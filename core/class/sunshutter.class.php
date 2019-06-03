@@ -101,7 +101,6 @@ class sunshutter extends eqLogic {
   
   public function executeAction($_force = false){
     $this->updateData();
-    
     if(!$_force && $this->getConfiguration('condition::allowmove') != '' && evaluate($this->getConfiguration('condition::allowmove')) == false){
       return;
     }
@@ -116,7 +115,6 @@ class sunshutter extends eqLogic {
         return;
       }
     }
-    
     $position == null;
     $sun_angle = $this->getCmd(null, 'sun_angle')->execCmd();
     if($sun_angle > $this->getConfiguration('angle:close::from') && $sun_angle < $this->getConfiguration('angle:close::to')){
