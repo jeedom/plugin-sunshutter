@@ -115,7 +115,7 @@ class sunshutter extends eqLogic {
         return;
       }
     }
-    $position == null;
+    $position = null;
     $sun_angle = $this->getCmd(null, 'sun_angle')->execCmd();
     if($sun_angle > $this->getConfiguration('angle:close::from') && $sun_angle < $this->getConfiguration('angle:close::to')){
       $position = $this->getConfiguration('shutter::closePosition',100);
