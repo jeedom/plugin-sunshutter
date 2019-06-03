@@ -102,7 +102,7 @@ class sunshutter extends eqLogic {
   public function executeAction($_force = false){
     log::add('sunshutter','debug','Start executeAction');
     $this->updateData();
-    if(!$_force && $this->getConfiguration('condition::allowmove') != '' && evaluate($this->getConfiguration('condition::allowmove')) == false){
+    if($this->getConfiguration('condition::allowmove') != '' && evaluate($this->getConfiguration('condition::allowmove')) == false){
       log::add('sunshutter','debug','Do nothing, false condition');
       return;
     }
