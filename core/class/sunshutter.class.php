@@ -128,7 +128,7 @@ class sunshutter extends eqLogic {
     if($this->getConfiguration('condition::forceclose') != '' && evaluate($this->getConfiguration('condition::forceclose'))){
       $position = $this->getConfiguration('shutter::closePosition',0);
     }
-    if($position !== null && ($currentPosition === null || $position != $currentPosition)){
+    if($position !== null && ($currentPosition === null || $position != $currentPosition || $_force)){
       $cmd = cmd::byId(str_replace('#','',$this->getConfiguration('shutter::position')));
       if(is_object($cmd)){
         $cmd->execCmd(array('slider' => $position));
