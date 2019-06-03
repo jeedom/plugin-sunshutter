@@ -1,0 +1,53 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "523e8d0693235d0729b6940a0ed6cf3e",
+    "packages": [
+        {
+            "name": "abbadon1334/sun-position-spa-php",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/abbadon1334/sun-position-spa-php.git",
+                "reference": "4cb63934c11bcb92282b0289e7db06953d2aeabd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/abbadon1334/sun-position-spa-php/zipball/4cb63934c11bcb92282b0289e7db06953d2aeabd",
+                "reference": "4cb63934c11bcb92282b0289e7db06953d2aeabd",
+                "shasum": ""
+            },
+            "require-dev": {
+                "kint-php/kint": "^2.0",
+                "phpunit/phpunit": "3.7.14"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SolarData\\": "src/",
+                    "SolarData\\Tests\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Francesco Danti",
+                    "email": "fdanti@gmail.com"
+                }
+            ],
+            "description": "solar data calculation and sun position",
+            "time": "2017-05-07T10:04:34+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
