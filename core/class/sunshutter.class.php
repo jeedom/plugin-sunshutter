@@ -100,8 +100,10 @@ class sunshutter extends eqLogic {
   }
   
   public function executeAction($_force = false){
+    log::add('sunshutter','debug','Start executeAction');
     $this->updateData();
     if(!$_force && $this->getConfiguration('condition::allowmove') != '' && evaluate($this->getConfiguration('condition::allowmove')) == false){
+      log::add('sunshutter','debug','Do nothing, false condition');
       return;
     }
     $currentPosition = null;
@@ -112,23 +114,29 @@ class sunshutter extends eqLogic {
     if(!$_force && $this->getConfiguration('shutter::nobackhand',0) == 1){
       $lastPositionOrder = $this->getCache('lastPositionOrder',null);
       if($currentPosition !== null  && $lastPositionOrder !== null && $lastPositionOrder != $currentPosition){
+        log::add('sunshutter','debug','Do nothing, position != last order and I don\'t have controle');
         return;
       }
     }
     $position = null;
     $sun_angle = $this->getCmd(null, 'sun_angle')->execCmd();
+    log::add('sunshutter','debug','Sun angle '.$sun_angle);
     if($sun_angle > $this->getConfiguration('angle:close::from') && $sun_angle < $this->getConfiguration('angle:close::to')){
       $position = $this->getConfiguration('shutter::closePosition',100);
     }else{
       $position = $this->getConfiguration('shutter::openPosition',0);
     }
     if($this->getConfiguration('condition::forceopen') != '' && evaluate($this->getConfiguration('condition::forceopen'))){
+      log::add('sunshutter','debug','Force open');
       $position = $this->getConfiguration('shutter::openPosition',0);
     }
     if($this->getConfiguration('condition::forceclose') != '' && evaluate($this->getConfiguration('condition::forceclose'))){
+      log::add('sunshutter','debug','Force close');
       $position = $this->getConfiguration('shutter::closePosition',0);
     }
+    log::add('sunshutter','debug','Calcul position '.$position);
     if($position !== null && ($currentPosition === null || $position != $currentPosition || $_force)){
+      log::add('sunshutter','debug','Do action');
       $cmd = cmd::byId(str_replace('#','',$this->getConfiguration('shutter::position')));
       if(is_object($cmd)){
         $cmd->execCmd(array('slider' => $position));
