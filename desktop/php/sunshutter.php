@@ -168,70 +168,56 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-3 control-label">{{Position proportionnel}}
-								<sup><i class="fas fa-question-circle tooltips" title="{{Utilisez #angle# pour l'angle du soleil}}"></i></sup>
-							</label>
-						</label>
-						<div class="col-sm-9">
-							<div class="input-group">
-								<input type="text" class="eqLogicAttr form-control" data-concat="1" data-l1key="configuration" data-l2key="position::proportional"/>
-								<span class="input-group-btn">
-									<a class="btn btn-default listCmdInfo roundedRight" ><i class="fas fa-list-alt"></i></a>
-								</span>
+							<label class="col-sm-3 control-label">{{Condition pour action}}</label>
+							<div class="col-sm-9">
+								<div class="input-group">
+									<input type="text" class="eqLogicAttr form-control" data-concat="1" data-l1key="configuration" data-l2key="condition::allowmove"/>
+									<span class="input-group-btn">
+										<a class="btn btn-default listCmdInfo roundedRight" ><i class="fas fa-list-alt"></i></a>
+									</span>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-3 control-label">{{Condition pour action}}</label>
-						<div class="col-sm-9">
-							<div class="input-group">
-								<input type="text" class="eqLogicAttr form-control" data-concat="1" data-l1key="configuration" data-l2key="condition::allowmove"/>
-								<span class="input-group-btn">
-									<a class="btn btn-default listCmdInfo roundedRight" ><i class="fas fa-list-alt"></i></a>
-								</span>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">{{Forcer l'ouverture si}}</label>
+							<div class="col-sm-9">
+								<div class="input-group">
+									<input type="text" class="eqLogicAttr form-control" data-concat="1" data-l1key="configuration" data-l2key="condition::forceopen"/>
+									<span class="input-group-btn">
+										<a class="btn btn-default listCmdInfo roundedRight" ><i class="fas fa-list-alt"></i></a>
+									</span>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-3 control-label">{{Forcer l'ouverture si}}</label>
-						<div class="col-sm-9">
-							<div class="input-group">
-								<input type="text" class="eqLogicAttr form-control" data-concat="1" data-l1key="configuration" data-l2key="condition::forceopen"/>
-								<span class="input-group-btn">
-									<a class="btn btn-default listCmdInfo roundedRight" ><i class="fas fa-list-alt"></i></a>
-								</span>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">{{Forcer la fermeture si}}</label>
+							<div class="col-sm-9">
+								<div class="input-group">
+									<input type="text" class="eqLogicAttr form-control" data-concat="1" data-l1key="configuration" data-l2key="condition::forceclose"/>
+									<span class="input-group-btn">
+										<a class="btn btn-default listCmdInfo roundedRight" ><i class="fas fa-list-alt"></i></a>
+									</span>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="form-group">
-						<label class="col-sm-3 control-label">{{Forcer la fermeture si}}</label>
-						<div class="col-sm-9">
-							<div class="input-group">
-								<input type="text" class="eqLogicAttr form-control" data-concat="1" data-l1key="configuration" data-l2key="condition::forceclose"/>
-								<span class="input-group-btn">
-									<a class="btn btn-default listCmdInfo roundedRight" ><i class="fas fa-list-alt"></i></a>
-								</span>
-							</div>
-						</div>
-					</div>
-				</fieldset>
-			</form>
+					</fieldset>
+				</form>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="commandtab">
+				<a class="btn btn-success btn-sm cmdAction pull-right" data-action="add" style="margin-top:5px;"><i class="fa fa-plus-circle"></i> {{Commandes}}</a><br/><br/>
+				<table id="table_cmd" class="table table-bordered table-condensed">
+					<thead>
+						<tr>
+							<th>{{Nom}}</th><th>{{Type}}</th><th>{{Action}}</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
 		</div>
-		<div role="tabpanel" class="tab-pane" id="commandtab">
-			<a class="btn btn-success btn-sm cmdAction pull-right" data-action="add" style="margin-top:5px;"><i class="fa fa-plus-circle"></i> {{Commandes}}</a><br/><br/>
-			<table id="table_cmd" class="table table-bordered table-condensed">
-				<thead>
-					<tr>
-						<th>{{Nom}}</th><th>{{Type}}</th><th>{{Action}}</th>
-					</tr>
-				</thead>
-				<tbody>
-				</tbody>
-			</table>
-		</div>
+		
 	</div>
-	
-</div>
 </div>
 
 <?php include_file('desktop', 'sunshutter', 'js', 'sunshutter');?>

@@ -102,7 +102,7 @@ class sunshutter extends eqLogic {
   public function executeAction($_force = false){
     log::add('sunshutter','debug','Start executeAction');
     $this->updateData();
-    if($this->getConfiguration('condition::allowmove') != '' && evaluate($this->getConfiguration('condition::allowmove')) == false){
+    if($this->getConfiguration('condition::allowmove') != '' && jeedom::evaluateExpression($this->getConfiguration('condition::allowmove')) == false){
       log::add('sunshutter','debug','Do nothing, false condition');
       return;
     }
@@ -126,11 +126,11 @@ class sunshutter extends eqLogic {
     }else{
       $position = $this->getConfiguration('shutter::openPosition',0);
     }
-    if($this->getConfiguration('condition::forceopen') != '' && evaluate($this->getConfiguration('condition::forceopen'))){
-      log::add('sunshutter','debug','Force open');
+    if($this->getConfiguration('condition::forceopen') != '' && jeedom::evaluateExpression($this->getConfiguration('condition::forceopen'))){
+      log::add('sunshutter','debug','Force open ');
       $position = $this->getConfiguration('shutter::openPosition',0);
     }
-    if($this->getConfiguration('condition::forceclose') != '' && evaluate($this->getConfiguration('condition::forceclose'))){
+    if($this->getConfiguration('condition::forceclose') != '' && jeedom::evaluateExpression($this->getConfiguration('condition::forceclose'))){
       log::add('sunshutter','debug','Force close');
       $position = $this->getConfiguration('shutter::closePosition',0);
     }
