@@ -100,10 +100,10 @@ class sunshutter extends eqLogic {
   }
   
   public function executeAction($_force = false){
-    log::add('sunshutter','debug','Start executeAction');
+    log::add('sunshutter','debug',$this->getHumanName().' - Start executeAction');
     $this->updateData();
     if($this->getConfiguration('condition::allowmove') != '' && jeedom::evaluateExpression($this->getConfiguration('condition::allowmove')) == false){
-      log::add('sunshutter','debug','Do nothing, false condition');
+      log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, false condition');
       return;
     }
     $currentPosition = null;
@@ -114,29 +114,29 @@ class sunshutter extends eqLogic {
     if(!$_force && $this->getConfiguration('shutter::nobackhand',0) == 1){
       $lastPositionOrder = $this->getCache('lastPositionOrder',null);
       if($currentPosition !== null  && $lastPositionOrder !== null && $lastPositionOrder != $currentPosition){
-        log::add('sunshutter','debug','Do nothing, position != last order and I don\'t have controle');
+        log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, position != last order and I don\'t have controle');
         return;
       }
     }
     $position = null;
     $sun_angle = $this->getCmd(null, 'sun_angle')->execCmd();
-    log::add('sunshutter','debug','Sun angle '.$sun_angle);
+    log::add('sunshutter','debug',$this->getHumanName().' - Sun angle '.$sun_angle);
     if($sun_angle > $this->getConfiguration('angle:close::from') && $sun_angle < $this->getConfiguration('angle:close::to')){
       $position = $this->getConfiguration('shutter::closePosition',100);
     }else{
       $position = $this->getConfiguration('shutter::openPosition',0);
     }
     if($this->getConfiguration('condition::forceopen') != '' && jeedom::evaluateExpression($this->getConfiguration('condition::forceopen'))){
-      log::add('sunshutter','debug','Force open ');
+      log::add('sunshutter','debug',$this->getHumanName().' - Force open ');
       $position = $this->getConfiguration('shutter::openPosition',0);
     }
     if($this->getConfiguration('condition::forceclose') != '' && jeedom::evaluateExpression($this->getConfiguration('condition::forceclose'))){
-      log::add('sunshutter','debug','Force close');
+      log::add('sunshutter','debug',$this->getHumanName().' - Force close');
       $position = $this->getConfiguration('shutter::closePosition',0);
     }
-    log::add('sunshutter','debug','Calcul position '.$position);
+    log::add('sunshutter','debug',$this->getHumanName().' - Calcul position '.$position);
     if($position !== null && ($currentPosition === null || $position != $currentPosition || $_force)){
-      log::add('sunshutter','debug','Do action');
+      log::add('sunshutter','debug',$this->getHumanName().' - Do action');
       $cmd = cmd::byId(str_replace('#','',$this->getConfiguration('shutter::position')));
       if(is_object($cmd)){
         $cmd->execCmd(array('slider' => $position));
