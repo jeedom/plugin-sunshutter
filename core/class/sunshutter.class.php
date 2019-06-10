@@ -95,7 +95,7 @@ class sunshutter extends eqLogic {
     $cmd->setEqLogic_id($this->getId());
     $cmd->save();
     
-    if($this->getConfiguration('immediatforceopen') != '' || $this->getConfiguration('immediatforceclose') != ''){
+    if($this->getConfiguration('condition::immediatforceopen') != '' || $this->getConfiguration('condition::immediatforceclose') != ''){
       $listener = listener::byClassAndFunction('sunshutter', 'reExecuteAction', array('sunshutter_id' => intval($this->getId())));
       if (!is_object($listener)) {
         $listener = new listener();
@@ -104,11 +104,11 @@ class sunshutter extends eqLogic {
       $listener->setFunction('reExecuteAction');
       $listener->setOption(array('sunshutter_id' => intval($this->getId())));
       $listener->emptyEvent();
-      preg_match_all("/#([0-9]*)#/", $this->getConfiguration('immediatforceopen'), $matches);
+      preg_match_all("/#([0-9]*)#/", $this->getConfiguration('condition::immediatforceopen'), $matches);
       foreach ($matches[1] as $cmd_id) {
         $listener->addEvent($cmd_id);
       }
-      preg_match_all("/#([0-9]*)#/", $this->getConfiguration('immediatforceclose'), $matches);
+      preg_match_all("/#([0-9]*)#/", $this->getConfiguration('condition::immediatforceclose'), $matches);
       foreach ($matches[1] as $cmd_id) {
         $listener->addEvent($cmd_id);
       }
