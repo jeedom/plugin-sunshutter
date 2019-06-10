@@ -22,18 +22,18 @@ require_once dirname(__FILE__) . '/../../vendor/autoload.php';
 
 class sunshutter extends eqLogic {
   /*     * *************************Attributs****************************** */
-
-
-
+  
+  
+  
   /*     * ***********************Methode static*************************** */
-
-
+  
+  
   public static function cron5() {
     foreach (eqLogic::byType('sunshutter') as $sunshutter) {
       $sunshutter->updateData();
     }
   }
-
+  
   public static function cron() {
     foreach (eqLogic::byType('sunshutter', true) as $sunshutter) {
       $cron = $sunshutter->getConfiguration('cron::executeAction');
@@ -49,7 +49,7 @@ class sunshutter extends eqLogic {
       }
     }
   }
-
+  
   public static function reExecuteAction($_options){
     $sunshutter = eqLogic::byId($_options['sunshutter_id']);
     if (!is_object($sunshutter)) {
@@ -57,9 +57,9 @@ class sunshutter extends eqLogic {
     }
     $sunshutter->executeAction();
   }
-
+  
   /*     * *********************Méthodes d'instance************************* */
-
+  
   public function postSave() {
     $cmd = $this->getCmd(null, 'sun_angle');
     if (is_object($cmd)) {
@@ -75,7 +75,7 @@ class sunshutter extends eqLogic {
     $cmd->setSubType('numeric');
     $cmd->setEqLogic_id($this->getId());
     $cmd->save();
-
+    
     $cmd = $this->getCmd(null, 'sun_azimuth');
     if (!is_object($cmd)) {
       $cmd = new sunshutterCmd();
@@ -86,8 +86,8 @@ class sunshutter extends eqLogic {
     $cmd->setSubType('numeric');
     $cmd->setEqLogic_id($this->getId());
     $cmd->save();
-
-
+    
+    
     $cmd = $this->getCmd(null, 'executeAction');
     if (!is_object($cmd)) {
       $cmd = new sunshutterCmd();
@@ -98,7 +98,7 @@ class sunshutter extends eqLogic {
     $cmd->setSubType('other');
     $cmd->setEqLogic_id($this->getId());
     $cmd->save();
-
+    
     $cmd = $this->getCmd(null, 'refresh');
     if (!is_object($cmd)) {
       $cmd = new sunshutterCmd();
@@ -109,7 +109,7 @@ class sunshutter extends eqLogic {
     $cmd->setSubType('other');
     $cmd->setEqLogic_id($this->getId());
     $cmd->save();
-
+    
     if($this->getConfiguration('condition::immediatforceopen') != '' || $this->getConfiguration('condition::immediatforceclose') != ''){
       $listener = listener::byClassAndFunction('sunshutter', 'reExecuteAction', array('sunshutter_id' => intval($this->getId())));
       if (!is_object($listener)) {
@@ -135,7 +135,7 @@ class sunshutter extends eqLogic {
       }
     }
   }
-
+  
   public function updateData(){
     $SD = new SolarData\SolarData();
     $SD->setObserverPosition($this->getConfiguration('lat'),$this->getConfiguration('long'),$this->getConfiguration('alt'));
@@ -147,19 +147,21 @@ class sunshutter extends eqLogic {
     $this->checkAndUpdateCmd('sun_elevation', round($SunPosition->e0°,2));
     $this->checkAndUpdateCmd('sun_azimuth', round($SunPosition->Φ°,2));
   }
-
-  public function calculPosition($_sun_elevation, $_sun_azimuth){
+  
+  public function calculPosition(){
+    $sun_elevation = $this->getCmd(null, 'sun_elevation')->execCmd();
+    $sun_azimuth = $this->getCmd(null, 'sun_azimuth')->execCmd();
     $positions = $this->getConfiguration('positions');
     foreach ($positions as $position) {
-      if($_sun_elevation > $position['sun::elevation::from'] && $_sun_elevation <= $position['sun::elevation::to']){
-        if($_sun_azimuth > $position['sun::azimuth::from'] && $_sun_azimuth <= $position['sun::azimuth::to']){
+      if($sun_azimuth > $position['sun::elevation::from'] && $sun_azimuth <= $position['sun::elevation::to']){
+        if($sun_elevation > $position['sun::azimuth::from'] && $sun_elevation <= $position['sun::azimuth::to']){
           return $position['shutter::position'];
         }
       }
     }
     return $this->getConfiguration('shutter::openPosition',0);
   }
-
+  
   public function executeAction($_force = false){
     log::add('sunshutter','debug',$this->getHumanName().' - Start executeAction');
     $this->updateData();
@@ -180,11 +182,7 @@ class sunshutter extends eqLogic {
       }
     }
     $position = null;
-    $sun_elevation = $this->getCmd(null, 'sun_elevation')->execCmd();
-    $sun_azimuth = $this->getCmd(null, 'sun_azimuth')->execCmd();
-    log::add('sunshutter','debug',$this->getHumanName().' - Sun Elevation '.$sun_elevation);
-    log::add('sunshutter','debug',$this->getHumanName().' - Sun Azimuth '.$sun_azimuth);
-    $position = $this->calculPosition($sun_elevation,$sun_azimuth);
+    $position = $this->calculPosition();
     if($this->getConfiguration('condition::forceopen') != '' && jeedom::evaluateExpression($this->getConfiguration('condition::forceopen'))){
       log::add('sunshutter','debug',$this->getHumanName().' - Force open ');
       $position = $this->getConfiguration('shutter::openPosition',0);
@@ -211,29 +209,29 @@ class sunshutter extends eqLogic {
       $this->setCache('lastPositionOrder',$position);
     }
   }
-
+  
   /*     * **********************Getteur Setteur*************************** */
 }
 
 class sunshutterCmd extends cmd {
   /*     * *************************Attributs****************************** */
-
-
+  
+  
   /*     * ***********************Methode static*************************** */
-
-
+  
+  
   /*     * *********************Methode d'instance************************* */
-
-
+  
+  
   public function execute($_options = array()) {
     if($this->getLogicalId() == 'refresh'){
       $this->getEqLogic()->updateData();
     }
-
+    
     if($this->getLogicalId() == 'executeAction'){
       $this->getEqLogic()->executeAction(true);
     }
   }
-
+  
   /*     * **********************Getteur Setteur*************************** */
 }
