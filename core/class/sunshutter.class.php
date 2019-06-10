@@ -62,16 +62,9 @@ class sunshutter extends eqLogic {
   
   public function postSave() {
     $cmd = $this->getCmd(null, 'sun_angle');
-    if (!is_object($cmd)) {
-      $cmd = new sunshutterCmd();
-      $cmd->setLogicalId('sun_angle');
-      $cmd->setName(__('Angle soleil', __FILE__));
+    if (is_object($cmd)) {
+      $cmd->remove();
     }
-    $cmd->setType('info');
-    $cmd->setSubType('numeric');
-    $cmd->setEqLogic_id($this->getId());
-    $cmd->save();
-    
     $cmd = $this->getCmd(null, 'sun_elevation');
     if (!is_object($cmd)) {
       $cmd = new sunshutterCmd();
@@ -151,8 +144,6 @@ class sunshutter extends eqLogic {
     $SD->setDeltaTime(67);
     $SD->setObserverTimezone(date('Z') / 3600);
     $SunPosition = $SD->calculate();
-    
-    $this->checkAndUpdateCmd('sun_angle',round($SD->getSurfaceIncidenceAngle($this->getConfiguration('w'),$this->getConfiguration('y') - 180),2));
     $this->checkAndUpdateCmd('sun_elevation', round($SunPosition->e0°,2));
     $this->checkAndUpdateCmd('sun_azimuth', round($SunPosition->Φ°,2));
   }

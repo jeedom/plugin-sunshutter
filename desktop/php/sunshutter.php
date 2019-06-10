@@ -127,18 +127,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="alt"/>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">{{Orientation w}}</label>
-							<div class="col-sm-2">
-								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="w"/>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">{{Orientation y}}</label>
-							<div class="col-sm-2">
-								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="y"/>
-							</div>
-						</div>
 						<legend>{{Volet}}</legend>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">{{Etat volet}}</label>
@@ -262,9 +250,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				<table class="table table-condensed" id="table_sunShutterPosition">
 					<thead>
 						<tr>
-							<th>{{Angle}}</th>
-							<th>{{Elevation}}</th>
 							<th>{{Azimuth}}</th>
+							<th>{{Elevation}}</th>
 							<th>{{Position}}</th>
 						</tr>
 					</thead>

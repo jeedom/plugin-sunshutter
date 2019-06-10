@@ -20,15 +20,18 @@ $('#bt_addPosition').off('click').on('click',function(){
 });
 
 function addPosition(_position){
+  if(!_position['sun::elevation::from']){
+    _position['sun::elevation::from'] = 0;
+  }
+  if(!_position['sun::elevation::to']){
+    _position['sun::elevation::to'] = 90;
+  }
   var tr = '<tr>';
   tr += '<td>';
-  tr += '<input class="form-control positionAttr" data-l1key="sun::angle::from" style="width:calc( 50% - 10px);display:inline-block;" /> {{à}} <input class="form-control positionAttr" data-l1key="sun::angle::to"  style="width:calc( 50% - 10px);display:inline-block;"/>';
-  tr += '</td>';
-  tr += '<td>';
-  tr += '<input class="form-control positionAttr" data-l1key="sun::elevation::from" style="width:calc( 50% - 10px);display:inline-block;" /> {{à}} <input class="form-control positionAttr" data-l1key="sun::elevation::to"  style="width:calc( 50% - 10px);display:inline-block;"/>';
-  tr += '</td>';
-  tr += '<td>';
   tr += '<input class="form-control positionAttr" data-l1key="sun::azimuth::from" style="width:calc( 50% - 10px);display:inline-block;" /> {{à}} <input class="form-control positionAttr" data-l1key="sun::azimuth::to"  style="width:calc( 50% - 10px);display:inline-block;"/>';
+  tr += '</td>';
+  tr += '<td>';
+  tr += '<input class="form-control positionAttr" data-l1key="sun::elevation::from" style="width:calc( 50% - 10px);display:inline-block;" /> {{à}} <input class="form-control positionAttr" data-l1key="sun::elevation::to" style="width:calc( 50% - 10px);display:inline-block;"/>';
   tr += '</td>';
   tr += '<td>';
   tr += '<input class="form-control positionAttr" data-l1key="shutter::position" style="width:calc( 100% - 20px);display:inline-block;" /> %';
