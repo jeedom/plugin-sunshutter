@@ -263,6 +263,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 					<thead>
 						<tr>
 							<th>{{Angle}}</th>
+							<th>{{Elevation}}</th>
+							<th>{{Azimuth}}</th>
 							<th>{{Position}}</th>
 						</tr>
 					</thead>

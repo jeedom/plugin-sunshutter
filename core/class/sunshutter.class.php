@@ -163,6 +163,11 @@ class sunshutter extends eqLogic {
       if($_sun_angle > $position['sun::angle::from'] && $_sun_angle <= $position['sun::angle::to']){
         return $position['shutter::position'];
       }
+      if($_sun_angle > $position['sun::elevation::from'] && $_sun_angle <= $position['sun::elevation::to']){
+        if($_sun_angle > $position['sun::azimuth::from'] && $_sun_angle <= $position['sun::azimuth::to']){
+          return $position['shutter::position'];
+        }
+      }
     }
     return $this->getConfiguration('shutter::openPosition',0);
   }
