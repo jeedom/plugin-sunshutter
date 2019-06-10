@@ -50,6 +50,14 @@ class sunshutter extends eqLogic {
     }
   }
   
+  public static function reExecuteAction($_options){
+    $sunshutter = thermostat::byId($_options['sunshutter_id']);
+    if (!is_object($sunshutter)) {
+      return;
+    }
+    $sunshutter->executeAction();
+  }
+  
   /*     * *********************Méthodes d'instance************************* */
   
   public function postSave() {
@@ -86,6 +94,31 @@ class sunshutter extends eqLogic {
     $cmd->setSubType('other');
     $cmd->setEqLogic_id($this->getId());
     $cmd->save();
+    
+    if($this->getConfiguration('immediatforceopen') != '' || $this->getConfiguration('immediatforceclose') != ''){
+      $listener = listener::byClassAndFunction('sunshutter', 'reExecuteAction', array('sunshutter_id' => intval($this->getId())));
+      if (!is_object($listener)) {
+        $listener = new listener();
+      }
+      $listener->setClass('sunshutter');
+      $listener->setFunction('reExecuteAction');
+      $listener->setOption(array('sunshutter_id' => intval($this->getId())));
+      $listener->emptyEvent();
+      preg_match_all("/#([0-9]*)#/", $this->getConfiguration('immediatforceopen'), $matches);
+      foreach ($matches[1] as $cmd_id) {
+        $listener->addEvent($cmd_id);
+      }
+      preg_match_all("/#([0-9]*)#/", $this->getConfiguration('immediatforceclose'), $matches);
+      foreach ($matches[1] as $cmd_id) {
+        $listener->addEvent($cmd_id);
+      }
+      $listener->save();
+    }else{
+      $listener = listener::byClassAndFunction('sunshutter', 'reExecuteAction', array('sunshutter_id' => intval($this->getId())));
+      if (is_object($listener)) {
+        $listener->remove();
+      }
+    }
   }
   
   public function updateData(){
@@ -130,7 +163,15 @@ class sunshutter extends eqLogic {
       log::add('sunshutter','debug',$this->getHumanName().' - Force open ');
       $position = $this->getConfiguration('shutter::openPosition',0);
     }
+    if($this->getConfiguration('condition::immediatforceopen') != '' && jeedom::evaluateExpression($this->getConfiguration('condition::immediatforceopen'))){
+      log::add('sunshutter','debug',$this->getHumanName().' - Force open ');
+      $position = $this->getConfiguration('shutter::openPosition',0);
+    }
     if($this->getConfiguration('condition::forceclose') != '' && jeedom::evaluateExpression($this->getConfiguration('condition::forceclose'))){
+      log::add('sunshutter','debug',$this->getHumanName().' - Force close');
+      $position = $this->getConfiguration('shutter::closePosition',0);
+    }
+    if($this->getConfiguration('condition::immediatforceclose') != '' && jeedom::evaluateExpression($this->getConfiguration('condition::immediatforceclose'))){
       log::add('sunshutter','debug',$this->getHumanName().' - Force close');
       $position = $this->getConfiguration('shutter::closePosition',0);
     }
