@@ -148,14 +148,13 @@ class sunshutter extends eqLogic {
     $this->checkAndUpdateCmd('sun_azimuth', round($SunPosition->Φ°,2));
   }
   
-  public function calculPosition($_sun_angle){
+  public function calculPosition(){
+    $sun_elevation = $this->getCmd(null, 'sun_elevation')->execCmd();
+    $sun_azimuth = $this->getCmd(null, 'sun_azimuth')->execCmd();
     $positions = $this->getConfiguration('positions');
     foreach ($positions as $position) {
-      if($_sun_angle > $position['sun::angle::from'] && $_sun_angle <= $position['sun::angle::to']){
-        return $position['shutter::position'];
-      }
-      if($_sun_angle > $position['sun::elevation::from'] && $_sun_angle <= $position['sun::elevation::to']){
-        if($_sun_angle > $position['sun::azimuth::from'] && $_sun_angle <= $position['sun::azimuth::to']){
+      if($sun_azimuth > $position['sun::elevation::from'] && $sun_azimuth <= $position['sun::elevation::to']){
+        if($sun_elevation > $position['sun::azimuth::from'] && $sun_elevation <= $position['sun::azimuth::to']){
           return $position['shutter::position'];
         }
       }
@@ -183,9 +182,7 @@ class sunshutter extends eqLogic {
       }
     }
     $position = null;
-    $sun_angle = $this->getCmd(null, 'sun_angle')->execCmd();
-    log::add('sunshutter','debug',$this->getHumanName().' - Sun angle '.$sun_angle);
-    $position = $this->calculPosition($sun_angle);
+    $position = $this->calculPosition();
     if($this->getConfiguration('condition::forceopen') != '' && jeedom::evaluateExpression($this->getConfiguration('condition::forceopen'))){
       log::add('sunshutter','debug',$this->getHumanName().' - Force open ');
       $position = $this->getConfiguration('shutter::openPosition',0);
