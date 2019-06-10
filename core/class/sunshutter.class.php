@@ -83,6 +83,17 @@ class sunshutter extends eqLogic {
     $cmd->setEqLogic_id($this->getId());
     $cmd->save();
     
+    $cmd = $this->getCmd(null, 'sun_azimuth');
+    if (!is_object($cmd)) {
+      $cmd = new sunshutterCmd();
+      $cmd->setLogicalId('sun_azimuth');
+      $cmd->setName(__('Azimut soleil', __FILE__));
+    }
+    $cmd->setType('info');
+    $cmd->setSubType('numeric');
+    $cmd->setEqLogic_id($this->getId());
+    $cmd->save();
+    
     
     $cmd = $this->getCmd(null, 'executeAction');
     if (!is_object($cmd)) {
@@ -143,6 +154,7 @@ class sunshutter extends eqLogic {
     
     $this->checkAndUpdateCmd('sun_angle',round($SD->getSurfaceIncidenceAngle($this->getConfiguration('w'),$this->getConfiguration('y') - 180),2));
     $this->checkAndUpdateCmd('sun_elevation', round($SunPosition->e0°,2));
+    $this->checkAndUpdateCmd('sun_azimuth', round($SunPosition->Φ°,2));
   }
   
   public function calculPosition($_sun_angle){
