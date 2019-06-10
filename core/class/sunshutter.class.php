@@ -96,7 +96,7 @@ class sunshutter extends eqLogic {
     $SD->setDeltaTime(67);
     $SD->setObserverTimezone(date('Z') / 3600);
     
-    $this->checkAndUpdateCmd('sun_angle', $SD->getSurfaceIncidenceAngle($this->getConfiguration('w'),$this->getConfiguration('y'))) || $changed;
+    $this->checkAndUpdateCmd('sun_angle', $SD->getSurfaceIncidenceAngle($this->getConfiguration('w'),$this->getConfiguration('y') - 180)) || $changed;
   }
   
   public function executeAction($_force = false){
