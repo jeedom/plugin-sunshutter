@@ -51,7 +51,7 @@ class sunshutter extends eqLogic {
   }
   
   public static function reExecuteAction($_options){
-    $sunshutter = thermostat::byId($_options['sunshutter_id']);
+    $sunshutter = eqLogic::byId($_options['sunshutter_id']);
     if (!is_object($sunshutter)) {
       return;
     }
@@ -164,11 +164,7 @@ class sunshutter extends eqLogic {
     $position = null;
     $sun_angle = $this->getCmd(null, 'sun_angle')->execCmd();
     log::add('sunshutter','debug',$this->getHumanName().' - Sun angle '.$sun_angle);
-    if($sun_angle > $this->getConfiguration('angle:close::from') && $sun_angle < $this->getConfiguration('angle:close::to')){
-      $position = $this->getConfiguration('shutter::closePosition',100);
-    }else{
-      $position = $this->getConfiguration('shutter::openPosition',0);
-    }
+    $position = $this->calculPosition($sun_angle);
     if($this->getConfiguration('condition::forceopen') != '' && jeedom::evaluateExpression($this->getConfiguration('condition::forceopen'))){
       log::add('sunshutter','debug',$this->getHumanName().' - Force open ');
       $position = $this->getConfiguration('shutter::openPosition',0);
