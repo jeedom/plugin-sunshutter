@@ -153,8 +153,8 @@ class sunshutter extends eqLogic {
     $sun_azimuth = $this->getCmd(null, 'sun_azimuth')->execCmd();
     $positions = $this->getConfiguration('positions');
     foreach ($positions as $position) {
-      if($sun_azimuth > $position['sun::elevation::from'] && $sun_azimuth <= $position['sun::elevation::to']){
-        if($sun_elevation > $position['sun::azimuth::from'] && $sun_elevation <= $position['sun::azimuth::to']){
+      if($sun_elevation > $position['sun::elevation::from'] && $sun_elevation <= $position['sun::elevation::to']){
+        if($sun_azimuth > $position['sun::azimuth::from'] && $sun_azimuth <= $position['sun::azimuth::to']){
           return $position['shutter::position'];
         }
       }
