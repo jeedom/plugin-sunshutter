@@ -15,6 +15,30 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
+$('#bt_addPosition').off('click').on('click',function(){
+  addPosition({});
+});
+
+function addPosition(_position){
+  var tr = '<tr>';
+  tr += '<td>';
+  tr += '<input class="form-control positionAttr" data-l1key="sun::angle::from" style="width:calc( 50% - 10px);display:inline-block;" /> {{à}} <input class="form-control positionAttr" data-l1key="sun::angle::to"  style="width:calc( 50% - 10px);display:inline-block;"/>';
+  tr += '</td>';
+  tr += '<td>';
+  tr += '<input class="form-control positionAttr" data-l1key="shutter::position" style="width:calc( 100% - 20px);display:inline-block;" /> %';
+  tr += '</td>';
+  tr += '<td>';
+  tr += '<i class="fas fa-minus-circle cursor bt_removePosition"></i>';
+  tr += '</td>';
+  tr += '</tr>';
+  $('#table_sunShutterPosition').find('tbody').append(tr);
+  $('#table_sunShutterPosition').find('tbody tr').last().setValues(_position, '.positionAttr');
+}
+
+$('#table_sunShutterPosition').off('click','.bt_removePosition').on('click','.bt_removePosition',function(){
+  $(this).closest('tr').remove();
+});
+
 $(".eqLogic").on('click',".listCmdInfo",  function () {
   var el = $(this).closest('.form-group').find('.eqLogicAttr');
   jeedom.cmd.getSelectModal({cmd: {type: 'info'}}, function (result) {
@@ -32,6 +56,25 @@ $("body").on('click',".listCmdAction", function () {
     el.value(result.human);
   });
 });
+
+function saveEqLogic(_eqLogic) {
+  if (!isset(_eqLogic.configuration)) {
+    _eqLogic.configuration = {};
+  }
+  _eqLogic.configuration.positions = $('#table_sunShutterPosition').find('tbody tr').getValues('.positionAttr');
+  return _eqLogic;
+}
+
+function printEqLogic(_eqLogic) {
+  $('#table_sunShutterPosition').find('tbody').empty();
+  if (isset(_eqLogic.configuration)) {
+    if (isset(_eqLogic.configuration.positions)) {
+      for (var i in _eqLogic.configuration.positions) {
+        addPosition(_eqLogic.configuration.positions[i]);
+      }
+    }
+  }
+}
 
 
 $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});

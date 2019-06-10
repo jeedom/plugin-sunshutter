@@ -47,6 +47,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 		<ul class="nav nav-tabs" role="tablist">
 			<li role="presentation"><a href="#" class="eqLogicAction" aria-controls="home" role="tab" data-toggle="tab" data-action="returnToThumbnailDisplay"><i class="fa fa-arrow-circle-left"></i></a></li>
 			<li role="presentation" class="active"><a href="#eqlogictab" aria-controls="home" role="tab" data-toggle="tab"><i class="fas fa-tachometer-alt"></i> {{Equipement}}</a></li>
+			<li role="presentation"><a href="#conditiontab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-vial"></i> {{Condition}}</a></li>
+			<li role="presentation"><a href="#positiontab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-drafting-compass"></i> {{Positionnement}}</a></li>
 			<li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-list-alt"></i> {{Commandes}}</a></li>
 		</ul>
 		<div class="tab-content" style="height:calc(100% - 50px);overflow:auto;overflow-x: hidden;">
@@ -54,6 +56,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				<br/>
 				<form class="form-horizontal">
 					<fieldset>
+						<legend>{{Général}}</legend>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">{{Nom de l'équipement volet}}</label>
 							<div class="col-sm-3">
@@ -94,15 +97,32 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							</div>
 						</div>
 						<div class="form-group">
+							<label class="col-sm-3 control-label">{{Cron de vérification}}</label>
+							<div class="col-sm-2">
+								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="cron::executeAction"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">{{Ne pas reprendre la main}}</label>
+							<div class="col-sm-1">
+								<input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="shutter::nobackhand"/>
+							</div>
+						</div>
+						<legend>{{Orientation}}</legend>
+						<div class="form-group">
 							<label class="col-sm-3 control-label">{{Longitude}}</label>
 							<div class="col-sm-2">
 								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="long"/>
 							</div>
-							<label class="col-sm-1 control-label">{{Latitude}}</label>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">{{Latitude}}</label>
 							<div class="col-sm-2">
 								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="lat"/>
 							</div>
-							<label class="col-sm-1 control-label">{{Altitude}}</label>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">{{Altitude}}</label>
 							<div class="col-sm-2">
 								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="alt"/>
 							</div>
@@ -112,31 +132,14 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<div class="col-sm-2">
 								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="w"/>
 							</div>
-							<label class="col-sm-1 control-label">{{Orientation y}}</label>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">{{Orientation y}}</label>
 							<div class="col-sm-2">
 								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="y"/>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">{{Fermer entre}}</label>
-							<div class="col-sm-2">
-								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="angle:close::from"/>
-							</div>
-							<label class="col-sm-1 control-label">{{et}}</label>
-							<div class="col-sm-2">
-								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="angle:close::to"/>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-3 control-label">{{Cron de vérification}}</label>
-							<div class="col-sm-2">
-								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="cron::executeAction"/>
-							</div>
-							<label class="col-sm-2 control-label">{{Ne pas reprendre la main}}</label>
-							<div class="col-sm-1">
-								<input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="shutter::nobackhand"/>
-							</div>
-						</div>
+						<legend>{{Volet}}</legend>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">{{Etat volet}}</label>
 							<div class="col-sm-3">
@@ -158,15 +161,26 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									</span>
 								</div>
 							</div>
-							<label class="col-sm-1 control-label">{{% ouverture}}</label>
-							<div class="col-sm-1">
-								<input type="number" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::openPosition"/>
-							</div>
-							<label class="col-sm-1 control-label">{{% fermeture}}</label>
-							<div class="col-sm-1">
-								<input type="number" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::closePosition"/>
-							</div>
 						</div>
+					</fieldset>
+				</form>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="commandtab">
+				<a class="btn btn-success btn-sm cmdAction pull-right" data-action="add" style="margin-top:5px;"><i class="fa fa-plus-circle"></i> {{Commandes}}</a><br/><br/>
+				<table id="table_cmd" class="table table-bordered table-condensed">
+					<thead>
+						<tr>
+							<th>{{Nom}}</th><th>{{Type}}</th><th>{{Action}}</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="conditiontab">
+				<br/>
+				<fieldset>
+					<form class="form-horizontal">
 						<div class="form-group">
 							<label class="col-sm-3 control-label">{{Condition pour action}}</label>
 							<div class="col-sm-9">
@@ -225,20 +239,39 @@ $eqLogics = eqLogic::byType($plugin->getId());
 					</fieldset>
 				</form>
 			</div>
-			<div role="tabpanel" class="tab-pane" id="commandtab">
-				<a class="btn btn-success btn-sm cmdAction pull-right" data-action="add" style="margin-top:5px;"><i class="fa fa-plus-circle"></i> {{Commandes}}</a><br/><br/>
-				<table id="table_cmd" class="table table-bordered table-condensed">
+			<div role="tabpanel" class="tab-pane" id="positiontab">
+				<br/>
+				<fieldset>
+					<form class="form-horizontal">
+						<legend>{{Général}}</legend>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">{{% ouverture}}</label>
+							<div class="col-sm-1">
+								<input type="number" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::openPosition"/>
+							</div>
+							<label class="col-sm-1 control-label">{{% fermeture}}</label>
+							<div class="col-sm-1">
+								<input type="number" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::closePosition"/>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+				<legend>{{Positionnement}}
+					<a class="btn btn-default btn-xs pull-right" style="margin-right:15px;" id="bt_addPosition"><i class="fas fa-plus"></i> {{Ajouter}}</a>
+				</legend>
+				<table class="table table-condensed" id="table_sunShutterPosition">
 					<thead>
 						<tr>
-							<th>{{Nom}}</th><th>{{Type}}</th><th>{{Action}}</th>
+							<th>{{Angle}}</th>
+							<th>{{Position}}</th>
 						</tr>
 					</thead>
 					<tbody>
+						
 					</tbody>
 				</table>
 			</div>
 		</div>
-		
 	</div>
 </div>
 

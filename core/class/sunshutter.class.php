@@ -132,6 +132,16 @@ class sunshutter extends eqLogic {
     $this->checkAndUpdateCmd('sun_angle', $SD->getSurfaceIncidenceAngle($this->getConfiguration('w'),$this->getConfiguration('y') - 180)) || $changed;
   }
   
+  public function calculPosition($_sun_angle){
+    $positions = $this->getConfiguration('positions');
+    foreach ($positions as $position) {
+      if($_sun_angle > $position['sun::angle::from'] && $_sun_angle <= $position['sun::angle::to']){
+        return $position['shutter::position'];
+      }
+    }
+    return $this->getConfiguration('shutter::openPosition',0);
+  }
+  
   public function executeAction($_force = false){
     log::add('sunshutter','debug',$this->getHumanName().' - Start executeAction');
     $this->updateData();
