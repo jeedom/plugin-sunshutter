@@ -23,7 +23,9 @@ function sunshutter_install() {
 }
 
 function sunshutter_update() {
-  
+  foreach (sunshutter::byType('sunshutter') as $sunshutter) {
+    $sunshutter->save();
+  }
 }
 
 
