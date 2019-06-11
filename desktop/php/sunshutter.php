@@ -184,7 +184,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<label class="col-sm-3 control-label">{{Condition pour action}}</label>
 							<div class="col-sm-9">
 								<div class="input-group">
-									<input type="text" class="eqLogicAttr form-control" data-concat="1" data-l1key="configuration" data-l2key="condition::allowmove"/>
+									<textarea class="eqLogicAttr form-control" data-concat="1" data-l1key="configuration" data-l2key="condition::allowmove" style="height:200px"></textarea>
 									<span class="input-group-btn">
 										<a class="btn btn-default listCmdInfo roundedRight" ><i class="fas fa-list-alt"></i></a>
 									</span>
