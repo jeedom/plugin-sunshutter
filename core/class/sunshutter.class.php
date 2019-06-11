@@ -294,11 +294,11 @@ public function executeAction($_force = false){
   $position = null;
   $position = $this->calculPosition();
   if($this->getConfiguration('condition::forceopen') != '' && jeedom::evaluateExpression($this->getConfiguration('condition::forceopen'))){
-    log::add('sunshutter','debug',$this->getHumanName().' - Force open ');
+    log::add('sunshutter','debug',$this->getHumanName().' - Force open');
     $position = $this->getConfiguration('shutter::openPosition',0);
   }
   if($this->getConfiguration('condition::immediatforceopen') != '' && jeedom::evaluateExpression($this->getConfiguration('condition::immediatforceopen'))){
-    log::add('sunshutter','debug',$this->getHumanName().' - Force open ');
+    log::add('sunshutter','debug',$this->getHumanName().' - Force open immediate');
     $position = $this->getConfiguration('shutter::openPosition',0);
   }
   if($this->getConfiguration('condition::forceclose') != '' && jeedom::evaluateExpression($this->getConfiguration('condition::forceclose'))){
@@ -306,7 +306,7 @@ public function executeAction($_force = false){
     $position = $this->getConfiguration('shutter::closePosition',0);
   }
   if($this->getConfiguration('condition::immediatforceclose') != '' && jeedom::evaluateExpression($this->getConfiguration('condition::immediatforceclose'))){
-    log::add('sunshutter','debug',$this->getHumanName().' - Force close');
+    log::add('sunshutter','debug',$this->getHumanName().' - Force close immediate');
     $position = $this->getConfiguration('shutter::closePosition',0);
   }
   log::add('sunshutter','debug',$this->getHumanName().' - Calcul position '.$position);
