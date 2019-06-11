@@ -26,7 +26,7 @@ function addPosition(_position){
   if(!_position['sun::elevation::to']){
     _position['sun::elevation::to'] = 90;
   }
-  var tr = '<tr>';
+  var tr = '<tr class="position">';
   tr += '<td>';
   tr += '<input class="form-control positionAttr" data-l1key="sun::azimuth::from" style="width:calc( 50% - 10px);display:inline-block;" /> {{à}} <input class="form-control positionAttr" data-l1key="sun::azimuth::to"  style="width:calc( 50% - 10px);display:inline-block;"/>';
   tr += '</td>';
@@ -132,6 +132,7 @@ function printScheduling(_eqLogic){
 
 
 $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
+$("#table_sunShutterPosition").sortable({axis: "y", cursor: "move", items: ".position", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
 /*
 * Fonction pour l'ajout de commande, appellé automatiquement par plugin.template
 */
