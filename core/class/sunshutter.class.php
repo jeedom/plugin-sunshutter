@@ -216,7 +216,7 @@ class sunshutter extends eqLogic {
   
   public function executeAction($_force = false){
     $stateHandlingCmd = $this->getCmd(null,'stateHandling');
-    if ($stateHandlingCmd->execCmd() == false) {
+    if (!$_force && $stateHandlingCmd->execCmd() == false) {
       log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, handling desactivated');
       return;
     }
