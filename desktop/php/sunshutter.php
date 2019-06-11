@@ -254,6 +254,19 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<div class="col-sm-1">
 								<input type="number" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::closePosition"/>
 							</div>
+							<label class="col-sm-1 control-label">{{Action par défaut}}</label>
+							<div class="col-sm-1">
+								<select id="sel_object" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::defaultAction">
+									<option value="none">{{Ne rien faire}}</option>
+									<option value="open">{{Ouvrir}}</option>
+									<option value="close">{{Fermer}}</option>
+									<option value="custom">{{Position}}</option>
+								</select>
+							</div>
+							<label class="col-sm-1 control-label">{{Position}}</label>
+							<div class="col-sm-1">
+								<input type="number" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::customPosition"/>
+							</div>
 						</div>
 					</fieldset>
 				</form>

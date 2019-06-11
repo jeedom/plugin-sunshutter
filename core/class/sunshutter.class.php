@@ -211,7 +211,17 @@ class sunshutter extends eqLogic {
         }
       }
     }
-    return $this->getConfiguration('shutter::openPosition',0);
+    $default = $this->getConfiguration('shutter::openPosition',0);
+    if ($this->getConfiguration('shutter::defaultAction','open') == 'close'){
+        $default = $this->getConfiguration('shutter::closePosition',0);
+    }
+    if ($this->getConfiguration('shutter::defaultAction','open') == 'custom'){
+        $default = $this->getConfiguration('shutter::customPosition',0);
+    }
+    if ($this->getConfiguration('shutter::defaultAction','close') == 'none'){
+        $default = $this->getCache('lastPositionOrder',null);
+    }
+    return $default;
   }
   
   public function executeAction($_force = false){
