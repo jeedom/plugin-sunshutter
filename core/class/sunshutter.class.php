@@ -44,7 +44,7 @@ class sunshutter extends eqLogic {
             $sunshutter->executeAction();
           }
         } catch (Exception $exc) {
-          log::add('sunshutter', 'error', __('Expression cron non valide pour ', __FILE__) . $sunshutter->getHumanName() . ' : ' . $cron);
+          log::add('virtual', 'error', __('Expression cron non valide pour ', __FILE__) . $sunshutter->getHumanName() . ' : ' . $cron);
         }
       }
     }
@@ -233,10 +233,16 @@ class sunshutter extends eqLogic {
     }
     if(!$_force && $this->getConfiguration('shutter::nobackhand',0) == 1){
       $lastPositionOrder = $this->getCache('lastPositionOrder',null);
-      if($currentPosition !== null  && $lastPositionOrder !== null && $lastPositionOrder != $currentPosition){
-        $this->checkAndUpdateCmd('stateHandling', false);
-        log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, position != last order and I don\'t have controle');
-        return;
+      if($currentPosition !== null  && $lastPositionOrder !== null){
+        $amplitude = abs($this->getConfiguration('shutter::closePosition',0)-$this->getConfiguration('shutter::openPosition',100));
+        $delta = abs($currentPosition-$lastPositionOrder);
+        $ecart = ($delta/$amplitude)*100;
+        log::add('sunshutter','debug',$this->getHumanName().' - Ecart : ' . $ecart);
+        if ($ecart>2){
+            $this->checkAndUpdateCmd('stateHandling', false);
+            log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, position != last order by far 2% and I don\'t have controle');
+            return;
+        }
       }
     }
     $position = null;
