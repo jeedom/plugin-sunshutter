@@ -44,7 +44,7 @@ class sunshutter extends eqLogic {
             $sunshutter->executeAction();
           }
         } catch (Exception $exc) {
-          log::add('virtual', 'error', __('Expression cron non valide pour ', __FILE__) . $sunshutter->getHumanName() . ' : ' . $cron);
+          log::add('sunshutter', 'error', __('Expression cron non valide pour ', __FILE__) . $sunshutter->getHumanName() . ' : ' . $cron);
         }
       }
     }
