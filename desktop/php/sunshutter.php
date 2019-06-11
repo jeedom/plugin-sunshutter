@@ -110,15 +110,15 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						</div>
 						<legend>{{Orientation}}</legend>
 						<div class="form-group">
-							<label class="col-sm-3 control-label">{{Longitude}}</label>
-							<div class="col-sm-2">
-								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="long"/>
-							</div>
-						</div>
-						<div class="form-group">
 							<label class="col-sm-3 control-label">{{Latitude}}</label>
 							<div class="col-sm-2">
 								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="lat"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">{{Longitude}}</label>
+							<div class="col-sm-2">
+								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="long"/>
 							</div>
 						</div>
 						<div class="form-group">
