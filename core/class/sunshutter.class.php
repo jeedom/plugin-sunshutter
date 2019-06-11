@@ -55,7 +55,44 @@ class sunshutter extends eqLogic {
     if (!is_object($sunshutter)) {
       return;
     }
-    $sunshutter->executeAction();
+    $sunshutter->executeAction(true);
+  }
+  
+  public static function getMobilePanel(){
+    log::add('sunshutter','debug','Get Mobile Panel');
+    $return = array();
+    foreach (eqLogic::byType('sunshutter', true) as $sunshutter) {
+        $name = $sunshutter->getHumanName(true);
+		$cmdHandling = $sunshutter->getCmd(null, 'stateHandling');
+		$cmdpause = $sunshutter->getCmd(null, 'suspendHandling');
+		$cmdresume = $sunshutter->getCmd(null, 'resumeHandling');
+		$cmdExecute = $sunshutter->getCmd(null, 'executeAction');
+		$openvalue = $sunshutter->getConfiguration('shutter::openPosition',0);
+		$closevalue = $sunshutter->getConfiguration('shutter::closePosition',0);
+		$currentPosition = null;
+		$cmd = cmd::byId(str_replace('#','',$sunshutter->getConfiguration('shutter::state')));
+		$currentPosition = $cmd->execCmd();
+		$cmdstatehtml = $cmd->toHtml('mobile');
+		$cmdPosition = str_replace('#','',$sunshutter->getConfiguration('shutter::position'));
+		$cmd = cmd::byId($cmdPosition);
+		$cmdhtml = $cmd->toHtml('mobile');
+		$handling =  $cmdHandling->execCmd();
+        $datas = array('name' => $name,
+						'position' => $sunshutter->getCache('lastPositionOrder',null),
+						'handling' => $handling,
+						'pauseId' => $cmdpause->getId(),
+						'resumeId' => $cmdresume->getId(),
+						'executeId' => $cmdExecute->getId(),
+						'state' => $currentPosition,
+						'openvalue' => $openvalue,
+						'closevalue' => $closevalue,
+						'positionId' => $cmdPosition,
+						'cmdhtml' => $cmdhtml,
+						'cmdstatehtml' => $cmdstatehtml,
+					);
+        $return[]=$datas;
+    }
+    return $return;
   }
   
   /*     * *********************Méthodes d'instance************************* */

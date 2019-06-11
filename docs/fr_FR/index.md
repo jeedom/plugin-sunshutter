@@ -29,7 +29,7 @@ Vous retrouvez dans le premier onglet toute la configuration de votre équipemen
 ### Général
 
 - Cron de verification : très important c'est la fréquence à laquelle jeedom va verifier la position du soleil et les conditions pour positionner le volet. Trop court le volet bougera tout le temps, trop long cela risque de ne pas etre efficace. Un temps de 30min (\*/30 * * * \*) est pas mal.
-- Ne pas reprendre la main : interdit au systeme de gestion de volet de modifier la position de celui-ci si il a été bougé manuellement. Exemple le systeme ferme le volet, vous l'ouvrez il n'y touchera plus jusqu'a ce que la commande "Executer les actions" soit déclenchée
+- Ne pas reprendre la main : interdit au systeme de gestion de volet de modifier la position de celui-ci si il a été bougé manuellement. Exemple le systeme ferme le volet, vous l'ouvrez il n'y touchera plus jusqu'a ce que la commande "Reprendre gestion" soit déclenchée
 
 ### Coordonnées
 
@@ -74,9 +74,9 @@ Vous voyez ici les plannification de positionnement du volet faite dans le plann
 
 - Azimut soleil : angle Azimuth actuel du soleil
 - Elévation soleil : angle d'élevation actuel du soleil
-- Executer action : force le calcul de position du volet en fonction de la position du soleil et des conditions et lui applique le resultat. A noter que c'est cette commande qu'il faut lancer pour repasser en gestion automatique si vous avez modifier la position de votre volet manuellement et coché la case "Ne pas reprendre la main"
+- Executer action : force le calcul de position du volet en fonction de la position du soleil et des conditions et lui applique le resultat quelque soit l\'état de gestion (en pause ou pas)
 - Dernière position : derniere position demandé au volet par le plugin
 - Etat gestion : état de la gestion (suspendu ou pas)
-- Reprendre : force la remise en mode automatique de la gestion
+- Reprendre : force la remise en mode automatique de la gestion (A noter que c'est cette commande qu'il faut lancer pour repasser en gestion automatique si vous avez modifier la position de votre volet manuellement et coché la case "Ne pas reprendre la main")
 - Suspendre : suspend le positionnement automatique du volet
 - Rafraichir : mets à jour les valeurs des commandes "Azimut soleil" et "Elévation soleil"
