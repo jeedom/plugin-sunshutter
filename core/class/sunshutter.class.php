@@ -73,6 +73,7 @@ class sunshutter extends eqLogic {
     }
     $cmd->setType('info');
     $cmd->setSubType('numeric');
+    $cmd->setUnite('°');
     $cmd->setEqLogic_id($this->getId());
     $cmd->save();
     
@@ -84,15 +85,66 @@ class sunshutter extends eqLogic {
     }
     $cmd->setType('info');
     $cmd->setSubType('numeric');
+    $cmd->setUnite('°');
     $cmd->setEqLogic_id($this->getId());
     $cmd->save();
     
+    $cmd = $this->getCmd(null, 'stateHandling');
+    $init = 0;
+    if (!is_object($cmd)) {
+      $init = 1;
+      $cmd = new sunshutterCmd();
+      $cmd->setLogicalId('stateHandling');
+      $cmd->setName(__('Etat gestion', __FILE__));
+      
+    }
+    $cmd->setType('info');
+    $cmd->setSubType('binary');
+    $cmd->setEqLogic_id($this->getId());
+    $cmd->save();
+    if ($init == 1){
+        $cmd->event(true);
+    }
+
+    $cmd = $this->getCmd(null, 'lastposition');
+    if (!is_object($cmd)) {
+      $cmd = new sunshutterCmd();
+      $cmd->setLogicalId('lastposition');
+      $cmd->setName(__('Dernière position', __FILE__));
+    }
+    $cmd->setType('info');
+    $cmd->setSubType('numeric');
+    $cmd->setUnite('%');
+    $cmd->setEqLogic_id($this->getId());
+    $cmd->save();
     
     $cmd = $this->getCmd(null, 'executeAction');
     if (!is_object($cmd)) {
       $cmd = new sunshutterCmd();
       $cmd->setLogicalId('executeAction');
-      $cmd->setName(__('Executer action', __FILE__));
+      $cmd->setName(__('Forcer action', __FILE__));
+    }
+    $cmd->setType('action');
+    $cmd->setSubType('other');
+    $cmd->setEqLogic_id($this->getId());
+    $cmd->save();
+
+    $cmd = $this->getCmd(null, 'suspendHandling');
+    if (!is_object($cmd)) {
+      $cmd = new sunshutterCmd();
+      $cmd->setLogicalId('suspendHandling');
+      $cmd->setName(__('Suspendre', __FILE__));
+    }
+    $cmd->setType('action');
+    $cmd->setSubType('other');
+    $cmd->setEqLogic_id($this->getId());
+    $cmd->save();
+
+    $cmd = $this->getCmd(null, 'resumeHandling');
+    if (!is_object($cmd)) {
+      $cmd = new sunshutterCmd();
+      $cmd->setLogicalId('resumeHandling');
+      $cmd->setName(__('Reprendre', __FILE__));
     }
     $cmd->setType('action');
     $cmd->setSubType('other');
@@ -163,6 +215,11 @@ class sunshutter extends eqLogic {
   }
   
   public function executeAction($_force = false){
+    $stateHandlingCmd = $this->getCmd(null,'stateHandling');
+    if ($stateHandlingCmd->execCmd() == false) {
+      log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, handling desactivated');
+      return;
+    }
     log::add('sunshutter','debug',$this->getHumanName().' - Start executeAction');
     $this->updateData();
     if($this->getConfiguration('condition::allowmove') != '' && jeedom::evaluateExpression($this->getConfiguration('condition::allowmove')) == false){
@@ -177,6 +234,7 @@ class sunshutter extends eqLogic {
     if(!$_force && $this->getConfiguration('shutter::nobackhand',0) == 1){
       $lastPositionOrder = $this->getCache('lastPositionOrder',null);
       if($currentPosition !== null  && $lastPositionOrder !== null && $lastPositionOrder != $currentPosition){
+        $this->checkAndUpdateCmd('stateHandling', false);
         log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, position != last order and I don\'t have controle');
         return;
       }
@@ -207,6 +265,7 @@ class sunshutter extends eqLogic {
         $cmd->execCmd(array('slider' => $position));
       }
       $this->setCache('lastPositionOrder',$position);
+      $this->checkAndUpdateCmd('lastposition', $position);
     }
   }
   
@@ -224,12 +283,19 @@ class sunshutterCmd extends cmd {
   
   
   public function execute($_options = array()) {
+    $sunshutter = $this->getEqLogic();
     if($this->getLogicalId() == 'refresh'){
       $this->getEqLogic()->updateData();
     }
     
     if($this->getLogicalId() == 'executeAction'){
       $this->getEqLogic()->executeAction(true);
+    }
+    if($this->getLogicalId() == 'suspendHandling'){
+      $sunshutter->checkAndUpdateCmd('stateHandling', false);
+    }
+    if($this->getLogicalId() == 'resumeHandling'){
+      $sunshutter->checkAndUpdateCmd('stateHandling', true);
     }
   }
   

@@ -50,6 +50,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 			<li role="presentation"><a href="#configtab" aria-controls="home" role="tab" data-toggle="tab"><i class="fas fa-wrench"></i> {{Configuration}}</a></li>
 			<li role="presentation"><a href="#conditiontab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-vial"></i> {{Condition}}</a></li>
 			<li role="presentation"><a href="#positiontab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-drafting-compass"></i> {{Positionnement}}</a></li>
+			<li role="presentation"><a href="#scheduletab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-calendar"></i> {{Planning}}</a></li>
 			<li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-list-alt"></i> {{Commandes}}</a></li>
 		</ul>
 		<div class="tab-content" style="height:calc(100% - 50px);overflow:auto;overflow-x: hidden;">
@@ -271,6 +272,16 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						
 					</tbody>
 				</table>
+				<br/>
+				<div class="alert alert-info">{{Dans cet onglet BLABALABLABALBALBA}}</div>
+			</div>
+			<div class="tab-pane" id="scheduletab">
+				<form class="form-horizontal">
+					<fieldset>
+						<br/>
+						<div id="div_schedule"></div>
+					</fieldset>
+				</form>
 				<br/>
 				<div class="alert alert-info">{{Dans cet onglet BLABALABLABALBALBA}}</div>
 			</div>
