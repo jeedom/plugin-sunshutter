@@ -15,6 +15,11 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
+$('#bt_healthsunshutter').on('click', function () {
+  $('#md_modal').dialog({title: "{{Santé Gestion Volet}}"});
+  $('#md_modal').load('index.php?v=d&plugin=sunshutter&modal=health').dialog('open');
+});
+
 $('#bt_addPosition').off('click').on('click',function(){
   addPosition({});
 });
@@ -115,7 +120,6 @@ function printScheduling(_eqLogic){
           }
           html += '<span class="label label-info cursor" style="font-size:1.2em;background-color : ' + color + ';color : ' + init(data.result[i].cmd_param.text_color, 'black') + '">';
           html += '<a href="index.php?v=d&m=calendar&p=calendar&id='+data.result[i].eqLogic_id+'&event_id='+data.result[i].id+'" style="color : ' + init(data.result[i].cmd_param.text_color, 'black') + '">'
-          
           if (data.result[i].cmd_param.eventName != '') {
             html += data.result[i].cmd_param.icon + ' ' + data.result[i].cmd_param.eventName;
           } else {
