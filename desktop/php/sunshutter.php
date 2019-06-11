@@ -47,6 +47,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 		<ul class="nav nav-tabs" role="tablist">
 			<li role="presentation"><a href="#" class="eqLogicAction" aria-controls="home" role="tab" data-toggle="tab" data-action="returnToThumbnailDisplay"><i class="fa fa-arrow-circle-left"></i></a></li>
 			<li role="presentation" class="active"><a href="#eqlogictab" aria-controls="home" role="tab" data-toggle="tab"><i class="fas fa-tachometer-alt"></i> {{Equipement}}</a></li>
+			<li role="presentation"><a href="#configtab" aria-controls="home" role="tab" data-toggle="tab"><i class="fas fa-wrench"></i> {{Configuration}}</a></li>
 			<li role="presentation"><a href="#conditiontab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-vial"></i> {{Condition}}</a></li>
 			<li role="presentation"><a href="#positiontab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-drafting-compass"></i> {{Positionnement}}</a></li>
 			<li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-list-alt"></i> {{Commandes}}</a></li>
@@ -56,7 +57,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				<br/>
 				<form class="form-horizontal">
 					<fieldset>
-						<legend>{{Général}}</legend>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">{{Nom de l'équipement volet}}</label>
 							<div class="col-sm-3">
@@ -96,7 +96,27 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
 							</div>
 						</div>
-						<div class="form-group">
+					</fieldset>
+				</form>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="commandtab">
+				<a class="btn btn-success btn-sm cmdAction pull-right" data-action="add" style="margin-top:5px;"><i class="fa fa-plus-circle"></i> {{Commandes}}</a><br/><br/>
+				<table id="table_cmd" class="table table-bordered table-condensed">
+					<thead>
+						<tr>
+							<th>{{Nom}}</th><th>{{Type}}</th><th>{{Action}}</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
+			<div role="tabpanel" class="tab-pane" id="configtab">
+			<br/>
+				<fieldset>
+				<form class="form-horizontal">
+				<legend><i class="fas fa-cog"></i> {{Général}}</legend>
+				<div class="form-group">
 							<label class="col-sm-3 control-label">{{Cron de vérification}}</label>
 							<div class="col-sm-2">
 								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="cron::executeAction"/>
@@ -108,7 +128,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="shutter::nobackhand"/>
 							</div>
 						</div>
-						<legend>{{Orientation}}</legend>
+						<legend><i class="fas fa-globe"></i> {{Coordonnées}}</legend>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">{{Latitude}}</label>
 							<div class="col-sm-2">
@@ -127,7 +147,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="alt"/>
 							</div>
 						</div>
-						<legend>{{Volet}}</legend>
+						<legend><i class="icon jeedom-volet-ferme"></i> {{Volet}}</legend>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">{{Etat volet}}</label>
 							<div class="col-sm-3">
@@ -152,18 +172,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						</div>
 					</fieldset>
 				</form>
-			</div>
-			<div role="tabpanel" class="tab-pane" id="commandtab">
-				<a class="btn btn-success btn-sm cmdAction pull-right" data-action="add" style="margin-top:5px;"><i class="fa fa-plus-circle"></i> {{Commandes}}</a><br/><br/>
-				<table id="table_cmd" class="table table-bordered table-condensed">
-					<thead>
-						<tr>
-							<th>{{Nom}}</th><th>{{Type}}</th><th>{{Action}}</th>
-						</tr>
-					</thead>
-					<tbody>
-					</tbody>
-				</table>
+				<br/>
+				<div class="alert alert-info">{{Dans cet onglet BLABALABLABALBALBA}}</div>
 			</div>
 			<div role="tabpanel" class="tab-pane" id="conditiontab">
 				<br/>
@@ -226,12 +236,14 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						</div>
 					</fieldset>
 				</form>
+				<br/>
+				<div class="alert alert-info">{{Dans cet onglet BLABALABLABALBALBA}}</div>
 			</div>
 			<div role="tabpanel" class="tab-pane" id="positiontab">
 				<br/>
 				<fieldset>
 					<form class="form-horizontal">
-						<legend>{{Général}}</legend>
+						<legend><i class="fas fa-cog"></i> {{Général}}</legend>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">{{% ouverture}}</label>
 							<div class="col-sm-1">
@@ -244,7 +256,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						</div>
 					</fieldset>
 				</form>
-				<legend>{{Positionnement}}
+				<legend><i class="icon jeedom-volet-ferme"></i> {{Positionnement}}
 					<a class="btn btn-default btn-xs pull-right" style="margin-right:15px;" id="bt_addPosition"><i class="fas fa-plus"></i> {{Ajouter}}</a>
 				</legend>
 				<table class="table table-condensed" id="table_sunShutterPosition">
@@ -259,6 +271,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						
 					</tbody>
 				</table>
+				<br/>
+				<div class="alert alert-info">{{Dans cet onglet BLABALABLABALBALBA}}</div>
 			</div>
 		</div>
 	</div>
