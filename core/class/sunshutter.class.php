@@ -286,7 +286,7 @@ class sunshutter extends eqLogic {
         log::add('sunshutter','debug',$this->getHumanName().' - Ecart depuis le dernier ordre : ' . $ecart);
         if ($ecart>2){
             $this->checkAndUpdateCmd('stateHandling', false);
-            log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, position != last order by far 2% and I don\'t have controle');
+            log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, position != last order by far 2% and I don\'t have control');
             return;
         }
       }
@@ -310,7 +310,7 @@ class sunshutter extends eqLogic {
       $position = $this->getConfiguration('shutter::closePosition',0);
     }
     log::add('sunshutter','debug',$this->getHumanName().' - Calcul position '.$position);
-    if($position !== null && ($currentPosition === null || $_force)){
+    if(($position !== null && $currentPosition !== null)){
         $amplitude = abs($this->getConfiguration('shutter::closePosition',0)-$this->getConfiguration('shutter::openPosition',100));
         $delta = abs($position-$currentPosition);
         $ecart = ($delta/$amplitude)*100;
@@ -319,6 +319,8 @@ class sunshutter extends eqLogic {
             log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, position != new position by less than 2%');
             return;
         }
+    }
+    if ($position !== null || $_force){
         log::add('sunshutter','debug',$this->getHumanName().' - Do action ' . $position);
         $cmd = cmd::byId(str_replace('#','',$this->getConfiguration('shutter::position')));
         if(is_object($cmd)){
