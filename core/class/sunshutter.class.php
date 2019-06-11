@@ -59,7 +59,6 @@ class sunshutter extends eqLogic {
   }
   
   public static function getMobilePanel(){
-    log::add('sunshutter','debug','Get Mobile Panel');
     $return = array();
     foreach (eqLogic::byType('sunshutter', true) as $sunshutter) {
         $name = $sunshutter->getHumanName(true);
@@ -338,17 +337,18 @@ class sunshutterCmd extends cmd {
   public function execute($_options = array()) {
     $sunshutter = $this->getEqLogic();
     if($this->getLogicalId() == 'refresh'){
-      $this->getEqLogic()->updateData();
+      $sunshutter->updateData();
     }
     
     if($this->getLogicalId() == 'executeAction'){
-      $this->getEqLogic()->executeAction(true);
+      $sunshutter->executeAction(true);
     }
     if($this->getLogicalId() == 'suspendHandling'){
       $sunshutter->checkAndUpdateCmd('stateHandling', false);
     }
     if($this->getLogicalId() == 'resumeHandling'){
       $sunshutter->checkAndUpdateCmd('stateHandling', true);
+      $sunshutter->executeAction(true);
     }
   }
   
