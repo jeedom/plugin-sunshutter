@@ -55,7 +55,7 @@ class sunshutter extends eqLogic {
     if (!is_object($sunshutter)) {
       return;
     }
-    $sunshutter->executeAction(true);
+    $sunshutter->executeAction();
   }
   
   /*     * *********************Méthodes d'instance************************* */
