@@ -310,14 +310,22 @@ class sunshutter extends eqLogic {
       $position = $this->getConfiguration('shutter::closePosition',0);
     }
     log::add('sunshutter','debug',$this->getHumanName().' - Calcul position '.$position);
-    if($position !== null && ($currentPosition === null || $position != $currentPosition || $_force)){
-      log::add('sunshutter','debug',$this->getHumanName().' - Do action');
-      $cmd = cmd::byId(str_replace('#','',$this->getConfiguration('shutter::position')));
-      if(is_object($cmd)){
-        $cmd->execCmd(array('slider' => $position));
-      }
-      $this->setCache('lastPositionOrder',$position);
-      $this->checkAndUpdateCmd('lastposition', $position);
+    if($position !== null && ($currentPosition === null || $_force)){
+        $amplitude = abs($this->getConfiguration('shutter::closePosition',0)-$this->getConfiguration('shutter::openPosition',100));
+        $delta = abs($position-$currentPosition);
+        $ecart = ($delta/$amplitude)*100;
+        log::add('sunshutter','debug',$this->getHumanName().' - Ecart : ' . $ecart);
+        if ($ecart<2){
+            log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, position != new position by less than 2%');
+            return;
+        }
+        log::add('sunshutter','debug',$this->getHumanName().' - Do action ' . $position);
+        $cmd = cmd::byId(str_replace('#','',$this->getConfiguration('shutter::position')));
+        if(is_object($cmd)){
+            $cmd->execCmd(array('slider' => $position));
+        }
+        $this->setCache('lastPositionOrder',$position);
+        $this->checkAndUpdateCmd('lastposition', $position);
     }
   }
   
