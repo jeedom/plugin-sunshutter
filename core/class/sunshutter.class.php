@@ -37,6 +37,9 @@ class sunshutter extends eqLogic {
   public static function cron() {
     foreach (eqLogic::byType('sunshutter', true) as $sunshutter) {
       $cron = $sunshutter->getConfiguration('cron::executeAction');
+      if ($cron == 'custom'){
+        $cron = $sunshutter->getConfiguration('cron::custom');
+      }
       if ($cron != '') {
         try {
           $c = new Cron\CronExpression(checkAndFixCron($cron), new Cron\FieldFactory);

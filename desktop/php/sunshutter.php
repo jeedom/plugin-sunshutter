@@ -123,9 +123,20 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				<form class="form-horizontal">
 				<legend><i class="fas fa-cog"></i> {{Général}}</legend>
 				<div class="form-group">
-							<label class="col-sm-3 control-label">{{Cron de vérification}}</label>
+							<label class="col-sm-3 control-label">{{Vérification}}</label>
 							<div class="col-sm-2">
-								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="cron::executeAction"/>
+								<select id="sel_object" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="cron::executeAction">
+									<option value="*/5 * * * *">{{Toutes les 5 minutes}}</option>
+									<option value="*/10 * * * *">{{Toutes les 10 minutes}}</option>
+									<option value="*/15 * * * *">{{Toutes les 15 minutes}}</option>
+									<option value="*/30 * * * *">{{Toutes les 30 minutes}}</option>
+									<option value="*/45 * * * *">{{Toutes les 45 minutes}}</option>
+									<option value="custom">{{Cron Personnalisé}}</option>
+								</select>
+							</div>
+							<label class="col-sm-1 control-label">{{Cron Personnalisé}}</label>
+							<div class="col-sm-2">
+								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="cron::custom"/>
 							</div>
 						</div>
 						<div class="form-group">
