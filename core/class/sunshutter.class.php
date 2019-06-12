@@ -84,6 +84,7 @@ class sunshutter extends eqLogic {
     foreach (eqLogic::byType('sunshutter', true) as $sunshutter) {
       $name = $sunshutter->getHumanName(true);
       $cmdHandling = $sunshutter->getCmd(null, 'stateHandling');
+      $cmdHandlingLabel = $sunshutter->getCmd(null, 'stateHandlingLabel');
       $cmdAzimuth = $sunshutter->getCmd(null, 'sun_azimuth');
       $cmdElevation = $sunshutter->getCmd(null, 'sun_elevation');
       $cmdpause = $sunshutter->getCmd(null, 'suspendHandling');
@@ -116,6 +117,7 @@ class sunshutter extends eqLogic {
       'closevalue' => $closevalue,
       'positionId' => $cmdPosition,
       'cmdhtml' => $cmdhtml,
+      'HandlingLabel' => $cmdHandlingLabel->execCmd(),
       'cmdstatehtml' => $cmdstatehtml,
       'elevation' => $cmdElevation->execCmd(),
       'azimuth' => $cmdAzimuth->execCmd(),
@@ -157,10 +159,20 @@ public function postSave() {
     $cmd = new sunshutterCmd();
     $cmd->setLogicalId('stateHandling');
     $cmd->setName(__('Etat gestion', __FILE__));
-    
   }
   $cmd->setType('info');
   $cmd->setSubType('binary');
+  $cmd->setEqLogic_id($this->getId());
+  $cmd->save();
+  
+  $cmd = $this->getCmd(null, 'stateHandlingLabel');
+  if (!is_object($cmd)) {
+    $cmd = new sunshutterCmd();
+    $cmd->setLogicalId('stateHandlingLabel');
+    $cmd->setName(__('Suspension (Label)', __FILE__));
+  }
+  $cmd->setType('info');
+  $cmd->setSubType('string');
   $cmd->setEqLogic_id($this->getId());
   $cmd->save();
   
@@ -264,8 +276,6 @@ public function updateData(){
   $this->checkAndUpdateCmd('sun_azimuth', round($SunPosition->Φ°,2));
   $handlingCmd = $this->getCmd(null, 'stateHandling');
   if ($handlingCmd->execCmd() === '') {
-    
-    log::add('sunshutter','debug','blabla ' . $handlingCmd->execCmd());
     $handlingCmd->event(true);
   }
 }
@@ -301,8 +311,28 @@ public function calculPosition(){
 public function executeAction($_force = false){
   $stateHandlingCmd = $this->getCmd(null,'stateHandling');
   if (!$_force && $stateHandlingCmd->execCmd() == false) {
-    log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, handling desactivated');
-    return;
+    if ($this->getConfiguration('shutter::nobackhand',0) == 2){
+        $delay = $this->getConfiguration('shutter::customDelay',0);
+        $since = $this->getCache('beginSuspend');
+        $deltadelay = abs($since - time())/60;
+        log::add('sunshutter','debug',$this->getHumanName().' - Handling desactivated : delay is ' . $delay . ' min - delta is ' . round($deltadelay,2)) . ' minutes';
+        if ($this->getCache('manualSuspend')){
+            log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, Handling desactivated manually');
+            return;
+        }
+        if ($deltadelay>$delay){
+            log::add('sunshutter','debug',$this->getHumanName().' - Going back to normal delay is passed ');
+            $this->checkAndUpdateCmd('stateHandling', true);
+            $this->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
+            $_force = true;
+        } else {
+            log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, handling desactivated');
+            return;
+        }
+    } else {
+        log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, handling desactivated');
+        return;
+    }
   }
   log::add('sunshutter','debug',$this->getHumanName().' - Start executeAction');
   $this->updateData();
@@ -315,7 +345,7 @@ public function executeAction($_force = false){
   if(is_object($cmd)){
     $currentPosition = $cmd->execCmd();
   }
-  if(!$_force && $this->getConfiguration('shutter::nobackhand',0) == 1){
+  if(!$_force && $this->getConfiguration('shutter::nobackhand',0) != 0){
     $lastPositionOrder = $this->getCache('lastPositionOrder',null);
     if($currentPosition !== null  && $lastPositionOrder !== null){
       $amplitude = abs($this->getConfiguration('shutter::closePosition',0)-$this->getConfiguration('shutter::openPosition',100));
@@ -324,7 +354,10 @@ public function executeAction($_force = false){
       log::add('sunshutter','debug',$this->getHumanName().' - Ecart depuis le dernier ordre : ' . $ecart);
       if ($ecart>3){
         $this->checkAndUpdateCmd('stateHandling', false);
-        log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, position != last order by far 3% and I don\'t have control');
+        $this->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
+        $this->setCache('beginSuspend',time());
+        $this->setCache('manualSuspend',false);
+        log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, position != last order by far 3% i suspend');
         return;
       }
     }
@@ -391,9 +424,15 @@ class sunshutterCmd extends cmd {
     }
     if($this->getLogicalId() == 'suspendHandling'){
       $sunshutter->checkAndUpdateCmd('stateHandling', false);
+      $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Manuel');
+      $sunshutter->setCache('beginSuspend',time());
+      $sunshutter->setCache('manualSuspend',true);
     }
     if($this->getLogicalId() == 'resumeHandling'){
       $sunshutter->checkAndUpdateCmd('stateHandling', true);
+      $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
+      $sunshutter->setCache('beginSuspend',null);
+      $sunshutter->setCache('manualSuspend',false);
       $sunshutter->executeAction(true);
     }
   }

@@ -37,6 +37,7 @@ function getSunshutterState(){
 			table += '<td><center>' + data.result[sunshutter]['azimuth'] + '°</center></td>';
 			table += '<td><center>' + data.result[sunshutter]['elevation'] + '°</center></td>';
 			table += '<td><center>' + data.result[sunshutter]['position'] +'%</center></td>';
+			table += '<td><center>' + data.result[sunshutter]['HandlingLabel'] +'</center></td>';
 			if (data.result[sunshutter]['handling'] == '0'){
 				table += '<td><center>' + '<a class="bt_sunshutterAction btn btn-default" data-cmd="'+data.result[sunshutter]['resumeId']+'"><i class="fas fa-play"></i></a>';
 			} else {

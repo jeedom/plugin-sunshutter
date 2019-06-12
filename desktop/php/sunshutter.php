@@ -140,9 +140,17 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-3 control-label">{{Ne pas reprendre la main}}</label>
+							<label class="col-sm-3 control-label">{{Reprendre la main}}</label>
 							<div class="col-sm-1">
-								<input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="shutter::nobackhand"/>
+								<select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::nobackhand">
+									<option value="0">{{Oui}}</option>
+									<option value="1">{{Non}}</option>
+									<option value="2">{{Oui avec délai}}</option>
+								</select>
+							</div>
+							<label class="col-sm-1 control-label customDelay" style="display : none;">{{Au delà de (min)}}</label>
+							<div class="col-sm-1 customDelay" style="display : none;">
+								<input type="number" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::customDelay"/>
 							</div>
 						</div>
 						<legend><i class="fas fa-globe"></i> {{Coordonnées}}</legend>

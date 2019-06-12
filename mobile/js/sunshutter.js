@@ -38,7 +38,7 @@ function getSunshutterState(){
 		}
 		var table = '';
 		for (sunshutter in data.result) {
-			table += '<tr><td>' +  data.result[sunshutter]['name'] +' <br/> Dernier : '+ data.result[sunshutter]['position'] +'%</td>';
+			table += '<tr><td>' +  data.result[sunshutter]['name'] +' <br/> '+ data.result[sunshutter]['position'] +'% <br/>' + data.result[sunshutter]['HandlingLabel'] +'</td>';
 			if (data.result[sunshutter]['handling'] == '0'){
 				table += '<td>' + '<a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+data.result[sunshutter]['resumeId']+'"><i class="fas fa-play"></i></a>';
 			} else {

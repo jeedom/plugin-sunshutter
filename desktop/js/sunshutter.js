@@ -134,6 +134,14 @@ $('.eqLogicAttr[data-l1key=configuration][data-l2key="shutter::defaultAction"]')
   }
 });
 
+$('.eqLogicAttr[data-l1key=configuration][data-l2key="shutter::nobackhand"]').on('change', function () {
+  if($(this).value() == '2'){
+    $('.customDelay').show();
+  }else{
+    $('.customDelay').hide();
+  }
+});
+
 $("body").on('click',".listCmdAction", function () {
   var el = $(this).closest('.form-group').find('.eqLogicAttr');
   jeedom.cmd.getSelectModal({cmd: {type: 'action'}}, function (result) {

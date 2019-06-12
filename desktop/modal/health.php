@@ -46,10 +46,13 @@ foreach ($eqLogics as $eqLogic) {
 	if ($cron == 'custom') {
 		$cron = $eqLogic->getConfiguration('cron::custom','');
 	}
-	echo '<td><span class="label label-info" style="font-size : 1em;cursor:default;">' . $eqLogic->getConfiguration('cron::executeAction','') . '</span></td>';
-	$backhand = '<span class="label label-success" style="font-size : 1em;cursor:default;">{{Oui}}</span>';
-	if ($eqLogic->getConfiguration('cron::nobackhand',0) == 0) {
-		$backhand = '<span class="label label-danger" style="font-size : 1em;cursor:default;">{{Non}}</span>';
+	echo '<td><span class="label label-info" style="font-size : 1em;cursor:default;">' . $cron . '</span></td>';
+	$backhand = '<span class="label label-danger" style="font-size : 1em;cursor:default;">{{Non}}</span>';
+	if ($eqLogic->getConfiguration('shutter::nobackhand',0) == 1) {
+		$backhand = '<span class="label label-success" style="font-size : 1em;cursor:default;">{{Oui}}</span>';
+	}
+	if ($eqLogic->getConfiguration('shutter::nobackhand',0) == 2) {
+		$backhand = '<span class="label label-warning" style="font-size : 1em;cursor:default;">'. $eqLogic->getConfiguration('shutter::customDelay','0') . 'min</span>';
 	}
 	echo '<td>' . $backhand . '</td>';
 	echo '<td><span class="label label-info" style="font-size : 1em;cursor:default;">' . $eqLogic->getConfiguration('shutter::openPosition','') . '</span></td>';

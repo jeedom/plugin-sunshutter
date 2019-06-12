@@ -10,6 +10,7 @@ if (!isConnect()) {
 			<th data-priority="1">{{Azimuth}}</th>
 			<th data-priority="1">{{Elevation}}</th>
 			<th data-priority="1">{{Dernier}}</th>
+			<th data-priority="1">{{Suspension}}</th>
             <th data-priority="1">{{Gestion}}</th>
             <th data-priority="1">{{Manuel}}</th>
 		</tr>
