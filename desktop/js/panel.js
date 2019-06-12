@@ -69,4 +69,4 @@ setInterval(function() {
 
 getSunshutterState();
 
-}, 500000); 
+}, 5000); 

@@ -284,6 +284,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<th>{{Azimuth}}</th>
 							<th>{{Elevation}}</th>
 							<th>{{Position}}</th>
+							<th>{{Condition}}</th>
 						</tr>
 					</thead>
 					<tbody>

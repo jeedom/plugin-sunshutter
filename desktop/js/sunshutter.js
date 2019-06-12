@@ -42,6 +42,9 @@ function addPosition(_position){
   tr += '<input class="form-control positionAttr" data-l1key="shutter::position" style="width:calc( 100% - 20px);display:inline-block;" /> %';
   tr += '</td>';
   tr += '<td>';
+  tr += '<div class="input-group"><textarea class="positionAttr form-control" data-concat="1" data-l1key="position::allowmove" style="height:100px"></textarea><span class="input-group-btn"><a class="btn btn-default listCmdInfoPos roundedRight" ><i class="fas fa-list-alt"></i></a></span></div>';
+  tr += '</td>';
+  tr += '<td>';
   tr += '<i class="fas fa-minus-circle cursor bt_removePosition"></i>';
   tr += '</td>';
   tr += '</tr>';
@@ -55,6 +58,17 @@ $('#table_sunShutterPosition').off('click','.bt_removePosition').on('click','.bt
 
 $(".eqLogic").on('click',".listCmdInfo",  function () {
   var el = $(this).closest('.form-group').find('.eqLogicAttr');
+  jeedom.cmd.getSelectModal({cmd: {type: 'info'}}, function (result) {
+    if (el.attr('data-concat') == 1) {
+      el.atCaret('insert', result.human);
+    } else {
+      el.value(result.human);
+    }
+  });
+});
+
+$(".eqLogic").on('click',".listCmdInfoPos",  function () {
+  var el = $(this).closest('.input-group').find('.positionAttr');
   jeedom.cmd.getSelectModal({cmd: {type: 'info'}}, function (result) {
     if (el.attr('data-concat') == 1) {
       el.atCaret('insert', result.human);

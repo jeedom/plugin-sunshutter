@@ -59,7 +59,6 @@ class sunshutter extends eqLogic {
   }
   
   public static function getPanel($_type){
-    log::add('sunshutter','debug','panle ' . $_type);
     $return = array();
     foreach (eqLogic::byType('sunshutter', true) as $sunshutter) {
       $name = $sunshutter->getHumanName(true);
@@ -252,7 +251,11 @@ public function calculPosition(){
   foreach ($positions as $position) {
     if($sun_elevation > $position['sun::elevation::from'] && $sun_elevation <= $position['sun::elevation::to']){
       if($sun_azimuth > $position['sun::azimuth::from'] && $sun_azimuth <= $position['sun::azimuth::to']){
-        return $position['shutter::position'];
+        if($position['position::allowmove'] == '' || jeedom::evaluateExpression($position['position::allowmove']) == true){
+            log::add('sunshutter','debug',$this->getHumanName().' - Valid condition : ' . $position['position::allowmove'] . ' Elevation : ' . $position['sun::elevation::from'] . '°-' . $position['sun::elevation::to'] . '° Azimuth : ' . $position['sun::azimuth::from'] . '°-' . $position['sun::azimuth::to'] . '° ('  . $position['shutter::position'] . '%)');
+            return $position['shutter::position'];
+        }
+         log::add('sunshutter','debug',$this->getHumanName().' - Invalid condition : ' . $position['position::allowmove'] . ' Elevation : ' . $position['sun::elevation::from'] . '°-' . $position['sun::elevation::to'] . '° Azimuth : ' . $position['sun::azimuth::from'] . '°-' . $position['sun::azimuth::to'] . '° ('  . $position['shutter::position'] . '%)');
       }
     }
   }
