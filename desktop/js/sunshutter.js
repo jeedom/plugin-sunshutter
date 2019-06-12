@@ -78,12 +78,30 @@ $(".eqLogic").on('click',".listCmdInfoPos",  function () {
   });
 });
 
+
+$('.eqLogicAttr[data-l1key=configuration][data-l2key="cron::executeAction"]').on('change', function () {
+  if($(this).value() == 'custom'){
+    $('.customcron').show();
+  }else{
+    $('.customcron').hide();
+  }
+});
+
+$('.eqLogicAttr[data-l1key=configuration][data-l2key="shutter::defaultAction"]').on('change', function () {
+  if($(this).value() == 'custom'){
+    $('.customPosition').show();
+  }else{
+    $('.customPosition').hide();
+  }
+});
+
 $("body").on('click',".listCmdAction", function () {
   var el = $(this).closest('.form-group').find('.eqLogicAttr');
   jeedom.cmd.getSelectModal({cmd: {type: 'action'}}, function (result) {
     el.value(result.human);
   });
 });
+
 
 function saveEqLogic(_eqLogic) {
   if (!isset(_eqLogic.configuration)) {

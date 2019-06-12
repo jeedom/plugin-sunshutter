@@ -125,7 +125,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				<div class="form-group">
 							<label class="col-sm-3 control-label">{{Vérification}}</label>
 							<div class="col-sm-2">
-								<select id="sel_object" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="cron::executeAction">
+								<select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="cron::executeAction">
 									<option value="*/5 * * * *">{{Toutes les 5 minutes}}</option>
 									<option value="*/10 * * * *">{{Toutes les 10 minutes}}</option>
 									<option value="*/15 * * * *">{{Toutes les 15 minutes}}</option>
@@ -134,8 +134,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									<option value="custom">{{Cron Personnalisé}}</option>
 								</select>
 							</div>
-							<label class="col-sm-1 control-label">{{Cron Personnalisé}}</label>
-							<div class="col-sm-2">
+							<label class="col-sm-1 control-label customcron" style="display : none;">{{Cron Personnalisé}}</label>
+							<div class="col-sm-2 customcron" style="display : none;">
 								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="cron::custom"/>
 							</div>
 						</div>
@@ -272,15 +272,15 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							</div>
 							<label class="col-sm-1 control-label">{{Action par défaut}}</label>
 							<div class="col-sm-1">
-								<select id="sel_object" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::defaultAction">
+								<select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::defaultAction">
 									<option value="none">{{Ne rien faire}}</option>
 									<option value="open">{{Ouvrir}}</option>
 									<option value="close">{{Fermer}}</option>
-									<option value="custom">{{Position}}</option>
+									<option value="custom">{{Position Personnalisée}}</option>
 								</select>
 							</div>
-							<label class="col-sm-1 control-label">{{Position}}</label>
-							<div class="col-sm-1">
+							<label class="col-sm-1 control-label customPosition" style="display : none;">{{Position personnalisée}}</label>
+							<div class="col-sm-1 customPosition" style="display : none;">
 								<input type="number" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::customPosition"/>
 							</div>
 						</div>
