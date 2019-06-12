@@ -126,9 +126,7 @@ public function postSave() {
   $cmd->save();
   
   $cmd = $this->getCmd(null, 'stateHandling');
-  $init = 0;
   if (!is_object($cmd)) {
-    $init = 1;
     $cmd = new sunshutterCmd();
     $cmd->setLogicalId('stateHandling');
     $cmd->setName(__('Etat gestion', __FILE__));
@@ -138,9 +136,6 @@ public function postSave() {
   $cmd->setSubType('binary');
   $cmd->setEqLogic_id($this->getId());
   $cmd->save();
-  if ($init == 1){
-    $cmd->event(true);
-  }
   
   $cmd = $this->getCmd(null, 'lastposition');
   if (!is_object($cmd)) {
@@ -222,6 +217,7 @@ public function postSave() {
       $listener->remove();
     }
   }
+  $this->updateData();
 }
 
 public function updateData(){
@@ -234,6 +230,12 @@ public function updateData(){
   $SunPosition = $SD->calculate();
   $this->checkAndUpdateCmd('sun_elevation', round($SunPosition->e0°,2));
   $this->checkAndUpdateCmd('sun_azimuth', round($SunPosition->Φ°,2));
+  $handlingCmd = $this->getCmd(null, 'stateHandling');
+  if ($handlingCmd->execCmd() === '') {
+    
+    log::add('sunshutter','debug','blabla ' . $handlingCmd->execCmd());
+    $handlingCmd->event(true);
+  }
 }
 
 public function calculPosition(){
@@ -284,9 +286,9 @@ public function executeAction($_force = false){
       $delta = abs($currentPosition-$lastPositionOrder);
       $ecart = ($delta/$amplitude)*100;
       log::add('sunshutter','debug',$this->getHumanName().' - Ecart depuis le dernier ordre : ' . $ecart);
-      if ($ecart>2){
+      if ($ecart>3){
         $this->checkAndUpdateCmd('stateHandling', false);
-        log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, position != last order by far 2% and I don\'t have control');
+        log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, position != last order by far 3% and I don\'t have control');
         return;
       }
     }
@@ -315,8 +317,8 @@ public function executeAction($_force = false){
     $delta = abs($position-$currentPosition);
     $ecart = ($delta/$amplitude)*100;
     log::add('sunshutter','debug',$this->getHumanName().' - Ecart avec la cible : ' . $ecart);
-    if ($ecart<2){
-      log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, position != new position by less than 2%');
+    if ($ecart<3){
+      log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, position != new position by less than 3%');
       return;
     }
   }
