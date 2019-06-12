@@ -6,6 +6,7 @@
 	"author" : "Jeedom SAS",
 	"require" : "3.3",
 	"category" : "automatisation",
+	"display" : "panel",
 	"hasDependency" : false,
 	"hasOwnDeamon" : false,
 	"maxDependancyInstallTime" : 0,

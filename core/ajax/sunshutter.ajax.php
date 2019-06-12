@@ -54,11 +54,11 @@ try {
 		ajax::success(utils::o2a($return));
 	}
 	
-	if (init('action') == 'getMobilePanel') {
+	if (init('action') == 'getPanel') {
 		if (!isConnect('admin')) {
 			throw new Exception(__('401 - Accès non autorisé', __FILE__));
 		}
-		ajax::success(sunshutter::getMobilePanel());
+		ajax::success(sunshutter::getPanel(init('type')));
 	}
 
 	throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));

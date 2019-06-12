@@ -58,11 +58,14 @@ class sunshutter extends eqLogic {
     $sunshutter->executeAction();
   }
   
-  public static function getMobilePanel(){
+  public static function getPanel($_type){
+    log::add('sunshutter','debug','panle ' . $_type);
     $return = array();
     foreach (eqLogic::byType('sunshutter', true) as $sunshutter) {
       $name = $sunshutter->getHumanName(true);
       $cmdHandling = $sunshutter->getCmd(null, 'stateHandling');
+      $cmdAzimuth = $sunshutter->getCmd(null, 'sun_azimuth');
+      $cmdElevation = $sunshutter->getCmd(null, 'sun_elevation');
       $cmdpause = $sunshutter->getCmd(null, 'suspendHandling');
       $cmdresume = $sunshutter->getCmd(null, 'resumeHandling');
       $cmdExecute = $sunshutter->getCmd(null, 'executeAction');
@@ -74,12 +77,12 @@ class sunshutter extends eqLogic {
       $cmd = cmd::byId(str_replace('#','',$sunshutter->getConfiguration('shutter::state')));
       if (is_object($cmd)) {
         $currentPosition = $cmd->execCmd();
-        $cmdstatehtml = $cmd->toHtml('mobile');
+        $cmdstatehtml = $cmd->toHtml($_type);
       }
       $cmdPosition = str_replace('#','',$sunshutter->getConfiguration('shutter::position'));
       $cmd = cmd::byId($cmdPosition);
       if (is_object($cmd)) {
-        $cmdhtml = $cmd->toHtml('mobile');
+        $cmdhtml = $cmd->toHtml($_type);
       }
       $handling =  $cmdHandling->execCmd();
       $datas = array('name' => $name,
@@ -94,6 +97,8 @@ class sunshutter extends eqLogic {
       'positionId' => $cmdPosition,
       'cmdhtml' => $cmdhtml,
       'cmdstatehtml' => $cmdstatehtml,
+      'elevation' => $cmdElevation->execCmd(),
+      'azimuth' => $cmdAzimuth->execCmd(),
     );
     $return[]=$datas;
   }
@@ -103,10 +108,6 @@ class sunshutter extends eqLogic {
 /*     * *********************Méthodes d'instance************************* */
 
 public function postSave() {
-  $cmd = $this->getCmd(null, 'sun_angle');
-  if (is_object($cmd)) {
-    $cmd->remove();
-  }
   $cmd = $this->getCmd(null, 'sun_elevation');
   if (!is_object($cmd)) {
     $cmd = new sunshutterCmd();
@@ -123,7 +124,7 @@ public function postSave() {
   if (!is_object($cmd)) {
     $cmd = new sunshutterCmd();
     $cmd->setLogicalId('sun_azimuth');
-    $cmd->setName(__('Azimut soleil', __FILE__));
+    $cmd->setName(__('Azimuth soleil', __FILE__));
   }
   $cmd->setType('info');
   $cmd->setSubType('numeric');
