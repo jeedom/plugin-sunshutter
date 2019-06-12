@@ -387,6 +387,8 @@ public function executeAction($_force = false){
     log::add('sunshutter','debug',$this->getHumanName().' - Ecart avec la cible : ' . $ecart);
     if ($ecart<3){
       log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, position != new position by less than 3%');
+      $this->setCache('lastPositionOrder',$position);
+      $this->checkAndUpdateCmd('lastposition', $position);
       return;
     }
   }
