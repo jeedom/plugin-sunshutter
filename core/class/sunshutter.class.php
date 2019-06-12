@@ -232,8 +232,6 @@ public function updateData(){
   $this->checkAndUpdateCmd('sun_azimuth', round($SunPosition->Φ°,2));
   $handlingCmd = $this->getCmd(null, 'stateHandling');
   if ($handlingCmd->execCmd() === '') {
-    
-    log::add('sunshutter','debug','blabla ' . $handlingCmd->execCmd());
     $handlingCmd->event(true);
   }
 }
