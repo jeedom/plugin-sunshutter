@@ -69,12 +69,18 @@ class sunshutter extends eqLogic {
       $openvalue = $sunshutter->getConfiguration('shutter::openPosition',0);
       $closevalue = $sunshutter->getConfiguration('shutter::closePosition',0);
       $currentPosition = null;
+      $cmdstatehtml = '';
+      $cmdhtml = '';
       $cmd = cmd::byId(str_replace('#','',$sunshutter->getConfiguration('shutter::state')));
-      $currentPosition = $cmd->execCmd();
-      $cmdstatehtml = $cmd->toHtml('mobile');
+      if (is_object($cmd)) {
+        $currentPosition = $cmd->execCmd();
+        $cmdstatehtml = $cmd->toHtml('mobile');
+      }
       $cmdPosition = str_replace('#','',$sunshutter->getConfiguration('shutter::position'));
       $cmd = cmd::byId($cmdPosition);
-      $cmdhtml = $cmd->toHtml('mobile');
+      if (is_object($cmd)) {
+        $cmdhtml = $cmd->toHtml('mobile');
+      }
       $handling =  $cmdHandling->execCmd();
       $datas = array('name' => $name,
       'position' => $sunshutter->getCache('lastPositionOrder',null),
@@ -232,6 +238,8 @@ public function updateData(){
   $this->checkAndUpdateCmd('sun_azimuth', round($SunPosition->Φ°,2));
   $handlingCmd = $this->getCmd(null, 'stateHandling');
   if ($handlingCmd->execCmd() === '') {
+    
+    log::add('sunshutter','debug','blabla ' . $handlingCmd->execCmd());
     $handlingCmd->event(true);
   }
 }
