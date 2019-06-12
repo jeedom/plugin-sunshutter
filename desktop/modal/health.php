@@ -42,6 +42,10 @@ $eqLogics = sunshutter::byType($plugin->getId());
 	 <?php
 foreach ($eqLogics as $eqLogic) {
 	echo '<tr><td><a href="' . $eqLogic->getLinkToConfiguration() . '" style="text-decoration: none;">' . $eqLogic->getHumanName(true) . '</a></td>';
+	$cron = $eqLogic->getConfiguration('cron::executeAction','');
+	if ($cron == 'custom') {
+		$cron = $eqLogic->getConfiguration('cron::custom','');
+	}
 	echo '<td><span class="label label-info" style="font-size : 1em;cursor:default;">' . $eqLogic->getConfiguration('cron::executeAction','') . '</span></td>';
 	$backhand = '<span class="label label-success" style="font-size : 1em;cursor:default;">{{Oui}}</span>';
 	if ($eqLogic->getConfiguration('cron::nobackhand',0) == 0) {

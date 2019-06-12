@@ -24,10 +24,6 @@ function sunshutter_install() {
 
 function sunshutter_update() {
   foreach (sunshutter::byType('sunshutter') as $sunshutter) {
-    if (!in_array($sunshutter->getConfiguration('cron::executeAction',''), array('*/5 * * * *','*/10 * * * *','*/15 * * * *','*/30 * * * *','*/45 * * * *','custom'))) {
-        $sunshutter->setConfiguration('cron::custom',$sunshutter->getConfiguration('cron::executeAction',''));
-        $sunshutter->setConfiguration('cron::executeAction','custom');
-    }
     $sunshutter->save();
   }
 }
