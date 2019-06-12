@@ -24,6 +24,10 @@ $('#bt_addPosition').off('click').on('click',function(){
   addPosition({});
 });
 
+$('#bt_addConditions').off('click').on('click',function(){
+  addConditions({});
+});
+
 function addPosition(_position){
   if(!_position['sun::elevation::from']){
     _position['sun::elevation::from'] = 0;
@@ -52,7 +56,31 @@ function addPosition(_position){
   $('#table_sunShutterPosition').find('tbody tr').last().setValues(_position, '.positionAttr');
 }
 
+function addConditions(_condition){
+  var tr = '<tr class="conditions">';
+  tr += '<td>';
+  tr += '<input class="form-control conditionsAttr" data-l1key="conditions::position" style="width:calc( 50% - 10px);display:inline-block;" /> %';
+  tr += '</td>';
+  tr += '<td>';
+  tr += '<input type="checkbox" class="form-control conditionsAttr" data-l1key="conditions::immediate" style="width:calc( 100% - 20px);display:inline-block;"/>';
+  tr += '</td>';
+  tr += '<td>';
+  tr += '<div class="input-group"><textarea class="conditionsAttr form-control" data-concat="1" data-l1key="conditions::condition" style="height:100px"></textarea><span class="input-group-btn"><a class="btn btn-default listCmdInfoConditions roundedRight" ><i class="fas fa-list-alt"></i></a></span></div>';
+  tr += '</td>';
+  tr += '<td>';
+  tr += '<td>';
+  tr += '<i class="fas fa-minus-circle cursor bt_removeCondition"></i>';
+  tr += '</td>';
+  tr += '</tr>';
+  $('#table_sunShutterConditions').find('tbody').append(tr);
+  $('#table_sunShutterConditions').find('tbody tr').last().setValues(_condition, '.conditionsAttr');
+}
+
 $('#table_sunShutterPosition').off('click','.bt_removePosition').on('click','.bt_removePosition',function(){
+  $(this).closest('tr').remove();
+});
+
+$('#table_sunShutterConditions').off('click','.bt_removeCondition').on('click','.bt_removeCondition',function(){
   $(this).closest('tr').remove();
 });
 
@@ -69,6 +97,17 @@ $(".eqLogic").on('click',".listCmdInfo",  function () {
 
 $(".eqLogic").on('click',".listCmdInfoPos",  function () {
   var el = $(this).closest('.input-group').find('.positionAttr');
+  jeedom.cmd.getSelectModal({cmd: {type: 'info'}}, function (result) {
+    if (el.attr('data-concat') == 1) {
+      el.atCaret('insert', result.human);
+    } else {
+      el.value(result.human);
+    }
+  });
+});
+
+$(".eqLogic").on('click',".listCmdInfoConditions",  function () {
+  var el = $(this).closest('.input-group').find('.conditionsAttr');
   jeedom.cmd.getSelectModal({cmd: {type: 'info'}}, function (result) {
     if (el.attr('data-concat') == 1) {
       el.atCaret('insert', result.human);
@@ -108,6 +147,7 @@ function saveEqLogic(_eqLogic) {
     _eqLogic.configuration = {};
   }
   _eqLogic.configuration.positions = $('#table_sunShutterPosition').find('tbody tr').getValues('.positionAttr');
+  _eqLogic.configuration.conditions = $('#table_sunShutterConditions').find('tbody tr').getValues('.conditionsAttr');
   return _eqLogic;
 }
 
@@ -117,6 +157,14 @@ function printEqLogic(_eqLogic) {
     if (isset(_eqLogic.configuration.positions)) {
       for (var i in _eqLogic.configuration.positions) {
         addPosition(_eqLogic.configuration.positions[i]);
+      }
+    }
+  }
+  $('#table_sunShutterConditions').find('tbody').empty();
+  if (isset(_eqLogic.configuration)) {
+    if (isset(_eqLogic.configuration.conditions)) {
+      for (var i in _eqLogic.configuration.conditions) {
+        addConditions(_eqLogic.configuration.conditions[i]);
       }
     }
   }

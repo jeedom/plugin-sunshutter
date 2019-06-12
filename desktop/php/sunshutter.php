@@ -207,6 +207,21 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 							</div>
 						</div>
+						<legend><i class="icon jeedom-volet-ferme"></i> {{Conditions}}
+						<a class="btn btn-default btn-xs pull-right" style="margin-right:15px;" id="bt_addConditions"><i class="fas fa-plus"></i> {{Ajouter}}</a>
+						</legend>
+						<table class="table table-condensed" id="table_sunShutterConditions">
+							<thead>
+							<tr>
+								<th>{{Position}}</th>
+								<th>{{Action Systématique}}</th>
+								<th>{{Condition}}</th>
+							</tr>
+							</thead>
+						<tbody>
+						
+						</tbody>
+						</table>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">{{Forcer l'ouverture si}}</label>
 							<div class="col-sm-9">

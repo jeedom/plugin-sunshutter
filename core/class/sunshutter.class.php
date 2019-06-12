@@ -47,18 +47,36 @@ class sunshutter extends eqLogic {
             $sunshutter->executeAction();
           }
         } catch (Exception $exc) {
-          log::add('virtual', 'error', __('Expression cron non valide pour ', __FILE__) . $sunshutter->getHumanName() . ' : ' . $cron);
+          log::add('sunshutter', 'error', __('Expression cron non valide pour ', __FILE__) . $sunshutter->getHumanName() . ' : ' . $cron);
         }
       }
     }
   }
   
-  public static function reExecuteAction($_options){
+  public static function immediateAction($_options){
     $sunshutter = eqLogic::byId($_options['sunshutter_id']);
     if (!is_object($sunshutter)) {
       return;
     }
-    $sunshutter->executeAction();
+    log::add('sunshutter', 'debug', $sunshutter->getHumanName().' - Immediate Trigger');
+    $conditions = $sunshutter->getConfiguration('conditions','');
+    if($conditions != '' ){
+      foreach ($conditions as $condition) {
+        if ($condition['conditions::immediate']) {
+            if($condition['conditions::condition'] != '' && jeedom::evaluateExpression($condition['conditions::condition'])){
+                if ($condition['conditions::position'] != '') {
+                    log::add('sunshutter','debug',$sunshutter->getHumanName().' - Immediate Condition Met : ' . $condition['conditions::condition'] . ' (' . $condition['conditions::position'] . '%)');
+                    log::add('sunshutter','debug',$sunshutter->getHumanName().' - Do action ' . $condition['conditions::position']);
+                    $cmd = cmd::byId(str_replace('#','',$sunshutter->getConfiguration('shutter::position')));
+                    if(is_object($cmd)){
+                        $cmd->execCmd(array('slider' => $condition['conditions::position']));
+                    }
+                    break;
+                }
+            }
+        }
+      }
+    }
   }
   
   public static function getPanel($_type){
@@ -202,26 +220,31 @@ public function postSave() {
   $cmd->setEqLogic_id($this->getId());
   $cmd->save();
   
-  if($this->getConfiguration('condition::immediatforceopen') != '' || $this->getConfiguration('condition::immediatforceclose') != ''){
-    $listener = listener::byClassAndFunction('sunshutter', 'reExecuteAction', array('sunshutter_id' => intval($this->getId())));
+  $conditions = $this->getConfiguration('conditions','');
+  if($conditions != '' ){
+    $listener = listener::byClassAndFunction('sunshutter', 'immediateAction', array('sunshutter_id' => intval($this->getId())));
     if (!is_object($listener)) {
-      $listener = new listener();
+        $listener = new listener();
     }
     $listener->setClass('sunshutter');
-    $listener->setFunction('reExecuteAction');
+    $listener->setFunction('immediateAction');
     $listener->setOption(array('sunshutter_id' => intval($this->getId())));
     $listener->emptyEvent();
-    preg_match_all("/#([0-9]*)#/", $this->getConfiguration('condition::immediatforceopen'), $matches);
-    foreach ($matches[1] as $cmd_id) {
-      $listener->addEvent($cmd_id);
+    $nblistener = 0;
+    foreach ($conditions as $condition) {
+        if ($condition['conditions::immediate']) {
+            preg_match_all("/#([0-9]*)#/", $condition['conditions::condition'], $matches);
+            foreach ($matches[1] as $cmd_id) {
+                $nblistener += 1;
+                $listener->addEvent($cmd_id);
+            }
+        }
     }
-    preg_match_all("/#([0-9]*)#/", $this->getConfiguration('condition::immediatforceclose'), $matches);
-    foreach ($matches[1] as $cmd_id) {
-      $listener->addEvent($cmd_id);
+    if ($nblistener > 0) {
+        $listener->save();
     }
-    $listener->save();
-  }else{
-    $listener = listener::byClassAndFunction('sunshutter', 'reExecuteAction', array('sunshutter_id' => intval($this->getId())));
+  } else {
+    $listener = listener::byClassAndFunction('sunshutter', 'immediateAction', array('sunshutter_id' => intval($this->getId())));
     if (is_object($listener)) {
       $listener->remove();
     }
@@ -308,21 +331,19 @@ public function executeAction($_force = false){
   }
   $position = null;
   $position = $this->calculPosition();
-  if($this->getConfiguration('condition::forceopen') != '' && jeedom::evaluateExpression($this->getConfiguration('condition::forceopen'))){
-    log::add('sunshutter','debug',$this->getHumanName().' - Force open');
-    $position = $this->getConfiguration('shutter::openPosition',0);
-  }
-  if($this->getConfiguration('condition::immediatforceopen') != '' && jeedom::evaluateExpression($this->getConfiguration('condition::immediatforceopen'))){
-    log::add('sunshutter','debug',$this->getHumanName().' - Force open immediate');
-    $position = $this->getConfiguration('shutter::openPosition',0);
-  }
-  if($this->getConfiguration('condition::forceclose') != '' && jeedom::evaluateExpression($this->getConfiguration('condition::forceclose'))){
-    log::add('sunshutter','debug',$this->getHumanName().' - Force close');
-    $position = $this->getConfiguration('shutter::closePosition',0);
-  }
-  if($this->getConfiguration('condition::immediatforceclose') != '' && jeedom::evaluateExpression($this->getConfiguration('condition::immediatforceclose'))){
-    log::add('sunshutter','debug',$this->getHumanName().' - Force close immediate');
-    $position = $this->getConfiguration('shutter::closePosition',0);
+  $conditions = $this->getConfiguration('conditions','');
+  if($conditions != '' ){
+    foreach ($conditions as $condition) {
+        if (!$condition['conditions::immediate']) {
+            if($condition['conditions::condition'] != '' && jeedom::evaluateExpression($condition['conditions::condition'])){
+                if ($condition['conditions::position'] != '') {
+                    log::add('sunshutter','debug',$this->getHumanName().' - Condition Met : ' . $condition['conditions::condition'] . ' (' . $condition['conditions::position'] . '%)');
+                    $position = $condition['conditions::position'];
+                    break;
+                }
+            }
+        }
+    }
   }
   log::add('sunshutter','debug',$this->getHumanName().' - Calcul position '.$position);
   if(($position !== null && $currentPosition !== null)){
