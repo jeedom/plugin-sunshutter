@@ -277,6 +277,7 @@ public function updateData(){
   $handlingCmd = $this->getCmd(null, 'stateHandling');
   if ($handlingCmd->execCmd() === '') {
     $handlingCmd->event(true);
+    $this->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
   }
 }
 
