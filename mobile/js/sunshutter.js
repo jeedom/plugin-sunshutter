@@ -36,24 +36,28 @@ function getSunshutterState(){
             $('#div_inclusionAlert').showAlert({message: data.result, level: 'danger'});
             return;
 		}
+		$(".posMoy").value(data.result.global['moyPos']+'%');
+		$(".manualSuspend").value(data.result.global['manual']);
+		$(".autoSuspend").value(data.result.global['auto']);
 		var table = '';
-		for (sunshutter in data.result) {
+		for (sunshutter in data.result.shutters) {
+			var shutter = data.result.shutters[sunshutter];
 			handling ='';
-			if (data.result[sunshutter]['HandlingLabel'] == 'Auto'){
+			if (shutter['HandlingLabel'] == 'Auto'){
 				handling = '<i class="fas fa-magic"></i>';
-			} else if (data.result[sunshutter]['HandlingLabel'] == 'Manuel'){
+			} else if (shutter['HandlingLabel'] == 'Manuel'){
 				handling = '<i class="fas fa-user"></i>';
 			}
-			table += '<tr><td>' +  data.result[sunshutter]['name'] +' <br/> '+ data.result[sunshutter]['position'] +'% <br/>' + handling +'</td>';
-			if (data.result[sunshutter]['handling'] == '0'){
-				table += '<td>' + '<a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+data.result[sunshutter]['resumeId']+'"><i class="fas fa-play"></i></a>';
+			table += '<tr><td>' +  shutter['name'] +' <br/> '+ shutter['position'] +'% <br/>' + handling +'</td>';
+			if (shutter['handling'] == '0'){
+				table += '<td>' + '<a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['resumeId']+'"><i class="fas fa-play"></i></a>';
 			} else {
-				table += '<td>' + '<a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+data.result[sunshutter]['pauseId']+'"><i class="fas fa-pause"></i></a>';
+				table += '<td>' + '<a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['pauseId']+'"><i class="fas fa-pause"></i></a>';
 			}
-			table += ' <a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+data.result[sunshutter]['executeId']+'"><i class="fas fa-crosshairs"></i></a>';
-			table += ' <a class="bt_positionshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-value="'+data.result[sunshutter]['openvalue']+'" data-cmd="'+data.result[sunshutter]['positionId']+'"><i class="fas fa-arrow-up"></i></a>';
-			table += ' <a class="bt_positionshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-value="'+data.result[sunshutter]['closevalue']+'" data-cmd="'+data.result[sunshutter]['positionId']+'"><i class="fas fa-arrow-down"></i></a></td>';
-			table += '<td>' + data.result[sunshutter]['cmdhtml'] + '</td>';
+			table += ' <a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['executeId']+'"><i class="fas fa-crosshairs"></i></a>';
+			table += ' <a class="bt_positionshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-value="'+shutter['openvalue']+'" data-cmd="'+shutter['positionId']+'"><i class="fas fa-arrow-up"></i></a>';
+			table += ' <a class="bt_positionshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-value="'+shutter['closevalue']+'" data-cmd="'+shutter['positionId']+'"><i class="fas fa-arrow-down"></i></a></td>';
+			table += '<td>' + shutter['cmdhtml'] + '</td>';
 			table += '</tr>';
 		}
 		$("#table_sunshutter tbody").empty().append(table);

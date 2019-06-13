@@ -31,28 +31,32 @@ function getSunshutterState(){
             $('#div_inclusionAlert').showAlert({message: data.result, level: 'danger'});
             return;
 		}
+		$(".posMoy").value(data.result.global['moyPos']+'%');
+		$(".manualSuspend").value(data.result.global['manual']);
+		$(".autoSuspend").value(data.result.global['auto']);
 		var table = '';
-		for (sunshutter in data.result) {
+		for (sunshutter in data.result.shutters) {
+			var shutter = data.result.shutters[sunshutter];
 			handling ='Aucune';
-			if (data.result[sunshutter]['HandlingLabel'] == 'Auto'){
+			if (shutter['HandlingLabel'] == 'Auto'){
 				handling = '<i class="fas fa-magic"></i>';
-			} else if (data.result[sunshutter]['HandlingLabel'] == 'Manuel'){
+			} else if (shutter['HandlingLabel'] == 'Manuel'){
 				handling = '<i class="fas fa-user"></i>';
 			}
-			table += '<tr><td><a href="' + data.result[sunshutter]['link'] + '">' +  data.result[sunshutter]['name'] +'</a></td>';
-			table += '<td><center><span class="label label-primary">'+ data.result[sunshutter]['azimuth'] + '°</span></center></td>';
-			table += '<td><center><span class="label label-primary">'+ data.result[sunshutter]['elevation'] + '°</span></center></td>';
-			table += '<td><center><span class="label label-primary">'+ data.result[sunshutter]['position'] + '%</span></center></td>';
+			table += '<tr><td><a href="' + shutter['link'] + '">' +  shutter['name'] +'</a></td>';
+			table += '<td><center><span class="label label-primary">'+ shutter['azimuth'] + '°</span></center></td>';
+			table += '<td><center><span class="label label-primary">'+ shutter['elevation'] + '°</span></center></td>';
+			table += '<td><center><span class="label label-primary">'+ shutter['position'] + '%</span></center></td>';
 			table += '<td><center><span class="label label-primary">'+ handling + '</span></center></td>';
-			if (data.result[sunshutter]['handling'] == '0'){
-				table += '<td><center>' + '<a class="bt_sunshutterAction btn btn-default" data-cmd="'+data.result[sunshutter]['resumeId']+'"><i class="fas fa-play"></i></a>';
+			if (shutter['handling'] == '0'){
+				table += '<td><center>' + '<a class="bt_sunshutterAction btn btn-default" data-cmd="'+shutter['resumeId']+'"><i class="fas fa-play"></i></a>';
 			} else {
-				table += '<td><center>' + '<a class="bt_sunshutterAction btn btn-default" data-cmd="'+data.result[sunshutter]['pauseId']+'"><i class="fas fa-pause"></i></a>';
+				table += '<td><center>' + '<a class="bt_sunshutterAction btn btn-default" data-cmd="'+shutter['pauseId']+'"><i class="fas fa-pause"></i></a>';
 			}
-			table += ' <a class="bt_sunshutterAction btn btn-default" data-cmd="'+data.result[sunshutter]['executeId']+'"><i class="fas fa-crosshairs"></i></a>';
-			table += ' <a class="bt_positionshutterAction btn btn-default" data-value="'+data.result[sunshutter]['openvalue']+'" data-cmd="'+data.result[sunshutter]['positionId']+'"><i class="fas fa-arrow-up"></i></a>';
-			table += ' <a class="bt_positionshutterAction btn btn-default" data-value="'+data.result[sunshutter]['closevalue']+'" data-cmd="'+data.result[sunshutter]['positionId']+'"><i class="fas fa-arrow-down"></i></a>' +'</center></td>';
-			table += '<td><center>' + data.result[sunshutter]['cmdhtml'] + '</center></td>';
+			table += ' <a class="bt_sunshutterAction btn btn-default" data-cmd="'+shutter['executeId']+'"><i class="fas fa-crosshairs"></i></a>';
+			table += ' <a class="bt_positionshutterAction btn btn-default" data-value="'+shutter['openvalue']+'" data-cmd="'+shutter['positionId']+'"><i class="fas fa-arrow-up"></i></a>';
+			table += ' <a class="bt_positionshutterAction btn btn-default" data-value="'+shutter['closevalue']+'" data-cmd="'+shutter['positionId']+'"><i class="fas fa-arrow-down"></i></a>' +'</center></td>';
+			table += '<td><center>' + shutter['cmdhtml'] + '</center></td>';
 			table += '</tr>';
 		}
 		$("#table_sunshutter tbody").empty().append(table);

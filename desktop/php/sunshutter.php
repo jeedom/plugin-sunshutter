@@ -209,6 +209,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				<br/>
 				<fieldset>
 					<form class="form-horizontal">
+						<legend><i class="fas fa-cog"></i> {{Général}}</legend>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">{{Condition pour action}}</label>
 							<div class="col-sm-9">

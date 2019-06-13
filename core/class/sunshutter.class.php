@@ -144,8 +144,13 @@ class sunshutter extends eqLogic {
   }
   
   public static function getPanel($_type){
-    $return = array();
+    $return = array('shutters'=>array());
+    $numberShutters = 0;
+    $sumposition =0;
+    $numbersupendedAuto =0;
+    $numbersupendedManual =0;
     foreach (eqLogic::byType('sunshutter', true) as $sunshutter) {
+      $numberShutters += 1;
       $name = $sunshutter->getHumanName(true);
       $cmdHandling = $sunshutter->getCmd(null, 'stateHandling');
       $cmdHandlingLabel = $sunshutter->getCmd(null, 'stateHandlingLabel');
@@ -162,6 +167,7 @@ class sunshutter extends eqLogic {
       $cmd = cmd::byId(str_replace('#','',$sunshutter->getConfiguration('shutter::state')));
       if (is_object($cmd)) {
         $currentPosition = $cmd->execCmd();
+        $sumposition += $currentPosition;
         $cmdstatehtml = $cmd->toHtml($_type);
       }
       $cmdPosition = str_replace('#','',$sunshutter->getConfiguration('shutter::position'));
@@ -170,6 +176,14 @@ class sunshutter extends eqLogic {
         $cmdhtml = $cmd->toHtml($_type);
       }
       $handling =  $cmdHandling->execCmd();
+      $handlingLabel = $cmdHandlingLabel->execCmd();
+      if ($handling == false){
+        if ($handlingLabel == 'Auto'){
+            $numbersupendedAuto +=1;
+        } else {
+            $numbersupendedManual += 1;
+        }
+      }
       $datas = array('name' => $name,
       'position' => $sunshutter->getCache('lastPositionOrder',null),
       'handling' => $handling,
@@ -181,13 +195,16 @@ class sunshutter extends eqLogic {
       'closevalue' => $closevalue,
       'positionId' => $cmdPosition,
       'cmdhtml' => $cmdhtml,
-      'HandlingLabel' => $cmdHandlingLabel->execCmd(),
+      'HandlingLabel' => $handlingLabel,
       'cmdstatehtml' => $cmdstatehtml,
       'elevation' => $cmdElevation->execCmd(),
       'azimuth' => $cmdAzimuth->execCmd(),
       'link' => $sunshutter->getLinkToConfiguration(),
     );
-    $return[]=$datas;
+    $return['shutters'][]=$datas;
+    $return['global']=array('moyPos' => ($numberShutters == 0) ? 'N/A' : round($sumposition/$numberShutters),
+      'auto' => $numbersupendedAuto,
+      'manual' => $numbersupendedManual,);
   }
   return $return;
 }
