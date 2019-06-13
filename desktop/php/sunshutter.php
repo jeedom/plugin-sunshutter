@@ -141,7 +141,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">{{Reprendre la main}}</label>
-							<div class="col-sm-1">
+							<div class="col-sm-2">
 								<select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::nobackhand">
 									<option value="0">{{Oui}}</option>
 									<option value="1">{{Non}}</option>
@@ -149,7 +149,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</select>
 							</div>
 							<label class="col-sm-1 control-label customDelay" style="display : none;">{{Au delà de (min)}}</label>
-							<div class="col-sm-1 customDelay" style="display : none;">
+							<div class="col-sm-2 customDelay" style="display : none;">
 								<input type="number" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::customDelay"/>
 							</div>
 						</div>
@@ -198,7 +198,13 @@ $eqLogics = eqLogic::byType($plugin->getId());
 					</fieldset>
 				</form>
 				<br/>
-				<div class="alert alert-info">{{Dans cet onglet BLABALABLABALBALBA}}</div>
+				<div class="alert alert-info">{{Dans cet onglet, vous allez définir la configuration générale de la gestion :<br>
+				- Vérification : tous les combiens le plugin vérifiera la position du soleil pour éventuellement changer la position du volet (un cron personnalisé est possible)<br>
+				- Reprendre la main : si la position du volet se retrouve dans une position différente de celle voulue (changement manuel ou par exception), le système doit il reprendre la main automatiquement, 
+				ne pas la reprendre, ou après un délai. Lorsque vous utilisez un délai celui-ci agira après la première vérification (exemple Vérification : 5 minutes, Délai : 1 minute -> si on ouvre manuellement le volet le système reprendra la main
+				1 minute après la prochaine vérification). On effet c'est la vérification qui démarrera le chronomètre car c'est à ce moment là que le système détectera le décalage.<br>
+				- Coordonnées : la latitude, la longitude et l'altitude de votre volet (suncalc.org est très bien pour cela)
+				-Volet : ici vous allez choisi la commande état et la commande positionnement de votre volet}}</div>
 			</div>
 			<div role="tabpanel" class="tab-pane" id="conditiontab">
 				<br/>
@@ -250,7 +256,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<input type="number" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::closePosition"/>
 							</div>
 							<label class="col-sm-1 control-label">{{Action par défaut}}</label>
-							<div class="col-sm-1">
+							<div class="col-sm-2">
 								<select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::defaultAction">
 									<option value="none">{{Ne rien faire}}</option>
 									<option value="open">{{Ouvrir}}</option>
