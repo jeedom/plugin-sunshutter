@@ -203,7 +203,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				- Reprendre la main : si la position du volet se retrouve dans une position différente de celle voulue (changement manuel ou par exception), le système doit il reprendre la main automatiquement, 
 				ne pas la reprendre, ou après un délai. Lorsque vous utilisez un délai celui-ci agira après la première vérification (exemple Vérification : 5 minutes, Délai : 1 minute -> si on ouvre manuellement le volet le système reprendra la main
 				1 minute après la prochaine vérification). On effet c'est la vérification qui démarrera le chronomètre car c'est à ce moment là que le système détectera le décalage.<br>
-				- Coordonnées : la latitude, la longitude et l'altitude de votre volet (suncalc.org est très bien pour cela)<br>
+				- Coordonnées : la latitude, la longitude et l'altitude de votre volet (suncalc.org est très bien pour cela)
 				-Volet : ici vous allez choisi la commande état et la commande positionnement de votre volet}}</div>
 			</div>
 			<div role="tabpanel" class="tab-pane" id="conditiontab">
@@ -229,6 +229,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<tr>
 								<th>{{Position}}</th>
 								<th>{{Action Systématique}}</th>
+								<th>{{Suspendre}}</th>
 								<th>{{Condition}}</th>
 							</tr>
 							</thead>
@@ -245,7 +246,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				- Conditions : cette partie permet de rajouter des règles d'exception <br>
 				       . position : la position désirée<br>
 					   . action systématique et immédiate : si coché cette action sera systématique si la condition est remplie et immédiatement exécutée. Sinon elle est executée que si la condition globale est vérifiée et au moment de la vérification<br>
-					   . conditon : la condition en tant que tel (exemple : si j'ouvre la fenêtre, si j'active la climatisation etc...<br>
+					   . suspendre : valable que pour les conditions systematique (si cochée elle suspendra la gestion et dans le cas d'une reprise sur délai repoussera le délai à chaque fois qu'elle est triggée)<br>
+					   . condition : la condition en tant que tel (exemple : si j'ouvre la fenêtre, si j'active la climatisation etc...<br>
 				Exemple de systématique : j'ouvre la fenêtre je veux que immédiatement le volet s'ouvre peut importe la condition sur action<br>
 				Exemple de non systématique : si la luminosité est inférieur à 50lux alors je veux que le volet lors de la prochaine vérification s'ouvre à 80% indépendamment de la position du soleil que si le moteur à le droit de tourner (condition pour action)}}</div>
 			</div>

@@ -39,22 +39,22 @@ class sunshutter extends eqLogic {
     foreach (eqLogic::byType('sunshutter', true) as $sunshutter) {
       $stateHandlingCmd = $sunshutter->getCmd(null,'stateHandling');
       if ($stateHandlingCmd->execCmd() == false) {
-        if ($sunshutter->getConfiguration('shutter::nobackhand',0) == 2){
-            $delay = $sunshutter->getConfiguration('shutter::customDelay',0);
-            $since = $sunshutter->getCache('beginSuspend');
-            $deltadelay = abs($since - time())/60;
-            log::add('sunshutter','debug',$sunshutter->getHumanName().' - CRON CHECK DELAY : delay is ' . $delay . ' min - delta is ' . round($deltadelay,2)) . ' minutes';
-            if ($deltadelay>=$delay){
-                if (!$sunshutter->getCache('manualSuspend')){
-                    log::add('sunshutter','debug',$sunshutter->getHumanName().' - CRON CHECK DELAY Going back to normal delay is passed recalculating...');
-                    $sunshutter->checkAndUpdateCmd('stateHandling', true);
-                    $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
-                    $sunshutter->setCache('beginSuspend',0);
-                    $sunshutter->executeAction(true);
-                    $forcedByDelay = 1;
+            if (!$sunshutter->getCache('manualSuspend')){
+                if ($sunshutter->getConfiguration('shutter::nobackhand',0) == 2){
+                    $delay = $sunshutter->getConfiguration('shutter::customDelay',0);
+                    $since = $sunshutter->getCache('beginSuspend');
+                    $deltadelay = abs($since - time())/60;
+                    log::add('sunshutter','debug',$sunshutter->getHumanName().' - CRON CHECK DELAY : delay is ' . $delay . ' min - delta is ' . round($deltadelay,2)) . ' minutes';
+                    if ($deltadelay>=$delay){
+                        log::add('sunshutter','debug',$sunshutter->getHumanName().' - CRON CHECK DELAY Going back to normal delay is passed recalculating...');
+                        $sunshutter->checkAndUpdateCmd('stateHandling', true);
+                        $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
+                        $sunshutter->setCache('beginSuspend',0);
+                        $sunshutter->executeAction(true);
+                        $forcedByDelay = 1;
+                    }
                 }
             }
-        }
       }
       $cron = $sunshutter->getConfiguration('cron::executeAction');
       if ($cron == 'custom'){
@@ -91,7 +91,12 @@ class sunshutter extends eqLogic {
                     $cmd = cmd::byId(str_replace('#','',$sunshutter->getConfiguration('shutter::position')));
                     if(is_object($cmd)){
                         $position = $condition['conditions::position'];
-                        $sunshutter->setCache('beginSuspend',time());
+                        if ($condition['conditions::suspend'] == 1) {
+                            log::add('sunshutter','debug',$sunshutter->getHumanName().' - Immediate Condition is a suspendable condition : suspend');
+                            $sunshutter->setCache('beginSuspend',time());
+                            $sunshutter->checkAndUpdateCmd('stateHandling', false);
+                            $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
+                        }
                         $currentPosition = null;
                         $cmdState = cmd::byId(str_replace('#','',$sunshutter->getConfiguration('shutter::state')));
                         if(is_object($cmdState)){
