@@ -32,10 +32,9 @@ $eqLogics = sunshutter::byType($plugin->getId());
 			<th>{{%fermeture}}</th>
 			<th>{{Action défaut}}</th>
 			<th>{{Condition pour action}}</th>
-			<th>{{Ouverture Forcée}}</th>
-			<th>{{Fermeture Forcée}}</th>
-			<th>{{Ouverture Immédiate}}</th>
-			<th>{{Fermeture Immédiate}}</th>
+			<th>{{Exception}}</th>
+			<th>{{Exception immédiate}}</th>
+			<th>{{Exception avec suspension}}</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -72,26 +71,25 @@ foreach ($eqLogics as $eqLogic) {
 		$condition = '<span class="label label-danger" style="font-size : 1em;cursor:default;">{{Non}}</span>';
 	}
 	echo '<td>' . $condition . '</td>';
-	$open = '<span class="label label-success" style="font-size : 1em;cursor:default;">{{Oui}}</span>';
-	if ($eqLogic->getConfiguration('condition::forceopen','') == '') {
-		$open = '<span class="label label-danger" style="font-size : 1em;cursor:default;">{{Non}}</span>';
+	$conditions = $eqLogic->getConfiguration('conditions','');
+	$numberconditionImmediates = 0;
+	$numbercondition = 0;
+	$numberconditionSuspend = 0;
+	if($conditions != '' ){
+		foreach ($conditions as $condition) {
+			if (!$condition['conditions::immediate']) {
+				$numbercondition += 1;
+			} else {
+				$numberconditionImmediates += 1;
+			}
+			if ($condition['conditions::suspend']) {
+				$numberconditionSuspend += 1;
+			} 
+		}
 	}
-	echo '<td>' . $open . '</td>';
-	$close = '<span class="label label-success" style="font-size : 1em;cursor:default;">{{Oui}}</span>';
-	if ($eqLogic->getConfiguration('condition::forceclose','') == '') {
-		$close = '<span class="label label-danger" style="font-size : 1em;cursor:default;">{{Non}}</span>';
-	}
-	echo '<td>' . $close . '</td>';
-	$immediatopen = '<span class="label label-success" style="font-size : 1em;cursor:default;">{{Oui}}</span>';
-	if ($eqLogic->getConfiguration('condition::immediatforceopen','') == '') {
-		$immediatopen = '<span class="label label-danger" style="font-size : 1em;cursor:default;">{{Non}}</span>';
-	}
-	echo '<td>' . $immediatopen . '</td>';
-	$immediatclose = '<span class="label label-success" style="font-size : 1em;cursor:default;">{{Oui}}</span>';
-	if ($eqLogic->getConfiguration('condition::immediatforceclose','') == '') {
-		$immediatclose = '<span class="label label-danger" style="font-size : 1em;cursor:default;">{{Non}}</span>';
-	}
-	echo '<td>' . $immediatclose . '</td>';
+	echo  '<td><span class="label label-primary" style="font-size : 1em;cursor:default;">' . $numbercondition .'</span></td>';
+	echo  '<td><span class="label label-primary" style="font-size : 1em;cursor:default;">' . $numberconditionImmediates .'</span></td>';
+	echo  '<td><span class="label label-primary" style="font-size : 1em;cursor:default;">' . $numberconditionSuspend .'</span></td>';
 	echo '</tr>';
 }
 ?>
