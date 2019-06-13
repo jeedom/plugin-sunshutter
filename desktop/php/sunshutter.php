@@ -246,7 +246,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				- Conditions : cette partie permet de rajouter des règles d'exception <br>
 				       . position : la position désirée<br>
 					   . action systématique et immédiate : si coché cette action sera systématique si la condition est remplie et immédiatement exécutée. Sinon elle est executée que si la condition globale est vérifiée et au moment de la vérification<br>
-					   . suspendre : valable que pour les conditions systematique (si cochée elle suspendra la gestion et dans le cas d'une reprise sur délai repoussera le délai à chaque fois qu'elle est triggée)<br>
+					   . suspendre : valable que pour les conditions systematique (si cochée elle suspendra la gestion systematiquement et dans le cas d'une reprise sur délai repoussera le délai à chaque fois qu'elle est triggée)<br>
 					   . condition : la condition en tant que tel (exemple : si j'ouvre la fenêtre, si j'active la climatisation etc...<br>
 				Exemple de systématique : j'ouvre la fenêtre je veux que immédiatement le volet s'ouvre peut importe la condition sur action<br>
 				Exemple de non systématique : si la luminosité est inférieur à 50lux alors je veux que le volet lors de la prochaine vérification s'ouvre à 80% indépendamment de la position du soleil que si le moteur à le droit de tourner (condition pour action)}}</div>
