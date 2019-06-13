@@ -185,6 +185,7 @@ class sunshutter extends eqLogic {
       'cmdstatehtml' => $cmdstatehtml,
       'elevation' => $cmdElevation->execCmd(),
       'azimuth' => $cmdAzimuth->execCmd(),
+      'link' => $sunshutter->getLinkToConfiguration(),
     );
     $return[]=$datas;
   }

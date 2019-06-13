@@ -33,17 +33,23 @@ function getSunshutterState(){
 		}
 		var table = '';
 		for (sunshutter in data.result) {
-			table += '<tr><td>' +  data.result[sunshutter]['name'] +'</td>';
-			table += '<td><center>' + data.result[sunshutter]['azimuth'] + '°</center></td>';
-			table += '<td><center>' + data.result[sunshutter]['elevation'] + '°</center></td>';
-			table += '<td><center>' + data.result[sunshutter]['position'] +'%</center></td>';
-			table += '<td><center>' + data.result[sunshutter]['HandlingLabel'] +'</center></td>';
+			handling ='Aucune';
+			if (data.result[sunshutter]['HandlingLabel'] == 'Auto'){
+				handling = '<i class="fas fa-magic"></i>';
+			} else if (data.result[sunshutter]['HandlingLabel'] == 'Manuel'){
+				handling = '<i class="fas fa-user"></i>';
+			}
+			table += '<tr><td><a href="' + data.result[sunshutter]['link'] + '">' +  data.result[sunshutter]['name'] +'</a></td>';
+			table += '<td><center><span class="label label-primary">'+ data.result[sunshutter]['azimuth'] + '°</span></center></td>';
+			table += '<td><center><span class="label label-primary">'+ data.result[sunshutter]['elevation'] + '°</span></center></td>';
+			table += '<td><center><span class="label label-primary">'+ data.result[sunshutter]['position'] + '%</span></center></td>';
+			table += '<td><center><span class="label label-primary">'+ handling + '</span></center></td>';
 			if (data.result[sunshutter]['handling'] == '0'){
 				table += '<td><center>' + '<a class="bt_sunshutterAction btn btn-default" data-cmd="'+data.result[sunshutter]['resumeId']+'"><i class="fas fa-play"></i></a>';
 			} else {
 				table += '<td><center>' + '<a class="bt_sunshutterAction btn btn-default" data-cmd="'+data.result[sunshutter]['pauseId']+'"><i class="fas fa-pause"></i></a>';
 			}
-			table += ' <a class="bt_sunshutterAction btn btn-default" data-cmd="'+data.result[sunshutter]['executeId']+'"><i class="fas fa-magic"></i></a>';
+			table += ' <a class="bt_sunshutterAction btn btn-default" data-cmd="'+data.result[sunshutter]['executeId']+'"><i class="fas fa-crosshairs"></i></a>';
 			table += ' <a class="bt_positionshutterAction btn btn-default" data-value="'+data.result[sunshutter]['openvalue']+'" data-cmd="'+data.result[sunshutter]['positionId']+'"><i class="fas fa-arrow-up"></i></a>';
 			table += ' <a class="bt_positionshutterAction btn btn-default" data-value="'+data.result[sunshutter]['closevalue']+'" data-cmd="'+data.result[sunshutter]['positionId']+'"><i class="fas fa-arrow-down"></i></a>' +'</center></td>';
 			table += '<td><center>' + data.result[sunshutter]['cmdhtml'] + '</center></td>';
