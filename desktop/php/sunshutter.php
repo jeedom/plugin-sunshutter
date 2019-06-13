@@ -239,7 +239,15 @@ $eqLogics = eqLogic::byType($plugin->getId());
 					</fieldset>
 				</form>
 				<br/>
-				<div class="alert alert-info">{{Dans cet onglet BLABALABLABALBALBA}}</div>
+				<div class="alert alert-info">{{Dans cet onglet vous allez définir les conditions pour le moteur de gestion : <br>
+				- Condition pour action : Condition nécessaire pour que le moteur fonctionne, si elle est remplie le moteur ne fera rien à part les conditions systématiques. Par défaut le champ est vide ce qui veut dire que le moteur est toujours actif.
+				(exemples : fenêtre fermée, température > 25° etc...<br>
+				- Conditions : cette partie permet de rajouter des règles d'exception <br>
+				       . position : la position désirée<br>
+					   . action systématique et immédiate : si coché cette action sera systématique si la condition est remplie et immédiatement exécutée. Sinon elle est executée que si la condition globale est vérifiée et au moment de la vérification<br>
+					   . conditon : la condition en tant que tel (exemple : si j'ouvre la fenêtre, si j'active la climatisation etc...<br>
+				Exemple de systématique : j'ouvre la fenêtre je veux que immédiatement le volet s'ouvre peut importe la condition sur action<br>
+				Exemple de non systématique : si la luminosité est inférieur à 50lux alors je veux que le volet lors de la prochaine vérification s'ouvre à 80% indépendamment de la position du soleil que si le moteur à le droit de tourner (condition pour action)}}</div>
 			</div>
 			<div role="tabpanel" class="tab-pane" id="positiontab">
 				<br/>
@@ -288,7 +296,17 @@ $eqLogics = eqLogic::byType($plugin->getId());
 					</tbody>
 				</table>
 				<br/>
-				<div class="alert alert-info">{{Dans cet onglet BLABALABLABALBALBA}}</div>
+				<div class="alert alert-info">{{Dans cet onglet vous allez définir le coeur même du moteur de gestion en définissant les règles de base de postionnement en fonction de la position du soleil : <br>
+				-%ouverture : % maximum d'ouverture du volet (généralement 99 ou 100) <br>
+				-% fermeture : % minimum de fermeture du volet (généralement 0) <br>
+				- action par défaut : que faire lorsqu'aucune règle du tableau positionnement ne correspond (ouvrir/fermer/position personnalisée) <br>
+				- Tableau de positionnement : ici vous allez définir les règles de positionnement (si aucune exception n'est en cours) <br>
+				. Azimuth : borne d'azimuth du soleil (suncalc.org permet de faire bouger le soleil et voir son azimuth par rapport à votre volet) <br>
+				. Elevation : borne d'élévation du soleil (suncalc.org permet de faire bouger le soleil et voir son élévation par rapport à votre volet) <br>
+				. Position : valeur de position à appliquer au volet si les conditions d'azimuth et d'élévation sont réunies <br>
+				. Condition : permet de définir une condition supplémentaire (cela permet par exemple pour une même position du soleil d'avoir un comportement différent si température au dessus ou en dessous d'une valeur, ou toute autres conditions) <br>
+				NB : si pour une position du soleil donnée il ya plusieurs positionnement possible (toutes les conditions réunies) le système prendra la première<br>
+				}}</div>
 			</div>
 			<div class="tab-pane" id="scheduletab">
 				<form class="form-horizontal">
@@ -298,7 +316,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 					</fieldset>
 				</form>
 				<br/>
-				<div class="alert alert-info">{{Dans cet onglet BLABALABLABALBALBA}}</div>
+				<div class="alert alert-info">{{Dans cet onglet vous pouvez voir s'il y a un planning dans le plugin agenda agissant sur votre gestion de volet.<br> 
+				Exemple : planifier une suspension et une reprise manuelle pendant les heures de sieste d'un enfant etc....}}</div>
 			</div>
 		</div>
 	</div>
