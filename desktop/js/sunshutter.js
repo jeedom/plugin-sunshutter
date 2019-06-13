@@ -197,6 +197,7 @@ function printScheduling(_eqLogic){
         return;
       }
       $('#div_schedule').empty();
+      console.log(data);
       if(data.result.length == 0){
         $('#div_schedule').append("<center><span style='color:#767676;font-size:1.2em;font-weight: bold;'>{{Vous n'avez encore aucune programmation. Veuillez cliquer <a href='index.php?v=d&m=calendar&p=calendar'>ici</a> pour programmer votre volet à l'aide du plugin agenda}}</span></center>");
       }else{
@@ -213,7 +214,8 @@ function printScheduling(_eqLogic){
           } else {
             html += data.result[i].cmd_param.icon + ' ' + data.result[i].cmd_param.name;
           }
-          html += '</a></span><br\><br\>';
+          html += '</a></span>';
+          html += ' ' + data.result[i].startDate.substr(11,5) + ' à ' + data.result[i].endDate.substr(11,5)+'<br\><br\>';
         }
         $('#div_schedule').empty().append(html);
       }
