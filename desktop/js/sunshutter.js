@@ -49,6 +49,9 @@ function addPosition(_position){
   tr += '<div class="input-group"><textarea class="positionAttr form-control" data-concat="1" data-l1key="position::allowmove" style="height:75px"></textarea><span class="input-group-btn"><a class="btn btn-default listCmdInfoPos roundedRight" ><i class="fas fa-list-alt"></i></a></span></div>';
   tr += '</td>';
   tr += '<td>';
+  tr += '<textarea class="positionAttr form-control" data-concat="1" data-l1key="position::comment" style="width:100%;height:75px"></textarea>';
+  tr += '</td>';
+  tr += '<td>';
   tr += '<i class="fas fa-minus-circle cursor bt_removePosition"></i>';
   tr += '</td>';
   tr += '</tr>';
@@ -71,6 +74,8 @@ function addConditions(_condition){
   tr += '<div class="input-group"><textarea class="conditionsAttr form-control" data-concat="1" data-l1key="conditions::condition" style="height:75px"></textarea><span class="input-group-btn"><a class="btn btn-default listCmdInfoConditions roundedRight" ><i class="fas fa-list-alt"></i></a></span></div>';
   tr += '</td>';
   tr += '<td>';
+  tr += '<textarea class="conditionsAttr form-control" data-concat="1" data-l1key="position::comment" style="width:100%;height:75px"></textarea>';
+  tr += '</td>';
   tr += '<td>';
   tr += '<i class="fas fa-minus-circle cursor bt_removeCondition"></i>';
   tr += '</td>';
@@ -224,7 +229,7 @@ function printScheduling(_eqLogic){
       }
     }
   });
-  
+
 }
 
 

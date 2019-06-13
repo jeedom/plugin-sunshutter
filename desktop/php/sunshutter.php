@@ -42,7 +42,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 			?>
 		</div>
 	</div>
-	
+
 	<div class="col-xs-12 eqLogic" style="display: none;">
 		<div class="input-group pull-right" style="display:inline-flex">
 			<span class="input-group-btn">
@@ -200,7 +200,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				<br/>
 				<div class="alert alert-info">{{Dans cet onglet, vous allez définir la configuration générale de la gestion :<br>
 				- Vérification : tous les combiens le plugin vérifiera la position du soleil pour éventuellement changer la position du volet (un cron personnalisé est possible)<br>
-				- Reprendre la main : si la position du volet se retrouve dans une position différente de celle voulue (changement manuel ou par exception), le système doit il reprendre la main automatiquement, 
+				- Reprendre la main : si la position du volet se retrouve dans une position différente de celle voulue (changement manuel ou par exception), le système doit il reprendre la main automatiquement,
 				ne pas la reprendre, ou après un délai (délai après detection de l'écart et mise en suspens).<br>
 				- Coordonnées : la latitude, la longitude et l'altitude de votre volet (suncalc.org est très bien pour cela)
 				-Volet : ici vous allez choisi la commande état et la commande positionnement de votre volet}}</div>
@@ -230,11 +230,12 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<th>{{Position}}</th>
 								<th>{{Action Systématique}}</th>
 								<th>{{Suspendre}}</th>
-								<th>{{Condition}}</th>
+								<th style="width:20%">{{Condition}}</th>
+								<th style="width:15%">{{Commentaire}}</th>
 							</tr>
 							</thead>
 						<tbody>
-						
+
 						</tbody>
 						</table>
 					</fieldset>
@@ -244,10 +245,11 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				- Condition pour action : Condition nécessaire pour que le moteur fonctionne, si elle est remplie le moteur ne fera rien à part les conditions systématiques. Par défaut le champ est vide ce qui veut dire que le moteur est toujours actif.
 				(exemples : fenêtre fermée, température > 25° etc...<br>
 				- Conditions : cette partie permet de rajouter des règles d'exception <br>
-				       . position : la position désirée<br>
-					   . action systématique et immédiate : si coché cette action sera systématique si la condition est remplie et immédiatement exécutée. Sinon elle est executée que si la condition globale est vérifiée et au moment de la vérification<br>
-					   . suspendre : valable que pour les conditions systematique (si cochée elle suspendra la gestion systematiquement et dans le cas d'une reprise sur délai repoussera le délai à chaque fois qu'elle est triggée)<br>
-					   . condition : la condition en tant que tel (exemple : si j'ouvre la fenêtre, si j'active la climatisation etc...<br>
+				       . Position : la position désirée<br>
+					   . Action systématique et immédiate : si coché cette action sera systématique si la condition est remplie et immédiatement exécutée. Sinon elle est executée que si la condition globale est vérifiée et au moment de la vérification<br>
+					   . Suspendre : valable que pour les conditions systematique (si cochée elle suspendra la gestion systematiquement et dans le cas d'une reprise sur délai repoussera le délai à chaque fois qu'elle est triggée)<br>
+					   . Condition : la condition en tant que tel (exemple : si j'ouvre la fenêtre, si j'active la climatisation etc...<br>
+					   . Commentaire : si vous voulez garder une trace de pourquoi vouz mis cette rêgle c'est ici que ça se passe<br>
 				Exemple de systématique : j'ouvre la fenêtre je veux que immédiatement le volet s'ouvre peut importe la condition sur action<br>
 				Exemple de non systématique : si la luminosité est inférieur à 50lux alors je veux que le volet lors de la prochaine vérification s'ouvre à 80% indépendamment de la position du soleil que si le moteur à le droit de tourner (condition pour action)}}</div>
 			</div>
@@ -290,11 +292,12 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<th>{{Azimuth}}</th>
 							<th>{{Elevation}}</th>
 							<th>{{Position}}</th>
-							<th>{{Condition}}</th>
+							<th style="width:20%">{{Condition}}</th>
+							<th style="width:15%">{{Commentaire}}</th>
 						</tr>
 					</thead>
 					<tbody>
-						
+
 					</tbody>
 				</table>
 				<br/>
@@ -307,6 +310,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				. Elevation : borne d'élévation du soleil (suncalc.org permet de faire bouger le soleil et voir son élévation par rapport à votre volet) <br>
 				. Position : valeur de position à appliquer au volet si les conditions d'azimuth et d'élévation sont réunies <br>
 				. Condition : permet de définir une condition supplémentaire (cela permet par exemple pour une même position du soleil d'avoir un comportement différent si température au dessus ou en dessous d'une valeur, ou toute autres conditions) <br>
+				. Commentaire : si vous voulez garder une trace de pourquoi vouz mis cette rêgle c'est ici que ça se passe<br>
 				NB : si pour une position du soleil donnée il ya plusieurs positionnement possible (toutes les conditions réunies) le système prendra la première<br>
 				}}</div>
 			</div>
@@ -318,7 +322,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 					</fieldset>
 				</form>
 				<br/>
-				<div class="alert alert-info">{{Dans cet onglet vous pouvez voir s'il y a un planning dans le plugin agenda agissant sur votre gestion de volet.<br> 
+				<div class="alert alert-info">{{Dans cet onglet vous pouvez voir s'il y a un planning dans le plugin agenda agissant sur votre gestion de volet.<br>
 				Exemple : planifier une suspension et une reprise manuelle pendant les heures de sieste d'un enfant etc....}}</div>
 			</div>
 		</div>
