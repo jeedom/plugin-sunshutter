@@ -55,6 +55,28 @@ class sunshutter extends eqLogic {
                     }
                 }
             }
+      } else {
+            if($sunshutter->getConfiguration('shutter::nobackhand',0) != 0){
+                $lastPositionOrder = $sunshutter->getCache('lastPositionOrder',null);
+                $currentPosition = null;
+                $cmd = cmd::byId(str_replace('#','',$sunshutter->getConfiguration('shutter::state')));
+                if(is_object($cmd)){
+                    $currentPosition = $cmd->execCmd();
+                }
+                if($currentPosition !== null  && $lastPositionOrder !== null){
+                    $amplitude = abs($sunshutter->getConfiguration('shutter::closePosition',0)-$sunshutter->getConfiguration('shutter::openPosition',100));
+                    $delta = abs($currentPosition-$lastPositionOrder);
+                    $ecart = ($delta/$amplitude)*100;
+                    log::add('sunshutter','debug',$sunshutter->getHumanName().' - Ecart depuis le dernier ordre : ' . $ecart);
+                    if ($ecart>3){
+                        $sunshutter->checkAndUpdateCmd('stateHandling', false);
+                        $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
+                        $sunshutter->setCache('beginSuspend',time());
+                        $sunshutter->setCache('manualSuspend',false);
+                        log::add('sunshutter','debug',$sunshutter->getHumanName().' - Position != last order by far 3% i suspend');
+                    }
+                }
+            }
       }
       $cron = $sunshutter->getConfiguration('cron::executeAction');
       if ($cron == 'custom'){

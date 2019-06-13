@@ -201,8 +201,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				<div class="alert alert-info">{{Dans cet onglet, vous allez définir la configuration générale de la gestion :<br>
 				- Vérification : tous les combiens le plugin vérifiera la position du soleil pour éventuellement changer la position du volet (un cron personnalisé est possible)<br>
 				- Reprendre la main : si la position du volet se retrouve dans une position différente de celle voulue (changement manuel ou par exception), le système doit il reprendre la main automatiquement, 
-				ne pas la reprendre, ou après un délai. Lorsque vous utilisez un délai celui-ci agira après la première vérification (exemple Vérification : 5 minutes, Délai : 1 minute -> si on ouvre manuellement le volet le système reprendra la main
-				1 minute après la prochaine vérification). On effet c'est la vérification qui démarrera le chronomètre car c'est à ce moment là que le système détectera le décalage.<br>
+				ne pas la reprendre, ou après un délai (délai après detection de l'écart et mise en suspens).<br>
 				- Coordonnées : la latitude, la longitude et l'altitude de votre volet (suncalc.org est très bien pour cela)
 				-Volet : ici vous allez choisi la commande état et la commande positionnement de votre volet}}</div>
 			</div>
