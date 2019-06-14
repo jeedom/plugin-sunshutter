@@ -235,6 +235,7 @@ function printScheduling(_eqLogic){
 
 $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
 $("#table_sunShutterPosition").sortable({axis: "y", cursor: "move", items: ".position", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
+$("#table_sunShutterConditions").sortable({axis: "y", cursor: "move", items: ".conditions", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
 /*
 * Fonction pour l'ajout de commande, appellé automatiquement par plugin.template
 */

@@ -452,9 +452,20 @@ public function executeAction($_force = false){
     foreach ($conditions as $condition) {
         if (!$condition['conditions::immediate']) {
             if($condition['conditions::condition'] != '' && jeedom::evaluateExpression($condition['conditions::condition'])){
+                if ($condition['conditions::suspend'] == 1) {
+                    log::add('sunshutter','debug',$this->getHumanName().' - Condition wants to suspend or extend suspension : ' . $condition['conditions::condition']);
+                    $this->checkAndUpdateCmd('stateHandling', false);
+                    $this->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
+                    $this->setCache('beginSuspend',time());
+                    $this->setCache('manualSuspend',false);
+                }
                 if ($condition['conditions::position'] != '') {
                     log::add('sunshutter','debug',$this->getHumanName().' - Condition Met : ' . $condition['conditions::condition'] . ' (' . $condition['conditions::position'] . '%)');
                     $position = $condition['conditions::position'];
+                    break;
+                } else {
+                    log::add('sunshutter','debug',$this->getHumanName().' - Condition Met : ' . $condition['conditions::condition'] . ' (Empty position do nothing)');
+                    $position = $currentPosition;
                     break;
                 }
             }

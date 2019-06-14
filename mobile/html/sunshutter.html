@@ -1,14 +1,17 @@
-<div class="row" style='margin-top : 10px;'>
-	<div class="col-xs-4">
-		<span>{{Moyenne}}</span> <span class="label label-success posMoy"></span>
-	</div>
-	<div class="col-xs-4">
-		<span>{{Manuel}}</span> <span class="label label-danger manualSuspend"></span>
-	</div>
-	<div class="col-xs-4">
-		<span>{{Auto}}</span> <span class="label label-warning autoSuspend"></span>
-	</div>
-</div>
+<center>
+<span style="margin-right:5px;">
+<i class="icon jeedom-volet-ouvert"></i> 
+<sup><span class="posMoy"></span> </sup>
+</span>
+<span style="margin-right:5px;">
+<i class="fas fa-user"></i> 
+<sup><span class="manualSuspend"></span> </sup>
+</span>
+<span>
+<i class="fas fa-magic"></i> 
+<sup><span class="autoSuspend"></span> </sup>
+</span>
+</center>
 <table data-role="table" id="table_sunshutter" data-mode="columntoggle" class="ui-responsive table-stroke">
     <thead>
         <tr>

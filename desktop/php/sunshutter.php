@@ -245,13 +245,14 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				- Condition pour action : Condition nécessaire pour que le moteur fonctionne, si elle est remplie le moteur ne fera rien à part les conditions systématiques. Par défaut le champ est vide ce qui veut dire que le moteur est toujours actif.
 				(exemples : fenêtre fermée, température > 25° etc...<br>
 				- Conditions : cette partie permet de rajouter des règles d'exception <br>
-				       . Position : la position désirée<br>
+				       . Position : la position désirée (vide = ne rien faire)<br>
 					   . Action systématique et immédiate : si coché cette action sera systématique si la condition est remplie et immédiatement exécutée. Sinon elle est executée que si la condition globale est vérifiée et au moment de la vérification<br>
-					   . Suspendre : valable que pour les conditions systematique (si cochée elle suspendra la gestion systematiquement et dans le cas d'une reprise sur délai repoussera le délai à chaque fois qu'elle est triggée)<br>
+					   . Suspendre : pour les conditions systematique (si cochée elle suspendra la gestion immédiatement et dans le cas d'une reprise sur délai repoussera le délai à chaque fois qu'elle est triggée) pour une condition normale elle suspendra lors de la vérification<br>
 					   . Condition : la condition en tant que tel (exemple : si j'ouvre la fenêtre, si j'active la climatisation etc...<br>
-					   . Commentaire : si vous voulez garder une trace de pourquoi vouz mis cette rêgle c'est ici que ça se passe<br>
+					   . Commentaire : si vous voulez garder une trace de pourquoi vous avez mis cette rêgle c'est ici que ça se passe<br>
 				Exemple de systématique : j'ouvre la fenêtre je veux que immédiatement le volet s'ouvre peut importe la condition sur action<br>
-				Exemple de non systématique : si la luminosité est inférieur à 50lux alors je veux que le volet lors de la prochaine vérification s'ouvre à 80% indépendamment de la position du soleil que si le moteur à le droit de tourner (condition pour action)}}</div>
+				Exemple de non systématique : si la luminosité est inférieur à 50lux alors je veux que le volet lors de la prochaine vérification s'ouvre à 80% indépendamment de la position du soleil que si le moteur à le droit de tourner (condition pour action)}}<br>
+				NB : les lignes peuvent être déplacées en drag and drop (il est bon à noter que c'est la première condition valide qui sera prise en compte)</div>
 			</div>
 			<div role="tabpanel" class="tab-pane" id="positiontab">
 				<br/>
@@ -311,7 +312,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				. Position : valeur de position à appliquer au volet si les conditions d'azimuth et d'élévation sont réunies <br>
 				. Condition : permet de définir une condition supplémentaire (cela permet par exemple pour une même position du soleil d'avoir un comportement différent si température au dessus ou en dessous d'une valeur, ou toute autres conditions) <br>
 				. Commentaire : si vous voulez garder une trace de pourquoi vouz mis cette rêgle c'est ici que ça se passe<br>
-				NB : si pour une position du soleil donnée il ya plusieurs positionnement possible (toutes les conditions réunies) le système prendra la première<br>
+				NB : si pour une position du soleil donnée il y a plusieurs positionnement possible (toutes les conditions réunies) le système prendra la première (vous pouvez réorganiser les règles en drag and drop<br>
 				}}</div>
 			</div>
 			<div class="tab-pane" id="scheduletab">
