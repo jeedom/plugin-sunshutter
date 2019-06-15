@@ -118,7 +118,8 @@ class sunshutter extends eqLogic {
                             $sunshutter->setCache('beginSuspend',time());
                             $sunshutter->checkAndUpdateCmd('stateHandling', false);
                             $cmdStateLabel = $sunshutter->getCmd(null, 'stateHandlingLabel');
-                            if ($cmdStateLabel->execCmd() != 'Manuel'){
+                            $stateLabel = $cmdStateLabel->execCmd();
+                            if ($stateLabel != 'Manuel'){
                               $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
                             }
                         }
