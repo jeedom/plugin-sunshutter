@@ -1,6 +1,6 @@
 {
 	"id" : "sunshutter",
-	"name" : "Gestion volet",
+	"name" : "Gestion Volets",
 	"description" : "Plugin pour gerer l'ouverture/fermeture des volets en fonction du soleil",
 	"licence" : "AGPL",
 	"author" : "Jeedom SAS",
