@@ -117,7 +117,10 @@ class sunshutter extends eqLogic {
                             log::add('sunshutter','debug',$sunshutter->getHumanName().' - Immediate Condition is a suspendable condition : suspend');
                             $sunshutter->setCache('beginSuspend',time());
                             $sunshutter->checkAndUpdateCmd('stateHandling', false);
-                            $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
+                            $cmdStateLabel = $sunshutter->getCmd(null, 'stateHandlingLabel');
+                            if ($cmdStateLabel->execCmd() != 'Manuel'){
+                              $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
+                            }
                         }
                         $currentPosition = null;
                         $cmdState = cmd::byId(str_replace('#','',$sunshutter->getConfiguration('shutter::state')));
