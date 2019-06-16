@@ -39,44 +39,44 @@ class sunshutter extends eqLogic {
     foreach (eqLogic::byType('sunshutter', true) as $sunshutter) {
       $stateHandlingCmd = $sunshutter->getCmd(null,'stateHandling');
       if ($stateHandlingCmd->execCmd() == false) {
-            if (!$sunshutter->getCache('manualSuspend')){
-                if ($sunshutter->getConfiguration('shutter::nobackhand',0) == 2){
-                    $delay = $sunshutter->getConfiguration('shutter::customDelay',0);
-                    $since = $sunshutter->getCache('beginSuspend');
-                    $deltadelay = abs($since - time())/60;
-                    log::add('sunshutter','debug',$sunshutter->getHumanName().' - CRON CHECK DELAY : delay is ' . $delay . ' min - delta is ' . round($deltadelay,2)) . ' minutes';
-                    if ($deltadelay>=$delay){
-                        log::add('sunshutter','debug',$sunshutter->getHumanName().' - CRON CHECK DELAY Going back to normal delay is passed recalculating...');
-                        $sunshutter->checkAndUpdateCmd('stateHandling', true);
-                        $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
-                        $sunshutter->setCache('beginSuspend',0);
-                        $sunshutter->executeAction(true);
-                        $forcedByDelay = 1;
-                    }
-                }
+        if (!$sunshutter->getCache('manualSuspend')){
+          if ($sunshutter->getConfiguration('shutter::nobackhand',0) == 2){
+            $delay = $sunshutter->getConfiguration('shutter::customDelay',0);
+            $since = $sunshutter->getCache('beginSuspend');
+            $deltadelay = abs($since - time())/60;
+            log::add('sunshutter','debug',$sunshutter->getHumanName().' - CRON CHECK DELAY : delay is ' . $delay . ' min - delta is ' . round($deltadelay,2)) . ' minutes';
+            if ($deltadelay>=$delay){
+              log::add('sunshutter','debug',$sunshutter->getHumanName().' - CRON CHECK DELAY Going back to normal delay is passed recalculating...');
+              $sunshutter->checkAndUpdateCmd('stateHandling', true);
+              $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
+              $sunshutter->setCache('beginSuspend',0);
+              $sunshutter->executeAction(true);
+              $forcedByDelay = 1;
             }
+          }
+        }
       } else {
-            if($sunshutter->getConfiguration('shutter::nobackhand',0) != 0){
-                $lastPositionOrder = $sunshutter->getCache('lastPositionOrder',null);
-                $currentPosition = null;
-                $cmd = cmd::byId(str_replace('#','',$sunshutter->getConfiguration('shutter::state')));
-                if(is_object($cmd)){
-                    $currentPosition = $cmd->execCmd();
-                }
-                if($currentPosition !== null  && $lastPositionOrder !== null){
-                    $amplitude = abs($sunshutter->getConfiguration('shutter::closePosition',0)-$sunshutter->getConfiguration('shutter::openPosition',100));
-                    $delta = abs($currentPosition-$lastPositionOrder);
-                    $ecart = ($delta/$amplitude)*100;
-                    log::add('sunshutter','debug',$sunshutter->getHumanName().' - Ecart depuis le dernier ordre : ' . $ecart);
-                    if ($ecart>3){
-                        $sunshutter->checkAndUpdateCmd('stateHandling', false);
-                        $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
-                        $sunshutter->setCache('beginSuspend',time());
-                        $sunshutter->setCache('manualSuspend',false);
-                        log::add('sunshutter','debug',$sunshutter->getHumanName().' - Position != last order by far 3% i suspend');
-                    }
-                }
+        if($sunshutter->getConfiguration('shutter::nobackhand',0) != 0){
+          $lastPositionOrder = $sunshutter->getCache('lastPositionOrder',null);
+          $currentPosition = null;
+          $cmd = cmd::byId(str_replace('#','',$sunshutter->getConfiguration('shutter::state')));
+          if(is_object($cmd)){
+            $currentPosition = $cmd->execCmd();
+          }
+          if($currentPosition !== null  && $lastPositionOrder !== null){
+            $amplitude = abs($sunshutter->getConfiguration('shutter::closePosition',0)-$sunshutter->getConfiguration('shutter::openPosition',100));
+            $delta = abs($currentPosition-$lastPositionOrder);
+            $ecart = ($delta/$amplitude)*100;
+            log::add('sunshutter','debug',$sunshutter->getHumanName().' - Ecart depuis le dernier ordre : ' . $ecart);
+            if ($ecart>3){
+              $sunshutter->checkAndUpdateCmd('stateHandling', false);
+              $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
+              $sunshutter->setCache('beginSuspend',time());
+              $sunshutter->setCache('manualSuspend',false);
+              log::add('sunshutter','debug',$sunshutter->getHumanName().' - Position != last order by far 3% i suspend');
             }
+          }
+        }
       }
       $cron = $sunshutter->getConfiguration('cron::executeAction');
       if ($cron == 'custom'){
@@ -87,7 +87,7 @@ class sunshutter extends eqLogic {
           $c = new Cron\CronExpression(checkAndFixCron($cron), new Cron\FieldFactory);
           if ($c->isDue()) {
             if ($forcedByDelay == 0){
-                $sunshutter->executeAction();
+              $sunshutter->executeAction();
             }
           }
         } catch (Exception $exc) {
@@ -107,41 +107,41 @@ class sunshutter extends eqLogic {
     if($conditions != '' ){
       foreach ($conditions as $condition) {
         if ($condition['conditions::immediate']) {
-            if($condition['conditions::condition'] != '' && jeedom::evaluateExpression($condition['conditions::condition'])){
-                if ($condition['conditions::position'] != '') {
-                    log::add('sunshutter','debug',$sunshutter->getHumanName().' - Immediate Condition Met : ' . $condition['conditions::condition'] . ' (' . $condition['conditions::position'] . '%)');
-                    $cmd = cmd::byId(str_replace('#','',$sunshutter->getConfiguration('shutter::position')));
-                    if(is_object($cmd)){
-                        $position = $condition['conditions::position'];
-                        if ($condition['conditions::suspend'] == 1) {
-                            log::add('sunshutter','debug',$sunshutter->getHumanName().' - Immediate Condition is a suspendable condition : suspend');
-                            $sunshutter->setCache('beginSuspend',time());
-                            $sunshutter->checkAndUpdateCmd('stateHandling', false);
-                            $cmdStateLabel = $sunshutter->getCmd(null, 'stateHandlingLabel');
-                            $stateLabel = $cmdStateLabel->execCmd();
-                            if ($stateLabel != 'Manuel'){
-                              $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
-                            }
-                        }
-                        $currentPosition = null;
-                        $cmdState = cmd::byId(str_replace('#','',$sunshutter->getConfiguration('shutter::state')));
-                        if(is_object($cmdState)){
-                            $currentPosition = $cmdState->execCmd();
-                        }
-                        $amplitude = abs($sunshutter->getConfiguration('shutter::closePosition',0)-$sunshutter->getConfiguration('shutter::openPosition',100));
-                        $delta = abs($position-$currentPosition);
-                        $ecart = ($delta/$amplitude)*100;
-                        log::add('sunshutter','debug',$sunshutter->getHumanName().' - Ecart avec la cible : ' . $ecart);
-                        if ($ecart<3){
-                          log::add('sunshutter','debug',$sunshutter->getHumanName().' - Do nothing, position != new position by less than 3%');
-                        } else {
-                            log::add('sunshutter','debug',$sunshutter->getHumanName().' - Do action ' . $position);
-                            $cmd->execCmd(array('slider' => $position));
-                        }
-                    }
-                    break;
+          if($condition['conditions::condition'] != '' && jeedom::evaluateExpression($condition['conditions::condition'])){
+            if ($condition['conditions::position'] != '') {
+              log::add('sunshutter','debug',$sunshutter->getHumanName().' - Immediate Condition Met : ' . $condition['conditions::condition'] . ' (' . $condition['conditions::position'] . '%)');
+              $cmd = cmd::byId(str_replace('#','',$sunshutter->getConfiguration('shutter::position')));
+              if(is_object($cmd)){
+                $position = $condition['conditions::position'];
+                if ($condition['conditions::suspend'] == 1) {
+                  log::add('sunshutter','debug',$sunshutter->getHumanName().' - Immediate Condition is a suspendable condition : suspend');
+                  $sunshutter->setCache('beginSuspend',time());
+                  $sunshutter->checkAndUpdateCmd('stateHandling', false);
+                  $cmdStateLabel = $sunshutter->getCmd(null, 'stateHandlingLabel');
+                  $stateLabel = $cmdStateLabel->execCmd();
+                  if ($stateLabel != 'Manuel'){
+                    $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
+                  }
                 }
+                $currentPosition = null;
+                $cmdState = cmd::byId(str_replace('#','',$sunshutter->getConfiguration('shutter::state')));
+                if(is_object($cmdState)){
+                  $currentPosition = $cmdState->execCmd();
+                }
+                $amplitude = abs($sunshutter->getConfiguration('shutter::closePosition',0)-$sunshutter->getConfiguration('shutter::openPosition',100));
+                $delta = abs($position-$currentPosition);
+                $ecart = ($delta/$amplitude)*100;
+                log::add('sunshutter','debug',$sunshutter->getHumanName().' - Ecart avec la cible : ' . $ecart);
+                if ($ecart<3){
+                  log::add('sunshutter','debug',$sunshutter->getHumanName().' - Do nothing, position != new position by less than 3%');
+                } else {
+                  log::add('sunshutter','debug',$sunshutter->getHumanName().' - Do action ' . $position);
+                  $cmd->execCmd(array('slider' => $position));
+                }
+              }
+              break;
             }
+          }
         }
       }
     }
@@ -183,9 +183,9 @@ class sunshutter extends eqLogic {
       $handlingLabel = $cmdHandlingLabel->execCmd();
       if ($handling == false){
         if ($handlingLabel == 'Auto'){
-            $numbersupendedAuto +=1;
+          $numbersupendedAuto +=1;
         } else {
-            $numbersupendedManual += 1;
+          $numbersupendedManual += 1;
         }
       }
       $datas = array('name' => $name,
@@ -207,8 +207,8 @@ class sunshutter extends eqLogic {
     );
     $return['shutters'][]=$datas;
     $return['global']=array('moyPos' => ($numberShutters == 0) ? 'N/A' : round($sumposition/$numberShutters),
-      'auto' => $numbersupendedAuto,
-      'manual' => $numbersupendedManual,);
+    'auto' => $numbersupendedAuto,
+    'manual' => $numbersupendedManual,);
   }
   return $return;
 }
@@ -322,7 +322,7 @@ public function postSave() {
   if($conditions != '' ){
     $listener = listener::byClassAndFunction('sunshutter', 'immediateAction', array('sunshutter_id' => intval($this->getId())));
     if (!is_object($listener)) {
-        $listener = new listener();
+      $listener = new listener();
     }
     $listener->setClass('sunshutter');
     $listener->setFunction('immediateAction');
@@ -330,16 +330,16 @@ public function postSave() {
     $listener->emptyEvent();
     $nblistener = 0;
     foreach ($conditions as $condition) {
-        if ($condition['conditions::immediate']) {
-            preg_match_all("/#([0-9]*)#/", $condition['conditions::condition'], $matches);
-            foreach ($matches[1] as $cmd_id) {
-                $nblistener += 1;
-                $listener->addEvent($cmd_id);
-            }
+      if ($condition['conditions::immediate']) {
+        preg_match_all("/#([0-9]*)#/", $condition['conditions::condition'], $matches);
+        foreach ($matches[1] as $cmd_id) {
+          $nblistener += 1;
+          $listener->addEvent($cmd_id);
         }
+      }
     }
     if ($nblistener > 0) {
-        $listener->save();
+      $listener->save();
     }
   } else {
     $listener = listener::byClassAndFunction('sunshutter', 'immediateAction', array('sunshutter_id' => intval($this->getId())));
@@ -375,10 +375,10 @@ public function calculPosition(){
     if($sun_elevation > $position['sun::elevation::from'] && $sun_elevation <= $position['sun::elevation::to']){
       if($sun_azimuth > $position['sun::azimuth::from'] && $sun_azimuth <= $position['sun::azimuth::to']){
         if($position['position::allowmove'] == '' || jeedom::evaluateExpression($position['position::allowmove']) == true){
-            log::add('sunshutter','debug',$this->getHumanName().' - Valid condition : ' . $position['position::allowmove'] . ' Elevation : ' . $position['sun::elevation::from'] . '°-' . $position['sun::elevation::to'] . '° Azimuth : ' . $position['sun::azimuth::from'] . '°-' . $position['sun::azimuth::to'] . '° ('  . $position['shutter::position'] . '%)');
-            return $position['shutter::position'];
+          log::add('sunshutter','debug',$this->getHumanName().' - Valid condition : ' . $position['position::allowmove'] . ' Elevation : ' . $position['sun::elevation::from'] . '°-' . $position['sun::elevation::to'] . '° Azimuth : ' . $position['sun::azimuth::from'] . '°-' . $position['sun::azimuth::to'] . '° ('  . $position['shutter::position'] . '%)');
+          return $position['shutter::position'];
         }
-         log::add('sunshutter','debug',$this->getHumanName().' - Invalid condition : ' . $position['position::allowmove'] . ' Elevation : ' . $position['sun::elevation::from'] . '°-' . $position['sun::elevation::to'] . '° Azimuth : ' . $position['sun::azimuth::from'] . '°-' . $position['sun::azimuth::to'] . '° ('  . $position['shutter::position'] . '%)');
+        log::add('sunshutter','debug',$this->getHumanName().' - Invalid condition : ' . $position['position::allowmove'] . ' Elevation : ' . $position['sun::elevation::from'] . '°-' . $position['sun::elevation::to'] . '° Azimuth : ' . $position['sun::azimuth::from'] . '°-' . $position['sun::azimuth::to'] . '° ('  . $position['shutter::position'] . '%)');
       }
     }
   }
@@ -399,26 +399,26 @@ public function executeAction($_force = false){
   $stateHandlingCmd = $this->getCmd(null,'stateHandling');
   if (!$_force && $stateHandlingCmd->execCmd() == false) {
     if ($this->getConfiguration('shutter::nobackhand',0) == 2){
-        $delay = $this->getConfiguration('shutter::customDelay',0);
-        $since = $this->getCache('beginSuspend');
-        $deltadelay = abs($since - time())/60;
-        log::add('sunshutter','debug',$this->getHumanName().' - Handling desactivated : delay is ' . $delay . ' min - delta is ' . round($deltadelay,2)) . ' minutes';
-        if ($this->getCache('manualSuspend')){
-            log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, Handling desactivated manually');
-            return;
-        }
-        if ($deltadelay>=$delay){
-            log::add('sunshutter','debug',$this->getHumanName().' - Going back to normal delay is passed ');
-            $this->checkAndUpdateCmd('stateHandling', true);
-            $this->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
-            $_force = true;
-        } else {
-            log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, handling desactivated');
-            return;
-        }
-    } else {
+      $delay = $this->getConfiguration('shutter::customDelay',0);
+      $since = $this->getCache('beginSuspend');
+      $deltadelay = abs($since - time())/60;
+      log::add('sunshutter','debug',$this->getHumanName().' - Handling desactivated : delay is ' . $delay . ' min - delta is ' . round($deltadelay,2)) . ' minutes';
+      if ($this->getCache('manualSuspend')){
+        log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, Handling desactivated manually');
+        return;
+      }
+      if ($deltadelay>=$delay){
+        log::add('sunshutter','debug',$this->getHumanName().' - Going back to normal delay is passed ');
+        $this->checkAndUpdateCmd('stateHandling', true);
+        $this->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
+        $_force = true;
+      } else {
         log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, handling desactivated');
         return;
+      }
+    } else {
+      log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, handling desactivated');
+      return;
     }
   }
   log::add('sunshutter','debug',$this->getHumanName().' - Start executeAction');
@@ -454,26 +454,26 @@ public function executeAction($_force = false){
   $conditions = $this->getConfiguration('conditions','');
   if($conditions != '' ){
     foreach ($conditions as $condition) {
-        if (!$condition['conditions::immediate']) {
-            if($condition['conditions::condition'] != '' && jeedom::evaluateExpression($condition['conditions::condition'])){
-                if ($condition['conditions::suspend'] == 1) {
-                    log::add('sunshutter','debug',$this->getHumanName().' - Condition wants to suspend or extend suspension : ' . $condition['conditions::condition']);
-                    $this->checkAndUpdateCmd('stateHandling', false);
-                    $this->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
-                    $this->setCache('beginSuspend',time());
-                    $this->setCache('manualSuspend',false);
-                }
-                if ($condition['conditions::position'] != '') {
-                    log::add('sunshutter','debug',$this->getHumanName().' - Condition Met : ' . $condition['conditions::condition'] . ' (' . $condition['conditions::position'] . '%)');
-                    $position = $condition['conditions::position'];
-                    break;
-                } else {
-                    log::add('sunshutter','debug',$this->getHumanName().' - Condition Met : ' . $condition['conditions::condition'] . ' (Empty position do nothing)');
-                    $position = $currentPosition;
-                    break;
-                }
-            }
+      if (!$condition['conditions::immediate']) {
+        if($condition['conditions::condition'] != '' && jeedom::evaluateExpression($condition['conditions::condition'])){
+          if (isset($condition['conditions::suspend'])  && $condition['conditions::suspend'] == 1) {
+            log::add('sunshutter','debug',$this->getHumanName().' - Condition wants to suspend or extend suspension : ' . $condition['conditions::condition']);
+            $this->checkAndUpdateCmd('stateHandling', false);
+            $this->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
+            $this->setCache('beginSuspend',time());
+            $this->setCache('manualSuspend',false);
+          }
+          if ($condition['conditions::position'] != '') {
+            log::add('sunshutter','debug',$this->getHumanName().' - Condition Met : ' . $condition['conditions::condition'] . ' (' . $condition['conditions::position'] . '%)');
+            $position = $condition['conditions::position'];
+            break;
+          } else {
+            log::add('sunshutter','debug',$this->getHumanName().' - Condition Met : ' . $condition['conditions::condition'] . ' (Empty position do nothing)');
+            $position = $currentPosition;
+            break;
+          }
         }
+      }
     }
   }
   log::add('sunshutter','debug',$this->getHumanName().' - Calcul position '.$position);
