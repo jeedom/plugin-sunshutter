@@ -262,6 +262,17 @@ public function postSave() {
   $cmd->setEqLogic_id($this->getId());
   $cmd->save();
   
+  $cmd = $this->getCmd(null, 'mode');
+  if (!is_object($cmd)) {
+    $cmd = new sunshutterCmd();
+    $cmd->setLogicalId('mode');
+    $cmd->setName(__('Mode', __FILE__));
+  }
+  $cmd->setType('info');
+  $cmd->setSubType('string');
+  $cmd->setEqLogic_id($this->getId());
+  $cmd->save();
+  
   $cmd = $this->getCmd(null, 'lastposition');
   if (!is_object($cmd)) {
     $cmd = new sunshutterCmd();
@@ -452,26 +463,34 @@ public function executeAction($_force = false){
   $position = null;
   $position = $this->calculPosition();
   $conditions = $this->getConfiguration('conditions','');
-  if($conditions != '' ){
+  
+  $mode = $this->getCmd('mode');
+  if(is_array($conditions) && count($conditions) > 0){
     foreach ($conditions as $condition) {
-      if (!$condition['conditions::immediate']) {
-        if($condition['conditions::condition'] != '' && jeedom::evaluateExpression($condition['conditions::condition'])){
-          if (isset($condition['conditions::suspend'])  && $condition['conditions::suspend'] == 1) {
-            log::add('sunshutter','debug',$this->getHumanName().' - Condition wants to suspend or extend suspension : ' . $condition['conditions::condition']);
-            $this->checkAndUpdateCmd('stateHandling', false);
-            $this->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
-            $this->setCache('beginSuspend',time());
-            $this->setCache('manualSuspend',false);
-          }
-          if ($condition['conditions::position'] != '') {
-            log::add('sunshutter','debug',$this->getHumanName().' - Condition Met : ' . $condition['conditions::condition'] . ' (' . $condition['conditions::position'] . '%)');
-            $position = $condition['conditions::position'];
-            break;
-          } else {
-            log::add('sunshutter','debug',$this->getHumanName().' - Condition Met : ' . $condition['conditions::condition'] . ' (Empty position do nothing)');
-            $position = $currentPosition;
-            break;
-          }
+      if ($condition['conditions::immediate']) {
+        continue;
+      }
+      if(isset($condition['conditions::mode']) && $condition['conditions::mode'] != '' && is_object($mode)){
+        if(strpos(strtolower($condition['conditions::mode']),strtolower($mode->execCmd())) === false){
+          continue;
+        }
+      }
+      if($condition['conditions::condition'] != '' && jeedom::evaluateExpression($condition['conditions::condition'])){
+        if (isset($condition['conditions::suspend'])  && $condition['conditions::suspend'] == 1) {
+          log::add('sunshutter','debug',$this->getHumanName().' - Condition wants to suspend or extend suspension : ' . $condition['conditions::condition']);
+          $this->checkAndUpdateCmd('stateHandling', false);
+          $this->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
+          $this->setCache('beginSuspend',time());
+          $this->setCache('manualSuspend',false);
+        }
+        if ($condition['conditions::position'] != '') {
+          log::add('sunshutter','debug',$this->getHumanName().' - Condition Met : ' . $condition['conditions::condition'] . ' (' . $condition['conditions::position'] . '%)');
+          $position = $condition['conditions::position'];
+          break;
+        } else {
+          log::add('sunshutter','debug',$this->getHumanName().' - Condition Met : ' . $condition['conditions::condition'] . ' (Empty position do nothing)');
+          $position = $currentPosition;
+          break;
         }
       }
     }
@@ -529,6 +548,14 @@ class sunshutterCmd extends cmd {
       $sunshutter->setCache('manualSuspend',true);
     }
     if($this->getLogicalId() == 'resumeHandling'){
+      $sunshutter->checkAndUpdateCmd('stateHandling', true);
+      $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
+      $sunshutter->setCache('beginSuspend',0);
+      $sunshutter->setCache('manualSuspend',false);
+      $sunshutter->executeAction(true);
+    }
+    if($this->getLogicalId() == 'mode'){
+      $sunshutter->checkAndUpdateCmd('mode', $this->getName());
       $sunshutter->checkAndUpdateCmd('stateHandling', true);
       $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
       $sunshutter->setCache('beginSuspend',0);

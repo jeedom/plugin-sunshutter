@@ -65,10 +65,13 @@ function addConditions(_condition){
   tr += '<input class="form-control conditionsAttr" data-l1key="conditions::position" style="width:calc( 50% - 10px);display:inline-block;" /> %';
   tr += '</td>';
   tr += '<td>';
-  tr += '<input type="checkbox" class="form-control conditionsAttr" data-l1key="conditions::immediate" style="width:calc( 100% - 20px);display:inline-block;"/>';
+  tr += '<input class="form-control conditionsAttr" data-l1key="conditions::mode" />';
   tr += '</td>';
   tr += '<td>';
-  tr += '<input type="checkbox" class="form-control conditionsAttr" data-l1key="conditions::suspend" style="width:calc( 100% - 20px);display:inline-block;"/>';
+  tr += '<input type="checkbox" class="form-control conditionsAttr" data-l1key="conditions::immediate" />';
+  tr += '</td>';
+  tr += '<td>';
+  tr += '<input type="checkbox" class="form-control conditionsAttr" data-l1key="conditions::suspend" />';
   tr += '</td>';
   tr += '<td>';
   tr += '<div class="input-group"><textarea class="conditionsAttr form-control" data-concat="1" data-l1key="conditions::condition" style="height:75px"></textarea><span class="input-group-btn"><a class="btn btn-default listCmdInfoConditions roundedRight" ><i class="fas fa-list-alt"></i></a></span></div>';
@@ -229,7 +232,7 @@ function printScheduling(_eqLogic){
       }
     }
   });
-
+  
 }
 
 
@@ -246,16 +249,20 @@ function addCmdToTable(_cmd) {
   if (!isset(_cmd.configuration)) {
     _cmd.configuration = {};
   }
+  if(!_cmd.logicalId){
+    _cmd.logicalId = 'mode';
+    _cmd.type = 'action';
+    _cmd.subType = 'other';
+  }
   var tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '">';
   tr += '<td>';
   tr += '<span class="cmdAttr" data-l1key="id" style="display:none;"></span>';
+  tr += '<span class="cmdAttr" data-l1key="logicalId" style="display:none;"></span>';
   tr += '<input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 140px;" placeholder="{{Nom}}">';
   tr += '</td>';
   tr += '<td>';
-  tr += '<span class="type" type="' + init(_cmd.type) + '">' + jeedom.cmd.availableType() + '</span>';
-  tr += '<span class="subType" subType="' + init(_cmd.subType) + '"></span>';
-  tr += '</td>';
-  tr += '<td>';
+  tr += '<span class="type" type="' + init(_cmd.type) + '" style="display:none;">' + jeedom.cmd.availableType() + '</span>';
+  tr += '<span class="subType" subType="' + init(_cmd.subType) + '" style="display:none;"></span>';
   tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isVisible" checked/>{{Afficher}}</label></span> ';
   tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isHistorized" checked/>{{Historiser}}</label></span> ';
   tr += '</td>';
