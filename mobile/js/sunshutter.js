@@ -43,12 +43,16 @@ function getSunshutterState(){
 		for (sunshutter in data.result.shutters) {
 			var shutter = data.result.shutters[sunshutter];
 			handling ='';
-			if (shutter['HandlingLabel'] == 'Auto'){
-				handling = '<i class="fas fa-magic"></i>';
-			} else if (shutter['HandlingLabel'] == 'Manuel'){
-				handling = '<i class="fas fa-user"></i>';
+			mode = '';
+			if (shutter['mode'] != 'Aucun'){
+				mode = shutter['mode'];
 			}
-			table += '<tr><td>' +  shutter['name'] +' <br/> '+ shutter['position'] +'% <br/>' + handling +'</td>';
+			if (shutter['HandlingLabel'] == 'Auto'){
+				handling = '<i class="fas fa-magic"></i><br/>';
+			} else if (shutter['HandlingLabel'] == 'Manuel'){
+				handling = '<i class="fas fa-user"></i><br/>';
+			}
+			table += '<tr><td>' +  shutter['name'] +' <br/> '+ shutter['position'] +'% <br/>' + handling +mode+'</td>';
 			if (shutter['handling'] == '0'){
 				table += '<td>' + '<a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['resumeId']+'"><i class="fas fa-play"></i></a>';
 			} else {

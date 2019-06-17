@@ -28,8 +28,8 @@ if (!isConnect()) {
 	<thead>
 		<tr>
 			<th data-priority="1">{{Nom}}</th>
-			<th data-priority="1">{{Azimuth}}</th>
-			<th data-priority="1">{{Elevation}}</th>
+			<th data-priority="1">{{Soleil}}</th>
+			<th data-priority="1">{{Mode}}</th>
 			<th data-priority="1">{{Dernier}}</th>
 			<th data-priority="1">{{Suspension}}</th>
 			<th data-priority="1">{{Gestion}}</th>

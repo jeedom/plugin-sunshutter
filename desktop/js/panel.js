@@ -44,8 +44,8 @@ function getSunshutterState(){
 					handling = '<i class="fas fa-user"></i>';
 				}
 				table += '<tr><td><a href="' + shutter['link'] + '">' +  shutter['name'] +'</a></td>';
-				table += '<td><center><span class="label label-primary">'+ shutter['azimuth'] + '°</span></center></td>';
-				table += '<td><center><span class="label label-primary">'+ shutter['elevation'] + '°</span></center></td>';
+				table += '<td><center><span class="label label-primary">'+ shutter['azimuth'] + '° - ' + shutter['elevation'] + '°</span></center></td>';
+				table += '<td><center><span class="label label-primary">'+ shutter['mode'] + '</span></center></td>';
 				table += '<td><center><span class="label label-primary">'+ shutter['position'] + '%</span></center></td>';
 				table += '<td><center><span class="label label-primary">'+ handling + '</span></center></td>';
 				if (shutter['handling'] == '0'){

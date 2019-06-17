@@ -168,6 +168,11 @@ class sunshutter extends eqLogic {
       $currentPosition = null;
       $cmdstatehtml = '';
       $cmdhtml = '';
+      $currentMode = 'Aucun';
+      $modeCmd = $sunshutter->getCmd(null, 'mode');
+      if (is_object($modeCmd)) {
+        $currentMode = $modeCmd->execCmd();
+      }
       $cmd = cmd::byId(str_replace('#','',$sunshutter->getConfiguration('shutter::state')));
       if (is_object($cmd)) {
         $currentPosition = $cmd->execCmd();
@@ -204,6 +209,7 @@ class sunshutter extends eqLogic {
       'elevation' => $cmdElevation->execCmd(),
       'azimuth' => $cmdAzimuth->execCmd(),
       'link' => $sunshutter->getLinkToConfiguration(),
+      'mode' => $currentMode,
     );
     $return['shutters'][]=$datas;
     $return['global']=array('moyPos' => ($numberShutters == 0) ? 'N/A' : round($sumposition/$numberShutters),
