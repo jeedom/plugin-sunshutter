@@ -480,7 +480,7 @@ public function executeAction($_force = false){
         continue;
       }
       if(isset($condition['conditions::mode']) && $condition['conditions::mode'] != '' && $mode != ''){
-        if(strpos(strtolower($condition['conditions::mode']),$mode) === false){
+        if(!in_array($mode, explode(',',strtolower($condition['conditions::mode'])))){
           continue;
         }
         if ($condition['conditions::condition'] == '') {
