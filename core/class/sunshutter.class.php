@@ -474,6 +474,11 @@ public function executeAction($_force = false){
         if(strpos(strtolower($condition['conditions::mode']),strtolower($mode->execCmd())) === false){
           continue;
         }
+        if ($condition['conditions::condition'] == '') {
+          log::add('sunshutter','debug',$this->getHumanName().' - No Condition defined but valid mode : ' . ' (' . $condition['conditions::position'] . ')');
+          $position = $condition['conditions::position'];
+          break;
+        }
       }
       if($condition['conditions::condition'] != '' && jeedom::evaluateExpression($condition['conditions::condition'])){
         if (isset($condition['conditions::suspend'])  && $condition['conditions::suspend'] == 1) {
@@ -492,10 +497,6 @@ public function executeAction($_force = false){
           $position = $currentPosition;
           break;
         }
-      } else if ($condition['conditions::condition'] == '') {
-        log::add('sunshutter','debug',$this->getHumanName().' - No Condition defined but valid mode : ' . ' (' . $condition['conditions::position'] . ')');
-        $position = $condition['conditions::position'];
-        break;
       }
     }
   }
