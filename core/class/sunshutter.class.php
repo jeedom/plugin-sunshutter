@@ -473,10 +473,9 @@ public function executeAction($_force = false){
   $position = $this->calculPosition();
   $conditions = $this->getConfiguration('conditions','');
   $mode = '';
-  if(is_object($this->getCmd('mode'))){
-    $mode = strtolower($this->getCmd('mode')->execCmd());
+  if(is_object($this->getCmd(null,'mode'))){
+    $mode = strtolower($this->getCmd(null,'mode')->execCmd());
   }
-  
   if(is_array($conditions) && count($conditions) > 0){
     foreach ($conditions as $condition) {
       if ($condition['conditions::immediate']) {
@@ -484,6 +483,7 @@ public function executeAction($_force = false){
       }
       if(isset($condition['conditions::mode']) && $condition['conditions::mode'] != '' && $mode != ''){
         if(!in_array($mode, explode(',',strtolower($condition['conditions::mode'])))){
+          log::add('sunshutter','debug',$this->getHumanName().' - Mode not ok : ' . ' (' . $mode . ')');
           continue;
         }
         if ($condition['conditions::condition'] == '') {
@@ -574,11 +574,11 @@ class sunshutterCmd extends cmd {
     if($this->getLogicalId() == 'mode'){
       $sunshutter->checkAndUpdateCmd('mode', $this->getName());
       if ($sunshutter->getConfiguration('condition::allowIgnoreSuspend',0) == 1) {
-            $sunshutter->checkAndUpdateCmd('stateHandling', true);
-            $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
-            $sunshutter->setCache('beginSuspend',0);
-            $sunshutter->setCache('manualSuspend',false);
-            $sunshutter->executeAction(true);
+        $sunshutter->checkAndUpdateCmd('stateHandling', true);
+        $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
+        $sunshutter->setCache('beginSuspend',0);
+        $sunshutter->setCache('manualSuspend',false);
+        $sunshutter->executeAction(true);
       }
     }
   }
