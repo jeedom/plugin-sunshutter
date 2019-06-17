@@ -463,15 +463,17 @@ public function executeAction($_force = false){
   $position = null;
   $position = $this->calculPosition();
   $conditions = $this->getConfiguration('conditions','');
+  if(is_object($this->getCmd('mode'))){
+    $mode = strtolower($this->getCmd('mode')->execCmd());
+  }
   
-  $mode = $this->getCmd('mode');
   if(is_array($conditions) && count($conditions) > 0){
     foreach ($conditions as $condition) {
       if ($condition['conditions::immediate']) {
         continue;
       }
-      if(isset($condition['conditions::mode']) && $condition['conditions::mode'] != '' && is_object($mode)){
-        if(strpos(strtolower($condition['conditions::mode']),strtolower($mode->execCmd())) === false){
+      if(isset($condition['conditions::mode']) && $condition['conditions::mode'] != '' && $mode != ''){
+        if(strpos(strtolower($condition['conditions::mode']),$mode) === false){
           continue;
         }
         if ($condition['conditions::condition'] == '') {
