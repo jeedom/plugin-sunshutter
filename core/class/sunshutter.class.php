@@ -492,6 +492,10 @@ public function executeAction($_force = false){
           $position = $currentPosition;
           break;
         }
+      } else if ($condition['conditions::condition'] == '') {
+        log::add('sunshutter','debug',$this->getHumanName().' - No Condition defined but valid mode : ' . ' (' . $condition['conditions::position'] . ')');
+        $position = $condition['conditions::position'];
+        break;
       }
     }
   }
