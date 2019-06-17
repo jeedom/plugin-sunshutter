@@ -561,11 +561,13 @@ class sunshutterCmd extends cmd {
     }
     if($this->getLogicalId() == 'mode'){
       $sunshutter->checkAndUpdateCmd('mode', $this->getName());
-      $sunshutter->checkAndUpdateCmd('stateHandling', true);
-      $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
-      $sunshutter->setCache('beginSuspend',0);
-      $sunshutter->setCache('manualSuspend',false);
-      $sunshutter->executeAction(true);
+      if ($sunshutter->getConfiguration('condition::allowIgnoreSuspend',0) == 1) {
+            $sunshutter->checkAndUpdateCmd('stateHandling', true);
+            $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
+            $sunshutter->setCache('beginSuspend',0);
+            $sunshutter->setCache('manualSuspend',false);
+            $sunshutter->executeAction(true);
+      }
     }
   }
   
