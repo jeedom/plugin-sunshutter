@@ -463,6 +463,7 @@ public function executeAction($_force = false){
   $position = null;
   $position = $this->calculPosition();
   $conditions = $this->getConfiguration('conditions','');
+  $mode = '';
   if(is_object($this->getCmd('mode'))){
     $mode = strtolower($this->getCmd('mode')->execCmd());
   }
