@@ -173,6 +173,9 @@ class sunshutter extends eqLogic {
       if (is_object($modeCmd)) {
         $currentMode = $modeCmd->execCmd();
       }
+      if ( $currentMode == ''){
+        'Aucun';
+      }
       $cmd = cmd::byId(str_replace('#','',$sunshutter->getConfiguration('shutter::state')));
       if (is_object($cmd)) {
         $currentPosition = $cmd->execCmd();
