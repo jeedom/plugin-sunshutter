@@ -560,12 +560,14 @@ class sunshutterCmd extends cmd {
       $sunshutter->executeAction(true);
     }
     if($this->getLogicalId() == 'suspendHandling'){
+      log::add('sunshutter','debug',$sunshutter->getHumanName().' - Suspend Handling');
       $sunshutter->checkAndUpdateCmd('stateHandling', false);
       $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Manuel');
       $sunshutter->setCache('beginSuspend',time());
       $sunshutter->setCache('manualSuspend',true);
     }
     if($this->getLogicalId() == 'resumeHandling'){
+      log::add('sunshutter','debug',$sunshutter->getHumanName().' - Resume Handling');
       $sunshutter->checkAndUpdateCmd('stateHandling', true);
       $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
       $sunshutter->setCache('beginSuspend',0);
@@ -573,6 +575,7 @@ class sunshutterCmd extends cmd {
       $sunshutter->executeAction(true);
     }
     if($this->getLogicalId() == 'mode'){
+      log::add('sunshutter','debug',$sunshutter->getHumanName().' - Change shutter to mode : ' . $this->getName());
       $sunshutter->checkAndUpdateCmd('mode', $this->getName());
       if ($sunshutter->getConfiguration('condition::allowIgnoreSuspend',0) == 1) {
         $sunshutter->checkAndUpdateCmd('stateHandling', true);
