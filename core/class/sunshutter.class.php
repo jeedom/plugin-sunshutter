@@ -410,14 +410,18 @@ public function calculPosition(){
       }
     }
   }
+  log::add('sunshutter','debug',$this->getHumanName().' - Do default action');
   $default = $this->getConfiguration('shutter::openPosition',0);
   if ($this->getConfiguration('shutter::defaultAction','open') == 'close'){
+    log::add('sunshutter','debug',$this->getHumanName().' - Do default close action');
     $default = $this->getConfiguration('shutter::closePosition',0);
   }
   if ($this->getConfiguration('shutter::defaultAction','open') == 'custom'){
+    log::add('sunshutter','debug',$this->getHumanName().' - Do default custom action');
     $default = $this->getConfiguration('shutter::customPosition',0);
   }
   if ($this->getConfiguration('shutter::defaultAction','close') == 'none'){
+    log::add('sunshutter','debug',$this->getHumanName().' - Do default none');
     $default = $this->getCache('lastPositionOrder',null);
   }
   return $default;
