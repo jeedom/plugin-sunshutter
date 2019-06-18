@@ -441,7 +441,7 @@ public function executeAction($_force = false){
       return;
     }
   }
-  log::add('sunshutter','debug',$this->getHumanName().' - Start executeAction');
+  log::add('sunshutter','debug',$this->getHumanName().' - Start executeAction mode : '.$_force);
   $this->updateData();
   if($this->getConfiguration('condition::allowmove') != '' && jeedom::evaluateExpression($this->getConfiguration('condition::allowmove')) == false){
     log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, false condition');
@@ -458,7 +458,7 @@ public function executeAction($_force = false){
       $amplitude = abs($this->getConfiguration('shutter::closePosition',0)-$this->getConfiguration('shutter::openPosition',100));
       $delta = abs($currentPosition-$lastPositionOrder);
       $ecart = ($delta/$amplitude)*100;
-      log::add('sunshutter','debug',$this->getHumanName().' - Ecart depuis le dernier ordre : ' . $ecart);
+      log::add('sunshutter','debug',$this->getHumanName().' - Gap since last order : ' . $ecart);
       if ($ecart>3){
         $this->checkAndUpdateCmd('stateHandling', false);
         $this->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
@@ -487,7 +487,7 @@ public function executeAction($_force = false){
           continue;
         }
         if ($condition['conditions::condition'] == '') {
-          log::add('sunshutter','debug',$this->getHumanName().' - No Condition defined but valid mode : ' . ' (' . $condition['conditions::position'] . ')');
+          log::add('sunshutter','debug',$this->getHumanName().' - No Condition defined but valid mode ['.$mode.'] : ' . ' (' . $condition['conditions::position'] . ')');
           $position = $condition['conditions::position'];
           break;
         }
@@ -513,11 +513,12 @@ public function executeAction($_force = false){
     }
   }
   log::add('sunshutter','debug',$this->getHumanName().' - Calcul position '.$position);
+  log::add('sunshutter','debug',$this->getHumanName().' - Current position '.$currentPosition);
   if(($position !== null && $currentPosition !== null)){
     $amplitude = abs($this->getConfiguration('shutter::closePosition',0)-$this->getConfiguration('shutter::openPosition',100));
     $delta = abs($position-$currentPosition);
     $ecart = ($delta/$amplitude)*100;
-    log::add('sunshutter','debug',$this->getHumanName().' - Ecart avec la cible : ' . $ecart);
+    log::add('sunshutter','debug',$this->getHumanName().' - Gap with target : ' . $ecart);
     if ($ecart<3){
       log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, position != new position by less than 3%');
       $this->setCache('lastPositionOrder',$position);
