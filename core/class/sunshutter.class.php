@@ -485,7 +485,7 @@ public function executeAction($_force = false){
       if ($condition['conditions::immediate']) {
         continue;
       }
-      if(isset($condition['conditions::mode']) && $condition['conditions::mode'] != '' && $mode != ''){
+      if(isset($condition['conditions::mode']) && $condition['conditions::mode'] != ''){
         if(!in_array($mode, explode(',',strtolower($condition['conditions::mode'])))){
           log::add('sunshutter','debug',$this->getHumanName().' - Mode not ok : ' . ' (' . $mode . ')');
           continue;
