@@ -58,11 +58,7 @@ class sunshutter extends eqLogic {
       } else {
         if($sunshutter->getConfiguration('shutter::nobackhand',0) != 0){
           $lastPositionOrder = $sunshutter->getCache('lastPositionOrder',null);
-          $currentPosition = null;
-          $cmd = cmd::byId(str_replace('#','',$sunshutter->getConfiguration('shutter::state')));
-          if(is_object($cmd)){
-            $currentPosition = $cmd->execCmd();
-          }
+          $currentPosition = $sunshutter->getCurrentPosition();
           if($currentPosition !== null  && $lastPositionOrder !== null){
             $amplitude = abs($sunshutter->getConfiguration('shutter::closePosition',0)-$sunshutter->getConfiguration('shutter::openPosition',100));
             $delta = abs($currentPosition-$lastPositionOrder);
@@ -124,10 +120,7 @@ class sunshutter extends eqLogic {
                   }
                 }
                 $currentPosition = null;
-                $cmdState = cmd::byId(str_replace('#','',$sunshutter->getConfiguration('shutter::state')));
-                if(is_object($cmdState)){
-                  $currentPosition = $cmdState->execCmd();
-                }
+                $currentPosition = $sunshutter->getCurrentPosition();
                 $amplitude = abs($sunshutter->getConfiguration('shutter::closePosition',0)-$sunshutter->getConfiguration('shutter::openPosition',100));
                 $delta = abs($position-$currentPosition);
                 $ecart = ($delta/$amplitude)*100;
@@ -387,6 +380,21 @@ public function updateData(){
   }
 }
 
+public function getCurrentPosition(){
+  if($this->getConfiguration('shutter::refreshPosition') != ''){
+    $cmd = cmd::byId(str_replace('#','',$this->getConfiguration('shutter::refreshPosition')));
+    if(is_object($cmd)){
+      $cmd->execCmd();
+    }
+  }
+  $currentPosition = null;
+  $cmd = cmd::byId(str_replace('#','',$this->getConfiguration('shutter::state')));
+  if(is_object($cmd)){
+    $currentPosition = $cmd->execCmd();
+  }
+  return $currentPosition;
+}
+
 public function calculPosition(){
   $sun_elevation = $this->getCmd(null, 'sun_elevation')->execCmd();
   $sun_azimuth = $this->getCmd(null, 'sun_azimuth')->execCmd();
@@ -447,11 +455,7 @@ public function executeAction($_force = false){
     log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, false condition');
     return;
   }
-  $currentPosition = null;
-  $cmd = cmd::byId(str_replace('#','',$this->getConfiguration('shutter::state')));
-  if(is_object($cmd)){
-    $currentPosition = $cmd->execCmd();
-  }
+  $currentPosition = $this->getCurrentPosition();
   if(!$_force && $this->getConfiguration('shutter::nobackhand',0) != 0){
     $lastPositionOrder = $this->getCache('lastPositionOrder',null);
     if($currentPosition !== null  && $lastPositionOrder !== null){
