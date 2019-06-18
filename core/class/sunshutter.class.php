@@ -456,7 +456,7 @@ public function executeAction($_force = false){
     return;
   }
   $currentPosition = $this->getCurrentPosition();
-  if(!$_force && $this->getConfiguration('shutter::nobackhand',0) != 0){
+  if(!$_force && $this->getConfiguration('shutter::nobackhand',0) != 1){
     $lastPositionOrder = $this->getCache('lastPositionOrder',null);
     if($currentPosition !== null  && $lastPositionOrder !== null){
       $amplitude = abs($this->getConfiguration('shutter::closePosition',0)-$this->getConfiguration('shutter::openPosition',100));
