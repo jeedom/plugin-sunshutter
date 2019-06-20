@@ -26,41 +26,42 @@ Vous retrouvez dans le premier onglet toute la configuration de votre équipemen
 
 ## Configuration
 
-### Général
+### Configuration
 
-- Cron de verification : très important c'est la fréquence à laquelle jeedom va verifier la position du soleil et les conditions pour positionner le volet. Trop court le volet bougera tout le temps, trop long cela risque de ne pas etre efficace. Un temps de 30min (\*/30 * * * \*) est pas mal.
-- Ne pas reprendre la main : interdit au systeme de gestion de volet de modifier la position de celui-ci si il a été bougé manuellement. Exemple le systeme ferme le volet, vous l'ouvrez il n'y touchera plus jusqu'a ce que la commande "Reprendre gestion" soit déclenchée
-
-### Coordonnées
-
+- Vérification : fréquence de verification des conditions et position des volets
+- Reprendre la main : interdit au systeme de gestion de volet de modifier la position de celui-ci si il a été bougé manuellement. Exemple le systeme ferme le volet, vous l'ouvrez il n'y touchera plus jusqu'a ce que la commande "Reprendre gestion" soit déclenchée ou si le délai de reprise de main est passé
 - Latitude : la latitude de votre volet/maison
 - Longitude : la longitude de votre volet/maison
 - Altitude : l'altitude de votre volet/maison
-
-### Volet
-
 - Etat volet : commande indiquant la position actuel du volet
 - Position volet : commande permettant de positionner le volet
+- Rafraîchir position volet : commande permettant de rafraichir la positionner du volet
 
 ## Condition
 
 - Condition pour action : si cette condition n'est pas vrai le plugin ne modifiera pas la position du volet
-- Forcer l'ouverture si : si cette condition est vrai le volet s'ouvrira (la verification se fait sur le cycle du cron)
-- Forcer l'ouverture immediatement si : si cette condition est vrai le volet s'ouvrira immediatement
-- Forcer la fermeture si : si cette condition est vrai le volet se fermera (la verification se fait sur le cycle du cron)
-- Forcer l'ouverture immediatement si : si cette condition est vrai le volet se fermera immediatement
+
+Le tableau des conditions vous permet de spécifier des conditions de positionnement spécifique, qui prenne la main sur le tableau de position du volets :
+- Position : si la condition est vrai, la position du volets
+- Mode : la condition ne marche que si le volet est dans ce mode (vous pouvez en mettre plusieurs séparé par des ,). Si ce champs n'est pas remplis alors la condition sera testée quelque soit le mode
+- Action systematique : agit immediatement dès que la condition est vrai (n'attend donc pas le cron de verification)
+- Suspendre : si la condition est vrai alors le systeme de gestion de volet passe en suspendu
+- Condition : votre condition
+- Commentaire : champs libre pour mettre des commentaires
 
 ## Positionnement
 
+- %ouveture : le % quand le volet est ouvert
+- %fermeture : le % quand le volet est fermé
+- Action par defaut : l'action par defaut si aucune condition et position n'est valide
+
 C'est ici que vous allez pouvoir gerer le positionenement du volet en fonction de la position du soleil.
 
-### Général
-
-La vous indiqué la position ouvert et fermer du volet (c'est ces position qui sont utilisée par les conditions)
-
-### Positionnement
-
-Tableau de positionnement du volet en fonction du soleil. Vous indiquer 2 bornes d'azimuth et d'elevation (en ° pour les 2), dès que les conditions sont remplis le volet se met à la position donnée.
+- Azimuth : angle de position du soleil
+- Elevation : angle de hauteur du soleil
+- Position : position du volet à prendre si le soleil se trouve dans les bornes d'Azimuth et d'élévation
+- Condition : condition en plus à satisfaire pour que le volet prenne cette position (peut etre vide)
+- Commentaire : champs libre pour mettre des commentaires
 
 >**ASTUCE**
 >
@@ -80,3 +81,6 @@ Vous voyez ici les plannification de positionnement du volet faite dans le plann
 - Reprendre : force la remise en mode automatique de la gestion (A noter que c'est cette commande qu'il faut lancer pour repasser en gestion automatique si vous avez modifier la position de votre volet manuellement et coché la case "Ne pas reprendre la main")
 - Suspendre : suspend le positionnement automatique du volet
 - Rafraichir : mets à jour les valeurs des commandes "Azimut soleil" et "Elévation soleil"
+- Mode : mode actuel du volet
+
+Vous pouvez ajouter des commandes "mode", le nom de la commande sera le nom du mode.
