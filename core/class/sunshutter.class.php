@@ -64,12 +64,12 @@ class sunshutter extends eqLogic {
             $delta = abs($currentPosition-$lastPositionOrder);
             $ecart = ($delta/$amplitude)*100;
             log::add('sunshutter','debug',$sunshutter->getHumanName().' - [cron] - Gap since last order : ' . $ecart);
-            if ($ecart>3){
+            if ($ecart>4){
               $sunshutter->checkAndUpdateCmd('stateHandling', false);
               $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
               $sunshutter->setCache('beginSuspend',time());
               $sunshutter->setCache('manualSuspend',false);
-              log::add('sunshutter','debug',$sunshutter->getHumanName().'- [cron] - Position != last order by far 3% i suspend');
+              log::add('sunshutter','debug',$sunshutter->getHumanName().'- [cron] - Position != last order by far 4% i suspend');
             }
           }
         }
@@ -125,8 +125,8 @@ class sunshutter extends eqLogic {
                 $delta = abs($position-$currentPosition);
                 $ecart = ($delta/$amplitude)*100;
                 log::add('sunshutter','debug',$sunshutter->getHumanName().' - Ecart avec la cible : ' . $ecart);
-                if ($ecart<3){
-                  log::add('sunshutter','debug',$sunshutter->getHumanName().' - Do nothing, position != new position by less than 3%');
+                if ($ecart<=4){
+                  log::add('sunshutter','debug',$sunshutter->getHumanName().' - Do nothing, position != new position by less than 4%');
                 } else {
                   log::add('sunshutter','debug',$sunshutter->getHumanName().' - Do action ' . $position);
                   $cmd->execCmd(array('slider' => $position));
@@ -467,12 +467,12 @@ public function executeAction($_force = false){
       $delta = abs($currentPosition-$lastPositionOrder);
       $ecart = ($delta/$amplitude)*100;
       log::add('sunshutter','debug',$this->getHumanName().' - Gap since last order : ' . $ecart);
-      if ($ecart>3){
+      if ($ecart>4){
         $this->checkAndUpdateCmd('stateHandling', false);
         $this->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
         $this->setCache('beginSuspend',time());
         $this->setCache('manualSuspend',false);
-        log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, position != last order by far 3% i suspend');
+        log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, position != last order by far 4% i suspend');
         return;
       }
     }
@@ -527,8 +527,8 @@ public function executeAction($_force = false){
     $delta = abs($position-$currentPosition);
     $ecart = ($delta/$amplitude)*100;
     log::add('sunshutter','debug',$this->getHumanName().' - Gap with target : ' . $ecart);
-    if ($ecart<3){
-      log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, position != new position by less than 3%');
+    if ($ecart<=4){
+      log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, position != new position by less than 4%');
       $this->setCache('lastPositionOrder',$position);
       $this->checkAndUpdateCmd('lastposition', $position);
       return;
