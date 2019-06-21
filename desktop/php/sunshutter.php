@@ -227,7 +227,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									<div class="input-group">
 										<textarea class="eqLogicAttr form-control" data-concat="1" data-l1key="configuration" data-l2key="condition::allowmove" style="height:75px"></textarea>
 										<span class="input-group-addon hasBtn roundedRight">
-											<a class="btn btn-default listCmdInfo" ><i class="fas fa-list-alt"></i></a>
+											<a class="btn btn-default listCmdInfo roundedRight" ><i class="fas fa-list-alt"></i></a>
 										</span>
 									</div>
 								</div>
