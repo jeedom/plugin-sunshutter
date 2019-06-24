@@ -195,6 +195,17 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 							</div>
 						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">{{Rafraîchir position volet}}</label>
+							<div class="col-sm-3">
+								<div class="input-group">
+									<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::refreshPosition"/>
+									<span class="input-group-btn">
+										<a class="btn btn-default listCmdAction roundedRight"><i class="fas fa-list-alt"></i></a>
+									</span>
+								</div>
+							</div>
+						</div>
 					</fieldset>
 				</form>
 				<br/>
@@ -215,7 +226,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<div class="col-sm-9">
 									<div class="input-group">
 										<textarea class="eqLogicAttr form-control" data-concat="1" data-l1key="configuration" data-l2key="condition::allowmove" style="height:75px"></textarea>
-										<span class="input-group-btn">
+										<span class="input-group-addon hasBtn roundedRight">
 											<a class="btn btn-default listCmdInfo roundedRight" ><i class="fas fa-list-alt"></i></a>
 										</span>
 									</div>
