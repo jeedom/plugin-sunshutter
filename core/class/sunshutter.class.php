@@ -479,7 +479,7 @@ public function executeAction($_force = false){
   if(is_array($conditions) && count($conditions) > 0){
     foreach ($conditions as $condition) {
       if ($condition['conditions::immediate']) {
-        continue;
+        //  continue;
       }
       if(isset($condition['conditions::mode']) && $condition['conditions::mode'] != '' && $mode != ''){
         if(!in_array($mode, explode(',',strtolower($condition['conditions::mode'])))){
