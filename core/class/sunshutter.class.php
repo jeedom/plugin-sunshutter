@@ -99,10 +99,20 @@ class sunshutter extends eqLogic {
       return;
     }
     log::add('sunshutter', 'debug', $sunshutter->getHumanName().' - Immediate Trigger from ' . print_r($_options,true));
+    $mode = '';
+    if(is_object($sunshutter->getCmd(null,'mode'))){
+      $mode = strtolower($sunshutter->getCmd(null,'mode')->execCmd());
+    }
     $conditions = $sunshutter->getConfiguration('conditions','');
     if($conditions != '' ){
       foreach ($conditions as $condition) {
         if ($condition['conditions::immediate']) {
+          if(isset($condition['conditions::mode']) && $condition['conditions::mode'] != ''){
+            if(!in_array($mode, explode(',',strtolower($condition['conditions::mode'])))){
+              log::add('sunshutter','debug',$sunshutter->getHumanName().' - Mode not ok : ' . ' (' . $mode . ')');
+              continue;
+            }
+          }
           if($condition['conditions::condition'] != '' && jeedom::evaluateExpression($condition['conditions::condition'])){
             if ($condition['conditions::position'] != '') {
               log::add('sunshutter','debug',$sunshutter->getHumanName().' - Immediate Condition Met : ' . $condition['conditions::condition'] . ' (' . $condition['conditions::position'] . '%)');
