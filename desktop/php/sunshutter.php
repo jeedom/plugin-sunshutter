@@ -252,7 +252,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									<tr>
 										<th>{{Position}}</th>
 										<th>{{Mode}}</th>
-										<th>{{Action Systématique}}</th>
+										<th>{{Action Immédiate}}</th>
 										<th>{{Suspendre}}</th>
 										<th style="width:50%">{{Condition}}</th>
 										<th style="width:15%">{{Commentaire}}</th>
