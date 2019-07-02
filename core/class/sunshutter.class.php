@@ -99,7 +99,12 @@ class sunshutter extends eqLogic {
       return;
     }
     log::add('sunshutter', 'debug', $sunshutter->getHumanName().' - Immediate Trigger from ' . print_r($_options,true));
-    $sunshutter->executeAction();
+    if ($sunshutter->getConfiguration('condition::systematic',0) == 1) {
+        log::add('sunshutter', 'debug', $sunshutter->getHumanName().' - Immediate must be systematic');
+        $sunshutter->executeAction(true);
+    } else {
+        $sunshutter->executeAction();
+    }
   }
   
   public static function getPanel($_type){

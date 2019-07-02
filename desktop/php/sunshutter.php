@@ -238,6 +238,12 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									<input type="checkbox" class="form-control eqLogicAttr" data-l1key="configuration" data-l2key="condition::allowIgnoreSuspend"/>
 								</div>
 							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">{{Les actions immédiates ignorent les suspensions en cours}}</label>
+								<div class="col-sm-9">
+									<input type="checkbox" class="form-control eqLogicAttr" data-l1key="configuration" data-l2key="condition::systematic"/>
+								</div>
+							</div>
 							<legend><i class="icon jeedom-volet-ferme"></i> {{Conditions}}
 								<a class="btn btn-default btn-xs pull-right" style="margin-right:15px;" id="bt_addConditions"><i class="fas fa-plus"></i> {{Ajouter}}</a>
 							</legend>
