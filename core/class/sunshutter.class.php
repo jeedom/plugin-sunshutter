@@ -101,7 +101,7 @@ class sunshutter extends eqLogic {
     log::add('sunshutter', 'debug', $sunshutter->getHumanName().' - Immediate Trigger from ' . print_r($_options,true));
     if ($sunshutter->getConfiguration('condition::systematic',0) == 1) {
         log::add('sunshutter', 'debug', $sunshutter->getHumanName().' - Immediate must be systematic');
-        $sunshutter->executeAction(true);
+        $sunshutter->systematicAction();
     } else {
         $sunshutter->executeAction();
     }
@@ -362,6 +362,58 @@ public function getCurrentPosition(){
   return $currentPosition;
 }
 
+public function systematicAction(){
+  $mode = '';
+  if(is_object($this->getCmd(null,'mode'))){
+    $mode = strtolower($this->getCmd(null,'mode')->execCmd());
+  }
+  $conditions = $this->getConfiguration('conditions','');
+  if($conditions != '' ){
+    foreach ($conditions as $condition) {
+      if ($condition['conditions::immediate']) {
+        if(isset($condition['conditions::mode']) && $condition['conditions::mode'] != ''){
+          if(!in_array($mode, explode(',',strtolower($condition['conditions::mode'])))){
+            log::add('sunshutter','debug',$this->getHumanName().' - Mode not ok : ' . ' (' . $mode . ')');
+            continue;
+          }
+        }
+        if($condition['conditions::condition'] != '' && jeedom::evaluateExpression($condition['conditions::condition'])){
+          if ($condition['conditions::position'] != '') {
+            log::add('sunshutter','debug',$this->getHumanName().' - Immediate Condition Met : ' . $condition['conditions::condition'] . ' (' . $condition['conditions::position'] . '%)');
+            $cmd = cmd::byId(str_replace('#','',$this->getConfiguration('shutter::position')));
+            if(is_object($cmd)){
+              $position = $condition['conditions::position'];
+              if ($condition['conditions::suspend'] == 1) {
+                log::add('sunshutter','debug',$this->getHumanName().' - Immediate Condition is a suspendable condition : suspend');
+                $this->setCache('beginSuspend',time());
+                $this->checkAndUpdateCmd('stateHandling', false);
+                $cmdStateLabel = $this->getCmd(null, 'stateHandlingLabel');
+                $stateLabel = $cmdStateLabel->execCmd();
+                if ($stateLabel != 'Manuel'){
+                  $this->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
+                }
+              }
+              $currentPosition = null;
+              $currentPosition = $this->getCurrentPosition();
+              $amplitude = abs($this->getConfiguration('shutter::closePosition',0)-$this->getConfiguration('shutter::openPosition',100));
+              $delta = abs($position-$currentPosition);
+              $ecart = ($delta/$amplitude)*100;
+              log::add('sunshutter','debug',$this->getHumanName().' - Ecart avec la cible : ' . $ecart);
+              if ($ecart<=4){
+                log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, position != new position by less than 4%');
+              } else {
+                log::add('sunshutter','debug',$this->getHumanName().' - Do action ' . $position);
+                $cmd->execCmd(array('slider' => $position));
+              }
+            }
+            break;
+          }
+        }
+      }
+    }
+  }
+}
+
 public function calculPosition(){
   $sun_elevation = $this->getCmd(null, 'sun_elevation')->execCmd();
   $sun_azimuth = $this->getCmd(null, 'sun_azimuth')->execCmd();
@@ -453,8 +505,8 @@ public function executeAction($_force = false){
   }
   if(is_array($conditions) && count($conditions) > 0){
     foreach ($conditions as $condition) {
-      if ($condition['conditions::immediate']) {
-        //continue;
+      if ($condition['conditions::immediate'] && $this->getConfiguration('condition::systematic',0) == 1) {
+        continue;
       }
       if(isset($condition['conditions::mode']) && $condition['conditions::mode'] != ''){
         if(!in_array($mode, explode(',',strtolower($condition['conditions::mode'])))){
