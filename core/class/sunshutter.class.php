@@ -101,9 +101,9 @@ class sunshutter extends eqLogic {
     log::add('sunshutter', 'debug', $sunshutter->getHumanName().' - Immediate Trigger from ' . print_r($_options,true));
     if ($sunshutter->getConfiguration('condition::systematic',0) == 1) {
         log::add('sunshutter', 'debug', $sunshutter->getHumanName().' - Immediate must be systematic');
-        $sunshutter->systematicAction();
+        $sunshutter->systematicAction($_options['event_id']);
     } else {
-        $sunshutter->executeAction();
+        $sunshutter->executeAction($_cmdId=$_options['event_id']);
     }
   }
   
@@ -362,7 +362,7 @@ public function getCurrentPosition(){
   return $currentPosition;
 }
 
-public function systematicAction(){
+public function systematicAction($_cmdId){
   $mode = '';
   if(is_object($this->getCmd(null,'mode'))){
     $mode = strtolower($this->getCmd(null,'mode')->execCmd());
@@ -370,7 +370,7 @@ public function systematicAction(){
   $conditions = $this->getConfiguration('conditions','');
   if($conditions != '' ){
     foreach ($conditions as $condition) {
-      if ($condition['conditions::immediate']) {
+      if ($condition['conditions::immediate'] && strpos($condition['conditions::condition'],'#'.$_cmdId.'#') !== false) {
         if(isset($condition['conditions::mode']) && $condition['conditions::mode'] != ''){
           if(!in_array($mode, explode(',',strtolower($condition['conditions::mode'])))){
             log::add('sunshutter','debug',$this->getHumanName().' - Mode not ok : ' . ' (' . $mode . ')');
@@ -446,7 +446,7 @@ public function calculPosition(){
   return $default;
 }
 
-public function executeAction($_force = false){
+public function executeAction($_force = false, $_cmdId =''){
   $stateHandlingCmd = $this->getCmd(null,'stateHandling');
   if (!$_force && $stateHandlingCmd->execCmd() == false) {
     if ($this->getConfiguration('shutter::nobackhand',0) == 2){
@@ -506,6 +506,9 @@ public function executeAction($_force = false){
   if(is_array($conditions) && count($conditions) > 0){
     foreach ($conditions as $condition) {
       if ($condition['conditions::immediate'] && $this->getConfiguration('condition::systematic',0) == 1) {
+        continue;
+      }
+      if ($_cmdId != '' && strpos($condition['conditions::condition'],'#'.$_cmdId.'#') === false) {
         continue;
       }
       if(isset($condition['conditions::mode']) && $condition['conditions::mode'] != ''){
