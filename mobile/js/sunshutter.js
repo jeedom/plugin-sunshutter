@@ -53,11 +53,8 @@ function getSunshutterState(){
 				handling = '<i class="fas fa-user"></i><br/>';
 			}
 			table += '<tr><td>' +  shutter['name'] +' <br/> '+ shutter['position'] +'% <br/>' + handling +mode+'</td>';
-			if (shutter['handling'] == '0'){
-				table += '<td>' + '<a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['resumeId']+'"><i class="fas fa-play"></i></a>';
-			} else {
-				table += '<td>' + '<a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['pauseId']+'"><i class="fas fa-pause"></i></a>';
-			}
+			table += '<td>' + '<a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['resumeId']+'"><i class="fas fa-play"></i></a>';
+			table += ' <a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['pauseId']+'"><i class="fas fa-pause"></i></a>';
 			table += ' <a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['executeId']+'"><i class="fas fa-crosshairs"></i></a>';
 			table += ' <a class="bt_positionshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-value="'+shutter['openvalue']+'" data-cmd="'+shutter['positionId']+'"><i class="fas fa-arrow-up"></i></a>';
 			table += ' <a class="bt_positionshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-value="'+shutter['closevalue']+'" data-cmd="'+shutter['positionId']+'"><i class="fas fa-arrow-down"></i></a></td>';
