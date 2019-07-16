@@ -497,7 +497,7 @@ public function executeAction($_force = false, $_cmdId = ''){
     }
   }
   $position = null;
-  if ($_cmdId != ''){
+  if ($_cmdId == ''){
     $position = $this->calculPosition();
   }
   $conditions = $this->getConfiguration('conditions','');
