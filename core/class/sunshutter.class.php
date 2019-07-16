@@ -446,7 +446,7 @@ public function calculPosition(){
   return $default;
 }
 
-public function executeAction($_force = false, $_cmdId =''){
+public function executeAction($_force = false, $_cmdId = ''){
   $stateHandlingCmd = $this->getCmd(null,'stateHandling');
   if (!$_force && $stateHandlingCmd->execCmd() == false) {
     if ($this->getConfiguration('shutter::nobackhand',0) == 2){
@@ -497,7 +497,9 @@ public function executeAction($_force = false, $_cmdId =''){
     }
   }
   $position = null;
-  $position = $this->calculPosition();
+  if ($_cmdId != ''){
+    $position = $this->calculPosition();
+  }
   $conditions = $this->getConfiguration('conditions','');
   $mode = '';
   if(is_object($this->getCmd(null,'mode'))){
