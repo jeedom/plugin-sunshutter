@@ -103,7 +103,7 @@ class sunshutter extends eqLogic {
       log::add('sunshutter', 'debug', $sunshutter->getHumanName().' - Immediate must be systematic');
       $sunshutter->systematicAction($_options['event_id']);
     } else {
-      $sunshutter->executeAction(false,$_options['event_id']);
+      $sunshutter->executeAction();
     }
   }
   
@@ -446,7 +446,7 @@ public function calculPosition(){
   return $default;
 }
 
-public function executeAction($_force = false, $_cmdId = ''){
+public function executeAction($_force = false){
   $stateHandlingCmd = $this->getCmd(null,'stateHandling');
   if (!$_force && $stateHandlingCmd->execCmd() == false) {
     if ($this->getConfiguration('shutter::nobackhand',0) == 2){
@@ -497,9 +497,7 @@ public function executeAction($_force = false, $_cmdId = ''){
     }
   }
   $position = null;
-  if ($_cmdId == ''){
-    $position = $this->calculPosition();
-  }
+  $position = $this->calculPosition();
   $conditions = $this->getConfiguration('conditions','');
   $mode = '';
   if(is_object($this->getCmd(null,'mode'))){
@@ -508,9 +506,6 @@ public function executeAction($_force = false, $_cmdId = ''){
   if(is_array($conditions) && count($conditions) > 0){
     foreach ($conditions as $condition) {
       if ($condition['conditions::immediate'] && $this->getConfiguration('condition::systematic',0) == 1) {
-        continue;
-      }
-      if ($_cmdId != '' && strpos($condition['conditions::condition'],'#'.$_cmdId.'#') === false) {
         continue;
       }
       if(isset($condition['conditions::mode']) && $condition['conditions::mode'] != ''){
