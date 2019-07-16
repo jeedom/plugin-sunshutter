@@ -206,6 +206,12 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 							</div>
 						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">{{Temps maximum pour un déplacement}} <sub>s</sub></label>
+							<div class="col-sm-3">
+								<input type="number" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::moveDuration"/>
+							</div>
+						</div>
 					</fieldset>
 				</form>
 				<br/>

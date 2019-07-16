@@ -100,10 +100,10 @@ class sunshutter extends eqLogic {
     }
     log::add('sunshutter', 'debug', $sunshutter->getHumanName().' - Immediate Trigger from ' . print_r($_options,true));
     if ($sunshutter->getConfiguration('condition::systematic',0) == 1) {
-        log::add('sunshutter', 'debug', $sunshutter->getHumanName().' - Immediate must be systematic');
-        $sunshutter->systematicAction($_options['event_id']);
+      log::add('sunshutter', 'debug', $sunshutter->getHumanName().' - Immediate must be systematic');
+      $sunshutter->systematicAction($_options['event_id']);
     } else {
-        $sunshutter->executeAction($_cmdId=$_options['event_id']);
+      $sunshutter->executeAction(false,$_options['event_id']);
     }
   }
   
@@ -486,7 +486,7 @@ public function executeAction($_force = false, $_cmdId =''){
       $delta = abs($currentPosition-$lastPositionOrder);
       $ecart = ($delta/$amplitude)*100;
       log::add('sunshutter','debug',$this->getHumanName().' - Gap since last order : ' . $ecart);
-      if ($ecart>4){
+      if ($ecart > 4 && ($this->getConfiguration('shutter::moveDuration',0) == 0 || (strtotime('now') - $this->getCache('lastPositionOrderTime',0)) > $this->getConfiguration('shutter::moveDuration'))){
         $this->checkAndUpdateCmd('stateHandling', false);
         $this->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
         $this->setCache('beginSuspend',time());
@@ -563,6 +563,7 @@ public function executeAction($_force = false, $_cmdId =''){
       $cmd->execCmd(array('slider' => $position));
     }
     $this->setCache('lastPositionOrder',$position);
+    $this->setCache('lastPositionOrderTime',strtotime('now'));
     $this->checkAndUpdateCmd('lastposition', $position);
   }
 }
