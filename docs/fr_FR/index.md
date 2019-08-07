@@ -89,3 +89,7 @@ Vous voyez ici les plannification de positionnement du volet faite dans le plann
 - Mode : mode actuel du volet
 
 Vous pouvez ajouter des commandes "mode", le nom de la commande sera le nom du mode.
+
+# Panel
+
+Le plugin possede un panel de gestion en desktop et mobile pour l'activer il suffit d'aller dans Plugins -> Gestion des plugins, cliquer sur le plugin de gestion de volet et tout en bas a droite de cocher les cases pour afficher le panel desktop et mobile
