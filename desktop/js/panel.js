@@ -48,11 +48,8 @@ function getSunshutterState(){
 				table += '<td><center><span class="label label-primary">'+ shutter['mode'] + '</span></center></td>';
 				table += '<td><center><span class="label label-primary">'+ shutter['position'] + '%</span></center></td>';
 				table += '<td><center><span class="label label-primary">'+ handling + '</span></center></td>';
-				if (shutter['handling'] == '0'){
-					table += '<td><center>' + '<a class="bt_sunshutterAction btn btn-default" data-cmd="'+shutter['resumeId']+'"><i class="fas fa-play"></i></a>';
-				} else {
-					table += '<td><center>' + '<a class="bt_sunshutterAction btn btn-default" data-cmd="'+shutter['pauseId']+'"><i class="fas fa-pause"></i></a>';
-				}
+				table += '<td><center>' + '<a class="bt_sunshutterAction btn btn-default" data-cmd="'+shutter['resumeId']+'"><i class="fas fa-play"></i></a>';
+				table += ' <a class="bt_sunshutterAction btn btn-default" data-cmd="'+shutter['pauseId']+'"><i class="fas fa-pause"></i></a>';
 				table += ' <a class="bt_sunshutterAction btn btn-default" data-cmd="'+shutter['executeId']+'"><i class="fas fa-crosshairs"></i></a>';
 				table += ' <a class="bt_positionshutterAction btn btn-default" data-value="'+shutter['openvalue']+'" data-cmd="'+shutter['positionId']+'"><i class="fas fa-arrow-up"></i></a>';
 				table += ' <a class="bt_positionshutterAction btn btn-default" data-value="'+shutter['closevalue']+'" data-cmd="'+shutter['positionId']+'"><i class="fas fa-arrow-down"></i></a>' +'</center></td>';

@@ -32,6 +32,7 @@ $eqLogics = sunshutter::byType($plugin->getId());
 			<th>{{%fermeture}}</th>
 			<th>{{Action défaut}}</th>
 			<th>{{Condition pour action}}</th>
+			<th>{{Immédiate systématique}}</th>
 			<th>{{Exception}}</th>
 			<th>{{Exception immédiate}}</th>
 			<th>{{Exception avec suspension}}</th>
@@ -71,6 +72,11 @@ foreach ($eqLogics as $eqLogic) {
 		$condition = '<span class="label label-danger" style="font-size : 1em;cursor:default;">{{Non}}</span>';
 	}
 	echo '<td>' . $condition . '</td>';
+	$systematic = '<span class="label label-success" style="font-size : 1em;cursor:default;">{{Oui}}</span>';
+	if ($eqLogic->getConfiguration('condition::systematic',0) == 0) {
+		$systematic = '<span class="label label-danger" style="font-size : 1em;cursor:default;">{{Non}}</span>';
+	}
+	echo '<td>' . $systematic . '</td>';
 	$conditions = $eqLogic->getConfiguration('conditions','');
 	$numberconditionImmediates = 0;
 	$numbercondition = 0;
