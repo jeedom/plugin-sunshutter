@@ -2,6 +2,8 @@
 
 Ce plugin vous permet de gerer plus facilemement la position de vos volets en fonction de la position du soleil. Ce plugin est completement cloudless
 
+Vous pouvez trouver [ici](https://www.jeedom.com/blog/?p=4310) un article montrant un exemple de configuration du plugin
+
 # Configuration du plugins
 
 Rien de spécial ici juste à installer et activer le plugin
