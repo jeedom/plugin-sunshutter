@@ -467,7 +467,7 @@ public function executeAction($_force = false){
         log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, handling desactivated');
         return;
       }
-    } else {
+    } else if ($this->getConfiguration('shutter::nobackhand',0) != 0){ {
       log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, handling desactivated');
       return;
     }

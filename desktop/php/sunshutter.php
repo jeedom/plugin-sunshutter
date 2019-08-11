@@ -320,10 +320,10 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						<table class="table table-condensed" id="table_sunShutterPosition">
 							<thead>
 								<tr>
-									<th>{{Azimuth}}</th>
-									<th>{{Elevation}}</th>
-									<th>{{Position}}</th>
-									<th style="width:20%">{{Condition}}</th>
+									<th style="width:150px">{{Azimuth}}</th>
+									<th style="width:150px">{{Elevation}}</th>
+									<th style="width:75px">{{Position}}</th>
+									<th>{{Condition}}</th>
 									<th style="width:15%">{{Commentaire}}</th>
 								</tr>
 							</thead>
