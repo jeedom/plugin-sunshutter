@@ -13,8 +13,7 @@
 	"changelog" : "https://jeedom.github.io/plugin-sunshutter/#language#/changelog",
 	"documentation" : "https://jeedom.github.io/plugin-sunshutter/#language#/",
 	"link" : {
-		"forum":"Lien vers le forum",
-		"video" : "Lien vers une video"
+		"forum":"https://www.jeedom.com/forum/viewtopic.php?t=46887"
 	},
 	"language" : ["fr_FR","en_US","de_DE","sp_SP","ru_RU","id_ID","it_IT"],
 	"compatibility" : ["miniplus","smart","rpi","docker","diy","mobile"]
