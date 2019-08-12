@@ -245,7 +245,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">{{Les actions immédiates ignorent les suspensions en cours}}</label>
+								<label class="col-sm-3 control-label">{{Les actions immédiate sont systématique et prioritaire}}</label>
 								<div class="col-sm-9">
 									<input type="checkbox" class="form-control eqLogicAttr" data-l1key="configuration" data-l2key="condition::systematic"/>
 								</div>
