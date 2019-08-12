@@ -245,7 +245,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">{{Les actions immédiates ignorent les suspensions en cours}}</label>
+								<label class="col-sm-3 control-label">{{Les actions immédiate sont systématique et prioritaire}}</label>
 								<div class="col-sm-9">
 									<input type="checkbox" class="form-control eqLogicAttr" data-l1key="configuration" data-l2key="condition::systematic"/>
 								</div>
@@ -320,10 +320,10 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						<table class="table table-condensed" id="table_sunShutterPosition">
 							<thead>
 								<tr>
-									<th>{{Azimuth}}</th>
-									<th>{{Elevation}}</th>
-									<th>{{Position}}</th>
-									<th style="width:20%">{{Condition}}</th>
+									<th style="width:150px">{{Azimuth}}</th>
+									<th style="width:150px">{{Elevation}}</th>
+									<th style="width:75px">{{Position}}</th>
+									<th>{{Condition}}</th>
 									<th style="width:15%">{{Commentaire}}</th>
 								</tr>
 							</thead>

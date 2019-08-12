@@ -56,7 +56,7 @@ class sunshutter extends eqLogic {
           }
         }
       } else {
-        if($sunshutter->getConfiguration('shutter::nobackhand',0) != 1){
+        if($sunshutter->getConfiguration('shutter::nobackhand',0) != 0){
           $lastPositionOrder = $sunshutter->getCache('lastPositionOrder',null);
           $currentPosition = $sunshutter->getCurrentPosition();
           if($currentPosition !== null  && $lastPositionOrder !== null){
@@ -467,7 +467,7 @@ public function executeAction($_force = false){
         log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, handling desactivated');
         return;
       }
-    } else {
+    } else{
       log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, handling desactivated');
       return;
     }
