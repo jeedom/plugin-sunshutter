@@ -1,4 +1,4 @@
 # 12/08/2019
 
-- Correction de bugs
-- Mise à jour de la doc
+- Corrección de errores
+- Actualización de la documentación
