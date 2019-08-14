@@ -38,9 +38,9 @@ class sunshutter extends eqLogic {
     foreach (eqLogic::byType('sunshutter', true) as $sunshutter) {
       $forcedByDelay = 0;
       $stateHandlingCmd = $sunshutter->getCmd(null,'stateHandling');
-      if ($stateHandlingCmd->execCmd() == false) {
-        if (!$sunshutter->getCache('manualSuspend')){
-          if ($sunshutter->getConfiguration('shutter::nobackhand',0) == 2){
+      if($sunshutter->getConfiguration('shutter::nobackhand',0) == 2){
+        if ($stateHandlingCmd->execCmd() == false) {
+          if (!$sunshutter->getCache('manualSuspend')){
             $delay = $sunshutter->getConfiguration('shutter::customDelay',0);
             $since = $sunshutter->getCache('beginSuspend');
             $deltadelay = abs($since - time())/60;
@@ -54,9 +54,7 @@ class sunshutter extends eqLogic {
               $forcedByDelay = 1;
             }
           }
-        }
-      } else {
-        if($sunshutter->getConfiguration('shutter::nobackhand',0) != 1){
+        } else {
           $lastPositionOrder = $sunshutter->getCache('lastPositionOrder',null);
           $currentPosition = $sunshutter->getCurrentPosition();
           if($currentPosition !== null  && $lastPositionOrder !== null){
