@@ -44,7 +44,7 @@ Vous retrouvez dans le premier onglet toute la configuration de votre équipemen
 
 - Condition pour action : si cette condition n'est pas vrai le plugin ne modifiera pas la position du volet
 - Un changement de mode annule les suspensions en cours : si coché alors un changement de mode du volet repasse celui-ci en gestion automatique
-- Les actions immédiates ignorent les suspensions en cours : si coché alors les actions immediate s'executent meme si celui-ci est suspendu
+- Les actions immédiate sont systématique et prioritaire : si coché alors les actions immediate s'executent meme si celui-ci est suspendu et sans tenir compte de l'ordre des conditions
 
 
 Le tableau des conditions vous permet de spécifier des conditions de positionnement spécifique, qui prenne la main sur le tableau de position du volets :

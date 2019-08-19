@@ -35,12 +35,12 @@ class sunshutter extends eqLogic {
   }
   
   public static function cron() {
-    $forcedByDelay = 0;
     foreach (eqLogic::byType('sunshutter', true) as $sunshutter) {
+      $forcedByDelay = 0;
       $stateHandlingCmd = $sunshutter->getCmd(null,'stateHandling');
-      if ($stateHandlingCmd->execCmd() == false) {
-        if (!$sunshutter->getCache('manualSuspend')){
-          if ($sunshutter->getConfiguration('shutter::nobackhand',0) == 2){
+      if($sunshutter->getConfiguration('shutter::nobackhand',0) == 2){
+        if ($stateHandlingCmd->execCmd() == false) {
+          if (!$sunshutter->getCache('manualSuspend')){
             $delay = $sunshutter->getConfiguration('shutter::customDelay',0);
             $since = $sunshutter->getCache('beginSuspend');
             $deltadelay = abs($since - time())/60;
@@ -54,9 +54,7 @@ class sunshutter extends eqLogic {
               $forcedByDelay = 1;
             }
           }
-        }
-      } else {
-        if($sunshutter->getConfiguration('shutter::nobackhand',0) != 0){
+        } else {
           $lastPositionOrder = $sunshutter->getCache('lastPositionOrder',null);
           $currentPosition = $sunshutter->getCurrentPosition();
           if($currentPosition !== null  && $lastPositionOrder !== null){
@@ -81,10 +79,8 @@ class sunshutter extends eqLogic {
       if ($cron != '') {
         try {
           $c = new Cron\CronExpression(checkAndFixCron($cron), new Cron\FieldFactory);
-          if ($c->isDue()) {
-            if ($forcedByDelay == 0){
-              $sunshutter->executeAction();
-            }
+          if ($c->isDue() && $forcedByDelay == 0) {
+            $sunshutter->executeAction();
           }
         } catch (Exception $exc) {
           log::add('sunshutter', 'error', __('Expression cron non valide pour ', __FILE__) . $sunshutter->getHumanName() . ' : ' . $cron);
