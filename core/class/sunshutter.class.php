@@ -441,7 +441,7 @@ public function calculPosition(){
   }
   if ($this->getConfiguration('shutter::defaultAction','close') == 'none'){
     log::add('sunshutter','debug',$this->getHumanName().' - Do default none');
-    $default = $this->getCache('lastPositionOrder',null);
+    return null;
   }
   return $default;
 }
