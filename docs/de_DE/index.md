@@ -52,7 +52,6 @@ Le tableau des conditions vous permet de spécifier des conditions de positionne
 - Mode : la condition ne marche que si le volet est dans ce mode (vous pouvez en mettre plusieurs séparé par des ,). Si ce champs n'est pas remplis alors la condition sera testée quelque soit le mode
 - Action immediate : agit immediatement dès que la condition est vrai (n'attend donc pas le cron de verification)
 - Suspendre : si la condition est vrai elle suspend la gestion automatique du volet
-- Suspendre : si la condition est vrai alors le systeme de gestion de volet passe en suspendu
 - Condition : votre condition
 - Commentaire : champs libre pour mettre des commentaires
 
