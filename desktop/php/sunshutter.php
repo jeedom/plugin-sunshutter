@@ -241,13 +241,13 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<div class="form-group">
 								<label class="col-sm-3 control-label">{{Un changement de mode annule les suspensions en cours}}</label>
 								<div class="col-sm-9">
-									<input type="checkbox" class="form-control eqLogicAttr" data-l1key="configuration" data-l2key="condition::allowIgnoreSuspend"/>
+									<input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="condition::allowIgnoreSuspend"/>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">{{Les actions immédiate sont systématique et prioritaire}}</label>
 								<div class="col-sm-9">
-									<input type="checkbox" class="form-control eqLogicAttr" data-l1key="configuration" data-l2key="condition::systematic"/>
+									<input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="condition::systematic"/>
 								</div>
 							</div>
 							<legend><i class="icon jeedom-volet-ferme"></i> {{Conditions}}

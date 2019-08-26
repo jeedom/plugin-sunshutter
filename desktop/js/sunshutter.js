@@ -68,10 +68,10 @@ function addConditions(_condition){
   tr += '<input class="form-control conditionsAttr" data-l1key="conditions::mode" />';
   tr += '</td>';
   tr += '<td>';
-  tr += '<input type="checkbox" class="form-control conditionsAttr" data-l1key="conditions::immediate" />';
+  tr += '<input type="checkbox" class="conditionsAttr" data-l1key="conditions::immediate" />';
   tr += '</td>';
   tr += '<td>';
-  tr += '<input type="checkbox" class="form-control conditionsAttr" data-l1key="conditions::suspend" />';
+  tr += '<input type="checkbox" class="conditionsAttr" data-l1key="conditions::suspend" />';
   tr += '</td>';
   tr += '<td>';
   tr += '<div class="input-group"><textarea class="conditionsAttr form-control" data-concat="1" data-l1key="conditions::condition" style="height:75px"></textarea><span class="input-group-addon hasBtn roundedRight"><a class="btn btn-default listCmdInfoConditions roundedRight" ><i class="fas fa-list-alt"></i></a></span></div>';
