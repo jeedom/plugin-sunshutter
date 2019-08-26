@@ -1,5 +1,6 @@
 - Correction de bugs
 - Mise à jour de la doc
+- Correction de l'affichage des checkbox
 
 # 12/08/2019
 
