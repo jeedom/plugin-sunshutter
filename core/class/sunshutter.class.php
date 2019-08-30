@@ -400,6 +400,9 @@ public function systematicAction($_cmdId){
               } else {
                 log::add('sunshutter','debug',$this->getHumanName().' - Do action ' . $position);
                 $cmd->execCmd(array('slider' => $position));
+                $this->setCache('lastPositionOrder',$position);
+                $this->setCache('lastPositionOrderTime',strtotime('now'));
+                $this->checkAndUpdateCmd('lastposition', $position);
               }
             }
             break;
