@@ -121,6 +121,7 @@ class sunshutter extends eqLogic {
       $cmdExecute = $sunshutter->getCmd(null, 'executeAction');
       $openvalue = $sunshutter->getConfiguration('shutter::openPosition',0);
       $closevalue = $sunshutter->getConfiguration('shutter::closePosition',0);
+      $refreshId = str_replace('#','',$sunshutter->getConfiguration('shutter::refreshPosition',0));
       $currentPosition = null;
       $cmdstatehtml = '';
       $cmdhtml = '';
@@ -161,6 +162,7 @@ class sunshutter extends eqLogic {
       'state' => $currentPosition,
       'openvalue' => $openvalue,
       'closevalue' => $closevalue,
+      'refreshId' => $refreshId,
       'positionId' => $cmdPosition,
       'cmdhtml' => $cmdhtml,
       'HandlingLabel' => $handlingLabel,
@@ -169,6 +171,7 @@ class sunshutter extends eqLogic {
       'azimuth' => $cmdAzimuth->execCmd(),
       'link' => $sunshutter->getLinkToConfiguration(),
       'mode' => $currentMode,
+      'suspendTime' => date('d-m H:i:s',$sunshutter->getCache('beginSuspend',time())),
     );
     $return['shutters'][]=$datas;
     $return['global']=array('moyPos' => ($numberShutters == 0) ? 'N/A' : round($sumposition/$numberShutters),

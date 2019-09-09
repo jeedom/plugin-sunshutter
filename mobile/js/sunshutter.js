@@ -48,16 +48,20 @@ function getSunshutterState(){
 				mode = shutter['mode'];
 			}
 			if (shutter['HandlingLabel'] == 'Auto'){
-				handling = '<i class="fas fa-magic"></i><br/>';
+				handling = '<i class="fas fa-magic"></i>'+shutter['suspendTime']+'<br/>';
 			} else if (shutter['HandlingLabel'] == 'Manuel'){
-				handling = '<i class="fas fa-user"></i><br/>';
+				handling = '<i class="fas fa-user"></i>'+shutter['suspendTime']+'<br/>';
 			}
 			table += '<tr><td>' +  shutter['name'] +' <br/> '+ shutter['position'] +'% <br/>' + handling +mode+'</td>';
 			table += '<td>' + '<a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['resumeId']+'"><i class="fas fa-play"></i></a>';
 			table += ' <a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['pauseId']+'"><i class="fas fa-pause"></i></a>';
-			table += ' <a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['executeId']+'"><i class="fas fa-crosshairs"></i></a>';
 			table += ' <a class="bt_positionshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-value="'+shutter['openvalue']+'" data-cmd="'+shutter['positionId']+'"><i class="fas fa-arrow-up"></i></a>';
-			table += ' <a class="bt_positionshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-value="'+shutter['closevalue']+'" data-cmd="'+shutter['positionId']+'"><i class="fas fa-arrow-down"></i></a></td>';
+			table += ' <a class="bt_positionshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-value="'+shutter['closevalue']+'" data-cmd="'+shutter['positionId']+'"><i class="fas fa-arrow-down"></i></a>';
+			table += ' <a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['executeId']+'"><i class="fas fa-crosshairs"></i></a>';
+			if (shutter['refreshId'] != 0){
+				table += ' <a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['refreshId']+'"><i class="fas fa-sync"></i></a>';
+			}
+			table += '</td>';
 			table += '<td>' + shutter['cmdhtml'] + '</td>';
 			table += '</tr>';
 		}

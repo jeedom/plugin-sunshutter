@@ -39,20 +39,24 @@ function getSunshutterState(){
 				var shutter = data.result.shutters[sunshutter];
 				handling ='Aucune';
 				if (shutter['HandlingLabel'] == 'Auto'){
-					handling = '<i class="fas fa-magic"></i>';
+					handling = '<i class="fas fa-magic"></i> '+shutter['suspendTime'];
 				} else if (shutter['HandlingLabel'] == 'Manuel'){
-					handling = '<i class="fas fa-user"></i>';
+					handling = '<i class="fas fa-user"></i> '+shutter['suspendTime'];
 				}
-				table += '<tr><td><a href="' + shutter['link'] + '">' +  shutter['name'] +'</a></td>';
+				table += '<tr><td><a href="' + shutter['link'] + '">' +  shutter['name']+'</a></td>';
 				table += '<td><center><span class="label label-primary">'+ shutter['azimuth'] + '° - ' + shutter['elevation'] + '°</span></center></td>';
 				table += '<td><center><span class="label label-primary">'+ shutter['mode'] + '</span></center></td>';
 				table += '<td><center><span class="label label-primary">'+ shutter['position'] + '%</span></center></td>';
 				table += '<td><center><span class="label label-primary">'+ handling + '</span></center></td>';
 				table += '<td><center>' + '<a class="bt_sunshutterAction btn btn-default" data-cmd="'+shutter['resumeId']+'"><i class="fas fa-play"></i></a>';
 				table += ' <a class="bt_sunshutterAction btn btn-default" data-cmd="'+shutter['pauseId']+'"><i class="fas fa-pause"></i></a>';
-				table += ' <a class="bt_sunshutterAction btn btn-default" data-cmd="'+shutter['executeId']+'"><i class="fas fa-crosshairs"></i></a>';
 				table += ' <a class="bt_positionshutterAction btn btn-default" data-value="'+shutter['openvalue']+'" data-cmd="'+shutter['positionId']+'"><i class="fas fa-arrow-up"></i></a>';
-				table += ' <a class="bt_positionshutterAction btn btn-default" data-value="'+shutter['closevalue']+'" data-cmd="'+shutter['positionId']+'"><i class="fas fa-arrow-down"></i></a>' +'</center></td>';
+				table += ' <a class="bt_positionshutterAction btn btn-default" data-value="'+shutter['closevalue']+'" data-cmd="'+shutter['positionId']+'"><i class="fas fa-arrow-down"></i></a>';
+				table += ' <a class="bt_sunshutterAction btn btn-default" data-cmd="'+shutter['executeId']+'"><i class="fas fa-crosshairs"></i></a>';
+				if (shutter['refreshId'] != 0){
+					table += ' <a class="bt_sunshutterAction btn btn-default" data-cmd="'+shutter['refreshId']+'"><i class="fas fa-sync"></i></a>';
+				}
+				table += '</center></td>';
 				table += '<td><center>' + shutter['cmdhtml'] + '</center></td>';
 				table += '</tr>';
 			}
