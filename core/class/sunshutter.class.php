@@ -319,6 +319,8 @@ public function postSave() {
     }
     if ($nblistener > 0) {
       $listener->save();
+    } else {
+      $listener->remove();
     }
   } else {
     $listener = listener::byClassAndFunction('sunshutter', 'immediateAction', array('sunshutter_id' => intval($this->getId())));
