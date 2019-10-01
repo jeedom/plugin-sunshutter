@@ -62,7 +62,7 @@ class sunshutter extends eqLogic {
             $delta = abs($currentPosition-$lastPositionOrder);
             $ecart = ($delta/$amplitude)*100;
             log::add('sunshutter','debug',$sunshutter->getHumanName().' - [cron] - Gap since last order : ' . $ecart);
-            if ($ecart>4){
+            if ($ecart>4 && ($sunshutter->getConfiguration('shutter::moveDuration',0) == 0 || (strtotime('now') - $sunshutter->getCache('lastPositionOrderTime',0)) > $sunshutter->getConfiguration('shutter::moveDuration'))){
               $sunshutter->checkAndUpdateCmd('stateHandling', false);
               $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
               $sunshutter->setCache('beginSuspend',time());
