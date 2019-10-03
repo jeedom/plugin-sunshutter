@@ -98,7 +98,10 @@ class sunshutter extends eqLogic {
       return;
     }
     if($sunshutter->getIsEnable() == 0){
-      continue;
+      return;
+    }
+    if ($sunshutter->getCache('manualSuspend')){
+      return;
     }
     log::add('sunshutter', 'debug', $sunshutter->getHumanName().' - Immediate Trigger from ' . print_r($_options,true));
     if ($sunshutter->getConfiguration('condition::systematic',0) == 1) {
