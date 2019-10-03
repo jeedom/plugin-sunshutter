@@ -36,6 +36,9 @@ class sunshutter extends eqLogic {
   
   public static function cron() {
     foreach (eqLogic::byType('sunshutter', true) as $sunshutter) {
+      if($sunshutter->getIsEnable() == 0){
+        continue;
+      }
       $forcedByDelay = 0;
       $stateHandlingCmd = $sunshutter->getCmd(null,'stateHandling');
       if($sunshutter->getConfiguration('shutter::nobackhand',0) == 2){
@@ -93,6 +96,9 @@ class sunshutter extends eqLogic {
     $sunshutter = eqLogic::byId($_options['sunshutter_id']);
     if (!is_object($sunshutter)) {
       return;
+    }
+    if($sunshutter->getIsEnable() == 0){
+      continue;
     }
     log::add('sunshutter', 'debug', $sunshutter->getHumanName().' - Immediate Trigger from ' . print_r($_options,true));
     if ($sunshutter->getConfiguration('condition::systematic',0) == 1) {
