@@ -36,6 +36,9 @@ class sunshutter extends eqLogic {
   
   public static function cron() {
     foreach (eqLogic::byType('sunshutter', true) as $sunshutter) {
+      if($sunshutter->getIsEnable() == 0){
+        continue;
+      }
       $forcedByDelay = 0;
       $stateHandlingCmd = $sunshutter->getCmd(null,'stateHandling');
       if($sunshutter->getConfiguration('shutter::nobackhand',0) == 2){
@@ -62,7 +65,7 @@ class sunshutter extends eqLogic {
             $delta = abs($currentPosition-$lastPositionOrder);
             $ecart = ($delta/$amplitude)*100;
             log::add('sunshutter','debug',$sunshutter->getHumanName().' - [cron] - Gap since last order : ' . $ecart);
-            if ($ecart>4){
+            if ($ecart>4 && ($sunshutter->getConfiguration('shutter::moveDuration',0) == 0 || (strtotime('now') - $sunshutter->getCache('lastPositionOrderTime',0)) > $sunshutter->getConfiguration('shutter::moveDuration'))){
               $sunshutter->checkAndUpdateCmd('stateHandling', false);
               $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
               $sunshutter->setCache('beginSuspend',time());
@@ -94,6 +97,12 @@ class sunshutter extends eqLogic {
     if (!is_object($sunshutter)) {
       return;
     }
+    if($sunshutter->getIsEnable() == 0){
+      return;
+    }
+    if ($sunshutter->getCache('manualSuspend')){
+      return;
+    }
     log::add('sunshutter', 'debug', $sunshutter->getHumanName().' - Immediate Trigger from ' . print_r($_options,true));
     if ($sunshutter->getConfiguration('condition::systematic',0) == 1) {
       log::add('sunshutter', 'debug', $sunshutter->getHumanName().' - Immediate must be systematic');
@@ -121,6 +130,7 @@ class sunshutter extends eqLogic {
       $cmdExecute = $sunshutter->getCmd(null, 'executeAction');
       $openvalue = $sunshutter->getConfiguration('shutter::openPosition',0);
       $closevalue = $sunshutter->getConfiguration('shutter::closePosition',0);
+      $refreshId = str_replace('#','',$sunshutter->getConfiguration('shutter::refreshPosition',0));
       $currentPosition = null;
       $cmdstatehtml = '';
       $cmdhtml = '';
@@ -161,6 +171,7 @@ class sunshutter extends eqLogic {
       'state' => $currentPosition,
       'openvalue' => $openvalue,
       'closevalue' => $closevalue,
+      'refreshId' => $refreshId,
       'positionId' => $cmdPosition,
       'cmdhtml' => $cmdhtml,
       'HandlingLabel' => $handlingLabel,
@@ -169,6 +180,7 @@ class sunshutter extends eqLogic {
       'azimuth' => $cmdAzimuth->execCmd(),
       'link' => $sunshutter->getLinkToConfiguration(),
       'mode' => $currentMode,
+      'suspendTime' => date('d-m H:i:s',$sunshutter->getCache('beginSuspend',time())),
     );
     $return['shutters'][]=$datas;
     $return['global']=array('moyPos' => ($numberShutters == 0) ? 'N/A' : round($sumposition/$numberShutters),
