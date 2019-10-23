@@ -30,7 +30,11 @@ class sunshutter extends eqLogic {
   
   public static function cron5() {
     foreach (eqLogic::byType('sunshutter') as $sunshutter) {
-      $sunshutter->updateData();
+      if(date('Gi') == 0){
+        $sunshutter->save();
+      }else{
+        $sunshutter->updateData();
+      }
     }
   }
   
