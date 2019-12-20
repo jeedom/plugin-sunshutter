@@ -157,6 +157,10 @@ class sunshutter extends eqLogic {
       if (is_object($cmd)) {
         $cmdhtml = $cmd->toHtml($_type);
       }
+      $cmdMode = '';
+      foreach ($sunshutter->getCmd('action', 'mode','null',true) as $cmd) {
+        $cmdMode .= $cmd->toHtml($_type);
+      }
       $handling =  $cmdHandling->execCmd();
       $handlingLabel = $cmdHandlingLabel->execCmd();
       if ($handling == false){
@@ -178,6 +182,7 @@ class sunshutter extends eqLogic {
       'refreshId' => $refreshId,
       'positionId' => $cmdPosition,
       'cmdhtml' => $cmdhtml,
+      'cmdmode' => $cmdMode,
       'HandlingLabel' => $handlingLabel,
       'cmdstatehtml' => $cmdstatehtml,
       'elevation' => $cmdElevation->execCmd(),
