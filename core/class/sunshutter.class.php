@@ -201,6 +201,12 @@ class sunshutter extends eqLogic {
 
 /*     * *********************Méthodes d'instance************************* */
 
+public function preInsert(){
+  $this->setConfiguration('lat',config::byKey('info::latitude'));
+  $this->setConfiguration('long',config::byKey('info::longitude'));
+  $this->setConfiguration('alt',config::byKey('info::altitude'));
+}
+
 public function postSave() {
   $cmd = $this->getCmd(null, 'sun_elevation');
   if (!is_object($cmd)) {
