@@ -157,6 +157,10 @@ class sunshutter extends eqLogic {
       if (is_object($cmd)) {
         $cmdhtml = $cmd->toHtml($_type);
       }
+      $cmdMode = '';
+      foreach ($sunshutter->getCmd('action', 'mode','null',true) as $cmd) {
+        $cmdMode .= $cmd->toHtml($_type);
+      }
       $handling =  $cmdHandling->execCmd();
       $handlingLabel = $cmdHandlingLabel->execCmd();
       if ($handling == false){
@@ -178,6 +182,7 @@ class sunshutter extends eqLogic {
       'refreshId' => $refreshId,
       'positionId' => $cmdPosition,
       'cmdhtml' => $cmdhtml,
+      'cmdmode' => $cmdMode,
       'HandlingLabel' => $handlingLabel,
       'cmdstatehtml' => $cmdstatehtml,
       'elevation' => $cmdElevation->execCmd(),
@@ -195,6 +200,12 @@ class sunshutter extends eqLogic {
 }
 
 /*     * *********************Méthodes d'instance************************* */
+
+public function preInsert(){
+  $this->setConfiguration('lat',config::byKey('info::latitude'));
+  $this->setConfiguration('long',config::byKey('info::longitude'));
+  $this->setConfiguration('alt',config::byKey('info::altitude'));
+}
 
 public function postSave() {
   $cmd = $this->getCmd(null, 'sun_elevation');
