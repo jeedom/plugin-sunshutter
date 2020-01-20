@@ -15,6 +15,14 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
+$('.eqLogicAttr[data-l1key=configuration][data-l2key=useJeedomLocalisation]').off('change').on('change',function(){
+  if($(this).value() == 1){
+    $('.customLocalisation').hide()
+  }else{
+    $('.customLocalisation').show()
+  }
+})
+
 $('#bt_healthsunshutter').on('click', function () {
   $('#md_modal').dialog({title: "{{Santé Gestion Volet}}"});
   $('#md_modal').load('index.php?v=d&plugin=sunshutter&modal=health').dialog('open');

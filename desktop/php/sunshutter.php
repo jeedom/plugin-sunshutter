@@ -155,18 +155,24 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						</div>
 						<legend><i class="fas fa-globe"></i> {{Coordonnées}}</legend>
 						<div class="form-group">
+							<label class="col-sm-3 control-label">{{Utilisé les coordonnées jeedom}}</label>
+							<div class="col-sm-2">
+								<input type="checkbox" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="useJeedomLocalisation"/>
+							</div>
+						</div>
+						<div class="form-group customLocalisation">
 							<label class="col-sm-3 control-label">{{Latitude}}</label>
 							<div class="col-sm-2">
 								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="lat"/>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group customLocalisation">
 							<label class="col-sm-3 control-label">{{Longitude}}</label>
 							<div class="col-sm-2">
 								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="long"/>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group customLocalisation">
 							<label class="col-sm-3 control-label">{{Altitude}}</label>
 							<div class="col-sm-2">
 								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="alt"/>
