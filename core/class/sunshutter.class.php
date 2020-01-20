@@ -157,10 +157,6 @@ class sunshutter extends eqLogic {
       if (is_object($cmd)) {
         $cmdhtml = $cmd->toHtml($_type);
       }
-      $cmdMode = '';
-      foreach ($sunshutter->getCmd('action', 'mode','null',true) as $cmd) {
-        $cmdMode .= $cmd->toHtml($_type);
-      }
       $handling =  $cmdHandling->execCmd();
       $handlingLabel = $cmdHandlingLabel->execCmd();
       if ($handling == false){
@@ -182,7 +178,6 @@ class sunshutter extends eqLogic {
       'refreshId' => $refreshId,
       'positionId' => $cmdPosition,
       'cmdhtml' => $cmdhtml,
-      'cmdmode' => $cmdMode,
       'HandlingLabel' => $handlingLabel,
       'cmdstatehtml' => $cmdstatehtml,
       'elevation' => $cmdElevation->execCmd(),
@@ -200,12 +195,6 @@ class sunshutter extends eqLogic {
 }
 
 /*     * *********************Méthodes d'instance************************* */
-
-public function preInsert(){
-  $this->setConfiguration('lat',config::byKey('info::latitude'));
-  $this->setConfiguration('long',config::byKey('info::longitude'));
-  $this->setConfiguration('alt',config::byKey('info::altitude'));
-}
 
 public function postSave() {
   $cmd = $this->getCmd(null, 'sun_elevation');
@@ -355,7 +344,11 @@ public function postSave() {
 
 public function updateData(){
   $SD = new SolarData\SolarData();
-  $SD->setObserverPosition($this->getConfiguration('lat'),$this->getConfiguration('long'),$this->getConfiguration('alt'));
+  if($this->getConfiguration('useJeedomLocalisation') == 1){
+    $SD->setObserverPosition(config::byKey('info::latitude'),config::byKey('info::longitude'),config::byKey('info::altitude'));
+  }else{
+    $SD->setObserverPosition($this->getConfiguration('lat'),$this->getConfiguration('long'),$this->getConfiguration('alt'));
+  }
   $SD->setObserverDate(date('Y'), date('n'), date('j'));
   $SD->setObserverTime(date('G'), date('i'),date('s'));
   $SD->setDeltaTime(67);
