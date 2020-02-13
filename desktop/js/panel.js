@@ -56,7 +56,7 @@ function getSunshutterState(){
 				if (shutter['refreshId'] != 0){
 					table += ' <a class="bt_sunshutterAction btn btn-default" data-cmd="'+shutter['refreshId']+'"><i class="fas fa-sync"></i></a>';
 				}
-				if(shutter['cmdmode'] != ''){
+				if(shutter['cmdmode']){
 					table += '<br/>'+shutter['cmdmode']
 				}
 				table += '</center></td>';
