@@ -166,6 +166,10 @@ class sunshutter extends eqLogic {
           $numbersupendedManual += 1;
         }
       }
+      $cmdMode = '';
+      foreach ($sunshutter->getCmd('action', 'mode',null,true) as $cmd) {
+        $cmdMode .= $cmd->toHtml($_type);
+      }
       $datas = array('name' => $name,
       'position' => $sunshutter->getCache('lastPositionOrder',null),
       'handling' => $handling,
@@ -184,12 +188,11 @@ class sunshutter extends eqLogic {
       'azimuth' => $cmdAzimuth->execCmd(),
       'link' => $sunshutter->getLinkToConfiguration(),
       'mode' => $currentMode,
+      'cmdmode' => $cmdMode,
       'suspendTime' => date('d-m H:i:s',$sunshutter->getCache('beginSuspend',time())),
     );
     $return['shutters'][]=$datas;
-    $return['global']=array('moyPos' => ($numberShutters == 0) ? 'N/A' : round($sumposition/$numberShutters),
-    'auto' => $numbersupendedAuto,
-    'manual' => $numbersupendedManual,);
+    $return['global']=array('moyPos' => ($numberShutters == 0) ? 'N/A' : round($sumposition/$numberShutters),'auto' => $numbersupendedAuto,'manual' => $numbersupendedManual,);
   }
   return $return;
 }

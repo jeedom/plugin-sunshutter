@@ -53,16 +53,16 @@ function getSunshutterState(){
 					handling = '<i class="fas fa-user"></i>'+shutter['suspendTime']+'<br/>';
 				}
 				table += '<tr><td><center>' +  shutter['name'] +' <br/> '+ shutter['position'] +'% <br/>' + handling +mode+'</center></td>';
-				table += '<td><center>' + '<a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['resumeId']+'"><i class="fas fa-play"></i></a>';
-				table += ' <a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['pauseId']+'"><i class="fas fa-pause"></i></a>';
-				table += ' <a class="bt_positionshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-value="'+shutter['openvalue']+'" data-cmd="'+shutter['positionId']+'"><i class="fas fa-arrow-up"></i></a>';
-				table += ' <a class="bt_positionshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-value="'+shutter['closevalue']+'" data-cmd="'+shutter['positionId']+'"><i class="fas fa-arrow-down"></i></a>';
-				table += ' <a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['executeId']+'"><i class="fas fa-crosshairs"></i></a>';
+				table += '<td><center>' + '<a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['resumeId']+'" style="margin-top:2px;"><i class="fas fa-play"></i></a>';
+				table += ' <a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['pauseId']+'" style="margin-top:2px;"><i class="fas fa-pause"></i></a>';
+				table += ' <a class="bt_positionshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-value="'+shutter['openvalue']+'" data-cmd="'+shutter['positionId']+'" style="margin-top:2px;"><i class="fas fa-arrow-up"></i></a>';
+				table += ' <a class="bt_positionshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-value="'+shutter['closevalue']+'" data-cmd="'+shutter['positionId']+'" style="margin-top:2px;"><i class="fas fa-arrow-down"></i></a>';
+				table += ' <a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['executeId']+'" style="margin-top:2px;"><i class="fas fa-crosshairs"></i></a>';
 				if (shutter['refreshId'] != 0){
-					table += ' <a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['refreshId']+'"><i class="fas fa-sync"></i></a>';
+					table += ' <a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['refreshId']+'" style="margin-top:2px;"><i class="fas fa-sync"></i></a>';
 				}
 				if(shutter['cmdmode']){
-					table += '<br/>'+shutter['cmdmode']
+					table += '<hr/>'+shutter['cmdmode']
 				}
 				table += '</center></td>';
 				table += '<td>' + shutter['cmdhtml'] + '</td>';
