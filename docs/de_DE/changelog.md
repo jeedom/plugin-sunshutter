@@ -1,3 +1,5 @@
+- Correction de bugs sur les panels
+
 # 09/10/2019
 
 - Fehlerbehebungen
