@@ -1,20 +1,20 @@
-- Correction de bugs sur les panels
+- 
 
-# 09/10/2019
+# 
 
-- Correction de bugs
+- Bugfix
 
-# 30/08/2019
+# 08/30/2019
 
-- Correction de bugs
+- Bugfix
 
-# 26/08/2019
+# 08/26/2019
 
-- Correction de bugs
-- Mise à jour de la doc
-- Correction de l'affichage des checkbox
+- Bugfix
+- Updating the doc
+- 
 
-# 12/08/2019
+# 
 
-- Correction de bugs
-- Mise à jour de la doc
+- Bugfix
+- Updating the doc

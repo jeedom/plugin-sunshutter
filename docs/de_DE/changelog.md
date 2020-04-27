@@ -1,20 +1,20 @@
-- Correction de bugs sur les panels
+- 
 
-# 09/10/2019
-
-- Fehlerbehebungen
-
-# 30/08/2019
+# 
 
 - Fehlerbehebungen
 
-# 26/08/2019
+# 30.08.2019
 
 - Fehlerbehebungen
-- Aktualisierung des Dokuments
-- Correction de l'affichage des checkbox
 
-# 12/08/2019
+# 26.08.2019
 
 - Fehlerbehebungen
-- Aktualisierung des Dokuments
+- Aktualisieren des Dokuments
+- 
+
+# 
+
+- Fehlerbehebungen
+- Aktualisieren des Dokuments

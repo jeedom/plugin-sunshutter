@@ -1,5 +1,10 @@
 {
-    "desktop\/modal\/health.php": {
+    "plugins\/sunshutter\/mobile\/html\/sunshutter.html": {
+        "Nom": "Nom",
+        "Gestion": "Gestion",
+        "Manuel": "Manuel"
+    },
+    "plugins\/sunshutter\/desktop\/modal\/health.php": {
         "Volet": "Volet",
         "Cron": "Cron",
         "Reprise": "Reprise",
@@ -17,17 +22,7 @@
         "Rien": "Rien",
         "Fermer": "Fermer"
     },
-    "desktop\/js\/sunshutter.js": {
-        "Santé Gestion Volet": "Santé Gestion Volet",
-        "à": "à",
-        "Vous n'avez encore aucune programmation. Veuillez cliquer <a href='index.php?v=d&m=calendar&p=calendar'>ici<\/a> pour programmer votre volet à l'aide du plugin agenda": "Vous n'avez encore aucune programmation. Veuillez cliquer <a href='index.php?v=d&m=calendar&p=calendar'>ici<\/a> pour programmer votre volet à l'aide du plugin agenda",
-        "Liste des programmations du plugin Agenda liées au Volet": "Liste des programmations du plugin Agenda liées au Volet",
-        "Nom": "Nom",
-        "Afficher": "Afficher",
-        "Historiser": "Historiser",
-        "Tester": "Tester"
-    },
-    "desktop\/php\/panel.php": {
+    "plugins\/sunshutter\/desktop\/php\/panel.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
         "Position Moyenne": "Position Moyenne",
         "Suspendu Manuel": "Suspendu Manuel",
@@ -40,7 +35,7 @@
         "Gestion": "Gestion",
         "Manuel": "Manuel"
     },
-    "desktop\/php\/sunshutter.php": {
+    "plugins\/sunshutter\/desktop\/php\/sunshutter.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
         "Gestion": "Gestion",
         "Ajouter": "Ajouter",
@@ -110,12 +105,22 @@
         "Azimuth": "Azimuth",
         "Elevation": "Elevation"
     },
-    "core\/ajax\/sunshutter.ajax.php": {
+    "plugins\/sunshutter\/desktop\/js\/sunshutter.js": {
+        "Santé Gestion Volet": "Santé Gestion Volet",
+        "à": "à",
+        "Vous n'avez encore aucune programmation. Veuillez cliquer <a href='index.php?v=d&m=calendar&p=calendar'>ici<\/a> pour programmer votre volet à l'aide du plugin agenda": "Vous n'avez encore aucune programmation. Veuillez cliquer <a href='index.php?v=d&m=calendar&p=calendar'>ici<\/a> pour programmer votre volet à l'aide du plugin agenda",
+        "Liste des programmations du plugin Agenda liées au Volet": "Liste des programmations du plugin Agenda liées au Volet",
+        "Nom": "Nom",
+        "Afficher": "Afficher",
+        "Historiser": "Historiser",
+        "Tester": "Tester"
+    },
+    "plugins\/sunshutter\/core\/ajax\/sunshutter.ajax.php": {
         "401 - Accès non autorisé": "401 - Accès non autorisé",
         "Sunshutter non trouvé : ": "Sunshutter non trouvé : ",
         "Aucune methode correspondante à : ": "Aucune methode correspondante à : "
     },
-    "core\/class\/sunshutter.class.php": {
+    "plugins\/sunshutter\/core\/class\/sunshutter.class.php": {
         "Expression cron non valide pour ": "Expression cron non valide pour ",
         "Elévation soleil": "Elévation soleil",
         "Azimuth soleil": "Azimuth soleil",
@@ -127,10 +132,5 @@
         "Suspendre": "Suspendre",
         "Reprendre": "Reprendre",
         "Rafraichir": "Rafraichir"
-    },
-    "mobile\/html\/sunshutter.html": {
-        "Nom": "Nom",
-        "Gestion": "Gestion",
-        "Manuel": "Manuel"
     }
 }
