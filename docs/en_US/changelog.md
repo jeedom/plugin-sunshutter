@@ -1,6 +1,6 @@
-- 
+- Bug fixes on panels
 
-# 
+# 10/09/2019
 
 - Bugfix
 
@@ -12,9 +12,9 @@
 
 - Bugfix
 - Updating the doc
-- 
+- Fixed checkbox display
 
-# 
+# 08/12/2019
 
 - Bugfix
 - Updating the doc

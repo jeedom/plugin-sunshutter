@@ -1,6 +1,6 @@
-- 
+- Fehlerbehebungen an Panels
 
-# 
+# 10/09/2019
 
 - Fehlerbehebungen
 
@@ -12,9 +12,9 @@
 
 - Fehlerbehebungen
 - Aktualisieren des Dokuments
-- 
+- Checkbox-Anzeige behoben
 
-# 
+# 08/12/2019
 
 - Fehlerbehebungen
 - Aktualisieren des Dokuments
