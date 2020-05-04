@@ -16,7 +16,7 @@ The plugin will adjust the position of your shutters relative to sun positions (
 
 The configuration is broken down into several tabs.
 
-## Equipment
+## Equipement
 
 You will find in the first tab all the configuration of your equipment :
 
@@ -26,9 +26,9 @@ You will find in the first tab all the configuration of your equipment :
 - Visible : makes your equipment visible on the dashboard.
 
 
-## Setup
+## Configuration
 
-### Setup
+### Configuration
 
 - Verification : frequency of checking the conditions and position of the flaps
 - Regain control : prohibits the shutter management system from changing its position if it has been moved manually. Example the system closes the shutter, you open it it will no longer touch it until the "Resume management" command is triggered or if the recovery time has passed
@@ -55,7 +55,7 @@ The conditions table allows you to specify specific positioning conditions, whic
 - Condition : your condition
 - Comment : free fields for comments
 
-## Positioning
+## Positionnement
 
 - % opening : the% when the shutter is open
 - %closing : the% when the shutter is closed
@@ -73,11 +73,11 @@ This is where you will be able to manage the positioning of the shutter accordin
 >
 >Little tip the site [suncalc.org](https://www.suncalc.org) which allows, once your address entered, to see the position of the sun (and therefore the azimuth and elevation angles) according to the hours of the day (just drag the small sun at the top)
 
-## Schedule
+## Planning
 
 Here you can see the positioning plans of the shutter made in the Agenda planning
 
-## Commands
+## Commandes
 
 - Sun azimuth : current azimuth angle of the sun
 - Sun rise : current elevation angle of the sun

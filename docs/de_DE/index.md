@@ -1,4 +1,4 @@
-# Beschreibung
+# Description
 
 Mit diesem Plugin können Sie die Position Ihrer Fensterläden einfacher entsprechend der Sonnenposition verwalten.. Dieses Plugin ist komplett wolkenlos
 
@@ -16,7 +16,7 @@ Das Plugin passt die Position Ihrer Fensterläden relativ zu den Sonnenpositione
 
 Die Konfiguration ist in mehrere Registerkarten unterteilt.
 
-## Gerät
+## Equipement
 
 Auf der ersten Registerkarte finden Sie die gesamte Konfiguration Ihrer Geräte :
 
@@ -26,9 +26,9 @@ Auf der ersten Registerkarte finden Sie die gesamte Konfiguration Ihrer Geräte 
 - Sichtbar : macht Ihre Ausrüstung auf dem Armaturenbrett sichtbar.
 
 
-## Konfiguration
+## Configuration
 
-### Konfiguration
+### Configuration
 
 - Überprüfung : Häufigkeit der Überprüfung der Bedingungen und Position der Klappen
 - Gewinnen Sie die Kontrolle zurück : verhindert, dass das Verschlussmanagementsystem seine Position ändert, wenn es manuell bewegt wurde. Beispiel: Das System schließt den Verschluss. Wenn Sie ihn öffnen, wird er nicht mehr berührt, bis der Befehl "Verwaltung fortsetzen" ausgelöst wird oder wenn die Wiederherstellungszeit abgelaufen ist
@@ -40,7 +40,7 @@ Auf der ersten Registerkarte finden Sie die gesamte Konfiguration Ihrer Geräte 
 - Verschlussposition aktualisieren (optional) : Befehl zum Aktualisieren der Position des Verschlusses
 - Maximale Zeit für eine Reise : Zeit für eine vollständige Bewegung (von oben nach unten oder von unten nach oben) in Sekunden
 
-## Zustand
+## Condition
 
 - Handlungsbedingung : Wenn diese Bedingung nicht erfüllt ist, ändert das Plugin die Position des Verschlusses nicht
 - Der Moduswechsel bricht ausstehende Suspensionen ab : Wenn diese Option aktiviert ist, wird der Verschluss durch eine Änderung des Modus wieder automatisch verwaltet
@@ -55,7 +55,7 @@ In der Bedingungstabelle können Sie bestimmte Positionierungsbedingungen angebe
 - Zustand : Ihr Zustand
 - Kommentar : freie Felder für Kommentare
 
-## Positionierung
+## Positionnement
 
 - % Öffnung : die%, wenn der Verschluss geöffnet ist
 - % schließen : die%, wenn der Verschluss geschlossen ist
@@ -71,16 +71,16 @@ Hier können Sie die Positionierung des Verschlusses entsprechend der Sonnenposi
 
 >**ASTUCE**
 >
->Kleiner Tipp die Seite [suncalc.org](https://www.suncalc.org) Sobald Ihre Adresse eingegeben wurde, können Sie den Sonnenstand (und damit den Azimut- und Höheswinkel) entsprechend den Tagesstunden anzeigen (ziehen Sie einfach die kleine Sonne nach oben).
+>Kleiner Tipp die Seite [suncalc.org](https://www.suncalc.org) Sobald Ihre Adresse eingegeben wurde, können Sie den Sonnenstand (und damit den Azimut- und Elevationswinkel) entsprechend den Tagesstunden anzeigen (ziehen Sie einfach die kleine Sonne nach oben).
 
-## Zeitplan
+## Planning
 
 Hier sehen Sie die Positionierungspläne des Verschlusses, die in der Agenda-Planung erstellt wurden
 
-## Befehle
+## Commandes
 
 - Sonnenazimut : aktueller Azimutwinkel der Sonne
-- Sonnenaufgang : aktueller Höheswinkel der Sonne
+- Sonnenaufgang : aktueller Elevationswinkel der Sonne
 - Aktion ausführen : Erzwingt die Berechnung der Verschlussposition entsprechend dem Sonnenstand und den Bedingungen und wendet das Ergebnis unabhängig vom Verwaltungszustand (angehalten oder nicht) darauf an.
 - Letzte Position : Letzte vom Plugin vom Verschluss angeforderte Position
 - Managementstatus : Managementstatus (ausgesetzt oder nicht)
@@ -91,6 +91,6 @@ Hier sehen Sie die Positionierungspläne des Verschlusses, die in der Agenda-Pla
 
 Sie können "Modus" -Befehle hinzufügen. Der Befehlsname ist der Modusname.
 
-# Platte
+# Panel
 
 Das Plugin verfügt über ein Desktop- und ein mobiles Verwaltungsfeld, um es zu aktivieren. Gehen Sie einfach zu Plugins -> Plugin-Verwaltung, klicken Sie auf das Fensterverwaltungs-Plugin und aktivieren Sie ganz rechts unten die Kontrollkästchen, um das Feld anzuzeigen Desktop und Mobile

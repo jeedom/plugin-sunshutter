@@ -1,4 +1,4 @@
-# Descripción
+# Description
 
 Este complemento le permite administrar más fácilmente la posición de sus persianas de acuerdo con la posición del sol.. Este complemento no tiene nubes
 
@@ -16,7 +16,7 @@ El complemento ajustará la posición de sus persianas en relación con las posi
 
 La configuración se divide en varias pestañas..
 
-## Dispositivos
+## Equipement
 
 Encontrarás en la primera pestaña toda la configuración de tu equipo :
 
@@ -26,9 +26,9 @@ Encontrarás en la primera pestaña toda la configuración de tu equipo :
 - Visible : hace que su equipo sea visible en el tablero.
 
 
-## Configuración
+## Configuration
 
-### Configuración
+### Configuration
 
 - Verificación : frecuencia de verificación de las condiciones y posición de las aletas
 - Recuperar el control : prohíbe que el sistema de gestión del obturador cambie su posición si se ha movido manualmente. Por ejemplo, el sistema cierra el obturador, si lo abre, ya no lo tocará hasta que se active el comando "Reanudar administración" o si el tiempo de recuperación ha pasado
@@ -40,7 +40,7 @@ Encontrarás en la primera pestaña toda la configuración de tu equipo :
 - Actualizar la posición del obturador (opcional) : comando para actualizar la posición del obturador
 - Tiempo maximo para un viaje : tiempo para hacer un movimiento completo (de arriba hacia abajo o de abajo hacia arriba), en segundos
 
-## Condición
+## Condition
 
 - Condición para la acción. : Si esta condición no es cierta, el complemento no modificará la posición del obturador
 - El cambio de modo cancela las suspensiones pendientes : si está marcada, un cambio de modo del obturador lo devuelve a la gestión automática
@@ -55,7 +55,7 @@ La tabla de condiciones le permite especificar condiciones de posicionamiento es
 - Condición : su condicion
 - Comentario : campos libres para comentarios
 
-## Posicionamiento
+## Positionnement
 
 - % de apertura : el% cuando el obturador está abierto
 - % de cierre : el% cuando el obturador está cerrado
@@ -73,11 +73,11 @@ Aquí es donde podrá gestionar la posición del obturador de acuerdo con la pos
 >
 >Pequeño consejo del sitio [suncalc.org](https://www.suncalc.org) que permite, una vez que ingresó su dirección, ver la posición del sol (y, por lo tanto, los ángulos de acimut y elevación) de acuerdo con las horas del día (simplemente arrastre el pequeño sol en la parte superior)
 
-## Planificacion
+## Planning
 
 Aquí puede ver los planes de posicionamiento del obturador realizados en la planificación de la Agenda
 
-## Comandos
+## Commandes
 
 - Azimut del sol : ángulo azimutal actual del sol
 - Salida del sol : ángulo de elevación actual del sol

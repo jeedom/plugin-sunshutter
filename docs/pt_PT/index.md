@@ -1,4 +1,4 @@
-# Descrição
+# Description
 
 Este plugin permite que você gerencie mais facilmente a posição de suas persianas de acordo com a posição do sol.. Este plugin é completamente sem nuvens
 
@@ -16,7 +16,7 @@ O plug-in ajustará a posição das persianas em relação às posições do sol
 
 A configuração é dividida em várias guias.
 
-## Equipamento
+## Equipement
 
 Você encontrará na primeira aba toda a configuração do seu equipamento :
 
@@ -26,9 +26,9 @@ Você encontrará na primeira aba toda a configuração do seu equipamento :
 - Visivél : torna seu equipamento visível no painel.
 
 
-## Configuração
+## Configuration
 
-### Configuração
+### Configuration
 
 - Verificação : frequência de verificação das condições e posição dos flaps
 - Recuperar o controle : proíbe que o sistema de gerenciamento de obturador mude de posição se tiver sido movido manualmente. Exemplo: o sistema fecha o obturador, você o abre e não toca mais até que o comando "Reiniciar gerenciamento" seja acionado ou se o tempo de recuperação tiver passado
@@ -40,7 +40,7 @@ Você encontrará na primeira aba toda a configuração do seu equipamento :
 - Atualizar posição do obturador (opcional) : comando para atualizar a posição do obturador
 - Tempo máximo para uma viagem : tempo para fazer um movimento completo (de cima para baixo ou de baixo para cima), em segundos
 
-## Condição
+## Condition
 
 - Condição para ação : se essa condição não for verdadeira, o plug-in não modificará a posição do obturador
 - A alteração de modo cancela suspensões pendentes : se marcada, uma mudança de modo do obturador retorna ao gerenciamento automático
@@ -55,7 +55,7 @@ A tabela de condições permite especificar condições de posicionamento espec�
 - Condição : sua condição
 - COMMENTAIRE : campos livres para comentários
 
-## Posicionamento
+## Positionnement
 
 - % de abertura : a% quando o obturador está aberto
 - % de fechamento : a% quando o obturador é fechado
@@ -73,11 +73,11 @@ A tabela de condições permite especificar condições de posicionamento espec�
 >
 >Pequena dica do site [suncalc.org](https://www.suncalc.org) que permite, assim que o seu endereço digitado, ver a posição do sol (e, portanto, os ângulos de azimute e elevação) de acordo com as horas do dia (basta arrastar o pequeno sol no topo)
 
-## Horário
+## Planning
 
 Aqui você pode ver os planos de posicionamento da persiana feitos no planejamento da Agenda
 
-## Comandos
+## Commandes
 
 - Azimute do sol : ângulo atual do azimute do sol
 - Nascer do sol : ângulo de elevação atual do sol
@@ -91,6 +91,6 @@ Aqui você pode ver os planos de posicionamento da persiana feitos no planejamen
 
 Você pode adicionar comandos "mode", o nome do comando será o nome do modo.
 
-# Painel
+# Panel
 
 O plug-in possui um painel de gerenciamento móvel e de área de trabalho para ativá-lo, basta acessar Plugins -> Gerenciamento de plug-ins, clicar no plug-in de gerenciamento de painel e no canto inferior direito de marcar as caixas para exibir o painel computador e celular
