@@ -1,6 +1,6 @@
 # Shutter Management Plugin
 
-Este complemento le permite administrar más fácilmente la posición de sus persianas de acuerdo con la posición del sol.. Este complemento no tiene nubes
+Este complemento le permite administrar más fácilmente la posición de sus persianas de acuerdo con la posición del sol. Este complemento no tiene nubes
 
 Puedes encontrar [aquí](https://www.jeedom.com/blog/?p=4310) un artículo que muestra un ejemplo de configuración del complemento
 
@@ -12,9 +12,9 @@ Nada especial aquí solo para instalar y activar el complemento
 
 El complemento ajustará la posición de sus persianas en relación con las posiciones del sol (acimut y altitud) según la condición.
 
-# Configuración de las persianas.
+# Configuración de las persianas
 
-La configuración se divide en varias pestañas..
+La configuración se divide en varias pestañas.
 
 ## Equipement
 
@@ -42,9 +42,9 @@ Encontrarás en la primera pestaña toda la configuración de tu equipo :
 
 ## Condition
 
-- Condición para la acción. : Si esta condición no es cierta, el complemento no modificará la posición del obturador
+- Condición para la acción : Si esta condición no es cierta, el complemento no modificará la posición del obturador
 - El cambio de modo cancela las suspensiones pendientes : si está marcada, un cambio de modo del obturador lo devuelve a la gestión automática
-- Las acciones inmediatas son sistemáticas y prioritarias. : si está marcada, se ejecutan acciones inmediatas incluso si está suspendida y sin tener en cuenta el orden de las condiciones
+- Las acciones inmediatas son sistemáticas y prioritarias : si está marcada, se ejecutan acciones inmediatas incluso si está suspendida y sin tener en cuenta el orden de las condiciones
 
 La tabla de condiciones le permite especificar condiciones de posicionamiento específicas, que se apoderan de la tabla de posición de la aleta :
 - Posición : si la condición es verdadera, la posición de las aletas
@@ -60,7 +60,7 @@ La tabla de condiciones le permite especificar condiciones de posicionamiento es
 - % de cierre : el% cuando el obturador está cerrado
 - Acción por defecto : la acción predeterminada si ninguna condición y posición es válida
 
-Aquí es donde podrá gestionar la posición del obturador de acuerdo con la posición del sol..
+Aquí es donde podrá gestionar la posición del obturador de acuerdo con la posición del sol.
 
 - Acimut : ángulo de posición del sol
 - Elevacion : ángulo de altura del sol
@@ -68,7 +68,7 @@ Aquí es donde podrá gestionar la posición del obturador de acuerdo con la pos
 - Condición : condición adicional para satisfacer para que el obturador tome esta posición (puede estar vacío)
 - Comentario : campos libres para comentarios
 
->**ASTUCE**
+>**CONSEJO**
 >
 >Pequeño consejo del sitio [suncalc.org](https://www.suncalc.org) que permite, una vez que ingresó su dirección, ver la posición del sol (y, por lo tanto, los ángulos de acimut y elevación) de acuerdo con las horas del día (simplemente arrastre el pequeño sol en la parte superior)
 

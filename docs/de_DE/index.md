@@ -1,6 +1,6 @@
 # Shutter Management Plugin
 
-Mit diesem Plugin können Sie die Position Ihrer Fensterläden einfacher entsprechend der Sonnenposition verwalten.. Dieses Plugin ist komplett wolkenlos
+Mit diesem Plugin können Sie die Position Ihrer Fensterläden einfacher entsprechend der Sonnenposition verwalten. Dieses Plugin ist komplett wolkenlos
 
 Sie können finden [hier](https://www.jeedom.com/blog/?p=4310) Ein Artikel mit einer Beispielkonfiguration des Plugins
 
@@ -48,7 +48,7 @@ Auf der ersten Registerkarte finden Sie die gesamte Konfiguration Ihrer Geräte 
 
 In der Bedingungstabelle können Sie bestimmte Positionierungsbedingungen angeben, die die Klappenpositionstabelle erfassen :
 - Position : Wenn die Bedingung erfüllt ist, die Position der Klappen
-- Modus : Die Bedingung funktioniert nur, wenn sich der Verschluss in diesem Modus befindet (Sie können mehrere durch, getrennt setzen).. Wenn dieses Feld nicht ausgefüllt ist, wird die Bedingung unabhängig vom Modus getestet
+- Modus : Die Bedingung funktioniert nur, wenn sich der Verschluss in diesem Modus befindet (Sie können mehrere durch, getrennt setzen). Wenn dieses Feld nicht ausgefüllt ist, wird die Bedingung unabhängig vom Modus getestet
 - Sofortige Aktion : wirkt sofort, sobald die Bedingung erfüllt ist (wartet daher nicht auf die Überprüfung cron)
 - Anhalten : Wenn die Bedingung erfüllt ist, wird die automatische Verwaltung des Verschlusses unterbrochen
 - Zustand : Ihr Zustand
@@ -60,7 +60,7 @@ In der Bedingungstabelle können Sie bestimmte Positionierungsbedingungen angebe
 - % schließen : die%, wenn der Verschluss geschlossen ist
 - Standardaktion : Die Standardaktion, wenn keine Bedingung und Position gültig ist
 
-Hier können Sie die Positionierung des Verschlusses entsprechend der Sonnenposition steuern..
+Hier können Sie die Positionierung des Verschlusses entsprechend der Sonnenposition steuern.
 
 - Azimut : Sonnenstandwinkel
 - Höhe : Höhenwinkel der Sonne
@@ -68,9 +68,9 @@ Hier können Sie die Positionierung des Verschlusses entsprechend der Sonnenposi
 - Zustand : zusätzliche Bedingung, die erfüllt sein muss, damit der Verschluss diese Position einnimmt (kann leer sein)
 - Kommentar : freie Felder für Kommentare
 
->**ASTUCE**
+>**TIPP**
 >
->Kleiner Tipp die Seite [suncalc.org](https://www.suncalc.org) Sobald Ihre Adresse eingegeben wurde, können Sie den Sonnenstand (und damit den Azimut- und Elevationswinkel) entsprechend den Tagesstunden anzeigen (ziehen Sie einfach die kleine Sonne nach oben).
+>Kleiner Tipp die Seite [suncalc.org](https://www.suncalc.org) Sobald Ihre Adresse eingegeben wurde, können Sie den Sonnenstand (und damit den Azimut- und Elevationswinkel) entsprechend den Tagesstunden anzeigen (ziehen Sie einfach die kleine Sonne nach oben)
 
 ## Planning
 
@@ -80,7 +80,7 @@ Hier sehen Sie die Positionierungspläne des Verschlusses, die in der Agenda-Pla
 
 - Sonnenazimut : aktueller Azimutwinkel der Sonne
 - Sonnenaufgang : aktueller Elevationswinkel der Sonne
-- Aktion ausführen : Erzwingt die Berechnung der Verschlussposition entsprechend dem Sonnenstand und den Bedingungen und wendet das Ergebnis unabhängig vom Verwaltungszustand (angehalten oder nicht) darauf an.
+- Aktion ausführen : Erzwingt die Berechnung der Verschlussposition entsprechend dem Sonnenstand und den Bedingungen und wendet das Ergebnis unabhängig vom Verwaltungszustand (angehalten oder nicht) darauf an
 - Letzte Position : Letzte vom Plugin vom Verschluss angeforderte Position
 - Managementstatus : Managementstatus (ausgesetzt oder nicht)
 - Zusammenfassung : Erzwingen Sie die Rückkehr in den automatischen Verwaltungsmodus (Beachten Sie, dass dieser Befehl gestartet werden muss, um zur automatischen Verwaltung zurückzukehren, wenn Sie die Position Ihres Verschlusses manuell geändert und das Kontrollkästchen "Nicht übernehmen" aktiviert haben.)

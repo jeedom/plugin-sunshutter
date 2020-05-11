@@ -1,6 +1,6 @@
 # Plug-in de Gerenciamento de Obturador
 
-Este plugin permite que você gerencie mais facilmente a posição de suas persianas de acordo com a posição do sol.. Este plugin é completamente sem nuvens
+Este plugin permite que você gerencie mais facilmente a posição de suas persianas de acordo com a posição do sol. Este plugin é completamente sem nuvens
 
 Você pode encontrar [aqui](https://www.jeedom.com/blog/?p=4310) um artigo mostrando um exemplo de configuração do plug-in
 
@@ -60,7 +60,7 @@ A tabela de condições permite especificar condições de posicionamento espec�
 - % de fechamento : a% quando o obturador é fechado
 - Ação padrão : a ação padrão se nenhuma condição e posição forem válidas
 
-É aqui que você poderá gerenciar o posicionamento do obturador de acordo com a posição do sol..
+É aqui que você poderá gerenciar o posicionamento do obturador de acordo com a posição do sol.
 
 - Azimute : ângulo de posição do sol
 - Elevação : ângulo de altura do sol
@@ -68,7 +68,7 @@ A tabela de condições permite especificar condições de posicionamento espec�
 - Condição : condição adicional a satisfazer para que o obturador assuma esta posição (pode estar vazio)
 - COMMENTAIRE : campos livres para comentários
 
->**ASTUCE**
+>**DICA**
 >
 >Pequena dica do site [suncalc.org](https://www.suncalc.org) que permite, assim que o seu endereço digitado, ver a posição do sol (e, portanto, os ângulos de azimute e elevação) de acordo com as horas do dia (basta arrastar o pequeno sol no topo)
 

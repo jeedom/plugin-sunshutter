@@ -1,6 +1,6 @@
 # Shutter Management Plugin
 
-This plugin allows you to more easily manage the position of your shutters according to the position of the sun.. This plugin is completely cloudless
+This plugin allows you to more easily manage the position of your shutters according to the position of the sun. This plugin is completely cloudless
 
 You can find [here](https://www.jeedom.com/blog/?p=4310) an article showing an example configuration of the plugin
 
@@ -60,7 +60,7 @@ The conditions table allows you to specify specific positioning conditions, whic
 - %closing : the% when the shutter is closed
 - Default action : the default action if no condition and position is valid
 
-This is where you will be able to manage the positioning of the shutter according to the position of the sun..
+This is where you will be able to manage the positioning of the shutter according to the position of the sun.
 
 - Azimuth : sun position angle
 - Elevation : angle of height of the sun
@@ -68,7 +68,7 @@ This is where you will be able to manage the positioning of the shutter accordin
 - Condition : additional condition to satisfy for the shutter to take this position (can be empty)
 - Comment : free fields for comments
 
->**ASTUCE**
+>**TRICK**
 >
 >Little tip the site [suncalc.org](https://www.suncalc.org) which allows, once your address entered, to see the position of the sun (and therefore the azimuth and elevation angles) according to the hours of the day (just drag the small sun at the top)
 
