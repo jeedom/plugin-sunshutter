@@ -1,4 +1,4 @@
-# Description
+# Plug-in de Gerenciamento de Obturador
 
 Este plugin permite que você gerencie mais facilmente a posição de suas persianas de acordo com a posição do sol.. Este plugin é completamente sem nuvens
 
@@ -45,7 +45,6 @@ Você encontrará na primeira aba toda a configuração do seu equipamento :
 - Condição para ação : se essa condição não for verdadeira, o plug-in não modificará a posição do obturador
 - A alteração de modo cancela suspensões pendentes : se marcada, uma mudança de modo do obturador retorna ao gerenciamento automático
 - Ações imediatas são sistemáticas e prioritárias : se marcado, ações imediatas são executadas, mesmo que suspensas e sem levar em conta a ordem das condições
-
 
 A tabela de condições permite especificar condições de posicionamento específicas, que são mantidas na tabela de posição da aba :
 - Posição : se a condição for verdadeira, a posição dos retalhos

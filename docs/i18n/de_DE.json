@@ -1,5 +1,7 @@
 {
     "changelog.md": {
+        "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt.",
+        "11\/05\/2020": "05\/11\/2020",
         "Correction de bugs sur les panels": "Fehlerbehebungen an Panels",
         "09\/10\/2019": "10\/09\/2019",
         "Correction de bugs": "Fehlerbehebungen",
@@ -7,9 +9,15 @@
         "26\/08\/2019": "26.08.2019",
         "Mise à jour de la doc": "Aktualisieren des Dokuments",
         "Correction de l'affichage des checkbox": "Checkbox-Anzeige behoben",
-        "12\/08\/2019": "08\/12\/2019"
+        "12\/08\/2019": "08\/12\/2019",
+        " IMPORTANT.": " Wichtig.",
+        " IMPORTANT?": " Wichtig?",
+        "IMPORTANT ": "Wichtig ",
+        "[IMPORTANT": "[Wichtig",
+        "IMPORTANT]": "Wichtig]"
     },
     "index.md": {
+        "Plugin Gestion Volets": "Shutter Management Plugin",
         "Ce plugin vous permet de gerer plus facilemement la position de vos volets en fonction de la position du soleil": "Mit diesem Plugin können Sie die Position Ihrer Fensterläden einfacher entsprechend der Sonnenposition verwalten.",
         "Ce plugin est completement cloudless": "Dieses Plugin ist komplett wolkenlos",
         "Vous pouvez trouver": "Sie können finden",
@@ -87,11 +95,6 @@
         "mode actuel du volet": "aktueller Verschlussmodus",
         "Vous pouvez ajouter des commandes \"mode\", le nom de la commande sera le nom du mode": "Sie können \"Modus\" -Befehle hinzufügen. Der Befehlsname ist der Modusname",
         "Le plugin possede un panel de gestion en desktop et mobile pour l'activer il suffit d'aller dans Plugins -> Gestion des plugins, cliquer sur le plugin de gestion de volet et tout en bas a droite de cocher les cases pour afficher le panel desktop et mobile": "Das Plugin verfügt über ein Desktop- und ein mobiles Verwaltungsfeld, um es zu aktivieren. Gehen Sie einfach zu Plugins -> Plugin-Verwaltung, klicken Sie auf das Fensterverwaltungs-Plugin und aktivieren Sie ganz rechts unten die Kontrollkästchen, um das Feld anzuzeigen Desktop und Mobile",
-        " Description.": " Beschreibung.",
-        " Description?": " Beschreibung?",
-        "Description ": "Beschreibung ",
-        "[Description": "[Beschreibung",
-        "Description]": "Beschreibung]",
         " ici.": " hier.",
         " ici?": " hier?",
         "ici ": "hier ",

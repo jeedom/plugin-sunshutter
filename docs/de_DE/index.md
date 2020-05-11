@@ -1,4 +1,4 @@
-# Description
+# Shutter Management Plugin
 
 Mit diesem Plugin können Sie die Position Ihrer Fensterläden einfacher entsprechend der Sonnenposition verwalten.. Dieses Plugin ist komplett wolkenlos
 
@@ -45,7 +45,6 @@ Auf der ersten Registerkarte finden Sie die gesamte Konfiguration Ihrer Geräte 
 - Handlungsbedingung : Wenn diese Bedingung nicht erfüllt ist, ändert das Plugin die Position des Verschlusses nicht
 - Der Moduswechsel bricht ausstehende Suspensionen ab : Wenn diese Option aktiviert ist, wird der Verschluss durch eine Änderung des Modus wieder automatisch verwaltet
 - Sofortmaßnahmen sind systematisch und vorrangig : Wenn diese Option aktiviert ist, werden sofortige Aktionen ausgeführt, auch wenn sie ausgesetzt sind und die Reihenfolge der Bedingungen nicht berücksichtigt wird
-
 
 In der Bedingungstabelle können Sie bestimmte Positionierungsbedingungen angeben, die die Klappenpositionstabelle erfassen :
 - Position : Wenn die Bedingung erfüllt ist, die Position der Klappen

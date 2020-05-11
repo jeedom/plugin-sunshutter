@@ -1,4 +1,4 @@
-# Description
+# Shutter Management Plugin
 
 This plugin allows you to more easily manage the position of your shutters according to the position of the sun.. This plugin is completely cloudless
 
@@ -12,7 +12,7 @@ Nothing special here just to install and activate the plugin
 
 The plugin will adjust the position of your shutters relative to sun positions (Azimuth and Altitude) depending on condition.
 
-# Setup of the shutters
+# Configuration of the shutters
 
 The configuration is broken down into several tabs.
 
@@ -43,9 +43,8 @@ You will find in the first tab all the configuration of your equipment :
 ## Condition
 
 - Condition for action : if this condition is not true the plugin will not modify the position of the shutter
-- Fashion change cancels pending suspensions : if checked then a change of mode of the shutter returns it to automatic management
+- Mode change cancels pending suspensions : if checked then a change of mode of the shutter returns it to automatic management
 - Immediate actions are systematic and priority : if checked then immediate actions are executed even if it is suspended and without taking into account the order of conditions
-
 
 The conditions table allows you to specify specific positioning conditions, which takes hold of the flap position table :
 - Position : if the condition is true, the position of the flaps

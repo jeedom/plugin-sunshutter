@@ -1,4 +1,4 @@
-# Description
+# Shutter Management Plugin
 
 Este complemento le permite administrar más fácilmente la posición de sus persianas de acuerdo con la posición del sol.. Este complemento no tiene nubes
 
@@ -45,7 +45,6 @@ Encontrarás en la primera pestaña toda la configuración de tu equipo :
 - Condición para la acción. : Si esta condición no es cierta, el complemento no modificará la posición del obturador
 - El cambio de modo cancela las suspensiones pendientes : si está marcada, un cambio de modo del obturador lo devuelve a la gestión automática
 - Las acciones inmediatas son sistemáticas y prioritarias. : si está marcada, se ejecutan acciones inmediatas incluso si está suspendida y sin tener en cuenta el orden de las condiciones
-
 
 La tabla de condiciones le permite especificar condiciones de posicionamiento específicas, que se apoderan de la tabla de posición de la aleta :
 - Posición : si la condición es verdadera, la posición de las aletas

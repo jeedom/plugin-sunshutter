@@ -1,5 +1,7 @@
 {
     "changelog.md": {
+        "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto.",
+        "11\/05\/2020": "05\/11\/2020",
         "Correction de bugs sur les panels": "Correções de bugs nos painéis",
         "09\/10\/2019": "09\/09\/2019",
         "Correction de bugs": "Correções de bugs",
@@ -7,9 +9,15 @@
         "26\/08\/2019": "26\/08\/2019",
         "Mise à jour de la doc": "Atualizando o documento",
         "Correction de l'affichage des checkbox": "Exibição de caixa de seleção fixa",
-        "12\/08\/2019": "12\/08\/2019"
+        "12\/08\/2019": "12\/08\/2019",
+        " IMPORTANT.": " IMPORTANTE.",
+        " IMPORTANT?": " IMPORTANTE?",
+        "IMPORTANT ": "IMPORTANTE ",
+        "[IMPORTANT": "[IMPORTANTE",
+        "IMPORTANT]": "IMPORTANTE]"
     },
     "index.md": {
+        "Plugin Gestion Volets": "Plug-in de Gerenciamento de Obturador",
         "Ce plugin vous permet de gerer plus facilemement la position de vos volets en fonction de la position du soleil": "Este plugin permite que você gerencie mais facilmente a posição de suas persianas de acordo com a posição do sol.",
         "Ce plugin est completement cloudless": "Este plugin é completamente sem nuvens",
         "Vous pouvez trouver": "Você pode encontrar",
@@ -87,11 +95,6 @@
         "mode actuel du volet": "modo de obturador atual",
         "Vous pouvez ajouter des commandes \"mode\", le nom de la commande sera le nom du mode": "Você pode adicionar comandos \"mode\", o nome do comando será o nome do modo",
         "Le plugin possede un panel de gestion en desktop et mobile pour l'activer il suffit d'aller dans Plugins -> Gestion des plugins, cliquer sur le plugin de gestion de volet et tout en bas a droite de cocher les cases pour afficher le panel desktop et mobile": "O plug-in possui um painel de gerenciamento móvel e de área de trabalho para ativá-lo, basta acessar Plugins -> Gerenciamento de plug-ins, clicar no plug-in de gerenciamento de painel e no canto inferior direito de marcar as caixas para exibir o painel computador e celular",
-        " Description.": " Descrição.",
-        " Description?": " Descrição?",
-        "Description ": "Descrição ",
-        "[Description": "[Descrição",
-        "Description]": "Descrição]",
         " ici.": " aqui.",
         " ici?": " aqui?",
         "ici ": "aqui ",

@@ -1,5 +1,7 @@
 {
     "changelog.md": {
+        "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text.",
+        "11\/05\/2020": "05\/11\/2020",
         "Correction de bugs sur les panels": "Bug fixes on panels",
         "09\/10\/2019": "10\/09\/2019",
         "Correction de bugs": "Bugfix",
@@ -7,9 +9,15 @@
         "26\/08\/2019": "08\/26\/2019",
         "Mise à jour de la doc": "Updating the doc",
         "Correction de l'affichage des checkbox": "Fixed checkbox display",
-        "12\/08\/2019": "08\/12\/2019"
+        "12\/08\/2019": "08\/12\/2019",
+        " IMPORTANT.": " Important.",
+        " IMPORTANT?": " Important?",
+        "IMPORTANT ": "Important ",
+        "[IMPORTANT": "[Important",
+        "IMPORTANT]": "Important]"
     },
     "index.md": {
+        "Plugin Gestion Volets": "Shutter Management Plugin",
         "Ce plugin vous permet de gerer plus facilemement la position de vos volets en fonction de la position du soleil": "This plugin allows you to more easily manage the position of your shutters according to the position of the sun.",
         "Ce plugin est completement cloudless": "This plugin is completely cloudless",
         "Vous pouvez trouver": "You can find",
@@ -87,11 +95,6 @@
         "mode actuel du volet": "current shutter mode",
         "Vous pouvez ajouter des commandes \"mode\", le nom de la commande sera le nom du mode": "You can add \"mode\" commands, the command name will be the mode name",
         "Le plugin possede un panel de gestion en desktop et mobile pour l'activer il suffit d'aller dans Plugins -> Gestion des plugins, cliquer sur le plugin de gestion de volet et tout en bas a droite de cocher les cases pour afficher le panel desktop et mobile": "The plugin has a desktop and mobile management panel to activate it just go to Plugins -> Plugin management, click on the pane management plugin and at the very bottom right of ticking the boxes to display the panel desktop and mobile",
-        " Description.": " Description.",
-        " Description?": " Description?",
-        "Description ": "Description ",
-        "[Description": "[Description",
-        "Description]": "Description]",
         " ici.": " here.",
         " ici?": " here?",
         "ici ": "here ",
