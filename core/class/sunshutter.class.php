@@ -30,7 +30,11 @@ class sunshutter extends eqLogic {
   
   public static function cron5() {
     foreach (eqLogic::byType('sunshutter') as $sunshutter) {
-      $sunshutter->updateData();
+      if(date('Gi') == 0){
+        $sunshutter->save();
+      }else{
+        $sunshutter->updateData();
+      }
     }
   }
   
@@ -162,6 +166,10 @@ class sunshutter extends eqLogic {
           $numbersupendedManual += 1;
         }
       }
+      $cmdMode = '';
+      foreach ($sunshutter->getCmd('action', 'mode',null,true) as $cmd) {
+        $cmdMode .= $cmd->toHtml($_type);
+      }
       $datas = array('name' => $name,
       'position' => $sunshutter->getCache('lastPositionOrder',null),
       'handling' => $handling,
@@ -180,12 +188,11 @@ class sunshutter extends eqLogic {
       'azimuth' => $cmdAzimuth->execCmd(),
       'link' => $sunshutter->getLinkToConfiguration(),
       'mode' => $currentMode,
+      'cmdmode' => $cmdMode,
       'suspendTime' => date('d-m H:i:s',$sunshutter->getCache('beginSuspend',time())),
     );
     $return['shutters'][]=$datas;
-    $return['global']=array('moyPos' => ($numberShutters == 0) ? 'N/A' : round($sumposition/$numberShutters),
-    'auto' => $numbersupendedAuto,
-    'manual' => $numbersupendedManual,);
+    $return['global']=array('moyPos' => ($numberShutters == 0) ? 'N/A' : round($sumposition/$numberShutters),'auto' => $numbersupendedAuto,'manual' => $numbersupendedManual,);
   }
   return $return;
 }
@@ -340,7 +347,11 @@ public function postSave() {
 
 public function updateData(){
   $SD = new SolarData\SolarData();
-  $SD->setObserverPosition($this->getConfiguration('lat'),$this->getConfiguration('long'),$this->getConfiguration('alt'));
+  if($this->getConfiguration('useJeedomLocalisation') == 1){
+    $SD->setObserverPosition(config::byKey('info::latitude'),config::byKey('info::longitude'),config::byKey('info::altitude'));
+  }else{
+    $SD->setObserverPosition($this->getConfiguration('lat'),$this->getConfiguration('long'),$this->getConfiguration('alt'));
+  }
   $SD->setObserverDate(date('Y'), date('n'), date('j'));
   $SD->setObserverTime(date('G'), date('i'),date('s'));
   $SD->setDeltaTime(67);
