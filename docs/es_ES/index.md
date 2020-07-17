@@ -49,6 +49,9 @@ Encontrarás en la primera pestaña toda la configuración de tu equipo :
 La tabla de condiciones le permite especificar condiciones de posicionamiento específicas, que se apoderan de la tabla de posición de la aleta :
 - Posición : si la condición es verdadera, la posición de las aletas
 - Modo : la condición solo funciona si el obturador está en este modo (puede poner varios separados por ,). Si este campo no se llena, la condición se probará independientemente del modo
+>**Importante**
+>
+>Estamos hablando del modo de obturador aquí NO ES NADA VER CON el complemento de modo
 - Acción inmediata : actúa inmediatamente tan pronto como la condición sea verdadera (así que no espere a que se verifique el cron)
 - Suspender : si la condición es verdadera, suspende la gestión automática del obturador
 - Condición : su condicion

@@ -49,6 +49,9 @@ You will find in the first tab all the configuration of your equipment :
 The conditions table allows you to specify specific positioning conditions, which takes hold of the flap position table :
 - Position : if the condition is true, the position of the flaps
 - Fashion : the condition only works if the shutter is in this mode (you can put several separated by ,). If this field is not filled then the condition will be tested whatever the mode
+>**Important**
+>
+>We are talking about the shutter mode here IT'S NOTHING TO SEE with the mode plugin
 - Immediate action : acts immediately as soon as the condition is true (so do not wait for the verification cron)
 - To suspend : if the condition is true it suspends the automatic management of the shutter
 - Condition : your condition

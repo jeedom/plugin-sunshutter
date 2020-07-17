@@ -49,6 +49,9 @@ Auf der ersten Registerkarte finden Sie die gesamte Konfiguration Ihrer Geräte 
 In der Bedingungstabelle können Sie bestimmte Positionierungsbedingungen angeben, die die Klappenpositionstabelle erfassen :
 - Position : Wenn die Bedingung erfüllt ist, die Position der Klappen
 - Modus : Die Bedingung funktioniert nur, wenn sich der Verschluss in diesem Modus befindet (Sie können mehrere durch trennen ,). Wenn dieses Feld nicht ausgefüllt ist, wird die Bedingung unabhängig vom Modus getestet
+>**Wichtig**
+>
+>Wir sprechen hier über den Verschlussmodus. Mit dem Modus-Plugin ist nichts zu sehen
 - Sofortige Aktion : Wirkt sofort, sobald die Bedingung erfüllt ist (warten Sie also nicht auf die Überprüfung)
 - Anhalten : Wenn die Bedingung erfüllt ist, wird die automatische Verwaltung des Verschlusses unterbrochen
 - Zustand : Ihr Zustand

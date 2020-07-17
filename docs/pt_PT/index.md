@@ -49,6 +49,9 @@ Você encontrará na primeira aba toda a configuração do seu equipamento :
 A tabela de condições permite especificar condições de posicionamento específicas, que são mantidas na tabela de posição da aba :
 - Posição : se a condição for verdadeira, a posição dos retalhos
 - Modo : a condição só funciona se o obturador estiver neste modo (você pode colocar vários ,). Se este campo não for preenchido, a condição será testada independentemente do modo
+>**IMPORTANTE**
+>
+>Estamos falando do modo do obturador aqui. NÃO É NADA A VER COM o plugin do modo
 - Ação imediata : age imediatamente assim que a condição for verdadeira (portanto, não espere pela verificação cron)
 - Suspender : se a condição for verdadeira, suspende o gerenciamento automático do obturador
 - Condição : sua condição

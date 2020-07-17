@@ -69,6 +69,8 @@
         "Mode": "Mode",
         "la condition ne marche que si le volet est dans ce mode (vous pouvez en mettre plusieurs séparé par des": "la condition ne marche que si le volet est dans ce mode (vous pouvez en mettre plusieurs séparé par des",
         "Si ce champs n'est pas remplis alors la condition sera testée quelque soit le mode": "Si ce champs n'est pas remplis alors la condition sera testée quelque soit le mode",
+        "IMPORTANT": "IMPORTANT",
+        "On parle ici du mode du volet cela N'A RIEN A VOIR avec le plugin mode": "On parle ici du mode du volet cela N'A RIEN A VOIR avec le plugin mode",
         "Action immediate": "Action immediate",
         "agit immediatement dès que la condition est vrai (n'attend donc pas le cron de verification": "agit immediatement dès que la condition est vrai (n'attend donc pas le cron de verification",
         "Suspendre": "Suspendre",
