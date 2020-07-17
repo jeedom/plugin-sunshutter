@@ -31,7 +31,9 @@ function getSunshutterState(){
 				$('#div_inclusionAlert').showAlert({message: data.result, level: 'danger'});
 				return;
 			}
-			$(".posMoy").value(data.result.global['moyPos']+'%');
+			if(data.result.global['moyPos']){
+				$(".posMoy").value(data.result.global['moyPos']+'%');
+			}
 			$(".manualSuspend").value(data.result.global['manual']);
 			$(".autoSuspend").value(data.result.global['auto']);
 			var table = '';
