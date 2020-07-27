@@ -257,6 +257,17 @@ public function postSave() {
   $cmd->setEqLogic_id($this->getId());
   $cmd->save();
   
+  $cmd = $this->getCmd(null, 'label');
+  if (!is_object($cmd)) {
+    $cmd = new sunshutterCmd();
+    $cmd->setLogicalId('label');
+    $cmd->setName(__('Label', __FILE__));
+  }
+  $cmd->setType('info');
+  $cmd->setSubType('string');
+  $cmd->setEqLogic_id($this->getId());
+  $cmd->save();
+  
   $cmd = $this->getCmd(null, 'lastposition');
   if (!is_object($cmd)) {
     $cmd = new sunshutterCmd();
@@ -445,7 +456,8 @@ public function calculPosition(){
       if($sun_azimuth > $position['sun::azimuth::from'] && $sun_azimuth <= $position['sun::azimuth::to']){
         if($position['position::allowmove'] == '' || jeedom::evaluateExpression($position['position::allowmove']) == true){
           log::add('sunshutter','debug',$this->getHumanName().' - Valid condition : ' . $position['position::allowmove'] . ' Elevation : ' . $position['sun::elevation::from'] . '°-' . $position['sun::elevation::to'] . '° Azimuth : ' . $position['sun::azimuth::from'] . '°-' . $position['sun::azimuth::to'] . '° ('  . $position['shutter::position'] . '%)');
-          return $position['shutter::position'];
+          //return $position['shutter::position'];
+          return array('position'=>$position['shutter::position'], 'label' => $position['position::label']);
         }
         log::add('sunshutter','debug',$this->getHumanName().' - Invalid condition : ' . $position['position::allowmove'] . ' Elevation : ' . $position['sun::elevation::from'] . '°-' . $position['sun::elevation::to'] . '° Azimuth : ' . $position['sun::azimuth::from'] . '°-' . $position['sun::azimuth::to'] . '° ('  . $position['shutter::position'] . '%)');
       }
@@ -465,7 +477,8 @@ public function calculPosition(){
     log::add('sunshutter','debug',$this->getHumanName().' - Do default none');
     $default = $this->getCurrentPosition();
   }
-  return $default;
+  //return $default;
+  return array('position'=>$default, 'label' => '');
 }
 
 public function executeAction($_force = false){
@@ -519,7 +532,10 @@ public function executeAction($_force = false){
     }
   }
   $position = null;
-  $position = $this->calculPosition();
+  //$position = $this->calculPosition();
+  $positionArray = $this->calculPosition();
+  $position = $positionArray['position'];
+  $label = $positionArray['label'];
   $conditions = $this->getConfiguration('conditions','');
   $mode = '';
   if(is_object($this->getCmd(null,'mode'))){
@@ -538,6 +554,7 @@ public function executeAction($_force = false){
         if ($condition['conditions::condition'] == '') {
           log::add('sunshutter','debug',$this->getHumanName().' - No Condition defined but valid mode ['.$mode.'] : ' . ' (' . $condition['conditions::position'] . ')');
           $position = $condition['conditions::position'];
+          $label = $condition['conditions::label'];
           break;
         }
       }
@@ -552,10 +569,12 @@ public function executeAction($_force = false){
         if ($condition['conditions::position'] != '') {
           log::add('sunshutter','debug',$this->getHumanName().' - Condition Met : ' . $condition['conditions::condition'] . ' (' . $condition['conditions::position'] . '%)');
           $position = $condition['conditions::position'];
+          $label = $condition['conditions::label'];
           break;
         } else {
           log::add('sunshutter','debug',$this->getHumanName().' - Condition Met : ' . $condition['conditions::condition'] . ' (Empty position do nothing)');
           $position = $currentPosition;
+          $label = $condition['conditions::label'];
           break;
         }
       }
@@ -572,6 +591,7 @@ public function executeAction($_force = false){
       log::add('sunshutter','debug',$this->getHumanName().' - Do nothing, position != new position by less than 4%');
       $this->setCache('lastPositionOrder',$position);
       $this->checkAndUpdateCmd('lastposition', $position);
+      $this->checkAndUpdateCmd('label', $label);
       return;
     }
   }
@@ -584,6 +604,7 @@ public function executeAction($_force = false){
     $this->setCache('lastPositionOrder',$position);
     $this->setCache('lastPositionOrderTime',strtotime('now'));
     $this->checkAndUpdateCmd('lastposition', $position);
+    $this->checkAndUpdateCmd('label', $label);
   }
 }
 
