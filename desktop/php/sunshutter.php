@@ -266,6 +266,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 										<th>{{Mode}}</th>
 										<th>{{Action Immédiate}}</th>
 										<th>{{Suspendre}}</th>
+                                      	<th>{{Label}}</th>
 										<th style="width:50%">{{Condition}}</th>
 										<th style="width:15%">{{Commentaire}}</th>
 									</tr>
@@ -329,6 +330,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									<th style="width:150px">{{Azimuth}}</th>
 									<th style="width:150px">{{Elevation}}</th>
 									<th style="width:75px">{{Position}}</th>
+                                    <th style="width:75px">{{Label}}</th>
 									<th>{{Condition}}</th>
 									<th style="width:15%">{{Commentaire}}</th>
 								</tr>
@@ -368,4 +370,3 @@ $eqLogics = eqLogic::byType($plugin->getId());
 			
 			<?php include_file('desktop', 'sunshutter', 'js', 'sunshutter');?>
 			<?php include_file('core', 'plugin.template', 'js');?>
-			
