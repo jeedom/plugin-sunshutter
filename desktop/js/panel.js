@@ -47,7 +47,7 @@ function getSunshutterState(){
 				}
 				table += '<tr><td><a href="' + shutter['link'] + '">' +  shutter['name']+'</a></td>';
 				table += '<td><center><span class="label label-primary">'+ shutter['azimuth'] + '° / ' + shutter['elevation'] + '°</span></center></td>';
-				table += '<td><center><span class="label label-primary">'+ shutter['mode'] + '</span></center></td>';
+				table += '<td><center><span class="label label-primary">'+ shutter['mode'] + '</span> <span class="label label-info">'+ shutter['label'] + '</span></center></td>';
 				table += '<td><center><span class="label label-primary">'+ shutter['position'] + '%</span></center></td>';
 				table += '<td><center><span class="label label-primary">'+ handling + '</span></center></td>';
 				table += '<td><center>' + '<a class="bt_sunshutterAction btn btn-default" data-cmd="'+shutter['resumeId']+'"><i class="fas fa-play"></i></a>';

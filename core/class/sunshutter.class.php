@@ -127,6 +127,7 @@ class sunshutter extends eqLogic {
       $name = $sunshutter->getHumanName(true);
       $cmdHandling = $sunshutter->getCmd(null, 'stateHandling');
       $cmdHandlingLabel = $sunshutter->getCmd(null, 'stateHandlingLabel');
+      $cmdLabel = $sunshutter->getCmd(null, 'label');
       $cmdAzimuth = $sunshutter->getCmd(null, 'sun_azimuth');
       $cmdElevation = $sunshutter->getCmd(null, 'sun_elevation');
       $cmdpause = $sunshutter->getCmd(null, 'suspendHandling');
@@ -185,6 +186,7 @@ class sunshutter extends eqLogic {
       'HandlingLabel' => $handlingLabel,
       'cmdstatehtml' => $cmdstatehtml,
       'elevation' => $cmdElevation->execCmd(),
+      'label' => $cmdLabel->execCmd(),
       'azimuth' => $cmdAzimuth->execCmd(),
       'link' => $sunshutter->getLinkToConfiguration(),
       'mode' => $currentMode,

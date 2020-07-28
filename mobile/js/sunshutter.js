@@ -52,7 +52,7 @@ function getSunshutterState(){
 				} else if (shutter['HandlingLabel'] == 'Manuel'){
 					handling = '<i class="fas fa-user"></i>'+shutter['suspendTime']+'<br/>';
 				}
-				table += '<tr><td><center>' +  shutter['name'] +' <br/> '+ shutter['position'] +'% <br/>' + handling +mode+'</center></td>';
+				table += '<tr><td><center>' +  shutter['name'] +' <br/> '+ shutter['position'] +'% <br/>' + handling+mode+ '<br/>' +shutter['label']+'</center></td>';
 				table += '<td><center>' + '<a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['resumeId']+'" style="margin-top:2px;"><i class="fas fa-play"></i></a>';
 				table += ' <a class="bt_sunshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-cmd="'+shutter['pauseId']+'" style="margin-top:2px;"><i class="fas fa-pause"></i></a>';
 				table += ' <a class="bt_positionshutterAction ui-btn ui-mini ui-btn-inline ui-btn-raised clr-primary" data-value="'+shutter['openvalue']+'" data-cmd="'+shutter['positionId']+'" style="margin-top:2px;"><i class="fas fa-arrow-up"></i></a>';

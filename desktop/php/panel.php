@@ -29,7 +29,7 @@ if (!isConnect()) {
 		<tr>
 			<th data-priority="1">{{Nom}}</th>
 			<th data-priority="1">{{Soleil}}</th>
-			<th data-priority="1">{{Mode}}</th>
+			<th data-priority="1">{{Mode/Label}}</th>
 			<th data-priority="1">{{Dernier}}</th>
 			<th data-priority="1">{{Suspension}}</th>
 			<th data-priority="1">{{Gestion}}</th>
