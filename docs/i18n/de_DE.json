@@ -2,6 +2,7 @@
     "changelog.md": {
         "Changelog Gestion Volets": "Changelog Shutter Management",
         "Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt",
+        "Possibilité de mettre des labels pour les differentes condition (faculatif mais permet d'executer un scénario suite à un positionnement du volet par exemple": "Möglichkeit, Beschriftungen für die verschiedenen Bedingungen anzubringen (optional, ermöglicht jedoch die Ausführung eines Szenarios beispielsweise nach einer Positionierung des Verschlusses",
         "11\/05\/2020": "05\/11\/2020",
         "Correction de bugs sur les panels": "Fehlerbehebungen an Panels",
         "09\/10\/2019": "10\/09\/2019",
