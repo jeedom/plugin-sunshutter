@@ -4,6 +4,9 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte
 
+
+- Possibilité de mettre des labels pour les differentes condition (faculatif mais permet d'executer un scénario suite à un positionnement du volet par exemple)
+
 # 11/05/2020
 
 - Correction de bugs sur les panels
