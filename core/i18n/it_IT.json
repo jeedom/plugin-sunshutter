@@ -134,5 +134,8 @@
         "Suspendre": "",
         "Reprendre": "Riprendere",
         "Rafraichir": "Aggiorna"
+    },
+    "info.json": {
+        "Plugin pour gerer l'ouverture\/fermeture des volets en fonction du soleil et d'autre condition. IMPORTANT ce plugin ne marche pas avec des volets tout ou rien il faut ABSOLUMENT des volets avec reglage proportionnels (%)": ""
     }
 }

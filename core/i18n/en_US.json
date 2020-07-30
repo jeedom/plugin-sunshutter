@@ -134,5 +134,8 @@
         "Suspendre": "To suspend",
         "Reprendre": "Resume",
         "Rafraichir": "Refresh"
+    },
+    "info.json": {
+        "Plugin pour gerer l'ouverture\/fermeture des volets en fonction du soleil et d'autre condition. IMPORTANT ce plugin ne marche pas avec des volets tout ou rien il faut ABSOLUMENT des volets avec reglage proportionnels (%)": "Plugin to manage the opening \/ closing of shutters depending on the sun and other conditions. IMPORTANT this plugin does not work with all or nothing shutters it is ABSOLUTELY necessary shutters with proportional adjustment (%)"
     }
 }

@@ -134,5 +134,8 @@
         "Suspendre": "Suspender",
         "Reprendre": "Resumo",
         "Rafraichir": "Legal"
+    },
+    "info.json": {
+        "Plugin pour gerer l'ouverture\/fermeture des volets en fonction du soleil et d'autre condition. IMPORTANT ce plugin ne marche pas avec des volets tout ou rien il faut ABSOLUMENT des volets avec reglage proportionnels (%)": "Plugin para gerenciar a abertura \/ fechamento de persianas, dependendo do sol e de outras condições. IMPORTANTE, este plugin não funciona com persianas com tudo ou nada; é absolutamente necessário persianas com ajuste proporcional (%)"
     }
 }
