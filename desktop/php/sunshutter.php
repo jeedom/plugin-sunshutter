@@ -42,43 +42,52 @@ $eqLogics = eqLogic::byType($plugin->getId());
 			?>
 		</div>
 	</div>
-	
+
 	<div class="col-xs-12 eqLogic" style="display: none;">
 		<div class="input-group pull-right" style="display:inline-flex">
 			<span class="input-group-btn">
-				<a class="btn btn-default btn-sm eqLogicAction roundedLeft" data-action="configure"><i class="fa fa-cogs"></i> {{Configuration avancée}}</a><a class="btn btn-default btn-sm eqLogicAction" data-action="copy"><i class="fas fa-copy"></i> {{Dupliquer}}</a><a class="btn btn-sm btn-success eqLogicAction" data-action="save"><i class="fas fa-check-circle"></i> {{Sauvegarder}}</a><a class="btn btn-danger btn-sm eqLogicAction roundedRight" data-action="remove"><i class="fas fa-minus-circle"></i> {{Supprimer}}</a>
+				<a class="btn btn-sm btn-default eqLogicAction roundedLeft" data-action="configure"><i class="fas fa-cogs"></i><span class="hidden-xs"> {{Configuration avancée}}</span>
+				</a><a class="btn btn-sm btn-default eqLogicAction" data-action="copy"><i class="fas fa-copy"></i><span class="hidden-xs">  {{Dupliquer}}</span>
+				</a><a class="btn btn-sm btn-success eqLogicAction" data-action="save"><i class="fas fa-check-circle"></i> {{Sauvegarder}}
+				</a><a class="btn btn-sm btn-danger eqLogicAction roundedRight" data-action="remove"><i class="fas fa-minus-circle"></i> {{Supprimer}}
+				</a>
 			</span>
 		</div>
 		<ul class="nav nav-tabs" role="tablist">
-			<li role="presentation"><a href="#" class="eqLogicAction" aria-controls="home" role="tab" data-toggle="tab" data-action="returnToThumbnailDisplay"><i class="fa fa-arrow-circle-left"></i></a></li>
+			<li role="presentation"><a href="#" class="eqLogicAction" aria-controls="home" role="tab" data-toggle="tab" data-action="returnToThumbnailDisplay"><i class="fas fa-arrow-circle-left"></i></a></li>
 			<li role="presentation" class="active"><a href="#eqlogictab" aria-controls="home" role="tab" data-toggle="tab"><i class="fas fa-tachometer-alt"></i> {{Equipement}}</a></li>
 			<li role="presentation"><a href="#configtab" aria-controls="home" role="tab" data-toggle="tab"><i class="fas fa-wrench"></i> {{Configuration}}</a></li>
 			<li role="presentation"><a href="#conditiontab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-vial"></i> {{Condition}}</a></li>
 			<li role="presentation"><a href="#positiontab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-drafting-compass"></i> {{Positionnement}}</a></li>
 			<li role="presentation"><a href="#scheduletab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-calendar"></i> {{Planning}}</a></li>
-			<li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fa fa-list-alt"></i> {{Commandes}}</a></li>
+			<li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-list-alt"></i> {{Commandes}}</a></li>
 		</ul>
-		<div class="tab-content" style="height:calc(100% - 50px);overflow:auto;overflow-x: hidden;">
+		<div class="tab-content">
 			<div role="tabpanel" class="tab-pane active" id="eqlogictab">
 				<br/>
+				<div class="row">
+					<div class="col-lg-7">
 				<form class="form-horizontal">
 					<fieldset>
+						<legend><i class="fas fa-wrench"></i> {{Général}}</legend>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">{{Nom de l'équipement volet}}</label>
-							<div class="col-sm-3">
+							<div class="col-xs-11 col-sm-7">
 								<input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display : none;" />
 								<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom de l'équipement template}}"/>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label" >{{Objet parent}}</label>
-							<div class="col-sm-3">
+							<div class="col-xs-11 col-sm-7">
 								<select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
 									<option value="">{{Aucun}}</option>
 									<?php
-									foreach (jeeObject::all() as $object) {
-										echo '<option value="' . $object->getId() . '">' . $object->getName() . '</option>';
+									$options = '';
+									foreach ((jeeObject::buildTree(null, false)) as $object) {
+										$options .= '<option value="' . $object->getId() . '">' . str_repeat('&nbsp;&nbsp;', $object->getConfiguration('parentNumber')) . $object->getName() . '</option>';
 									}
+									echo $options;
 									?>
 								</select>
 							</div>
@@ -96,17 +105,22 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-3 control-label"></label>
-							<div class="col-sm-9">
+							<label class="col-sm-3 control-label">{{Options}}</label>
+							<div class="col-xs-11 col-sm-7">
 								<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isEnable" checked/>{{Activer}}</label>
 								<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
 							</div>
 						</div>
+						<br/>
 					</fieldset>
 				</form>
 			</div>
+		</div>
+			</div>
+
 			<div role="tabpanel" class="tab-pane" id="commandtab">
-				<a class="btn btn-success btn-sm cmdAction pull-right" data-action="add" style="margin-top:5px;"><i class="fa fa-plus-circle"></i> {{Commandes}}</a><br/><br/>
+				<a class="btn btn-default btn-sm pull-right cmdAction" data-action="add" style="margin-top:5px;"><i class="fas fa-plus-circle"></i> {{Ajouter une commande}}</a>
+				<br/><br/>
 				<table id="table_cmd" class="table table-bordered table-condensed">
 					<thead>
 						<tr>
@@ -117,6 +131,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 					</tbody>
 				</table>
 			</div>
+
 			<div role="tabpanel" class="tab-pane" id="configtab">
 				<br/>
 				<fieldset>
@@ -124,7 +139,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						<legend><i class="fas fa-cog"></i> {{Général}}</legend>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">{{Vérification}}</label>
-							<div class="col-sm-2">
+							<div class="col-xs-11 col-sm-7">
 								<select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="cron::executeAction">
 									<option value="*/5 * * * *">{{Toutes les 5 minutes}}</option>
 									<option value="*/10 * * * *">{{Toutes les 10 minutes}}</option>
@@ -134,54 +149,58 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									<option value="custom">{{Cron Personnalisé}}</option>
 								</select>
 							</div>
-							<label class="col-sm-1 control-label customcron" style="display : none;">{{Cron Personnalisé}}</label>
-							<div class="col-sm-2 customcron" style="display : none;">
+						</div>
+							<div class="form-group">
+							<label class="col-sm-3 control-label customcron" style="display : none;">{{Cron Personnalisé}}</label>
+							<div class="col-xs-11 col-sm-7 customcron" style="display : none;">
 								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="cron::custom"/>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">{{Reprendre la main}}</label>
-							<div class="col-sm-2">
+							<div class="col-xs-11 col-sm-7">
 								<select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::nobackhand">
 									<option value="0">{{Oui}}</option>
 									<option value="1">{{Non}}</option>
 									<option value="2">{{Oui avec délai}}</option>
 								</select>
 							</div>
-							<label class="col-sm-1 control-label customDelay" style="display : none;">{{Au delà de (min)}}</label>
-							<div class="col-sm-2 customDelay" style="display : none;">
+						</div>
+							<div class="form-group">
+							<label class="col-sm-3 control-label customDelay" style="display : none;">{{Au delà de (min)}}</label>
+							<div class="col-xs-11 col-sm-7 customDelay" style="display : none;">
 								<input type="number" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::customDelay"/>
 							</div>
 						</div>
 						<legend><i class="fas fa-globe"></i> {{Coordonnées}}</legend>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">{{Utilisé les coordonnées jeedom}}</label>
-							<div class="col-sm-2">
+							<div class="col-xs-11 col-sm-7">
 								<input type="checkbox" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="useJeedomLocalisation"/>
 							</div>
 						</div>
 						<div class="form-group customLocalisation">
 							<label class="col-sm-3 control-label">{{Latitude}}</label>
-							<div class="col-sm-2">
+							<div class="col-xs-11 col-sm-7">
 								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="lat"/>
 							</div>
 						</div>
 						<div class="form-group customLocalisation">
 							<label class="col-sm-3 control-label">{{Longitude}}</label>
-							<div class="col-sm-2">
+							<div class="col-xs-11 col-sm-7">
 								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="long"/>
 							</div>
 						</div>
 						<div class="form-group customLocalisation">
 							<label class="col-sm-3 control-label">{{Altitude}}</label>
-							<div class="col-sm-2">
+							<div class="col-xs-11 col-sm-7">
 								<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="alt"/>
 							</div>
 						</div>
 						<legend><i class="icon jeedom-volet-ferme"></i> {{Volet}}</legend>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">{{Etat volet}}</label>
-							<div class="col-sm-3">
+							<div class="col-xs-11 col-sm-7">
 								<div class="input-group">
 									<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::state"/>
 									<span class="input-group-btn">
@@ -192,7 +211,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">{{Position volet}}</label>
-							<div class="col-sm-3">
+							<div class="col-xs-11 col-sm-7">
 								<div class="input-group">
 									<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::position"/>
 									<span class="input-group-btn">
@@ -203,7 +222,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						</div>
 						<div class="form-group">
 							<label class="col-sm-3 control-label">{{Rafraîchir position volet}}</label>
-							<div class="col-sm-3">
+							<div class="col-xs-11 col-sm-7">
 								<div class="input-group">
 									<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::refreshPosition"/>
 									<span class="input-group-btn">
@@ -213,8 +232,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="col-sm-3 control-label">{{Temps maximum pour un déplacement}} <sub>s</sub></label>
-							<div class="col-sm-3">
+							<label class="col-sm-3 control-label">{{Temps maximum pour un déplacement}} <sub>(s)</sub></label>
+							<div class="col-xs-11 col-sm-7">
 								<input type="number" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::moveDuration"/>
 							</div>
 						</div>
@@ -222,12 +241,13 @@ $eqLogics = eqLogic::byType($plugin->getId());
 				</form>
 				<br/>
 				<div class="alert alert-info">{{Dans cet onglet, vous allez définir la configuration générale de la gestion :<br>
-					- Vérification : tous les combiens le plugin vérifiera la position du soleil pour éventuellement changer la position du volet (un cron personnalisé est possible)<br>
+					- Vérification : la fréquence à laquelle le plugin vérifiera la position du soleil pour éventuellement changer la position du volet (un cron personnalisé est possible)<br>
 					- Reprendre la main : si la position du volet se retrouve dans une position différente de celle voulue (changement manuel ou par exception), le système doit il reprendre la main automatiquement,
 					ne pas la reprendre, ou après un délai (délai après detection de l'écart et mise en suspens).<br>
-					- Coordonnées : la latitude, la longitude et l'altitude de votre volet (suncalc.org est très bien pour cela)
-					-Volet : ici vous allez choisi la commande état et la commande positionnement de votre volet}}</div>
+					- Coordonnées : la latitude, la longitude et l'altitude de votre volet (suncalc.org est très bien pour cela).<br>
+					- Volet : ici vous allez choisi la commande état et la commande positionnement de votre volet}}</div>
 				</div>
+
 				<div role="tabpanel" class="tab-pane" id="conditiontab">
 					<br/>
 					<fieldset>
@@ -235,7 +255,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<legend><i class="fas fa-cog"></i> {{Général}}</legend>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">{{Condition pour action}}</label>
-								<div class="col-sm-9">
+								<div class="col-xs-11 col-sm-7">
 									<div class="input-group">
 										<textarea class="eqLogicAttr form-control" data-concat="1" data-l1key="configuration" data-l2key="condition::allowmove" style="height:75px"></textarea>
 										<span class="input-group-addon hasBtn roundedRight">
@@ -246,13 +266,13 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">{{Un changement de mode annule les suspensions en cours}}</label>
-								<div class="col-sm-9">
+								<div class="col-xs-11 col-sm-7">
 									<input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="condition::allowIgnoreSuspend"/>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">{{Les actions immédiate sont systématique et prioritaire}}</label>
-								<div class="col-sm-9">
+								<label class="col-sm-3 control-label">{{Les actions immédiates sont systématiques et prioritaires}}</label>
+								<div class="col-xs-11 col-sm-7">
 									<input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="condition::systematic"/>
 								</div>
 							</div>
@@ -266,12 +286,13 @@ $eqLogics = eqLogic::byType($plugin->getId());
 										<th>{{Mode}}</th>
 										<th>{{Action Immédiate}}</th>
 										<th>{{Suspendre}}</th>
+										<th>{{Label}}</th>
 										<th style="width:50%">{{Condition}}</th>
 										<th style="width:15%">{{Commentaire}}</th>
 									</tr>
 								</thead>
 								<tbody>
-									
+
 								</tbody>
 							</table>
 						</fieldset>
@@ -297,15 +318,17 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<legend><i class="fas fa-cog"></i> {{Général}}</legend>
 								<div class="form-group">
 									<label class="col-sm-3 control-label">{{% ouverture}}</label>
-									<div class="col-sm-1">
+									<div class="col-sm-3">
 										<input type="number" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::openPosition"/>
 									</div>
-									<label class="col-sm-1 control-label">{{% fermeture}}</label>
-									<div class="col-sm-1">
+									<label class="col-sm-3 control-label">{{% fermeture}}</label>
+									<div class="col-sm-3">
 										<input type="number" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::closePosition"/>
 									</div>
-									<label class="col-sm-1 control-label">{{Action par défaut}}</label>
-									<div class="col-sm-2">
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label">{{Action par défaut}}</label>
+									<div class="col-sm-3">
 										<select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::defaultAction">
 											<option value="none">{{Ne rien faire}}</option>
 											<option value="open">{{Ouvrir}}</option>
@@ -313,8 +336,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 											<option value="custom">{{Position Personnalisée}}</option>
 										</select>
 									</div>
-									<label class="col-sm-1 control-label customPosition" style="display : none;">{{Position personnalisée}}</label>
-									<div class="col-sm-1 customPosition" style="display : none;">
+									<label class="col-sm-3 control-label customPosition" style="display : none;">{{Position personnalisée}}</label>
+									<div class="col-sm-3 customPosition" style="display : none;">
 										<input type="number" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="shutter::customPosition"/>
 									</div>
 								</div>
@@ -327,14 +350,15 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<thead>
 								<tr>
 									<th style="width:150px">{{Azimuth}}</th>
-									<th style="width:150px">{{Elevation}}</th>
+									<th style="width:150px">{{Elévation}}</th>
 									<th style="width:75px">{{Position}}</th>
+									<th style="width:75px">{{Label}}</th>
 									<th>{{Condition}}</th>
 									<th style="width:15%">{{Commentaire}}</th>
 								</tr>
 							</thead>
 							<tbody>
-								
+
 							</tbody>
 						</table>
 						<br/>
@@ -344,7 +368,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							- action par défaut : que faire lorsqu'aucune règle du tableau positionnement ne correspond (ouvrir/fermer/position personnalisée) <br>
 							- Tableau de positionnement : ici vous allez définir les règles de positionnement (si aucune exception n'est en cours) <br>
 							. Azimuth : borne d'azimuth du soleil (suncalc.org permet de faire bouger le soleil et voir son azimuth par rapport à votre volet) <br>
-							. Elevation : borne d'élévation du soleil (suncalc.org permet de faire bouger le soleil et voir son élévation par rapport à votre volet) <br>
+							. Elévation : borne d'élévation du soleil (suncalc.org permet de faire bouger le soleil et voir son élévation par rapport à votre volet) <br>
 							. Position : valeur de position à appliquer au volet si les conditions d'azimuth et d'élévation sont réunies <br>
 							. Condition : permet de définir une condition supplémentaire (cela permet par exemple pour une même position du soleil d'avoir un comportement différent si température au dessus ou en dessous d'une valeur, ou toute autres conditions) <br>
 							. Commentaire : si vous voulez garder une trace de pourquoi vouz mis cette rêgle c'est ici que ça se passe<br>
@@ -365,7 +389,6 @@ $eqLogics = eqLogic::byType($plugin->getId());
 					</div>
 				</div>
 			</div>
-			
+
 			<?php include_file('desktop', 'sunshutter', 'js', 'sunshutter');?>
 			<?php include_file('core', 'plugin.template', 'js');?>
-			

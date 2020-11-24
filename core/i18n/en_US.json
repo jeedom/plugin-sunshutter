@@ -29,7 +29,7 @@
         "Suspendu Auto": "Auto Suspended",
         "Nom": "Name",
         "Soleil": "Sun",
-        "Mode": "Fashion",
+        "Mode\/Label": "Fashion \/ Label",
         "Dernier": "Latest",
         "Suspension": "Suspension",
         "Gestion": "Management",
@@ -93,6 +93,7 @@
         "Mode": "Fashion",
         "Action Immédiate": "Immediate action",
         "Suspendre": "To suspend",
+        "Label": "Label",
         "Commentaire": "Comment",
         "% ouverture": "% opening",
         "% fermeture": "% closing",
@@ -127,10 +128,14 @@
         "Etat gestion": "Management status",
         "Suspension (Label)": "Suspension (Label)",
         "Mode": "Fashion",
+        "Label": "Label",
         "Dernière position": "Last Position",
         "Forcer action": "Force action",
         "Suspendre": "To suspend",
         "Reprendre": "Resume",
         "Rafraichir": "Refresh"
+    },
+    "info.json": {
+        "Plugin pour gerer l'ouverture\/fermeture des volets en fonction du soleil et d'autre condition. IMPORTANT ce plugin ne marche pas avec des volets tout ou rien il faut ABSOLUMENT des volets avec reglage proportionnels (%)": "Plugin to manage the opening \/ closing of shutters depending on the sun and other conditions. IMPORTANT this plugin does not work with all or nothing shutters it is ABSOLUTELY necessary shutters with proportional adjustment (%)"
     }
 }

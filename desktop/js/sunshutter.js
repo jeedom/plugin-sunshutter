@@ -54,6 +54,9 @@ function addPosition(_position){
   tr += '<input class="form-control positionAttr" data-l1key="shutter::position" style="width:calc( 100% - 20px);display:inline-block;" /> %';
   tr += '</td>';
   tr += '<td>';
+  tr += '<input class="form-control positionAttr" data-l1key="position::label" />';
+  tr += '</td>';
+  tr += '<td>';
   tr += '<div class="input-group"><textarea class="positionAttr form-control" data-concat="1" data-l1key="position::allowmove" style="height:75px"></textarea><span class="input-group-addon hasBtn roundedRight"><a class="btn btn-default listCmdInfoPos roundedRight" ><i class="fas fa-list-alt"></i></a></span></div>';
   tr += '</td>';
   tr += '<td>';
@@ -80,6 +83,9 @@ function addConditions(_condition){
   tr += '</td>';
   tr += '<td>';
   tr += '<input type="checkbox" class="conditionsAttr" data-l1key="conditions::suspend" />';
+  tr += '</td>';
+  tr += '<td>';
+  tr += '<input class="form-control conditionsAttr" data-l1key="conditions::label" />';
   tr += '</td>';
   tr += '<td>';
   tr += '<div class="input-group"><textarea class="conditionsAttr form-control" data-concat="1" data-l1key="conditions::condition" style="height:75px"></textarea><span class="input-group-addon hasBtn roundedRight"><a class="btn btn-default listCmdInfoConditions roundedRight" ><i class="fas fa-list-alt"></i></a></span></div>';
@@ -240,7 +246,7 @@ function printScheduling(_eqLogic){
       }
     }
   });
-  
+
 }
 
 
@@ -276,10 +282,10 @@ function addCmdToTable(_cmd) {
   tr += '</td>';
   tr += '<td>';
   if (is_numeric(_cmd.id)) {
-    tr += '<a class="btn btn-default btn-xs cmdAction" data-action="configure"><i class="fa fa-cogs"></i></a> ';
-    tr += '<a class="btn btn-default btn-xs cmdAction" data-action="test"><i class="fa fa-rss"></i> {{Tester}}</a>';
+    tr += '<a class="btn btn-default btn-xs cmdAction" data-action="configure"><i class="fas fa-cogs"></i></a> ';
+    tr += '<a class="btn btn-default btn-xs cmdAction" data-action="test"><i class="fas fa-rss"></i> {{Tester}}</a>';
   }
-  tr += '<i class="fa fa-minus-circle pull-right cmdAction cursor" data-action="remove"></i>';
+  tr += '<i class="fas fa-minus-circle pull-right cmdAction cursor" data-action="remove"></i>';
   tr += '</td>';
   tr += '</tr>';
   $('#table_cmd tbody').append(tr);

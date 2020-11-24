@@ -29,7 +29,7 @@
         "Suspendu Auto": "Auto Suspendido",
         "Nom": "Nombre",
         "Soleil": "Sol",
-        "Mode": "Modo",
+        "Mode\/Label": "Etiqueta de moda",
         "Dernier": "Pasado",
         "Suspension": "Suspensión",
         "Gestion": "Gestión",
@@ -93,6 +93,7 @@
         "Mode": "Modo",
         "Action Immédiate": "Acción inmediata",
         "Suspendre": "Suspender",
+        "Label": "Etiqueta",
         "Commentaire": "Comentario",
         "% ouverture": "% de apertura",
         "% fermeture": "% de cierre",
@@ -127,10 +128,14 @@
         "Etat gestion": "Estado de gestión",
         "Suspension (Label)": "Suspensión (etiqueta)",
         "Mode": "Modo",
+        "Label": "Etiqueta",
         "Dernière position": "Última posición",
         "Forcer action": "Acción de la fuerza",
         "Suspendre": "Suspender",
         "Reprendre": "Reanudar",
         "Rafraichir": "Refrescar"
+    },
+    "info.json": {
+        "Plugin pour gerer l'ouverture\/fermeture des volets en fonction du soleil et d'autre condition. IMPORTANT ce plugin ne marche pas avec des volets tout ou rien il faut ABSOLUMENT des volets avec reglage proportionnels (%)": "Complemento para gestionar la apertura \/ cierre de persianas en función del sol y otras condiciones. IMPORTANTE: este complemento no funciona con todos o nada de los obturadores, es ABSOLUTAMENTE necesario obturadores con ajuste proporcional (%)"
     }
 }

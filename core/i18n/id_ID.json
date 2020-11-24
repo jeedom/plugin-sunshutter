@@ -29,7 +29,7 @@
         "Suspendu Auto": "",
         "Nom": "Nama",
         "Soleil": "",
-        "Mode": "Mode",
+        "Mode\/Label": "",
         "Dernier": "",
         "Suspension": "",
         "Gestion": "Manajemen",
@@ -93,6 +93,7 @@
         "Mode": "Mode",
         "Action Immédiate": "",
         "Suspendre": "",
+        "Label": "",
         "Commentaire": "COMMENTAIRE",
         "% ouverture": "",
         "% fermeture": "",
@@ -127,10 +128,14 @@
         "Etat gestion": "",
         "Suspension (Label)": "",
         "Mode": "Mode",
+        "Label": "",
         "Dernière position": "",
         "Forcer action": "",
         "Suspendre": "",
         "Reprendre": "Ringkasan",
         "Rafraichir": "Dingin"
+    },
+    "info.json": {
+        "Plugin pour gerer l'ouverture\/fermeture des volets en fonction du soleil et d'autre condition. IMPORTANT ce plugin ne marche pas avec des volets tout ou rien il faut ABSOLUMENT des volets avec reglage proportionnels (%)": ""
     }
 }
