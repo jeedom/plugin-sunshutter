@@ -4,8 +4,14 @@
 >
 >Pour rappel s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte
 
+# 24/11/2020
 
-- Possibilité de mettre des labels pour les differentes condition (faculatif mais permet d'executer un scénario suite à un positionnement du volet par exemple)
+- Nouvelle présentation de la liste des objets
+- Ajout du tag "Compatibilité V4"
+
+# 28/07/2020
+
+- Possibilité de mettre des labels pour les différentes conditions (faculatif mais permet d'executer un scénario suite à un positionnement du volet par exemple)
 
 # 11/05/2020
 
