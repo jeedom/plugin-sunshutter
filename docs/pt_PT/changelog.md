@@ -4,8 +4,14 @@
 >
 >Como lembrete, se não houver informações sobre a atualização, isso significa que se trata apenas da atualização da documentação, tradução ou texto
 
+# 24/11/2020
 
-- Possibilidade de colocar etiquetas para as diferentes condições (opcional, mas permite executar um cenário após um posicionamento do obturador, por exemplo)
+- Nova apresentação da lista de objetos
+- Adição da tag "compatibilidade V4"
+
+# 28/07/2020
+
+- Possibilidade de colocar etiquetas para as diferentes condições (opcional, mas permite executar um cenário seguindo um posicionamento do obturador por exemplo)
 
 # 05/11/2020
 

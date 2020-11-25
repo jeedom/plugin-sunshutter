@@ -4,6 +4,12 @@
 >
 >As a reminder if there is no information on the update, it means that it only concerns the updating of documentation, translation or text
 
+# 24/11/2020
+
+- New presentation of the list of objects
+- Addition of the tag "V4 compatibility"
+
+# 07/28/2020
 
 - Possibility to put labels for the different conditions (optional but allows to execute a scenario following a positioning of the shutter for example)
 

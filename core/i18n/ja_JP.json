@@ -52,17 +52,18 @@
         "Positionnement": "",
         "Planning": "スケジュール",
         "Commandes": "コマンド",
+        "Général": "コモン",
         "Nom de l'équipement volet": "",
         "Nom de l'équipement template": "テンプレート機器の名称",
         "Objet parent": "親オブジェクト",
         "Aucun": "何でもありません",
         "Catégorie": "カテゴリ",
+        "Options": "オプション",
         "Activer": "アクティブ",
         "Visible": "目に見えます",
+        "Ajouter une commande": "コマンドの追加",
         "Nom": "表題",
-        "Options": "オプション",
         "Action": "アクション",
-        "Général": "コモン",
         "Vérification": "検証",
         "Toutes les 5 minutes": "",
         "Toutes les 10 minutes": "",
@@ -87,7 +88,7 @@
         "Temps maximum pour un déplacement": "",
         "Condition pour action": "",
         "Un changement de mode annule les suspensions en cours": "",
-        "Les actions immédiate sont systématique et prioritaire": "",
+        "Les actions immédiates sont systématiques et prioritaires": "",
         "Conditions": "",
         "Position": "位置",
         "Mode": "モード",
@@ -104,7 +105,7 @@
         "Position Personnalisée": "",
         "Position personnalisée": "",
         "Azimuth": "",
-        "Elevation": ""
+        "Elévation": ""
     },
     "plugins\/sunshutter\/desktop\/js\/sunshutter.js": {
         "Santé Gestion Volet": "",
@@ -136,6 +137,6 @@
         "Rafraichir": "クール"
     },
     "info.json": {
-        "Plugin pour gerer l'ouverture\/fermeture des volets en fonction du soleil et d'autre condition. IMPORTANT ce plugin ne marche pas avec des volets tout ou rien il faut ABSOLUMENT des volets avec reglage proportionnels (%)": ""
+        "Plugin permettant de gérer l'ouverture\/fermeture des volets en fonction du soleil et d'autres conditions. IMPORTANT : ce plugin ne fonctionne pas avec des volets tout ou rien, il faut ABSOLUMENT des volets avec réglages proportionnels (%).": ""
     }
 }

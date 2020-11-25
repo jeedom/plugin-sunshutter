@@ -52,17 +52,18 @@
         "Positionnement": "",
         "Planning": "Planlama",
         "Commandes": "Komutalar",
+        "Général": "Genel",
         "Nom de l'équipement volet": "",
         "Nom de l'équipement template": "Şablon cihazının ismi",
         "Objet parent": "Üst nesne",
         "Aucun": "Hiçbir",
         "Catégorie": "Kategori",
+        "Options": "Opsiyonlar",
         "Activer": "Etkinleştir",
         "Visible": "Görülebilir",
+        "Ajouter une commande": "Komuta ekle",
         "Nom": "İsim",
-        "Options": "Opsiyonlar",
         "Action": "Eylem",
-        "Général": "Genel",
         "Vérification": "",
         "Toutes les 5 minutes": "",
         "Toutes les 10 minutes": "",
@@ -87,7 +88,7 @@
         "Temps maximum pour un déplacement": "",
         "Condition pour action": "",
         "Un changement de mode annule les suspensions en cours": "",
-        "Les actions immédiate sont systématique et prioritaire": "",
+        "Les actions immédiates sont systématiques et prioritaires": "",
         "Conditions": "",
         "Position": "Pozisyon",
         "Mode": "Mod",
@@ -104,7 +105,7 @@
         "Position Personnalisée": "",
         "Position personnalisée": "",
         "Azimuth": "",
-        "Elevation": ""
+        "Elévation": ""
     },
     "plugins\/sunshutter\/desktop\/js\/sunshutter.js": {
         "Santé Gestion Volet": "",
@@ -136,6 +137,6 @@
         "Rafraichir": "Yenile"
     },
     "info.json": {
-        "Plugin pour gerer l'ouverture\/fermeture des volets en fonction du soleil et d'autre condition. IMPORTANT ce plugin ne marche pas avec des volets tout ou rien il faut ABSOLUMENT des volets avec reglage proportionnels (%)": ""
+        "Plugin permettant de gérer l'ouverture\/fermeture des volets en fonction du soleil et d'autres conditions. IMPORTANT : ce plugin ne fonctionne pas avec des volets tout ou rien, il faut ABSOLUMENT des volets avec réglages proportionnels (%).": ""
     }
 }

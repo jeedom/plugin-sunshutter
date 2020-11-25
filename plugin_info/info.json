@@ -3,10 +3,10 @@
     "name": "Gestion Volets",
     "description": {
         "fr_FR": "Plugin permettant de gérer l'ouverture\/fermeture des volets en fonction du soleil et d'autres conditions. IMPORTANT : ce plugin ne fonctionne pas avec des volets tout ou rien, il faut ABSOLUMENT des volets avec réglages proportionnels (%).",
-        "en_US": "Plugin to manage the opening \/ closing of shutters depending on the sun and other conditions. IMPORTANT this plugin does not work with all or nothing shutters it is ABSOLUTELY necessary shutters with proportional adjustment (%)",
-        "es_ES": "Complemento para gestionar la apertura \/ cierre de persianas en función del sol y otras condiciones. IMPORTANTE: este complemento no funciona con todos o nada de los obturadores, es ABSOLUTAMENTE necesario obturadores con ajuste proporcional (%)",
-        "de_DE": "Plugin zum Verwalten des Öffnens \/ Schließens von Rollläden in Abhängigkeit von der Sonne und anderen Bedingungen. WICHTIG Dieses Plugin funktioniert nicht mit allen oder nichts Rollläden. Es sind ABSOLUT notwendige Rollläden mit proportionaler Einstellung (%)",
-        "pt_PT": "Plugin para gerenciar a abertura \/ fechamento de persianas, dependendo do sol e de outras condições. IMPORTANTE, este plugin não funciona com persianas com tudo ou nada; é absolutamente necessário persianas com ajuste proporcional (%)"
+        "en_US": "Plugin allowing to manage the opening \/ closing of the shutters according to the sun and other conditions. IMPORTANT: this plugin does not work with all or nothing flaps, it is ABSOLUTELY necessary flaps with proportional settings (%)",
+        "es_ES": "Plugin que permite gestionar la apertura \/ cierre de las contraventanas según el sol y otras condiciones. IMPORTANTE: este complemento no funciona con contraventanas de todo o nada, ABSOLUTAMENTE necesita contraventanas con ajustes proporcionales (%)",
+        "de_DE": "Plugin, mit dem das Öffnen \/ Schließen der Fensterläden entsprechend der Sonne und anderen Bedingungen verwaltet werden kann. WICHTIG: Dieses Plugin funktioniert nicht mit allen oder nichts Klappen, es sind ABSOLUT notwendige Klappen mit proportionalen Einstellungen (%)",
+        "pt_PT": "Plugin que permite gerir a abertura \/ fecho das venezianas de acordo com o sol e outras condições. IMPORTANTE: este plugin não funciona com flaps tudo ou nada, são ABSOLUTAMENTE necessários flaps com ajustes proporcionais (%)"
     },
     "licence": "AGPL",
     "author": "Jeedom SAS",
