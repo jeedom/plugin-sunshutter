@@ -52,17 +52,18 @@
         "Positionnement": "Positionierung",
         "Planning": "Zeitplan",
         "Commandes": "Befehle",
+        "Général": "Allgemein",
         "Nom de l'équipement volet": "Name der Verschlussausrüstung",
         "Nom de l'équipement template": "Gerätename Vorlage",
         "Objet parent": "Übergeordnetes Objekt",
         "Aucun": "Ohne",
         "Catégorie": "Kategorie",
+        "Options": "Optionen",
         "Activer": "Aktivieren",
         "Visible": "Sichtbar",
+        "Ajouter une commande": "Kommando einfügen",
         "Nom": "Name",
-        "Options": "Optionen",
         "Action": "Aktion",
-        "Général": "Allgemein",
         "Vérification": "Überprüfung",
         "Toutes les 5 minutes": "Alle 5 Minuten",
         "Toutes les 10 minutes": "Alle 10 Minuten",
@@ -87,7 +88,7 @@
         "Temps maximum pour un déplacement": "Maximale Zeit für eine Reise",
         "Condition pour action": "Handlungsbedingung",
         "Un changement de mode annule les suspensions en cours": "Der Moduswechsel bricht ausstehende Suspensionen ab",
-        "Les actions immédiate sont systématique et prioritaire": "Sofortmaßnahmen sind systematisch und vorrangig",
+        "Les actions immédiates sont systématiques et prioritaires": "Sofortmaßnahmen sind systematisch und vorrangig",
         "Conditions": "Bedingungen",
         "Position": "Position",
         "Mode": "Modus",
@@ -104,7 +105,7 @@
         "Position Personnalisée": "Benutzerdefinierte Position",
         "Position personnalisée": "Benutzerdefinierte Position",
         "Azimuth": "Azimut",
-        "Elevation": "Höhe"
+        "Elévation": "Höhe"
     },
     "plugins\/sunshutter\/desktop\/js\/sunshutter.js": {
         "Santé Gestion Volet": "Gesundheitsmanagement-Komponente",
@@ -136,6 +137,6 @@
         "Rafraichir": "Aktualisieren"
     },
     "info.json": {
-        "Plugin pour gerer l'ouverture\/fermeture des volets en fonction du soleil et d'autre condition. IMPORTANT ce plugin ne marche pas avec des volets tout ou rien il faut ABSOLUMENT des volets avec reglage proportionnels (%)": "Plugin zum Verwalten des Öffnens \/ Schließens von Rollläden in Abhängigkeit von der Sonne und anderen Bedingungen. WICHTIG Dieses Plugin funktioniert nicht mit allen oder nichts Rollläden. Es sind ABSOLUT notwendige Rollläden mit proportionaler Einstellung (%)"
+        "Plugin permettant de gérer l'ouverture\/fermeture des volets en fonction du soleil et d'autres conditions. IMPORTANT : ce plugin ne fonctionne pas avec des volets tout ou rien, il faut ABSOLUMENT des volets avec réglages proportionnels (%).": "Plugin, mit dem das Öffnen \/ Schließen der Fensterläden entsprechend der Sonne und anderen Bedingungen verwaltet werden kann. WICHTIG: Dieses Plugin funktioniert nicht mit allen oder nichts Klappen, es sind ABSOLUT notwendige Klappen mit proportionalen Einstellungen (%)"
     }
 }

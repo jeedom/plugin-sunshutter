@@ -4,8 +4,14 @@
 >
 >Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
 
+# 24/11/2020
 
-- Posibilidad de poner etiquetas para las diferentes condiciones (opcional, pero permite ejecutar un escenario siguiendo un posicionamiento del obturador, por ejemplo)
+- Nueva presentación de la lista de objetos
+- Adición de la etiqueta "compatibilidad V4"
+
+# 28/07/2020
+
+- Posibilidad de poner etiquetas para las diferentes condiciones (opcional pero permite ejecutar un escenario siguiendo un posicionamiento de la persiana por ejemplo)
 
 # 05/11/2020
 

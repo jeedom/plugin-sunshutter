@@ -52,17 +52,18 @@
         "Positionnement": "Positionnement",
         "Planning": "Planning",
         "Commandes": "Commandes",
+        "Général": "Général",
         "Nom de l'équipement volet": "Nom de l'équipement volet",
         "Nom de l'équipement template": "Nom de l'équipement template",
         "Objet parent": "Objet parent",
         "Aucun": "Aucun",
         "Catégorie": "Catégorie",
+        "Options": "Options",
         "Activer": "Activer",
         "Visible": "Visible",
+        "Ajouter une commande": "Ajouter une commande",
         "Nom": "Nom",
-        "Options": "Options",
         "Action": "Action",
-        "Général": "Général",
         "Vérification": "Vérification",
         "Toutes les 5 minutes": "Toutes les 5 minutes",
         "Toutes les 10 minutes": "Toutes les 10 minutes",
@@ -87,7 +88,7 @@
         "Temps maximum pour un déplacement": "Temps maximum pour un déplacement",
         "Condition pour action": "Condition pour action",
         "Un changement de mode annule les suspensions en cours": "Un changement de mode annule les suspensions en cours",
-        "Les actions immédiate sont systématique et prioritaire": "Les actions immédiate sont systématique et prioritaire",
+        "Les actions immédiates sont systématiques et prioritaires": "Les actions immédiates sont systématiques et prioritaires",
         "Conditions": "Conditions",
         "Position": "Position",
         "Mode": "Mode",
@@ -104,7 +105,7 @@
         "Position Personnalisée": "Position Personnalisée",
         "Position personnalisée": "Position personnalisée",
         "Azimuth": "Azimuth",
-        "Elevation": "Elevation"
+        "Elévation": "Elévation"
     },
     "plugins\/sunshutter\/desktop\/js\/sunshutter.js": {
         "Santé Gestion Volet": "Santé Gestion Volet",
@@ -136,6 +137,6 @@
         "Rafraichir": "Rafraichir"
     },
     "info.json": {
-        "Plugin pour gerer l'ouverture\/fermeture des volets en fonction du soleil et d'autre condition. IMPORTANT ce plugin ne marche pas avec des volets tout ou rien il faut ABSOLUMENT des volets avec reglage proportionnels (%)": "Plugin pour gerer l'ouverture\/fermeture des volets en fonction du soleil et d'autre condition. IMPORTANT ce plugin ne marche pas avec des volets tout ou rien il faut ABSOLUMENT des volets avec reglage proportionnels (%)"
+        "Plugin permettant de gérer l'ouverture\/fermeture des volets en fonction du soleil et d'autres conditions. IMPORTANT : ce plugin ne fonctionne pas avec des volets tout ou rien, il faut ABSOLUMENT des volets avec réglages proportionnels (%).": "Plugin permettant de gérer l'ouverture\/fermeture des volets en fonction du soleil et d'autres conditions. IMPORTANT : ce plugin ne fonctionne pas avec des volets tout ou rien, il faut ABSOLUMENT des volets avec réglages proportionnels (%)."
     }
 }

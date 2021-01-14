@@ -52,17 +52,18 @@
         "Positionnement": "Positioning",
         "Planning": "Schedule",
         "Commandes": "Commands",
+        "Général": "Main",
         "Nom de l'équipement volet": "Shutter equipment name",
         "Nom de l'équipement template": "Equipment name template",
         "Objet parent": "Parent object",
         "Aucun": "None",
         "Catégorie": "Category",
+        "Options": "Options",
         "Activer": "Activate",
         "Visible": "Visible",
+        "Ajouter une commande": "Add a command",
         "Nom": "Name",
-        "Options": "Options",
         "Action": "Action",
-        "Général": "Main",
         "Vérification": "Verification",
         "Toutes les 5 minutes": "Every 5 minutes",
         "Toutes les 10 minutes": "Every 10 minutes",
@@ -87,7 +88,7 @@
         "Temps maximum pour un déplacement": "Maximum time for one trip",
         "Condition pour action": "Condition for action",
         "Un changement de mode annule les suspensions en cours": "Mode change cancels pending suspensions",
-        "Les actions immédiate sont systématique et prioritaire": "Immediate actions are systematic and priority",
+        "Les actions immédiates sont systématiques et prioritaires": "Immediate actions are systematic and priority",
         "Conditions": "Terms",
         "Position": "Position",
         "Mode": "Fashion",
@@ -104,7 +105,7 @@
         "Position Personnalisée": "Custom Position",
         "Position personnalisée": "Custom Position",
         "Azimuth": "Azimuth",
-        "Elevation": "Elevation"
+        "Elévation": "Elevation"
     },
     "plugins\/sunshutter\/desktop\/js\/sunshutter.js": {
         "Santé Gestion Volet": "Health Management Component",
@@ -136,6 +137,6 @@
         "Rafraichir": "Refresh"
     },
     "info.json": {
-        "Plugin pour gerer l'ouverture\/fermeture des volets en fonction du soleil et d'autre condition. IMPORTANT ce plugin ne marche pas avec des volets tout ou rien il faut ABSOLUMENT des volets avec reglage proportionnels (%)": "Plugin to manage the opening \/ closing of shutters depending on the sun and other conditions. IMPORTANT this plugin does not work with all or nothing shutters it is ABSOLUTELY necessary shutters with proportional adjustment (%)"
+        "Plugin permettant de gérer l'ouverture\/fermeture des volets en fonction du soleil et d'autres conditions. IMPORTANT : ce plugin ne fonctionne pas avec des volets tout ou rien, il faut ABSOLUMENT des volets avec réglages proportionnels (%).": "Plugin allowing to manage the opening \/ closing of the shutters according to the sun and other conditions. IMPORTANT: this plugin does not work with all or nothing flaps, it is ABSOLUTELY necessary flaps with proportional settings (%)"
     }
 }

@@ -52,17 +52,18 @@
         "Positionnement": "Posicionamento",
         "Planning": "Horário",
         "Commandes": "Comandos",
+        "Général": "Geral",
         "Nom de l'équipement volet": "Nome do equipamento do obturador",
         "Nom de l'équipement template": "Nome do equipamento modelo",
         "Objet parent": "Objeto pai",
         "Aucun": "Nemhum",
         "Catégorie": "Categoria",
+        "Options": "Opções",
         "Activer": "Ativar",
         "Visible": "Visivél",
+        "Ajouter une commande": "Adicionar comando",
         "Nom": "Nome",
-        "Options": "Opções",
         "Action": "Ação",
-        "Général": "Geral",
         "Vérification": "Verificação",
         "Toutes les 5 minutes": "A cada 5 minutos",
         "Toutes les 10 minutes": "A cada 10 minutos",
@@ -87,7 +88,7 @@
         "Temps maximum pour un déplacement": "Tempo máximo para uma viagem",
         "Condition pour action": "Condição para ação",
         "Un changement de mode annule les suspensions en cours": "A alteração de modo cancela suspensões pendentes",
-        "Les actions immédiate sont systématique et prioritaire": "Ações imediatas são sistemáticas e prioritárias",
+        "Les actions immédiates sont systématiques et prioritaires": "Ações imediatas são sistemáticas e prioritárias",
         "Conditions": "Condições",
         "Position": "Posição",
         "Mode": "Modo",
@@ -104,7 +105,7 @@
         "Position Personnalisée": "Posição Personalizada",
         "Position personnalisée": "Posição Personalizada",
         "Azimuth": "Azimute",
-        "Elevation": "Elevação"
+        "Elévation": "Elevação"
     },
     "plugins\/sunshutter\/desktop\/js\/sunshutter.js": {
         "Santé Gestion Volet": "Componente de gerenciamento de integridade",
@@ -136,6 +137,6 @@
         "Rafraichir": "Legal"
     },
     "info.json": {
-        "Plugin pour gerer l'ouverture\/fermeture des volets en fonction du soleil et d'autre condition. IMPORTANT ce plugin ne marche pas avec des volets tout ou rien il faut ABSOLUMENT des volets avec reglage proportionnels (%)": "Plugin para gerenciar a abertura \/ fechamento de persianas, dependendo do sol e de outras condições. IMPORTANTE, este plugin não funciona com persianas com tudo ou nada; é absolutamente necessário persianas com ajuste proporcional (%)"
+        "Plugin permettant de gérer l'ouverture\/fermeture des volets en fonction du soleil et d'autres conditions. IMPORTANT : ce plugin ne fonctionne pas avec des volets tout ou rien, il faut ABSOLUMENT des volets avec réglages proportionnels (%).": "Plugin que permite gerir a abertura \/ fecho das venezianas de acordo com o sol e outras condições. IMPORTANTE: este plugin não funciona com flaps tudo ou nada, são ABSOLUTAMENTE necessários flaps com ajustes proporcionais (%)"
     }
 }
