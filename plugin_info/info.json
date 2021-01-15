@@ -6,7 +6,12 @@
         "en_US": "Plugin allowing to manage the opening \/ closing of the shutters according to the sun and other conditions. IMPORTANT: this plugin does not work with all or nothing flaps, it is ABSOLUTELY necessary flaps with proportional settings (%)",
         "es_ES": "Plugin que permite gestionar la apertura \/ cierre de las contraventanas según el sol y otras condiciones. IMPORTANTE: este complemento no funciona con contraventanas de todo o nada, ABSOLUTAMENTE necesita contraventanas con ajustes proporcionales (%)",
         "de_DE": "Plugin, mit dem das Öffnen \/ Schließen der Fensterläden entsprechend der Sonne und anderen Bedingungen verwaltet werden kann. WICHTIG: Dieses Plugin funktioniert nicht mit allen oder nichts Klappen, es sind ABSOLUT notwendige Klappen mit proportionalen Einstellungen (%)",
-        "pt_PT": "Plugin que permite gerir a abertura \/ fecho das venezianas de acordo com o sol e outras condições. IMPORTANTE: este plugin não funciona com flaps tudo ou nada, são ABSOLUTAMENTE necessários flaps com ajustes proporcionais (%)"
+        "pt_PT": "Plugin que permite gerir a abertura \/ fecho das venezianas de acordo com o sol e outras condições. IMPORTANTE: este plugin não funciona com flaps tudo ou nada, são ABSOLUTAMENTE necessários flaps com ajustes proporcionais (%)",
+        "ru_RU": "Plugin permettant de gérer l'ouverture\/fermeture des volets en fonction du soleil et d'autres conditions. IMPORTANT : ce plugin ne fonctionne pas avec des volets tout ou rien, il faut ABSOLUMENT des volets avec réglages proportionnels (%)",
+        "id_ID": "Plugin permettant de gérer l'ouverture\/fermeture des volets en fonction du soleil et d'autres conditions. IMPORTANT : ce plugin ne fonctionne pas avec des volets tout ou rien, il faut ABSOLUMENT des volets avec réglages proportionnels (%)",
+        "it_IT": "Plugin permettant de gérer l'ouverture\/fermeture des volets en fonction du soleil et d'autres conditions. IMPORTANT : ce plugin ne fonctionne pas avec des volets tout ou rien, il faut ABSOLUMENT des volets avec réglages proportionnels (%)",
+        "ja_JP": "Plugin permettant de gérer l'ouverture\/fermeture des volets en fonction du soleil et d'autres conditions. IMPORTANT : ce plugin ne fonctionne pas avec des volets tout ou rien, il faut ABSOLUMENT des volets avec réglages proportionnels (%)",
+        "tr": "Plugin permettant de gérer l'ouverture\/fermeture des volets en fonction du soleil et d'autres conditions. IMPORTANT : ce plugin ne fonctionne pas avec des volets tout ou rien, il faut ABSOLUMENT des volets avec réglages proportionnels (%)"
     },
     "licence": "AGPL",
     "author": "Jeedom SAS",
@@ -23,7 +28,12 @@
         "en_US",
         "es_ES",
         "de_DE",
-        "pt_PT"
+        "ru_RU",
+        "id_ID",
+        "it_IT",
+        "ja_JP",
+        "pt_PT",
+        "tr"
     ],
     "compatibility": [
         "miniplus",
