@@ -23,6 +23,8 @@ $('.eqLogicAttr[data-l1key=configuration][data-l2key=useJeedomLocalisation]').of
   }
 })
 
+$("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
+
 $('#bt_healthsunshutter').on('click', function () {
   $('#md_modal').dialog({title: "{{Santé Gestion Volet}}"});
   $('#md_modal').load('index.php?v=d&plugin=sunshutter&modal=health').dialog('open');
