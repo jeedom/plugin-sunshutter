@@ -53,7 +53,7 @@ function addPosition(_position){
   tr += '<input class="form-control positionAttr" data-l1key="sun::elevation::from" style="width:calc( 50% - 10px);display:inline-block;" /> {{à}} <input class="form-control positionAttr" data-l1key="sun::elevation::to" style="width:calc( 50% - 10px);display:inline-block;"/>';
   tr += '</td>';
   tr += '<td>';
-  tr += '<input class="form-control positionAttr" data-l1key="shutter::position" style="width:calc( 100% - 20px);display:inline-block;" /> %';
+  tr += '<input class="form-control positionAttr" data-l1key="shutter::position" style="width:calc( 100% - 15px);display:inline-block;" /> %';
   tr += '</td>';
   tr += '<td>';
   tr += '<input class="form-control positionAttr" data-l1key="position::label" />';
@@ -248,7 +248,7 @@ function printScheduling(_eqLogic){
       }
     }
   });
-
+  
 }
 
 
