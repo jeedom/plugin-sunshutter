@@ -195,8 +195,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4 control-label">{{Exceptions immédiates prioritaires}}
-									<sup><i class="fas fa-question-circle tooltips" title="{{Cocher la case pour que les exceptions immédiates s'exécutent peu importe les autres conditions, même en cas de suspension}}"></i></sup>
+								<label class="col-sm-4 control-label">{{Actions immédiates prioritaires}}
+									<sup><i class="fas fa-question-circle tooltips" title="{{Cocher la case pour que les exceptions avec action immédiate s'exécutent peu importe les autres conditions, même en cas de suspension}}"></i></sup>
 								</label>
 								<div class="col-sm-6">
 									<input type="checkbox" class="eqLogicAttr" data-l1key="configuration" data-l2key="condition::systematic">
@@ -348,7 +348,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									<th style="min-width:100px;width:200px">{{Mode}}
 										<sup><i class="fas fa-question-circle tooltips" title="{{La règle ne sera valide que si le volet est dans le mode spécifié, plusieurs modes peuvent être renseignés séparés par des virgules (facultatif)}}"></i></sup>
 									</th>
-									<th>{{Exception immédiate}}
+									<th>{{Action immédiate}}
 										<sup><i class="fas fa-question-circle tooltips" title="{{Cocher la case pour que la règle s'exécute immédiatement dès que la condition est valide}}"></i></sup>
 									</th>
 									<th>{{Suspendre}}

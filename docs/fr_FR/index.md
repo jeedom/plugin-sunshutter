@@ -37,7 +37,7 @@ En dessous, nous allons pouvoir configurer le moteur de gestion automatique en l
 >*Exemple : le système ferme le volet puis vous l'ouvrez manuellement quelques minutes plus tard, alors la gestion automatique ne se fera que si **Reprendre la main** est à "**Oui**" ou que le délai de reprise de main est dépassé ou encore que la commande **Reprendre gestion** ne soit déclenchée.*
 
 - **Reprendre sur changement de mode** : Cochez la case pour reprendre la gestion automatique en cas de changement de mode.
-- **Exceptions immédiates prioritaires** : Cochez la case pour que les exceptions immédiates s'exécutent peu importe les autres conditions, même en cas de suspension.
+- **Actions immédiates prioritaires** : Cochez la case pour que les exceptions avec action immédiate s'exécutent peu importe les autres conditions, même en cas de suspension.
 
 >**IMPORTANT**
 >
