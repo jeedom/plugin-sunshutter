@@ -93,11 +93,11 @@ C'est au sein de cet onglet que vous allez pouvoir gérer le positionnement du v
 >
 >Le site [suncalc.org](https://www.suncalc.org){:target="\_blank"} permet, une fois votre adresse rentrée, de visualiser la position du soleil et les angles d'azimuth et d'élévation en fonction des heures de la journée *(il suffit de faire glisser le petit soleil en haut)*.
 
-## Programmation
+# Programmation
 
 Cet onglet recense les programmations du plugin **Agenda** agissant sur la gestion automatique de ce volet pour, par exemple, planifier une suspension et une reprise manuelle pendant les heures de sieste d'un enfant.
 
-## Commandes
+# Commandes
 
 Ce dernier onglet donne accès à la liste des commandes et permet de définir/supprimer des modes pour la gestion automatique du volet :
 
