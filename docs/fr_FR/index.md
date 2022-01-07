@@ -104,7 +104,7 @@ Ce dernier onglet donne accès à la liste des commandes et permet de définir/s
 - **Azimut soleil** : Angle d'azimuth actuel du soleil.
 - **Elévation soleil** : Angle d'élévation actuel du soleil.
 - **Rafraichir** : Force la mise à jour des commandes **Azimut soleil** et **Elévation soleil**.
->Il est bien sûr possible d'utiliser les valeurs des commandes **Azimuth soleil** et **Elévation soleil** pour d'autres fonctions dans Jeedom.
+>Il est bien sûr possible d'utiliser les valeurs des commandes **Azimuth soleil** et **Elévation soleil** ailleurs dans Jeedom.
 
 - **Etat gestion** : Etat actuel de la gestion automatique en binaire *(0 = suspendue / 1 = active)*.
 - **Forcer action** : Force le calcul de position du volet en fonction de la position du soleil et des exceptionbs et applique le positionnement quel que soit l\'état de la gestion automatique *(suspendue ou non)*.
