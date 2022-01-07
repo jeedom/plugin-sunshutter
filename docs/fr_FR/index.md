@@ -1,12 +1,12 @@
 # Plugin Gestion Volets
 
-Le **Gestion des Volets** va vous permettre de gérer facilement le positionnement automatique de vos volets en fonction de l'altitude et de l'azimuth du soleil et/ou d'autres conditions de votre choix. Tous les calculs sont effectués directement par le plugin sans nécessiter de connexion à internet.
+Le plugin **Gestion des Volets** va vous permettre de gérer facilement le positionnement automatique de vos volets en fonction de l'élévation et de l'azimuth du soleil et/ou d'autres conditions de votre choix. Tous les calculs sont effectués directement par le plugin sans nécessiter de connexion à internet.
 
 Bien appréhendé, ce plugin est en mesure de remplacer l'ensemble des scénarios relatifs à l'ouverture, la fermeture ou le positionnement de vos volets. Vous pouvez retrouver un exemple d'utilisation à la lecture de [cet article du blog rédigé par Loïc](https://www.jeedom.com/blog/?p=4310){:target="\_blank"}.
 
 >**IMPORTANT**
 >
->Le **Gestion des Volets** ne fonctionne qu'avec des équipements possédant **une commande action/curseur** permettant de **positionner le volet à un certain pourcentage d'ouverture/fermeture**. Si votre volet ne fonctionne qu'en ouverture/fermeture, le plugin sera pas utilisable.
+>Le plugin **Gestion des Volets** ne fonctionne qu'avec des équipements possédant **une commande action/curseur** permettant de **positionner le volet à un certain pourcentage d'ouverture/fermeture**. Si votre volet ne fonctionne qu'en ouverture/fermeture, le plugin ne sera pas utilisable.
 
 # Configuration
 
@@ -27,7 +27,7 @@ L'ensemble de la configuration d'automatisation de chaque volet s'effectue depui
 - **Catégorie** : Permet de choisir la catégorie de l'équipement.
 - **Options** :
     - **Activer** : Permet de rendre l'équipement actif.
-    - **Visible** : Rend l'équipement visible sur le dashboard.
+    - **Visible** : Rend l'équipement visible.
 
 En dessous, nous allons pouvoir configurer le moteur de gestion automatique en lui-même :
 
@@ -66,9 +66,7 @@ Enfin, ne reste plus qu'à renseigner les informations relatives au contrôle du
 
 # Exceptions
 
-Cet onglet va permettre de définir des règles spécifiques qui viendront en exception des conditions relatives à la position du soleil de l'onglet suivant.
-
-Les règles sont vérifiées les unes après les autres, le moteur de gestion automatique s'arrête à la première règle valide et place le volet à la position indiquée.
+Cet onglet va permettre de définir des règles spécifiques qui viendront en exception aux conditions relatives à la position du soleil de l'onglet suivant. Les règles sont vérifiées les unes après les autres, le moteur de gestion automatique s'arrête à la première règle valide et place le volet à la position indiquée.
 
 - **Condition** : La condition à remplir pour que la règle soit valide *(facultatif)*.
 - **Mode** : Si renseigné, la condition ne sera valide que si le volet est actuellement dans le mode spécifié. Il est possible de spécifier plusieurs modes en les séparant par des virgules *(facultatif)*.
@@ -93,7 +91,7 @@ C'est au sein de cet onglet que vous allez pouvoir gérer le positionnement du v
 
 >**ASTUCE**
 >
->Le site [suncalc.org](https://www.suncalc.org){:target="\_blank"} permet, une fois votre adresse rentrée, de visualiser la position du soleil et les angles Azimuth et d'élévation en fonction des heures de la journée *(il suffit de faire glisser le petit soleil en haut)*.
+>Le site [suncalc.org](https://www.suncalc.org){:target="\_blank"} permet, une fois votre adresse rentrée, de visualiser la position du soleil et les angles d'azimuth et d'élévation en fonction des heures de la journée *(il suffit de faire glisser le petit soleil en haut)*.
 
 ## Programmation
 
@@ -101,11 +99,13 @@ Cet onglet recense les programmations du plugin **Agenda** agissant sur la gesti
 
 ## Commandes
 
-Ce dernier onglet donne accès à la liste des commandes et permet de définir/supprimer des modes pour le volet. Il est bien sûr possible d'utiliser les informations de ces commandes pour d'autres fonctions dans Jeedom :
+Ce dernier onglet donne accès à la liste des commandes et permet de définir/supprimer des modes pour la gestion automatique du volet :
 
-- **Azimut soleil** : Angle Azimuth actuel du soleil.
+- **Azimut soleil** : Angle d'azimuth actuel du soleil.
 - **Elévation soleil** : Angle d'élévation actuel du soleil.
 - **Rafraichir** : Force la mise à jour des commandes **Azimut soleil** et **Elévation soleil**.
+>Il est bien sûr possible d'utiliser les valeurs des commandes **Azimuth soleil** et **Elévation soleil** pour d'autres fonctions dans Jeedom.
+
 - **Etat gestion** : Etat actuel de la gestion automatique en binaire *(0 = suspendue / 1 = active)*.
 - **Forcer action** : Force le calcul de position du volet en fonction de la position du soleil et des exceptionbs et applique le positionnement quel que soit l\'état de la gestion automatique *(suspendue ou non)*.
 - **Dernière position** : Dernière position demandée au volet par le plugin.
@@ -113,7 +113,7 @@ Ce dernier onglet donne accès à la liste des commandes et permet de définir/s
 - **Suspendre** : Suspend la gestion automatique du volet.
 - **Suspendre (Label)** : Etat actuel de la suspension de la gestion automatique du volet *(Aucun / Manuel / Auto)*.
 - **Reprendre** : Force la remise en route de la gestion automatique.
->*C'est cette commande qu'il faudra exécuter pour repasser en gestion automatique si vous avez modifié la position de votre volet manuellement et configuré **Reprendre la main** à "**Non**".
+>C'est cette commande qu'il faudra exécuter pour repasser en gestion automatique si vous avez modifié la position de votre volet manuellement et configuré **Reprendre la main** à "**Non**".
 
 - **Mode** : Mode actuel du volet.
 
@@ -125,8 +125,8 @@ Le bouton bleu **Ajouter un mode** permet d'ajouter une nouvelle commande action
 
 # Santé
 
-Le plugin **Gestion des Volets** est pourvu d'une fenêtre **Santé**, sur la page générale des équipements, qui permet de visualiser d'un seul coup les configurations de chaque gestion automatique.
+Le plugin **Gestion des Volets** est pourvu d'une fenêtre **Santé**, sur la page générale des équipements, qui permet de visualiser d'un seul coup d'œil les configurations de chaque gestion automatique.
 
 # Panel
 
-Le plugin est également doté d'un panel de gestion disponible à la fois en version desktop et mobile. Pour l'activer, il suffit d'aller dans **Plugins → Gestion des plugins**, cliquer sur le plugin de **Gestion Volets** et de cocher les cases pour afficher les panels tout en bas à droite .
+Le plugin est également doté d'un panel de gestion disponible à la fois en version desktop et mobile. Pour l'activer, il suffit d'aller dans **Plugins → Gestion des plugins**, cliquer sur le plugin **Gestion Volets** et de cocher les cases pour afficher les panels tout en bas à droite.
