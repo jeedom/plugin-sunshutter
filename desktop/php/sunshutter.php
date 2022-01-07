@@ -346,7 +346,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 										<sup><i class="fas fa-question-circle tooltips" title="{{Condition à remplir pour exécuter la règle (facultatif)}}"></i></sup>
 									</th>
 									<th style="min-width:100px;width:200px">{{Mode}}
-										<sup><i class="fas fa-question-circle tooltips" title="{{La règle ne sera valide que si le volet est dans le mode spécifié, plusieurs modes peuvent être renseignés séparés par des virgules (facultatif)}}"></i></sup>
+										<sup><i class="fas fa-question-circle tooltips" title="{{La condition ne sera valide que si le volet est dans le mode spécifié, plusieurs modes peuvent être renseignés séparés par des virgules (facultatif)}}"></i></sup>
 									</th>
 									<th>{{Action immédiate}}
 										<sup><i class="fas fa-question-circle tooltips" title="{{Cocher la case pour que la règle s'exécute immédiatement dès que la condition est valide}}"></i></sup>
