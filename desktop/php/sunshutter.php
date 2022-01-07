@@ -195,7 +195,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4 control-label">{{Actions immédiates prioritaires}}
+								<label class="col-sm-4 control-label">{{Action immédiate prioritaire}}
 									<sup><i class="fas fa-question-circle tooltips" title="{{Cocher la case pour que les exceptions avec action immédiate s'exécutent peu importe les autres conditions, même en cas de suspension}}"></i></sup>
 								</label>
 								<div class="col-sm-6">
