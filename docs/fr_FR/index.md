@@ -95,7 +95,7 @@ C'est au sein de cet onglet que vous allez pouvoir gérer le positionnement du v
 
 # Programmation
 
-Cet onglet recense les programmations du plugin **Agenda** agissant sur la gestion automatique de ce volet pour, par exemple, planifier une suspension et une reprise manuelle pendant les heures de sieste d'un enfant.
+Cet onglet n'apparait que si le plugin **Agenda** est installé sur votre Jeedom. Il recense les programmations du plugin **Agenda** agissant sur la gestion automatique de ce volet pour, par exemple, planifier une suspension et une reprise manuelle pendant les heures de sieste d'un enfant.
 
 # Commandes
 
