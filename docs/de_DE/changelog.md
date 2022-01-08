@@ -2,7 +2,15 @@
 
 >**Wichtig**
 >
->Zur Erinnerung: Wenn keine Informationen zum Update vorhanden sind, bedeutet dies, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt
+>Zur Erinnerung: Wenn keine Informationen zur Aktualisierung vorliegen, liegt dies daran, dass es sich nur um die Aktualisierung von Dokumentation, Übersetzung oder Text handelt.
+
+# 07.01.2022
+
+- Logs umschreiben und Code optimieren
+- Modernisierung der Schnittstelle
+- Dokumentations-Update
+
+# 14.01.2021
 
 - Codeoptimierung
 
@@ -13,7 +21,7 @@
 
 # 28.07.2020
 
-- Möglichkeit, Beschriftungen für die verschiedenen Bedingungen anzubringen (optional, ermöglicht jedoch die Ausführung eines Szenarios beispielsweise nach einer Positionierung des Verschlusses)
+- Möglichkeit, Etiketten für die verschiedenen Bedingungen anzubringen *(optional, ermöglicht aber zum Beispiel die Ausführung eines Szenarios nach der Positionierung des Rollladens)*
 
 # 05/11/2020
 
@@ -30,10 +38,10 @@
 # 26.08.2019
 
 - Fehlerbehebungen
-- Aktualisieren des Dokuments
-- Checkbox-Anzeige behoben
+- Dokumentations-Update
+- Anzeige von Checkboxen korrigiert
 
 # 08/12/2019
 
 - Fehlerbehebungen
-- Aktualisieren des Dokuments
+- Dokumentations-Update

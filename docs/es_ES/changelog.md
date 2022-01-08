@@ -2,7 +2,15 @@
 
 >**Importante**
 >
->Como recordatorio si no hay información sobre la actualización, significa que solo se refiere a la actualización de documentación, traducción o texto
+>Como recordatorio, si no hay información sobre la actualización es porque se trata solo de la actualización de documentación, traducción o texto.
+
+# 01/07/2022
+
+- Reescritura de registros y optimización de código
+- Modernización de la interfaz
+- Actualización de documentación
+
+# 14/01/2021
 
 - Optimización de código
 
@@ -13,7 +21,7 @@
 
 # 28/07/2020
 
-- Posibilidad de poner etiquetas para las diferentes condiciones (opcional pero permite ejecutar un escenario siguiendo un posicionamiento de la persiana por ejemplo)
+- Posibilidad de poner etiquetas para las diferentes condiciones *(opcional pero permite ejecutar un escenario siguiendo el posicionamiento de la persiana, por ejemplo)*
 
 # 05/11/2020
 
@@ -30,10 +38,10 @@
 # 26/08/2019
 
 - Correcciones de errores
-- Actualizando el documento
-- Pantalla de casilla de verificación fija
+- Actualización de documentación
+- Visualización fija de casillas de verificación
 
 # 08/12/2019
 
 - Correcciones de errores
-- Actualizando el documento
+- Actualización de documentación
