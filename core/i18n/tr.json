@@ -152,6 +152,9 @@
         "Nom": "İsim",
         "Action": "Eylem"
     },
+    "plugins\/sunshutter\/desktop\/js\/panel.js": {
+        "Aucun équipement actif ou créé trouvé.": "Aucun équipement actif ou créé trouvé"
+    },
     "plugins\/sunshutter\/desktop\/js\/sunshutter.js": {
         "Santé Gestion Volet": "Santé Gestion Volet",
         "de": "de",

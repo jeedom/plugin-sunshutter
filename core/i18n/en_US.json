@@ -152,10 +152,13 @@
         "Nom": "Name",
         "Action": "Action"
     },
+    "plugins\/sunshutter\/desktop\/js\/panel.js": {
+        "Aucun équipement actif ou créé trouvé.": "No active or created equipment found"
+    },
     "plugins\/sunshutter\/desktop\/js\/sunshutter.js": {
         "Santé Gestion Volet": "Health Management Component",
         "de": "of",
-        "à": "at",
+        "à": "At",
         "Supprimer la condition": "Remove condition",
         "Supprimer la règle": "Remove the rule",
         "Aucune programmation trouvée, accéder au": "No programming found, access",

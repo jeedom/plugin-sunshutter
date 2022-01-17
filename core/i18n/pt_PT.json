@@ -152,10 +152,13 @@
         "Nom": "Nome",
         "Action": "Ação"
     },
+    "plugins\/sunshutter\/desktop\/js\/panel.js": {
+        "Aucun équipement actif ou créé trouvé.": "Nenhum equipamento ativo ou criado encontrado"
+    },
     "plugins\/sunshutter\/desktop\/js\/sunshutter.js": {
         "Santé Gestion Volet": "Componente de gerenciamento de integridade",
         "de": "de",
-        "à": "no",
+        "à": "à",
         "Supprimer la condition": "Remover condição",
         "Supprimer la règle": "Remova a regra",
         "Aucune programmation trouvée, accéder au": "Nenhuma programação encontrada, acesse",

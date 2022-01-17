@@ -142,7 +142,7 @@
         "Condition complémentaire à remplir (facultatif)": "Zusätzliche zu erfüllende Bedingung (optional)",
         "Azimuth": "Azimut",
         "Bornes d'azimuth du soleil en degrés": "Azimutgrenzen der Sonne in Grad",
-        "Elévation": "Elevation",
+        "Elévation": "Höhe",
         "Bornes d'élévation du soleil en degrés": "Sonnenstandsmarkierungen in Grad",
         "Label associé à la validation de la condition (facultatif)": "Label, das mit der Validierung der Bedingung verbunden ist (optional)",
         "Cet onglet recense les programmations du plugin Agenda agissant sur la gestion automatique de ce volet.": "Diese Registerkarte listet die Programmierung des Agenda-Plugins auf, die auf die automatische Verwaltung dieses Bereichs wirkt",
@@ -152,10 +152,13 @@
         "Nom": "Name",
         "Action": "Aktion"
     },
+    "plugins\/sunshutter\/desktop\/js\/panel.js": {
+        "Aucun équipement actif ou créé trouvé.": "Keine aktive oder erstellte Ausrüstung gefunden"
+    },
     "plugins\/sunshutter\/desktop\/js\/sunshutter.js": {
         "Santé Gestion Volet": "Gesundheitsmanagement-Komponente",
         "de": "von",
-        "à": "beim",
+        "à": "Bis",
         "Supprimer la condition": "Bedingung entfernen",
         "Supprimer la règle": "Entferne die Regel",
         "Aucune programmation trouvée, accéder au": "Keine Programmierung gefunden, Zugriff",
