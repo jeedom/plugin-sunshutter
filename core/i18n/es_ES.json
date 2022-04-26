@@ -173,8 +173,8 @@
     },
     "plugins\/sunshutter\/core\/ajax\/sunshutter.ajax.php": {
         "401 - Accès non autorisé": "401 - Acceso no autorizado",
-        "Sunshutter non trouvé : ": "Sunshutter no encontrado:",
-        "Aucune methode correspondante à : ": "Ningún método correspondiente a:"
+        "Volet non trouvé": "Panel no encontrado",
+        "Aucune methode correspondante à": "Ningún método correspondiente a"
     },
     "plugins\/sunshutter\/core\/class\/sunshutter.class.php": {
         "Gestion automatique suspendue, vérification du délai avant reprise": "Gestión automática suspendida, verificación del retraso antes de la reanudación",
