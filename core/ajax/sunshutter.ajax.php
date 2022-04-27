@@ -32,7 +32,7 @@ try {
 		}
 		$sunshutter = sunshutter::byId(init('id'));
 		if (!is_object($sunshutter)) {
-			throw new Exception(__('Sunshutter non trouvé : ', __FILE__) . init('id'));
+			throw new Exception(__('Volet non trouvé', __FILE__) . ' : ' . init('id'));
 		}
 		try {
 			$plugin = plugin::byId('calendar');
@@ -53,7 +53,7 @@ try {
 		}
 		ajax::success(utils::o2a($return));
 	}
-	
+
 	if (init('action') == 'getPanel') {
 		if (!isConnect('admin')) {
 			throw new Exception(__('401 - Accès non autorisé', __FILE__));
@@ -61,7 +61,7 @@ try {
 		ajax::success(sunshutter::getPanel(init('type')));
 	}
 
-	throw new Exception(__('Aucune methode correspondante à : ', __FILE__) . init('action'));
+	throw new Exception(__('Aucune methode correspondante à', __FILE__) . ' : ' . init('action'));
 } catch (Exception $e) {
 	ajax::error(displayExeption($e), $e->getCode());
 }

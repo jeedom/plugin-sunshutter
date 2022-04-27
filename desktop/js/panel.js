@@ -31,6 +31,10 @@ function getSunshutterState(){
 				$('#div_inclusionAlert').showAlert({message: data.result, level: 'danger'});
 				return;
 			}
+			if(!data.result.global){
+				$('#div_inclusionAlert').showAlert({message: '{{Aucun équipement actif ou créé trouvé.}}', level: 'warning'});
+				return;
+			}
 			if(data.result.global['moyPos']){
 				$(".posMoy").value(data.result.global['moyPos']+'%');
 			}
