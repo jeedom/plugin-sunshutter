@@ -481,7 +481,7 @@ class sunshutter extends eqLogic {
       $default = $this->getConfiguration('shutter::openPosition', 100);
       log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Calcul de positionnement - Action par défaut : Ouvrir', __FILE__) . ' ' . __('à', __FILE__) . ' ' . $default . ' %');
       break;
-      case 'closest':
+      case 'close':
       $default = $this->getConfiguration('shutter::closePosition', 0);
       log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Calcul de positionnement - Action par défaut : Fermer', __FILE__) . ' ' . __('à', __FILE__) . ' ' . $default . ' %');
       break;
