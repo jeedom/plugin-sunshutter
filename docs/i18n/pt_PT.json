@@ -2,6 +2,8 @@
     "changelog.md": {
         "Changelog Gestion Volets": "Gerenciamento de Obturador de Alterações",
         "Pour rappel, s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte": "Recorde-se que, se não existe informação sobre a atualização, é porque se trata apenas da atualização de documentação, tradução ou texto",
+        "02\/05\/2022": "02\/05\/2022",
+        "Correction de bug (merci @florentde": "Correção de bug (obrigado @florentde",
         "07\/01\/2022": "01\/07\/2022",
         "Réécriture des logs et optimisation du code": "Reescrever registros e otimizar código",
         "Modernisation de l'interface": "Modernização da interface",
