@@ -28,8 +28,7 @@ class sunshutter extends eqLogic {
     foreach (eqLogic::byType(__CLASS__) as $sunshutter) {
       if (date('Gi') == 0) {
         $sunshutter->save();
-      }
-      else {
+      } else {
         $sunshutter->updateData();
       }
     }
@@ -48,7 +47,7 @@ class sunshutter extends eqLogic {
             $delay = $sunshutter->getConfiguration('shutter::customDelay', 0);
             $since = $sunshutter->getCache('beginSuspend');
             $deltadelay = abs($since - time()) / 60;
-            log::add(__CLASS__, 'debug', $sunshutter->getHumanName() . ' ' . __('Gestion automatique suspendue, vérification du délai avant reprise', __FILE__) . ' (' . $delay . ' ' . __('minutes', __FILE__). ') : ' . round($deltadelay) . ' ' . __('minutes', __FILE__));
+            log::add(__CLASS__, 'debug', $sunshutter->getHumanName() . ' ' . __('Gestion automatique suspendue, vérification du délai avant reprise', __FILE__) . ' (' . $delay . ' ' . __('minutes', __FILE__) . ') : ' . round($deltadelay) . ' ' . __('minutes', __FILE__));
             if ($deltadelay >= $delay) {
               log::add(__CLASS__, 'debug', $sunshutter->getHumanName() . ' ' . __('Délai de reprise atteint : réactivation de la gestion automatique', __FILE__));
               $sunshutter->checkAndUpdateCmd('stateHandling', true);
@@ -58,8 +57,7 @@ class sunshutter extends eqLogic {
               $forcedByDelay = 1;
             }
           }
-        }
-        else {
+        } else {
           $lastPositionOrder = $sunshutter->getCache('lastPositionOrder', null);
           $currentPosition = $sunshutter->getCurrentPosition();
           if ($currentPosition !== null && $lastPositionOrder !== null) {
@@ -67,12 +65,12 @@ class sunshutter extends eqLogic {
             $delta = abs($currentPosition - $lastPositionOrder);
             $ecart = round(($delta / $amplitude) * 100, 2);
             // log::add(__CLASS__, 'debug', $sunshutter->getHumanName() . ' ' . __('Ecart avec la dernière position connue',__FILE__) . ' : ' . $ecart . ' %');
-            if ($ecart > 4 && ($sunshutter->getConfiguration('shutter::moveDuration', 0) == 0 || (strtotime('now') - $sunshutter->getCache('lastPositionOrderTime', 0)) > $sunshutter->getConfiguration('shutter::moveDuration'))){
+            if ($ecart > 4 && ($sunshutter->getConfiguration('shutter::moveDuration', 0) == 0 || (strtotime('now') - $sunshutter->getCache('lastPositionOrderTime', 0)) > $sunshutter->getConfiguration('shutter::moveDuration'))) {
               $sunshutter->checkAndUpdateCmd('stateHandling', false);
               $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
               $sunshutter->setCache('beginSuspend', time());
               $sunshutter->setCache('manualSuspend', false);
-              log::add(__CLASS__, 'debug', $sunshutter->getHumanName() . ' ' . __('Ecart avec la dernière position connue supérieur à 4 % : suspension de la gestion automatique',__FILE__));
+              log::add(__CLASS__, 'debug', $sunshutter->getHumanName() . ' ' . __('Ecart avec la dernière position connue supérieur à 4 % : suspension de la gestion automatique', __FILE__));
             }
           }
         }
@@ -87,8 +85,7 @@ class sunshutter extends eqLogic {
           if ($c->isDue() && $forcedByDelay == 0) {
             $sunshutter->executeAction();
           }
-        }
-        catch (Exception $exc) {
+        } catch (Exception $exc) {
           log::add(__CLASS__, 'error', __('Expression cron non valide pour', __FILE__) . ' ' . $sunshutter->getHumanName() . ' : ' . $cron);
         }
       }
@@ -106,18 +103,17 @@ class sunshutter extends eqLogic {
     if ($sunshutter->getCache('manualSuspend')) {
       return;
     }
-    log::add(__CLASS__, 'debug', $sunshutter->getHumanName().' ' . __('Déclenchement de l\'action immédiate', __FILE__) . ' : ' . print_r($_options, true));
+    log::add(__CLASS__, 'debug', $sunshutter->getHumanName() . ' ' . __('Déclenchement de l\'action immédiate', __FILE__) . ' : ' . print_r($_options, true));
     if ($sunshutter->getConfiguration('condition::systematic', 0) == 1) {
       log::add(__CLASS__, 'debug', $sunshutter->getHumanName() . ' ' . __('Les actions immédiates sont prioritaires', __FILE__));
       $sunshutter->systematicAction($_options['event_id']);
-    }
-    else {
+    } else {
       $sunshutter->executeAction();
     }
   }
 
   public static function getPanel($_type) {
-    $return = array('shutters'=>array());
+    $return = array('shutters' => array());
     $numberShutters = 0;
     $sumposition = 0;
     $numbersupendedAuto = 0;
@@ -144,7 +140,7 @@ class sunshutter extends eqLogic {
       if (is_object($modeCmd)) {
         $currentMode = $modeCmd->execCmd();
       }
-      if ( $currentMode == '') {
+      if ($currentMode == '') {
         $currentMode = 'Aucun';
       }
       $cmd = cmd::byId(str_replace('#', '', $sunshutter->getConfiguration('shutter::state')));
@@ -163,8 +159,7 @@ class sunshutter extends eqLogic {
       if ($handling == false) {
         if ($handlingLabel == 'Auto') {
           $numbersupendedAuto += 1;
-        }
-        else {
+        } else {
           $numbersupendedManual += 1;
         }
       }
@@ -195,7 +190,7 @@ class sunshutter extends eqLogic {
         'cmdmode' => $cmdMode,
         'suspendTime' => date('d-m H:i:s', $sunshutter->getCache('beginSuspend', time()))
       );
-      $return['shutters'][]= $datas;
+      $return['shutters'][] = $datas;
       $return['global'] = array('moyPos' => ($numberShutters == 0) ? 'N/A' : round($sumposition / $numberShutters), 'auto' => $numbersupendedAuto, 'manual' => $numbersupendedManual,);
     }
     return $return;
@@ -350,12 +345,10 @@ class sunshutter extends eqLogic {
       }
       if ($nblistener > 0) {
         $listener->save();
-      }
-      else {
+      } else {
         $listener->remove();
       }
-    }
-    else {
+    } else {
       $listener = listener::byClassAndFunction(__CLASS__, 'immediateAction', array('sunshutter_id' => intval($this->getId())));
       if (is_object($listener)) {
         $listener->remove();
@@ -368,12 +361,11 @@ class sunshutter extends eqLogic {
     $SD = new SolarData\SolarData();
     if ($this->getConfiguration('useJeedomLocalisation') == 1) {
       $SD->setObserverPosition(config::byKey('info::latitude'), config::byKey('info::longitude'), config::byKey('info::altitude'));
-    }
-    else {
+    } else {
       $SD->setObserverPosition($this->getConfiguration('lat'), $this->getConfiguration('long'), $this->getConfiguration('alt'));
     }
     $SD->setObserverDate(date('Y'), date('n'), date('j'));
-    $SD->setObserverTime(date('G'), date('i'),date('s'));
+    $SD->setObserverTime(date('G'), date('i'), date('s'));
     $SD->setDeltaTime(67);
     $SD->setObserverTimezone(date('Z') / 3600);
     $SunPosition = $SD->calculate();
@@ -409,10 +401,10 @@ class sunshutter extends eqLogic {
     $conditions = $this->getConfiguration('conditions', '');
     if (is_array($conditions)) {
       foreach ($conditions as $condition) {
-        if ($condition['conditions::immediate'] && strpos($condition['conditions::condition'], '#'.$_cmdId.'#') !== false) {
+        if ($condition['conditions::immediate'] && strpos($condition['conditions::condition'], '#' . $_cmdId . '#') !== false) {
           if (isset($condition['conditions::mode']) && trim($condition['conditions::mode']) != '') {
             if (!in_array($mode, array_map('trim', explode(',', strtolower($condition['conditions::mode']))))) {
-              log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Le mode ne correspond pas',__FILE__) . ' : ' . $modeCmd->execCmd() . ' != ' . $condition['conditions::mode']);
+              log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Le mode ne correspond pas', __FILE__) . ' : ' . $modeCmd->execCmd() . ' != ' . $condition['conditions::mode']);
               continue;
             }
           }
@@ -423,7 +415,7 @@ class sunshutter extends eqLogic {
               if (is_object($cmd)) {
                 $position = $condition['conditions::position'];
                 if ($condition['conditions::suspend'] == 1) {
-                  log::add(__CLASS__, 'debug', $this->getHumanName().' ' . __('Condition avec action immédiate + suspension de la gestion automatique', __FILE__));
+                  log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Condition avec action immédiate + suspension de la gestion automatique', __FILE__));
                   $this->setCache('beginSuspend', time());
                   $this->checkAndUpdateCmd('stateHandling', false);
                   $cmdStateLabel = $this->getCmd(null, 'stateHandlingLabel');
@@ -435,13 +427,12 @@ class sunshutter extends eqLogic {
                 $currentPosition = null;
                 $currentPosition = $this->getCurrentPosition();
                 $amplitude = abs($this->getConfiguration('shutter::closePosition', 0) - $this->getConfiguration('shutter::openPosition', 100));
-                $delta = abs( $position - $currentPosition);
+                $delta = abs($position - $currentPosition);
                 $ecart = round(($delta / $amplitude) * 100, 2);
                 log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Ecart avec la position cible', __FILE__) . ' : ' . $ecart . ' %');
                 if ($ecart <= 4) {
                   log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Ecart avec la position cible inférieur à 4 % : aucune action', __FILE__));
-                }
-                else {
+                } else {
                   log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Positionnement à', __FILE__) . ' ' . $position . ' %');
                   $cmd->execCmd(array('slider' => $position));
                   $this->setCache('lastPositionOrder', $position);
@@ -457,7 +448,7 @@ class sunshutter extends eqLogic {
     }
   }
 
-  public function calculPosition(){
+  public function calculPosition() {
     $sun_elevation = $this->getCmd(null, 'sun_elevation')->execCmd();
     $sun_azimuth = $this->getCmd(null, 'sun_azimuth')->execCmd();
     $positions = $this->getConfiguration('positions', '');
@@ -478,21 +469,21 @@ class sunshutter extends eqLogic {
 
     switch ($this->getConfiguration('shutter::defaultAction', 'none')) {
       case 'open':
-      $default = $this->getConfiguration('shutter::openPosition', 100);
-      log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Calcul de positionnement - Action par défaut : Ouvrir', __FILE__) . ' ' . __('à', __FILE__) . ' ' . $default . ' %');
-      break;
+        $default = $this->getConfiguration('shutter::openPosition', 100);
+        log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Calcul de positionnement - Action par défaut : Ouvrir', __FILE__) . ' ' . __('à', __FILE__) . ' ' . $default . ' %');
+        break;
       case 'close':
-      $default = $this->getConfiguration('shutter::closePosition', 0);
-      log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Calcul de positionnement - Action par défaut : Fermer', __FILE__) . ' ' . __('à', __FILE__) . ' ' . $default . ' %');
-      break;
-      case 'custom' :
-      $default = $this->getConfiguration('shutter::customPosition', 50);
-      log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Calcul de positionnement - Action par défaut : Position personnalisée', __FILE__) . ' ' . __('à', __FILE__) . ' ' . $default . ' %');
-      break;
+        $default = $this->getConfiguration('shutter::closePosition', 0);
+        log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Calcul de positionnement - Action par défaut : Fermer', __FILE__) . ' ' . __('à', __FILE__) . ' ' . $default . ' %');
+        break;
+      case 'custom':
+        $default = $this->getConfiguration('shutter::customPosition', 50);
+        log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Calcul de positionnement - Action par défaut : Position personnalisée', __FILE__) . ' ' . __('à', __FILE__) . ' ' . $default . ' %');
+        break;
       default:
-      $default = $this->getCurrentPosition();
-      log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Calcul de positionnement - Action par défaut : Ne rien faire', __FILE__));
-      break;
+        $default = $this->getCurrentPosition();
+        log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Calcul de positionnement - Action par défaut : Ne rien faire', __FILE__));
+        break;
     }
 
     //return $default;
@@ -506,7 +497,7 @@ class sunshutter extends eqLogic {
         $delay = $this->getConfiguration('shutter::customDelay', 0);
         $since = $this->getCache('beginSuspend');
         $deltadelay = abs($since - time()) / 60;
-        log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Gestion automatique suspendue, vérification du délai avant reprise', __FILE__) . ' (' . $delay . ' ' . __('minutes', __FILE__). ') : ' . round($deltadelay) . ' ' . __('minutes', __FILE__));
+        log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Gestion automatique suspendue, vérification du délai avant reprise', __FILE__) . ' (' . $delay . ' ' . __('minutes', __FILE__) . ') : ' . round($deltadelay) . ' ' . __('minutes', __FILE__));
         if ($this->getCache('manualSuspend')) {
           log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Gestion automatique suspendue manuellement : aucune action', __FILE__));
           return;
@@ -516,13 +507,11 @@ class sunshutter extends eqLogic {
           $this->checkAndUpdateCmd('stateHandling', true);
           $this->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
           $_force = true;
-        }
-        else {
-          log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Gestion automatique suspendue, réactivation dans', __FILE__) . ' ' . round($delay - $deltadelay). ' ' . __('minutes', __FILE__));
+        } else {
+          log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Gestion automatique suspendue, réactivation dans', __FILE__) . ' ' . round($delay - $deltadelay) . ' ' . __('minutes', __FILE__));
           return;
         }
-      }
-      else{
+      } else {
         log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Gestion automatique suspendue : aucune action', __FILE__));
         return;
       }
@@ -540,13 +529,13 @@ class sunshutter extends eqLogic {
         $amplitude = abs($this->getConfiguration('shutter::closePosition', 0) - $this->getConfiguration('shutter::openPosition', 100));
         $delta = abs($currentPosition - $lastPositionOrder);
         $ecart = round(($delta / $amplitude) * 100, 2);
-        log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Ecart avec la dernière position connue',__FILE__) . ' : ' . $ecart . ' %');
+        log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Ecart avec la dernière position connue', __FILE__) . ' : ' . $ecart . ' %');
         if ($ecart > 4 && ($this->getConfiguration('shutter::moveDuration', 0) == 0 || (strtotime('now') - $this->getCache('lastPositionOrderTime', 0)) > $this->getConfiguration('shutter::moveDuration'))) {
           $this->checkAndUpdateCmd('stateHandling', false);
           $this->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
           $this->setCache('beginSuspend', time());
           $this->setCache('manualSuspend', false);
-          log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Ecart avec la dernière position connue supérieur à 4 % : suspension de la gestion automatique',__FILE__));
+          log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Ecart avec la dernière position connue supérieur à 4 % : suspension de la gestion automatique', __FILE__));
           return;
         }
       }
@@ -568,7 +557,7 @@ class sunshutter extends eqLogic {
         }
         if (isset($condition['conditions::mode']) && trim($condition['conditions::mode']) != '') {
           if (!in_array($mode, array_map('trim', explode(',', strtolower($condition['conditions::mode']))))) {
-            log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Le mode ne correspond pas',__FILE__) . ' : ' . $modeCmd->execCmd() . ' != ' . $condition['conditions::mode']);
+            log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Le mode ne correspond pas', __FILE__) . ' : ' . $modeCmd->execCmd() . ' != ' . $condition['conditions::mode']);
             continue;
           }
           if ($condition['conditions::condition'] == '') {
@@ -591,9 +580,8 @@ class sunshutter extends eqLogic {
             $position = $condition['conditions::position'];
             $label = $condition['conditions::label'];
             break;
-          }
-          else {
-            log::add(__CLASS__, 'debug', $this->getHumanName(). ' ' . __('Condition remplie mais position vide - Aucune action', __FILE__) . ' : ' . $condition['conditions::condition']);
+          } else {
+            log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Condition remplie mais position vide - Aucune action', __FILE__) . ' : ' . $condition['conditions::condition']);
             $position = $currentPosition;
             $label = $condition['conditions::label'];
             break;
@@ -627,7 +615,6 @@ class sunshutter extends eqLogic {
       $this->checkAndUpdateCmd('label', $label);
     }
   }
-
 }
 
 class sunshutterCmd extends cmd {
@@ -667,5 +654,4 @@ class sunshutterCmd extends cmd {
       }
     }
   }
-
 }
