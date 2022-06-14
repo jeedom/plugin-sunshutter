@@ -351,6 +351,9 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									<th>{{Action immédiate}}
 										<sup><i class="fas fa-question-circle tooltips" title="{{Cocher la case pour que la règle s'exécute immédiatement dès que la condition est valide}}"></i></sup>
 									</th>
+									<th>{{Action forcée}}
+										<sup><i class="fas fa-question-circle tooltips" title="{{Cocher la case pour que l'action immédiate soit exécutée même si la condition générale n'est pas remplie}}"></i></sup>
+									</th>
 									<th>{{Suspendre}}
 										<sup><i class="fas fa-question-circle tooltips" title="{{Cocher la case pour suspendre la gestion automatique tant que la règle est valide}}"></i></sup>
 									</th>

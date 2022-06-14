@@ -394,10 +394,6 @@ class sunshutter extends eqLogic {
   }
 
   public function systematicAction($_cmdId) {
-    if (trim($this->getConfiguration('condition::allowmove')) != '' && jeedom::evaluateExpression($this->getConfiguration('condition::allowmove')) == false) {
-      log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Condition générale non remplie - Aucune action', __FILE__) . ' : ' . $this->getConfiguration('condition::allowmove'));
-      return;
-    }
     $mode = '';
     if (is_object($modeCmd = $this->getCmd(null, 'mode'))) {
       $mode = strtolower($modeCmd->execCmd());
@@ -414,6 +410,14 @@ class sunshutter extends eqLogic {
           }
           if ($condition['conditions::condition'] != '' && jeedom::evaluateExpression($condition['conditions::condition'])) {
             if (trim($condition['conditions::position']) != '') {
+              if (trim($this->getConfiguration('condition::allowmove')) != '' && jeedom::evaluateExpression($this->getConfiguration('condition::allowmove')) == false) {
+                  if (isset($condition['conditions::forced']) && $condition['conditions::forced']){
+                    log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Condition générale non remplie - Mais action forcée', __FILE__) . ' : ' . $this->getConfiguration('condition::allowmove'));
+                  } else {
+                    log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Condition générale non remplie - Aucune action', __FILE__) . ' : ' . $this->getConfiguration('condition::allowmove'));
+                    continue;
+                  }
+              }
               log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Condition avec action immédiate', __FILE__) . ' : ' . $condition['conditions::condition'] . ' (' . $condition['conditions::position'] . ' %)');
               $cmd = cmd::byId(str_replace('#', '', $this->getConfiguration('shutter::position')));
               if (is_object($cmd)) {
