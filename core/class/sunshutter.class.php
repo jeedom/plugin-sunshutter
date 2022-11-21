@@ -145,17 +145,19 @@ class sunshutter extends eqLogic {
     if (!is_array($replace)) {
       return $replace;
     }
-    if ($_version == 'mview' || $_version == 'mobile') {
+    $_ori_version = $_version;
+    $_version = jeedom::versionAlias($_version);
+    if ($_version == 'mobile') {
       $replace['#class#'] = $replace['#class#'] . ' col2';
     }
-    if ($_version == 'mview' || $_version == 'view') {
+    if ($_ori_version == 'mview' || $_ori_version == 'view') {
       $replace['#class#'] = $replace['#class#'] . ' displayObjectName';
     }
-    $_version = jeedom::versionAlias($_version);
+
     $tableOption = $this->getDisplay('layout::' . $_version . '::table::parameters', array());
     $tableOption['center'] = 1;
     $replace['#eqLogic_class#'] = 'eqLogic_layout_table';
-    if ($_version == 'mobile') {
+    if ($_ori_version == 'mview') {
       $tableOption['style::td::1::1'] = 'width:65%';
     }
     $table = self::generateHtmlTable(1, 2, $tableOption);
@@ -170,14 +172,16 @@ class sunshutter extends eqLogic {
       }
       $table['tag']['#cmd::1::1#'] .= $cmd->toHtml($_version, '');
     }
-    $cmd = cmd::byId(str_replace('#', '', $this->getConfiguration('shutter::state')));
-    if (is_object($cmd)) {
-      $eqLogic_shutter = $cmd->getEqlogic();
-      foreach ($eqLogic_shutter->getCmd(null, null, true) as $cmd) {
-        if ($cmd->getLogicalId() == 'refresh') {
-          continue;
+    if ($_ori_version == 'mview' || $_ori_version == 'view') {
+      $cmd = cmd::byId(str_replace('#', '', $this->getConfiguration('shutter::state')));
+      if (is_object($cmd)) {
+        $eqLogic_shutter = $cmd->getEqlogic();
+        foreach ($eqLogic_shutter->getCmd(null, null, true) as $cmd) {
+          if ($cmd->getLogicalId() == 'refresh') {
+            continue;
+          }
+          $table['tag']['#cmd::1::2#'] .= $cmd->toHtml($_version, '');
         }
-        $table['tag']['#cmd::1::2#'] .= $cmd->toHtml($_version, '');
       }
     }
     $replace['#cmd#'] = template_replace($table['tag'], $table['html']);
