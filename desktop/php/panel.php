@@ -8,7 +8,7 @@ if (!isConnect()) {
 		<?php
 		echo '';
 		foreach (sunshutter::byType('sunshutter') as $sunshutter) {
-			echo $sunshutter->toHtml('dashboard');
+			echo $sunshutter->toHtml('view');
 		}
 		?>
 	</div>

@@ -119,14 +119,19 @@ class sunshutter extends eqLogic {
     if (!is_array($replace)) {
       return $replace;
     }
+    if ($_version == 'mview' || $_version == 'mobile') {
+      $replace['#class#'] = $replace['#class#'] . ' col2';
+    }
+    if ($_version == 'mview' || $_version == 'view') {
+      $replace['#class#'] = $replace['#class#'] . ' displayObjectName';
+    }
+    $_version = jeedom::versionAlias($_version);
     $tableOption = $this->getDisplay('layout::' . $_version . '::table::parameters', array());
     $tableOption['center'] = 1;
-    $_version = jeedom::versionAlias($_version);
     $replace['#eqLogic_class#'] = 'eqLogic_layout_table';
     $replace['#height#'] = '150px';
     $replace['#width#'] = '375px';
-    if ($_version == 'mview' || $_version == 'mobile') {
-      $replace['#class#'] = 'col2';
+    if ($_version == 'mobile') {
       $tableOption['style::td::1::1'] = 'width:65%';
     }
     $table = self::generateHtmlTable(1, 2, $tableOption);
