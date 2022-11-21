@@ -112,91 +112,43 @@ class sunshutter extends eqLogic {
     }
   }
 
-  public static function getPanel($_type) {
-    $return = array('shutters' => array());
-    $numberShutters = 0;
-    $sumposition = 0;
-    $numbersupendedAuto = 0;
-    $numbersupendedManual = 0;
-    foreach (eqLogic::byType(__CLASS__, true) as $sunshutter) {
-      $numberShutters += 1;
-      $name = $sunshutter->getHumanName(true);
-      $cmdHandling = $sunshutter->getCmd(null, 'stateHandling');
-      $cmdHandlingLabel = $sunshutter->getCmd(null, 'stateHandlingLabel');
-      $cmdLabel = $sunshutter->getCmd(null, 'label');
-      $cmdAzimuth = $sunshutter->getCmd(null, 'sun_azimuth');
-      $cmdElevation = $sunshutter->getCmd(null, 'sun_elevation');
-      $cmdpause = $sunshutter->getCmd(null, 'suspendHandling');
-      $cmdresume = $sunshutter->getCmd(null, 'resumeHandling');
-      $cmdExecute = $sunshutter->getCmd(null, 'executeAction');
-      $openvalue = $sunshutter->getConfiguration('shutter::openPosition', 100);
-      $closevalue = $sunshutter->getConfiguration('shutter::closePosition', 0);
-      $refreshId = str_replace('#', '', $sunshutter->getConfiguration('shutter::refreshPosition', 0));
-      $currentPosition = null;
-      $cmdstatehtml = '';
-      $cmdhtml = '';
-      $currentMode = 'Aucun';
-      $modeCmd = $sunshutter->getCmd(null, 'mode');
-      if (is_object($modeCmd)) {
-        $currentMode = $modeCmd->execCmd();
-      }
-      if ($currentMode == '') {
-        $currentMode = 'Aucun';
-      }
-      $cmd = cmd::byId(str_replace('#', '', $sunshutter->getConfiguration('shutter::state')));
-      if (is_object($cmd)) {
-        $currentPosition = $cmd->execCmd();
-        $sumposition += $currentPosition;
-        $cmdstatehtml = $cmd->toHtml($_type);
-      }
-      $cmdPosition = str_replace('#', '', $sunshutter->getConfiguration('shutter::position'));
-      $cmd = cmd::byId($cmdPosition);
-      if (is_object($cmd)) {
-        $cmdhtml = $cmd->toHtml($_type);
-      }
-      $handling =  $cmdHandling->execCmd();
-      $handlingLabel = $cmdHandlingLabel->execCmd();
-      if ($handling == false) {
-        if ($handlingLabel == 'Auto') {
-          $numbersupendedAuto += 1;
-        } else {
-          $numbersupendedManual += 1;
-        }
-      }
-      $cmdMode = '';
-      foreach ($sunshutter->getCmd('action', 'mode', null, true) as $cmd) {
-        $cmdMode .= $cmd->toHtml($_type);
-      }
-      $datas = array(
-        'name' => $name,
-        'position' => $sunshutter->getCache('lastPositionOrder', null),
-        'handling' => $handling,
-        'pauseId' => $cmdpause->getId(),
-        'resumeId' => $cmdresume->getId(),
-        'executeId' => $cmdExecute->getId(),
-        'state' => $currentPosition,
-        'openvalue' => $openvalue,
-        'closevalue' => $closevalue,
-        'refreshId' => $refreshId,
-        'positionId' => $cmdPosition,
-        'cmdhtml' => $cmdhtml,
-        'HandlingLabel' => $handlingLabel,
-        'cmdstatehtml' => $cmdstatehtml,
-        'elevation' => $cmdElevation->execCmd(),
-        'label' => $cmdLabel->execCmd(),
-        'azimuth' => $cmdAzimuth->execCmd(),
-        'link' => $sunshutter->getLinkToConfiguration(),
-        'mode' => $currentMode,
-        'cmdmode' => $cmdMode,
-        'suspendTime' => date('d-m H:i:s', $sunshutter->getCache('beginSuspend', time()))
-      );
-      $return['shutters'][] = $datas;
-      $return['global'] = array('moyPos' => ($numberShutters == 0) ? 'N/A' : round($sumposition / $numberShutters), 'auto' => $numbersupendedAuto, 'manual' => $numbersupendedManual,);
-    }
-    return $return;
-  }
-
   /*     * *********************Méthodes d'instance************************* */
+
+  public function toHtml($_version = 'dashboard') {
+    $replace = $this->preToHtml($_version);
+    if (!is_array($replace)) {
+      return $replace;
+    }
+    $tableOption = $this->getDisplay('layout::' . $_version . '::table::parameters', array());
+    $tableOption['center'] = 1;
+    $_version = jeedom::versionAlias($_version);
+    $replace['#eqLogic_class#'] = 'eqLogic_layout_table';
+    $replace['#height#'] = '150px';
+    $replace['#width#'] = '375px';
+    if ($_version == 'mview' || $_version == 'mobile') {
+      $replace['#class#'] = 'col2';
+      $tableOption['style::td::1::1'] = 'width:65%';
+    }
+    $table = self::generateHtmlTable(1, 2, $tableOption);
+    foreach ($this->getCmd(null, null, true) as $cmd) {
+      if (isset($replace['#refresh_id#']) && $cmd->getId() == $replace['#refresh_id#']) {
+        continue;
+      }
+      $table['tag']['#cmd::1::1#'] .= $cmd->toHtml($_version, '');
+    }
+    $cmd = cmd::byId(str_replace('#', '', $this->getConfiguration('shutter::state')));
+    if (is_object($cmd)) {
+      $eqLogic_shutter = $cmd->getEqlogic();
+      foreach ($eqLogic_shutter->getCmd(null, null, true) as $cmd) {
+        if ($cmd->getLogicalId() == 'refresh') {
+          continue;
+        }
+        $table['tag']['#cmd::1::2#'] .= $cmd->toHtml($_version, '');
+      }
+    }
+    $replace['#cmd#'] = template_replace($table['tag'], $table['html']);
+    return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $_version, 'eqLogic')));
+  }
 
   public function postSave() {
     $cmd = $this->getCmd(null, 'sun_elevation');
@@ -209,6 +161,7 @@ class sunshutter extends eqLogic {
     $cmd->setSubType('numeric');
     $cmd->setUnite('°');
     $cmd->setEqLogic_id($this->getId());
+    $cmd->setIsVisible(0);
     $cmd->save();
 
     $cmd = $this->getCmd(null, 'sun_azimuth');
@@ -221,6 +174,7 @@ class sunshutter extends eqLogic {
     $cmd->setSubType('numeric');
     $cmd->setUnite('°');
     $cmd->setEqLogic_id($this->getId());
+    $cmd->setIsVisible(0);
     $cmd->save();
 
     $cmd = $this->getCmd(null, 'stateHandling');
@@ -277,6 +231,7 @@ class sunshutter extends eqLogic {
     $cmd->setSubType('numeric');
     $cmd->setUnite('%');
     $cmd->setEqLogic_id($this->getId());
+    $cmd->setIsVisible(0);
     $cmd->save();
 
     $cmd = $this->getCmd(null, 'executeAction');
@@ -288,6 +243,7 @@ class sunshutter extends eqLogic {
     $cmd->setType('action');
     $cmd->setSubType('other');
     $cmd->setEqLogic_id($this->getId());
+    $cmd->setIsVisible(0);
     $cmd->save();
 
     $cmd = $this->getCmd(null, 'suspendHandling');
@@ -411,12 +367,12 @@ class sunshutter extends eqLogic {
           if ($condition['conditions::condition'] != '' && jeedom::evaluateExpression($condition['conditions::condition'])) {
             if (trim($condition['conditions::position']) != '') {
               if (trim($this->getConfiguration('condition::allowmove')) != '' && jeedom::evaluateExpression($this->getConfiguration('condition::allowmove')) == false) {
-                  if (isset($condition['conditions::forced']) && $condition['conditions::forced']){
-                    log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Condition générale non remplie - Mais action forcée', __FILE__) . ' : ' . $this->getConfiguration('condition::allowmove'));
-                  } else {
-                    log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Condition générale non remplie - Aucune action', __FILE__) . ' : ' . $this->getConfiguration('condition::allowmove'));
-                    continue;
-                  }
+                if (isset($condition['conditions::forced']) && $condition['conditions::forced']) {
+                  log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Condition générale non remplie - Mais action forcée', __FILE__) . ' : ' . $this->getConfiguration('condition::allowmove'));
+                } else {
+                  log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Condition générale non remplie - Aucune action', __FILE__) . ' : ' . $this->getConfiguration('condition::allowmove'));
+                  continue;
+                }
               }
               log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Condition avec action immédiate', __FILE__) . ' : ' . $condition['conditions::condition'] . ' (' . $condition['conditions::position'] . ' %)');
               $cmd = cmd::byId(str_replace('#', '', $this->getConfiguration('shutter::position')));
