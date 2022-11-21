@@ -129,15 +129,18 @@ class sunshutter extends eqLogic {
     $tableOption = $this->getDisplay('layout::' . $_version . '::table::parameters', array());
     $tableOption['center'] = 1;
     $replace['#eqLogic_class#'] = 'eqLogic_layout_table';
-    $replace['#height#'] = '150px';
-    $replace['#width#'] = '375px';
     if ($_version == 'mobile') {
       $tableOption['style::td::1::1'] = 'width:65%';
     }
     $table = self::generateHtmlTable(1, 2, $tableOption);
+    $firstCmdMode = true;
     foreach ($this->getCmd(null, null, true) as $cmd) {
       if (isset($replace['#refresh_id#']) && $cmd->getId() == $replace['#refresh_id#']) {
         continue;
+      }
+      if ($cmd->getType() == 'action' && $cmd->getLogicalId() == 'mode' && $firstCmdMode == true) {
+        $table['tag']['#cmd::1::1#'] .= '<br/>';
+        $firstCmdMode = false;
       }
       $table['tag']['#cmd::1::1#'] .= $cmd->toHtml($_version, '');
     }
@@ -161,12 +164,12 @@ class sunshutter extends eqLogic {
       $cmd = new sunshutterCmd();
       $cmd->setLogicalId('sun_elevation');
       $cmd->setName(__('Elévation soleil', __FILE__));
+      $cmd->setIsVisible(0);
     }
     $cmd->setType('info');
     $cmd->setSubType('numeric');
     $cmd->setUnite('°');
     $cmd->setEqLogic_id($this->getId());
-    $cmd->setIsVisible(0);
     $cmd->save();
 
     $cmd = $this->getCmd(null, 'sun_azimuth');
@@ -174,12 +177,12 @@ class sunshutter extends eqLogic {
       $cmd = new sunshutterCmd();
       $cmd->setLogicalId('sun_azimuth');
       $cmd->setName(__('Azimuth soleil', __FILE__));
+      $cmd->setIsVisible(0);
     }
     $cmd->setType('info');
     $cmd->setSubType('numeric');
     $cmd->setUnite('°');
     $cmd->setEqLogic_id($this->getId());
-    $cmd->setIsVisible(0);
     $cmd->save();
 
     $cmd = $this->getCmd(null, 'stateHandling');
@@ -198,6 +201,7 @@ class sunshutter extends eqLogic {
       $cmd = new sunshutterCmd();
       $cmd->setLogicalId('stateHandlingLabel');
       $cmd->setName(__('Suspension (label)', __FILE__));
+      $cmd->setIsVisible(0);
     }
     $cmd->setType('info');
     $cmd->setSubType('string');
@@ -231,12 +235,12 @@ class sunshutter extends eqLogic {
       $cmd = new sunshutterCmd();
       $cmd->setLogicalId('lastposition');
       $cmd->setName(__('Dernière position', __FILE__));
+      $cmd->setIsVisible(0);
     }
     $cmd->setType('info');
     $cmd->setSubType('numeric');
     $cmd->setUnite('%');
     $cmd->setEqLogic_id($this->getId());
-    $cmd->setIsVisible(0);
     $cmd->save();
 
     $cmd = $this->getCmd(null, 'executeAction');
@@ -244,11 +248,11 @@ class sunshutter extends eqLogic {
       $cmd = new sunshutterCmd();
       $cmd->setLogicalId('executeAction');
       $cmd->setName(__('Forcer action', __FILE__));
+      $cmd->setIsVisible(0);
     }
     $cmd->setType('action');
     $cmd->setSubType('other');
     $cmd->setEqLogic_id($this->getId());
-    $cmd->setIsVisible(0);
     $cmd->save();
 
     $cmd = $this->getCmd(null, 'suspendHandling');
