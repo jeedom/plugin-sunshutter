@@ -63,6 +63,10 @@ try {
 		ajax::success($return);
 	}
 
+	if (init('action') == 'getSummary') {
+		ajax::success(sunshutter::getSummary());
+	}
+
 	throw new Exception(__('Aucune methode correspondante à', __FILE__) . ' : ' . init('action'));
 } catch (Exception $e) {
 	ajax::error(displayExeption($e), $e->getCode());

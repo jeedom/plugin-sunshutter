@@ -61,9 +61,37 @@ function initSunshutterSunshutter() {
 		$.hideLoading();
 	  }
 	});
+
+	getSunshutterState();
+	setInterval(getSunshutterState, 5000);
 	
 	$(window).on("resize", function (event) {
 	  jeedomUtils.setTileSize('.eqLogic');
 	  $('#div_displayEquipementsunshutter').packery({gutter : 0});
 	});
   }
+
+  function getSunshutterState(){
+	$.ajax({
+		type: "POST",
+		url: "plugins/sunshutter/core/ajax/sunshutter.ajax.php",
+		data: {
+			action: "getSummary",
+			type: "dashboard",
+		},
+		dataType: 'json',
+		global : false,
+		error: function (request, status, error) {
+			handleAjaxError(request, status, error);
+		},
+		success: function (data) {
+			if (data.state != 'ok') {
+				$('#div_inclusionAlert').showAlert({message: data.result, level: 'danger'});
+				return;
+			}
+			$(".posMoy").value(data.result['moyPos']+'%');
+			$(".manualSuspend").value(data.result['manual']);
+			$(".autoSuspend").value(data.result['auto']);
+		}
+	});
+}

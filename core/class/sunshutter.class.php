@@ -112,6 +112,32 @@ class sunshutter extends eqLogic {
     }
   }
 
+  public static function getSummary() {
+    $numberShutters = 0;
+    $sumposition = 0;
+    $numbersupendedAuto = 0;
+    $numbersupendedManual = 0;
+    foreach (eqLogic::byType(__CLASS__, true) as $sunshutter) {
+      $numberShutters += 1;
+      $cmdHandling = $sunshutter->getCmd(null, 'stateHandling');
+      $cmdHandlingLabel = $sunshutter->getCmd(null, 'stateHandlingLabel');
+      $cmd = cmd::byId(str_replace('#', '', $sunshutter->getConfiguration('shutter::state')));
+      if (is_object($cmd)) {
+        $sumposition += $cmd->execCmd();
+      }
+      $handling =  $cmdHandling->execCmd();
+      if ($handling == false) {
+        $handlingLabel = $cmdHandlingLabel->execCmd();
+        if ($handlingLabel == 'Auto') {
+          $numbersupendedAuto += 1;
+        } else {
+          $numbersupendedManual += 1;
+        }
+      }
+    }
+    return array('moyPos' => ($numberShutters == 0) ? 'N/A' : round($sumposition / $numberShutters), 'auto' => $numbersupendedAuto, 'manual' => $numbersupendedManual);
+  }
+
   /*     * *********************Méthodes d'instance************************* */
 
   public function toHtml($_version = 'dashboard') {
