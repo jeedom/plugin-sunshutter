@@ -587,6 +587,7 @@ class sunshutterCmd extends cmd {
     $sunshutter = $this->getEqLogic();
     if ($this->getLogicalId() == 'refresh') {
       $sunshutter->updateData();
+      $sunshutter->getCurrentPosition();
     }
     if ($this->getLogicalId() == 'executeAction') {
       $sunshutter->executeAction(true);
