@@ -25,14 +25,11 @@ sendVarToJs('jeedomUtils.backgroundIMG', 'plugins/sunshutter/core/img/panel.jpg'
 		</fieldset>
 	</form>
 </div>
-<div class="col-sm-12" id="div_displayObject">
-	<div class="div_displayEquipement" style="width: 100%;">
-		<?php
-		echo '';
-		foreach (sunshutter::byType('sunshutter') as $sunshutter) {
-			echo $sunshutter->toHtml('view');
-		}
-		?>
-	</div>
+<div class="div_displayEquipement" style="width: 100%;">
+	<?php
+	foreach (sunshutter::byType('sunshutter') as $sunshutter) {
+		echo $sunshutter->toHtml('view');
+	}
+	?>
 </div>
 <?php include_file('desktop', 'panel', 'js', 'sunshutter'); ?>

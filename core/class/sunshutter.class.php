@@ -145,19 +145,18 @@ class sunshutter extends eqLogic {
     if (!is_array($replace)) {
       return $replace;
     }
-    $_ori_version = $_version;
-    $_version = jeedom::versionAlias($_version);
-    if ($_version == 'mobile') {
+    $version = jeedom::versionAlias($_version);
+    if ($version == 'mobile') {
       $replace['#class#'] = $replace['#class#'] . ' col2';
     }
-    if ($_ori_version == 'mview' || $_ori_version == 'view') {
+    if ($_version == 'mview' || $_version == 'view') {
       $replace['#class#'] = $replace['#class#'] . ' displayObjectName';
     }
 
-    $tableOption = $this->getDisplay('layout::' . $_version . '::table::parameters', array());
+    $tableOption = $this->getDisplay('layout::' . $version . '::table::parameters', array());
     $tableOption['center'] = 1;
     $replace['#eqLogic_class#'] = 'eqLogic_layout_table';
-    if ($_ori_version == 'mview') {
+    if ($_version == 'mview') {
       $tableOption['style::td::1::1'] = 'width:65%';
     }
     $table = self::generateHtmlTable(1, 2, $tableOption);
@@ -170,9 +169,9 @@ class sunshutter extends eqLogic {
         $table['tag']['#cmd::1::1#'] .= '<br/>';
         $firstCmdMode = false;
       }
-      $table['tag']['#cmd::1::1#'] .= $cmd->toHtml($_version, '');
+      $table['tag']['#cmd::1::1#'] .= $cmd->toHtml($version, '');
     }
-    if ($_ori_version == 'mview' || $_ori_version == 'view') {
+    if ($_version == 'mview' || $_version == 'view') {
       $cmd = cmd::byId(str_replace('#', '', $this->getConfiguration('shutter::state')));
       if (is_object($cmd)) {
         $eqLogic_shutter = $cmd->getEqlogic();
@@ -180,12 +179,12 @@ class sunshutter extends eqLogic {
           if ($cmd->getLogicalId() == 'refresh') {
             continue;
           }
-          $table['tag']['#cmd::1::2#'] .= $cmd->toHtml($_version, '');
+          $table['tag']['#cmd::1::2#'] .= $cmd->toHtml($version, '');
         }
       }
     }
     $replace['#cmd#'] = template_replace($table['tag'], $table['html']);
-    return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $_version, 'eqLogic')));
+    return $this->postToHtml($version, template_replace($replace, getTemplate('core', $version, 'eqLogic')));
   }
 
   public function postSave() {
