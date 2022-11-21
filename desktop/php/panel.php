@@ -2,6 +2,7 @@
 if (!isConnect()) {
 	throw new Exception('{{401 - Accès non autorisé}}');
 }
+sendVarToJs('jeedomUtils.backgroundIMG', 'plugins/sunshutter/core/img/panel.jpg');
 ?>
 <div>
 	<br />

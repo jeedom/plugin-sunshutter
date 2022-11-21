@@ -31,8 +31,8 @@
 */
 
 function initSunshutterSunshutter() {
-	if(typeof setBackgroundImage == 'function'){
-	  setBackgroundImage('plugins/sunshutter/core/img/panel.jpg');
+	if(typeof jeedomUtils.setBackgroundImage == 'function'){
+		jeedomUtils.setBackgroundImage('plugins/sunshutter/core/img/panel.jpg');
 	}
 	$.showLoading();
 	$.ajax({
