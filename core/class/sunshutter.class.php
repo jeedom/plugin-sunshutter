@@ -420,7 +420,7 @@ class sunshutter extends eqLogic {
                 }
               }
               log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Condition avec action immédiate', __FILE__) . ' : ' . $condition['conditions::condition'] . ' (' . $condition['conditions::position'] . ' %)');
-              if ($condition['conditions::position']=='-111'){
+              if ($condition['conditions::position']=='-1'){
                 log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Action immédiate de reprise', __FILE__)); 
                 $cmd = $this->getCmd(null, 'resumeHandling');
                 if (is_object($cmd)) {

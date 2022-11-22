@@ -359,7 +359,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 										<sup><i class="fas fa-question-circle tooltips" title="{{Cocher la case pour suspendre la gestion automatique tant que la règle est valide}}"></i></sup>
 									</th>
 									<th style="width:100px;">{{Position}}
-										<sup><i class="fas fa-question-circle tooltips" title="{{Indiquer la position voulue en pourcentage (vide = aucune action , -111 = en cas d'action immédiate fera une reprise de gestion)}}"></i></sup>
+										<sup><i class="fas fa-question-circle tooltips" title="{{Indiquer la position voulue en pourcentage (vide = aucune action , -1= en cas d'action immédiate fera une reprise de gestion)}}"></i></sup>
 									</th>
 									<th style="min-width:80px;width:150px">{{Label}}
 										<sup><i class="fas fa-question-circle tooltips" title="{{Label associé à la validation de la règle d'exception (facultatif)}}"></i></sup>
