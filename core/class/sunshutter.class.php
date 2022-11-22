@@ -219,6 +219,7 @@ class sunshutter extends eqLogic {
       $cmd = new sunshutterCmd();
       $cmd->setLogicalId('stateHandling');
       $cmd->setName(__('Etat gestion', __FILE__));
+      $cmd->setIsVisible(0);
     }
     $cmd->setType('info');
     $cmd->setSubType('binary');
@@ -230,7 +231,8 @@ class sunshutter extends eqLogic {
       $cmd = new sunshutterCmd();
       $cmd->setLogicalId('stateHandlingLabel');
       $cmd->setName(__('Suspension (label)', __FILE__));
-      $cmd->setIsVisible(0);
+      $cmd->setTemplate('dashboard',"sunshutter::suspensionState");
+      $cmd->setTemplate('mobile',"sunshutter::suspensionState");
     }
     $cmd->setType('info');
     $cmd->setSubType('string');
@@ -289,6 +291,7 @@ class sunshutter extends eqLogic {
       $cmd = new sunshutterCmd();
       $cmd->setLogicalId('suspendHandling');
       $cmd->setName(__('Suspendre', __FILE__));
+      $cmd->setDisplay('icon',"<i class='fa fa-pause'></i>");
     }
     $cmd->setType('action');
     $cmd->setSubType('other');
@@ -300,6 +303,7 @@ class sunshutter extends eqLogic {
       $cmd = new sunshutterCmd();
       $cmd->setLogicalId('resumeHandling');
       $cmd->setName(__('Reprendre', __FILE__));
+      $cmd->setDisplay('icon',"<i class='fa fa-play'></i>");
     }
     $cmd->setType('action');
     $cmd->setSubType('other');
@@ -617,6 +621,36 @@ class sunshutter extends eqLogic {
       $this->checkAndUpdateCmd('label', $label);
     }
   }
+  
+  public static function templateWidget() {
+		$return = array(
+            'info' => array(
+                'string' => array()
+            )
+        );
+        $return['info']['string']['suspensionState'] = array(
+            'template' => 'tmplmultistate',
+			'replace' => array('#_time_widget_#'=>1),
+            'test' =>  array(
+                array(
+                    'operation' => "#value# == 'Aucun'",
+                    'state_light' => "<i class='fas fa-play icon_green'></i>",
+                    'state_dark' => "<i class='fas fa-play icon_green'></i>"
+                ) ,
+                array(
+                    'operation' => "#value# == 'Auto'",
+                    'state_light' => "<i class='fas fa-robot icon_red'></i>",
+                    'state_dark' => "<i class='fas fa-robot icon_red'></i>"
+                ) ,
+                array(
+                    'operation' => "#value# == 'Manuel'",
+                    'state_light' => "<i class='fas fa-hand-paper icon_red'></i>",
+                    'state_dark' => "<i class='fas fa-hand-paper icon_red'></i>"
+                )
+			)
+        );
+        return $return;
+    }
 }
 
 class sunshutterCmd extends cmd {
