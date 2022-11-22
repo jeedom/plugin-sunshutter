@@ -52,6 +52,7 @@ class sunshutter extends eqLogic {
               log::add(__CLASS__, 'debug', $sunshutter->getHumanName() . ' ' . __('Délai de reprise atteint : réactivation de la gestion automatique', __FILE__));
               $sunshutter->checkAndUpdateCmd('stateHandling', true);
               $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
+              $sunshutter->checkAndUpdateCmd('label', 'Reprise Suspension');
               $sunshutter->setCache('beginSuspend', 0);
               $sunshutter->executeAction(true);
               $forcedByDelay = 1;
@@ -68,6 +69,7 @@ class sunshutter extends eqLogic {
             if ($ecart > 4 && ($sunshutter->getConfiguration('shutter::moveDuration', 0) == 0 || (strtotime('now') - $sunshutter->getCache('lastPositionOrderTime', 0)) > $sunshutter->getConfiguration('shutter::moveDuration'))) {
               $sunshutter->checkAndUpdateCmd('stateHandling', false);
               $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
+              $sunshutter->checkAndUpdateCmd('label', 'Ecart Position');
               $sunshutter->setCache('beginSuspend', time());
               $sunshutter->setCache('manualSuspend', false);
               log::add(__CLASS__, 'debug', $sunshutter->getHumanName() . ' ' . __('Ecart avec la dernière position connue supérieur à 4 % : suspension de la gestion automatique', __FILE__));
@@ -373,6 +375,7 @@ class sunshutter extends eqLogic {
     if ($handlingCmd->execCmd() === '') {
       $handlingCmd->event(true);
       $this->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
+      $this->checkAndUpdateCmd('label', 'Reprise Suspension');
     }
   }
 
@@ -428,6 +431,7 @@ class sunshutter extends eqLogic {
                   $stateLabel = $cmdStateLabel->execCmd();
                   if ($stateLabel != 'Manuel') {
                     $this->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
+                    $this->checkAndUpdateCmd('label', $condition['conditions::label']);
                   }
                 }
                 $currentPosition = null;
@@ -512,6 +516,7 @@ class sunshutter extends eqLogic {
           log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Délai de reprise atteint : réactivation de la gestion automatique', __FILE__));
           $this->checkAndUpdateCmd('stateHandling', true);
           $this->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
+          $this->checkAndUpdateCmd('label', 'Reprise Suspension');
           $_force = true;
         } else {
           log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Gestion automatique suspendue, réactivation dans', __FILE__) . ' ' . round($delay - $deltadelay) . ' ' . __('minutes', __FILE__));
@@ -539,6 +544,7 @@ class sunshutter extends eqLogic {
         if ($ecart > 4 && ($this->getConfiguration('shutter::moveDuration', 0) == 0 || (strtotime('now') - $this->getCache('lastPositionOrderTime', 0)) > $this->getConfiguration('shutter::moveDuration'))) {
           $this->checkAndUpdateCmd('stateHandling', false);
           $this->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
+          $this->checkAndUpdateCmd('label', 'Ecart Position');
           $this->setCache('beginSuspend', time());
           $this->setCache('manualSuspend', false);
           log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Ecart avec la dernière position connue supérieur à 4 % : suspension de la gestion automatique', __FILE__));
@@ -578,6 +584,7 @@ class sunshutter extends eqLogic {
             log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Condition avec suspension de la gestion automatique', __FILE__) . ' : ' . $condition['conditions::condition']);
             $this->checkAndUpdateCmd('stateHandling', false);
             $this->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
+            $this->checkAndUpdateCmd('label', $condition['conditions::label']);
             $this->setCache('beginSuspend', time());
             $this->setCache('manualSuspend', false);
           }
@@ -668,6 +675,7 @@ class sunshutterCmd extends cmd {
       log::add('sunshutter', 'debug', $sunshutter->getHumanName() . ' ' . __('Suspension manuelle de la gestion automatique', __FILE__));
       $sunshutter->checkAndUpdateCmd('stateHandling', false);
       $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Manuel');
+      $sunshutter->checkAndUpdateCmd('label', 'Manuel');
       $sunshutter->setCache('beginSuspend', time());
       $sunshutter->setCache('manualSuspend', true);
     }
@@ -675,6 +683,7 @@ class sunshutterCmd extends cmd {
       log::add('sunshutter', 'debug', $sunshutter->getHumanName() . ' ' . __('Reprise manuelle de la gestion automatique', __FILE__));
       $sunshutter->checkAndUpdateCmd('stateHandling', true);
       $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
+      $sunshutter->checkAndUpdateCmd('label', 'Reprise Suspension');
       $sunshutter->setCache('beginSuspend', 0);
       $sunshutter->setCache('manualSuspend', false);
       $sunshutter->executeAction(true);
@@ -685,6 +694,7 @@ class sunshutterCmd extends cmd {
       if ($sunshutter->getConfiguration('condition::allowIgnoreSuspend', 0) == 1) {
         $sunshutter->checkAndUpdateCmd('stateHandling', true);
         $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
+        $sunshutter->checkAndUpdateCmd('label', 'Reprise Suspension');
         $sunshutter->setCache('beginSuspend', 0);
         $sunshutter->setCache('manualSuspend', false);
         $sunshutter->executeAction(true);
