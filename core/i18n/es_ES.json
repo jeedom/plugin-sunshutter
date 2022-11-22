@@ -1,9 +1,4 @@
 {
-    "plugins\/sunshutter\/mobile\/html\/sunshutter.html": {
-        "Nom": "Nombre",
-        "Gestion": "Gestión",
-        "Manuel": "Manual"
-    },
     "plugins\/sunshutter\/desktop\/modal\/health.php": {
         "Volet": "Persiana",
         "Cron": "Cron",
@@ -26,14 +21,7 @@
         "401 - Accès non autorisé": "401 - Acceso no autorizado",
         "Position Moyenne": "Posición media",
         "Suspendu Manuel": "Manual suspendido",
-        "Suspendu Auto": "Auto Suspendido",
-        "Nom": "Nombre",
-        "Soleil": "Sol",
-        "Mode\/Label": "Etiqueta de moda",
-        "Dernier": "Pasado",
-        "Suspension": "Suspensión",
-        "Gestion": "Gestión",
-        "Manuel": "Manual"
+        "Suspendu Auto": "Auto Suspendido"
     },
     "plugins\/sunshutter\/desktop\/php\/sunshutter.php": {
         "401 - Accès non autorisé": "401 - Acceso no autorizado",
@@ -128,8 +116,8 @@
         "La condition ne sera valide que si le volet est dans le mode spécifié, plusieurs modes peuvent être renseignés séparés par des virgules (facultatif)": "La condición solo será válida si el panel está en el modo especificado, se pueden ingresar varios modos separados por comas (opcional)",
         "Action immédiate": "Acción inmediata",
         "Cocher la case pour que la règle s'exécute immédiatement dès que la condition est valide": "Marque la casilla para que la regla se ejecute inmediatamente tan pronto como la condición sea válida",
-        "Action forcée": "Action forcée",
-        "Cocher la case pour que l'action immédiate soit exécutée même si la condition générale n'est pas remplie": "Cocher la case pour que l'action immédiate soit exécutée même si la condition générale n'est pas remplie",
+        "Action forcée": "Acción forzada",
+        "Cocher la case pour que l'action immédiate soit exécutée même si la condition générale n'est pas remplie": "Marque la casilla para que se ejecute la acción inmediata aunque no se cumpla la condición general",
         "Suspendre": "Suspender",
         "Cocher la case pour suspendre la gestion automatique tant que la règle est valide": "Marque la casilla para suspender la gestión automática mientras la regla sea válida",
         "Position": "Posición",
@@ -152,10 +140,8 @@
         "Ajouter un mode": "Agregar un modo",
         "ID": "IDENTIFICACIÓN",
         "Nom": "Nombre",
+        "Etat": "Estado",
         "Action": "Acción"
-    },
-    "plugins\/sunshutter\/desktop\/js\/panel.js": {
-        "Aucun équipement actif ou créé trouvé.": "No se encontraron equipos activos o creados"
     },
     "plugins\/sunshutter\/desktop\/js\/sunshutter.js": {
         "Santé Gestion Volet": "Componente de gestión de salud",
@@ -199,7 +185,7 @@
         "Reprendre": "Reanudar",
         "Rafraichir": "Refrescar",
         "Le mode ne correspond pas": "El modo no coincide",
-        "Condition générale non remplie - Mais action forcée": "Condition générale non remplie - Mais action forcée",
+        "Condition générale non remplie - Mais action forcée": "Condición general no cumplida - Pero acción forzada",
         "Condition générale non remplie - Aucune action": "Condición general no cumplida - Sin acción",
         "Condition avec action immédiate": "Condición con acción inmediata",
         "Condition avec action immédiate + suspension de la gestion automatique": "Condición con acción inmediata + suspensión de la gestión automática",
