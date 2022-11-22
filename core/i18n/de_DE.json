@@ -1,9 +1,4 @@
 {
-    "plugins\/sunshutter\/mobile\/html\/sunshutter.html": {
-        "Nom": "Name",
-        "Gestion": "Verwaltung",
-        "Manuel": "Handbuch"
-    },
     "plugins\/sunshutter\/desktop\/modal\/health.php": {
         "Volet": "Klappe",
         "Cron": "Cron",
@@ -26,14 +21,7 @@
         "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
         "Position Moyenne": "Durchschnittliche Position",
         "Suspendu Manuel": "Angehaltenes Handbuch",
-        "Suspendu Auto": "Automatisch ausgesetzt",
-        "Nom": "Name",
-        "Soleil": "Sonne",
-        "Mode\/Label": "Modelabel",
-        "Dernier": "Zuletzt",
-        "Suspension": "Federung",
-        "Gestion": "Verwaltung",
-        "Manuel": "Handbuch"
+        "Suspendu Auto": "Automatisch ausgesetzt"
     },
     "plugins\/sunshutter\/desktop\/php\/sunshutter.php": {
         "401 - Accès non autorisé": "401 - Nicht autorisierter Zugriff",
@@ -128,8 +116,8 @@
         "La condition ne sera valide que si le volet est dans le mode spécifié, plusieurs modes peuvent être renseignés séparés par des virgules (facultatif)": "Die Bedingung ist nur gültig, wenn sich das Fenster im angegebenen Modus befindet, mehrere Modi können durch Kommas getrennt eingegeben werden (optional)",
         "Action immédiate": "Sofortige Aktion",
         "Cocher la case pour que la règle s'exécute immédiatement dès que la condition est valide": "Aktivieren Sie das Kontrollkästchen, damit die Regel sofort ausgeführt wird, sobald die Bedingung gültig ist",
-        "Action forcée": "Action forcée",
-        "Cocher la case pour que l'action immédiate soit exécutée même si la condition générale n'est pas remplie": "Cocher la case pour que l'action immédiate soit exécutée même si la condition générale n'est pas remplie",
+        "Action forcée": "Erzwungenes Handeln",
+        "Cocher la case pour que l'action immédiate soit exécutée même si la condition générale n'est pas remplie": "Aktivieren Sie das Kontrollkästchen für die sofortige Aktion, die ausgeführt werden soll, auch wenn die allgemeine Bedingung nicht erfüllt ist",
         "Suspendre": "Anhalten",
         "Cocher la case pour suspendre la gestion automatique tant que la règle est valide": "Aktivieren Sie das Kontrollkästchen, um die automatische Verwaltung auszusetzen, solange die Regel gültig ist",
         "Position": "Position",
@@ -152,10 +140,8 @@
         "Ajouter un mode": "Einen Modus hinzufügen",
         "ID": "ICH WÜRDE",
         "Nom": "Name",
+        "Etat": "Bundesland",
         "Action": "Aktion"
-    },
-    "plugins\/sunshutter\/desktop\/js\/panel.js": {
-        "Aucun équipement actif ou créé trouvé.": "Keine aktive oder erstellte Ausrüstung gefunden"
     },
     "plugins\/sunshutter\/desktop\/js\/sunshutter.js": {
         "Santé Gestion Volet": "Gesundheitsmanagement-Komponente",
@@ -199,7 +185,7 @@
         "Reprendre": "Zusammenfassung",
         "Rafraichir": "Aktualisieren",
         "Le mode ne correspond pas": "Der Modus stimmt nicht überein",
-        "Condition générale non remplie - Mais action forcée": "Condition générale non remplie - Mais action forcée",
+        "Condition générale non remplie - Mais action forcée": "Allgemeine Bedingung nicht erfüllt - aber Zwangsmaßnahmen",
         "Condition générale non remplie - Aucune action": "Allgemeine Bedingung nicht erfüllt - Keine Aktion",
         "Condition avec action immédiate": "Zustand mit Sofortmaßnahmen",
         "Condition avec action immédiate + suspension de la gestion automatique": "Bedingung mit sofortiger Aktion + Aussetzung der automatischen Verwaltung",

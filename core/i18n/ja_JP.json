@@ -1,9 +1,4 @@
 {
-    "plugins\/sunshutter\/mobile\/html\/sunshutter.html": {
-        "Nom": "表題",
-        "Gestion": "管理",
-        "Manuel": "マニュアル"
-    },
     "plugins\/sunshutter\/desktop\/modal\/health.php": {
         "Volet": "フラップ",
         "Cron": "Cronの",
@@ -26,14 +21,7 @@
         "401 - Accès non autorisé": "401-不正アクセス",
         "Position Moyenne": "Position Moyenne",
         "Suspendu Manuel": "Suspendu Manuel",
-        "Suspendu Auto": "Suspendu Auto",
-        "Nom": "表題",
-        "Soleil": "Soleil",
-        "Mode\/Label": "Mode\/Label",
-        "Dernier": "Dernier",
-        "Suspension": "Suspension",
-        "Gestion": "管理",
-        "Manuel": "マニュアル"
+        "Suspendu Auto": "Suspendu Auto"
     },
     "plugins\/sunshutter\/desktop\/php\/sunshutter.php": {
         "401 - Accès non autorisé": "401-不正アクセス",
@@ -152,10 +140,8 @@
         "Ajouter un mode": "Ajouter un mode",
         "ID": "ID",
         "Nom": "表題",
+        "Etat": "Etat",
         "Action": "アクション"
-    },
-    "plugins\/sunshutter\/desktop\/js\/panel.js": {
-        "Aucun équipement actif ou créé trouvé.": "Aucun équipement actif ou créé trouvé"
     },
     "plugins\/sunshutter\/desktop\/js\/sunshutter.js": {
         "Santé Gestion Volet": "Santé Gestion Volet",

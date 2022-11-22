@@ -1,9 +1,4 @@
 {
-    "plugins\/sunshutter\/mobile\/html\/sunshutter.html": {
-        "Nom": "Nome",
-        "Gestion": "Gestione",
-        "Manuel": "Manuale"
-    },
     "plugins\/sunshutter\/desktop\/modal\/health.php": {
         "Volet": "Falda",
         "Cron": "Cron",
@@ -26,14 +21,7 @@
         "401 - Accès non autorisé": "401 - Accesso non autorizzato",
         "Position Moyenne": "Position Moyenne",
         "Suspendu Manuel": "Suspendu Manuel",
-        "Suspendu Auto": "Suspendu Auto",
-        "Nom": "Nome",
-        "Soleil": "Soleil",
-        "Mode\/Label": "Mode\/Label",
-        "Dernier": "Dernier",
-        "Suspension": "Suspension",
-        "Gestion": "Gestione",
-        "Manuel": "Manuale"
+        "Suspendu Auto": "Suspendu Auto"
     },
     "plugins\/sunshutter\/desktop\/php\/sunshutter.php": {
         "401 - Accès non autorisé": "401 - Accesso non autorizzato",
@@ -152,10 +140,8 @@
         "Ajouter un mode": "Ajouter un mode",
         "ID": "ID",
         "Nom": "Nome",
+        "Etat": "Etat",
         "Action": "Azione"
-    },
-    "plugins\/sunshutter\/desktop\/js\/panel.js": {
-        "Aucun équipement actif ou créé trouvé.": "Aucun équipement actif ou créé trouvé"
     },
     "plugins\/sunshutter\/desktop\/js\/sunshutter.js": {
         "Santé Gestion Volet": "Santé Gestion Volet",

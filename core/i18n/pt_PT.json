@@ -1,9 +1,4 @@
 {
-    "plugins\/sunshutter\/mobile\/html\/sunshutter.html": {
-        "Nom": "Nome",
-        "Gestion": "Gestão",
-        "Manuel": "Manual"
-    },
     "plugins\/sunshutter\/desktop\/modal\/health.php": {
         "Volet": "Aba",
         "Cron": "Cron",
@@ -26,14 +21,7 @@
         "401 - Accès non autorisé": "401 - Acesso não autorizado",
         "Position Moyenne": "Posição Média",
         "Suspendu Manuel": "Manual Suspenso",
-        "Suspendu Auto": "Suspenso automaticamente",
-        "Nom": "Nome",
-        "Soleil": "Sol",
-        "Mode\/Label": "Moda \/ Etiqueta",
-        "Dernier": "Ultimo",
-        "Suspension": "Suspensão",
-        "Gestion": "Gestão",
-        "Manuel": "Manual"
+        "Suspendu Auto": "Suspenso automaticamente"
     },
     "plugins\/sunshutter\/desktop\/php\/sunshutter.php": {
         "401 - Accès non autorisé": "401 - Acesso não autorizado",
@@ -100,7 +88,7 @@
         "Pourcentages de fermeture\/ouverture": "Porcentagens de fechamento \/ abertura",
         "Indiquer le pourcentage minimal de fermeture (généralement 0) et maximal d'ouverture (généralement 99 ou 100)": "Indique a porcentagem mínima de fechamento (geralmente 0) e a porcentagem máxima de abertura (geralmente 99 ou 100)",
         "Pourcentage minimal de fermeture (0 par défaut)": "Porcentagem mínima fechada (0 por padrão)",
-        "Min.": "Min.",
+        "Min.": "Mín.",
         "Pourcentage maximal d'ouverture (100 par défaut)": "Porcentagem máxima de abertura (100 por padrão)",
         "Max.": "Máx.",
         "Durée d'un déplacement": "Duração de uma viagem",
@@ -128,8 +116,8 @@
         "La condition ne sera valide que si le volet est dans le mode spécifié, plusieurs modes peuvent être renseignés séparés par des virgules (facultatif)": "A condição só será válida se o painel estiver no modo especificado, vários modos podem ser inseridos separados por vírgulas (opcional)",
         "Action immédiate": "Ação imediata",
         "Cocher la case pour que la règle s'exécute immédiatement dès que la condition est valide": "Marque a caixa para que a regra seja executada imediatamente assim que a condição for válida",
-        "Action forcée": "Action forcée",
-        "Cocher la case pour que l'action immédiate soit exécutée même si la condition générale n'est pas remplie": "Cocher la case pour que l'action immédiate soit exécutée même si la condition générale n'est pas remplie",
+        "Action forcée": "Ação forçada",
+        "Cocher la case pour que l'action immédiate soit exécutée même si la condition générale n'est pas remplie": "Marque a caixa para a ação imediata a ser executada mesmo se a condição geral não for atendida",
         "Suspendre": "Suspender",
         "Cocher la case pour suspendre la gestion automatique tant que la règle est valide": "Marque a caixa para suspender o gerenciamento automático enquanto a regra for válida",
         "Position": "Posição",
@@ -152,14 +140,12 @@
         "Ajouter un mode": "Adicionar um modo",
         "ID": "Identificação",
         "Nom": "Nome",
+        "Etat": "Estado",
         "Action": "Ação"
-    },
-    "plugins\/sunshutter\/desktop\/js\/panel.js": {
-        "Aucun équipement actif ou créé trouvé.": "Nenhum equipamento ativo ou criado encontrado"
     },
     "plugins\/sunshutter\/desktop\/js\/sunshutter.js": {
         "Santé Gestion Volet": "Componente de gerenciamento de integridade",
-        "de": "de",
+        "de": "do",
         "à": "à",
         "Supprimer la condition": "Remover condição",
         "Supprimer la règle": "Remova a regra",
@@ -199,7 +185,7 @@
         "Reprendre": "Resumo",
         "Rafraichir": "Legal",
         "Le mode ne correspond pas": "O modo não combina",
-        "Condition générale non remplie - Mais action forcée": "Condition générale non remplie - Mais action forcée",
+        "Condition générale non remplie - Mais action forcée": "Condição geral não atendida - Mas ação forçada",
         "Condition générale non remplie - Aucune action": "Condição geral não cumprida - Nenhuma ação",
         "Condition avec action immédiate": "Condição com ação imediata",
         "Condition avec action immédiate + suspension de la gestion automatique": "Condição com ação imediata + suspensão da gestão automática",
