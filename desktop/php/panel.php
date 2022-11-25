@@ -6,11 +6,11 @@ sendVarToJs('jeedomUtils.backgroundIMG', 'plugins/sunshutter/core/img/panel.jpg'
 ?>
 <div>
 	<br />
-	<legend>
+	<legend><center>
 		{{Position Moyenne}} <span class="label label-success posMoy"></span>
 		{{Suspendu Manuel}} <span class="label label-danger manualSuspend"></span>
 		{{Suspendu Auto}} <span class="label label-warning autoSuspend"></span>
-	</legend>
+	</center></legend>
 </div>
 <div class="div_displayEquipement" style="width: 100%;">
 	<?php
