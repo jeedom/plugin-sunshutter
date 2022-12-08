@@ -22,6 +22,8 @@ require_once dirname(__FILE__) . '/../../vendor/autoload.php';
 
 class sunshutter extends eqLogic {
 
+  public static $_widgetPossibility = array('custom' => true, 'custom::layout' => false);
+
   /*     * ***********************Methode static*************************** */
 
   public static function cron5() {
@@ -420,11 +422,11 @@ class sunshutter extends eqLogic {
                 }
               }
               log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Condition avec action immédiate', __FILE__) . ' : ' . $condition['conditions::condition'] . ' (' . $condition['conditions::position'] . ' %)');
-              if ($condition['conditions::position']=='-1'){
-                log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Action immédiate de reprise', __FILE__)); 
+              if ($condition['conditions::position'] == '-1') {
+                log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Action immédiate de reprise', __FILE__));
                 $cmd = $this->getCmd(null, 'resumeHandling');
                 if (is_object($cmd)) {
-                    $cmd->execCmd();
+                  $cmd->execCmd();
                 }
                 break;
               }
