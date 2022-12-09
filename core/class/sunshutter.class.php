@@ -170,11 +170,18 @@ class sunshutter extends eqLogic {
         continue;
       }
       if ($version == 'mobile' && $cmd->getType() == 'action' && $cmd->getLogicalId() == 'mode' && $firstCmdMode == true) {
-        $table['tag']['#cmd::1::1#'] .= '<br/>';
+        $table['tag']['#cmd::1::1#'] .= '<div class="break"></div>';
         $firstCmdMode = false;
       }
-      $table['tag']['#cmd::1::1#'] .= $cmd->toHtml($version, '');
+      if ($cmd->getDisplay('forceReturnLineBefore', 0) == 1) {
+        $table['tag']['#cmd::1::1#'] .= '<div class="break"></div>';
+      }
+      $table['tag']['#cmd::1::1#'] .= $cmd->toHtml($_version, '');
+      if ($cmd->getDisplay('forceReturnLineAfter', 0) == 1) {
+        $table['tag']['#cmd::1::1#'] .= '<div class="break"></div>';
+      }
     }
+
     if ($_version == 'mview' || $_version == 'view') {
       $cmd = cmd::byId(str_replace('#', '', $this->getConfiguration('shutter::state')));
       if (is_object($cmd)) {
@@ -183,7 +190,13 @@ class sunshutter extends eqLogic {
           if ($cmd->getLogicalId() == 'refresh') {
             continue;
           }
-          $table['tag']['#cmd::1::2#'] .= $cmd->toHtml($version, '');
+          if ($cmd->getDisplay('forceReturnLineBefore', 0) == 1) {
+            $table['tag']['#cmd::1::2#'] .= '<div class="break"></div>';
+          }
+          $table['tag']['#cmd::1::2#'] .= $cmd->toHtml($_version, '');
+          if ($cmd->getDisplay('forceReturnLineAfter', 0) == 1) {
+            $table['tag']['#cmd::1::2#'] .= '<div class="break"></div>';
+          }
         }
       }
     }
