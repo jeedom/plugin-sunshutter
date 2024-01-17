@@ -67,7 +67,6 @@ class sunshutter extends eqLogic {
             $amplitude = abs($sunshutter->getConfiguration('shutter::closePosition', 0) - $sunshutter->getConfiguration('shutter::openPosition', 100));
             $delta = abs($currentPosition - $lastPositionOrder);
             $ecart = round(($delta / $amplitude) * 100, 2);
-            // log::add(__CLASS__, 'debug', $sunshutter->getHumanName() . ' ' . __('Ecart avec la dernière position connue',__FILE__) . ' : ' . $ecart . ' %');
             if ($ecart > 4 && ($sunshutter->getConfiguration('shutter::moveDuration', 0) == 0 || (strtotime('now') - $sunshutter->getCache('lastPositionOrderTime', 0)) > $sunshutter->getConfiguration('shutter::moveDuration'))) {
               $sunshutter->checkAndUpdateCmd('stateHandling', false);
               $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
@@ -424,61 +423,63 @@ class sunshutter extends eqLogic {
               continue;
             }
           }
-          if ($condition['conditions::condition'] != '' && jeedom::evaluateExpression($condition['conditions::condition'])) {
-            if (trim($condition['conditions::position']) != '') {
-              if (trim($this->getConfiguration('condition::allowmove')) != '' && jeedom::evaluateExpression($this->getConfiguration('condition::allowmove')) == false) {
-                if (isset($condition['conditions::forced']) && $condition['conditions::forced']) {
-                  log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Condition générale non remplie - Mais action forcée', __FILE__) . ' : ' . $this->getConfiguration('condition::allowmove'));
-                } else {
-                  log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Condition générale non remplie - Aucune action', __FILE__) . ' : ' . $this->getConfiguration('condition::allowmove'));
-                  continue;
-                }
-              }
-              log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Condition avec action immédiate', __FILE__) . ' : ' . $condition['conditions::condition'] . ' (' . $condition['conditions::position'] . ' %)');
-              if ($condition['conditions::position'] == '-1') {
-                log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Action immédiate de reprise', __FILE__));
-                $cmd = $this->getCmd(null, 'resumeHandling');
-                if (is_object($cmd)) {
-                  $cmd->execCmd();
-                }
-                break;
-              }
-              $cmd = cmd::byId(str_replace('#', '', $this->getConfiguration('shutter::position')));
-              if (is_object($cmd)) {
-                $position = $condition['conditions::position'];
-                if ($condition['conditions::suspend'] == 1) {
-                  log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Condition avec action immédiate + suspension de la gestion automatique', __FILE__));
-                  $this->setCache('beginSuspend', time());
-                  $this->checkAndUpdateCmd('stateHandling', false);
-                  $cmdStateLabel = $this->getCmd(null, 'stateHandlingLabel');
-                  $stateLabel = $cmdStateLabel->execCmd();
-                  if ($stateLabel != 'Manuel') {
-                    $this->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
-                    $this->checkAndUpdateCmd('label', $condition['conditions::label']);
-                  }
-                }
-                $currentPosition = null;
-                $currentPosition = $this->getCurrentPosition();
-                $amplitude = abs($this->getConfiguration('shutter::closePosition', 0) - $this->getConfiguration('shutter::openPosition', 100));
-                if($amplitude == 0){
-                    $amplitude = 100;
-                }
-                $delta = abs($position - $currentPosition);
-                $ecart = round(($delta / $amplitude) * 100, 2);
-                log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Ecart avec la position cible', __FILE__) . ' : ' . $ecart . ' %');
-                if ($ecart <= 4) {
-                  log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Ecart avec la position cible inférieur à 4 % : aucune action', __FILE__));
-                } else {
-                  log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Positionnement à', __FILE__) . ' ' . $position . ' %');
-                  $cmd->execCmd(array('slider' => $position));
-                  $this->setCache('lastPositionOrder', $position);
-                  $this->setCache('lastPositionOrderTime', strtotime('now'));
-                  $this->checkAndUpdateCmd('lastposition', $position);
-                }
-              }
-              break;
+          if ($condition['conditions::condition'] == '' || jeedom::evaluateExpression($condition['conditions::condition']) !== true) {
+            continue;
+          }
+          if (trim($condition['conditions::position']) == '') {
+            continue;
+          }
+          if (trim($this->getConfiguration('condition::allowmove')) != '' && jeedom::evaluateExpression($this->getConfiguration('condition::allowmove')) == false) {
+            if (isset($condition['conditions::forced']) && $condition['conditions::forced']) {
+              log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Condition générale non remplie - Mais action forcée', __FILE__) . ' : ' . $this->getConfiguration('condition::allowmove'));
+            } else {
+              log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Condition générale non remplie - Aucune action', __FILE__) . ' : ' . $this->getConfiguration('condition::allowmove'));
+              continue;
             }
           }
+          log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Condition avec action immédiate', __FILE__) . ' : ' . $condition['conditions::condition'] . ' (' . $condition['conditions::position'] . ' %)');
+          if ($condition['conditions::position'] == '-1') {
+            log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Action immédiate de reprise', __FILE__));
+            $cmd = $this->getCmd(null, 'resumeHandling');
+            if (is_object($cmd)) {
+              $cmd->execCmd();
+            }
+            break;
+          }
+          $cmd = cmd::byId(str_replace('#', '', $this->getConfiguration('shutter::position')));
+          if (is_object($cmd)) {
+            $position = $condition['conditions::position'];
+            if ($condition['conditions::suspend'] == 1) {
+              log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Condition avec action immédiate + suspension de la gestion automatique', __FILE__));
+              $this->setCache('beginSuspend', time());
+              $this->checkAndUpdateCmd('stateHandling', false);
+              $cmdStateLabel = $this->getCmd(null, 'stateHandlingLabel');
+              $stateLabel = $cmdStateLabel->execCmd();
+              if ($stateLabel != 'Manuel') {
+                $this->checkAndUpdateCmd('stateHandlingLabel', 'Auto');
+                $this->checkAndUpdateCmd('label', $condition['conditions::label']);
+              }
+            }
+            $currentPosition = null;
+            $currentPosition = $this->getCurrentPosition();
+            $amplitude = abs($this->getConfiguration('shutter::closePosition', 0) - $this->getConfiguration('shutter::openPosition', 100));
+            if($amplitude == 0){
+                $amplitude = 100;
+            }
+            $delta = abs($position - $currentPosition);
+            $ecart = round(($delta / $amplitude) * 100, 2);
+            log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Ecart avec la position cible', __FILE__) . ' : ' . $ecart . ' %');
+            if ($ecart <= 4) {
+              log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Ecart avec la position cible inférieur à 4 % : aucune action', __FILE__));
+            } else {
+              log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Positionnement à', __FILE__) . ' ' . $position . ' %');
+              $cmd->execCmd(array('slider' => $position));
+              $this->setCache('lastPositionOrder', $position);
+              $this->setCache('lastPositionOrderTime', strtotime('now'));
+              $this->checkAndUpdateCmd('lastposition', $position);
+            }
+          }
+          break;
         }
       }
     }
