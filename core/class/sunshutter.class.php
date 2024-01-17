@@ -405,6 +405,7 @@ class sunshutter extends eqLogic {
     if (is_object($cmd)) {
       $currentPosition = $cmd->execCmd();
     }
+    log::add(__CLASS__, 'debug', $this->getHumanName() . __('Position actuel du volet ', __FILE__).$currentPosition);
     return $currentPosition;
   }
 
