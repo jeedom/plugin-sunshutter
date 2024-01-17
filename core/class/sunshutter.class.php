@@ -489,12 +489,14 @@ class sunshutter extends eqLogic {
     $sun_azimuth = $this->getCmd(null, 'sun_azimuth')->execCmd();
     $positions = $this->getConfiguration('positions', '');
     if (is_array($positions)) {
-      foreach ($positions as $position) {
+      foreach ($positions as &$position) {
         if ($sun_elevation > $position['sun::elevation::from'] && $sun_elevation <= $position['sun::elevation::to']) {
           if ($sun_azimuth > $position['sun::azimuth::from'] && $sun_azimuth <= $position['sun::azimuth::to']) {
             if ($position['position::allowmove'] == '' || jeedom::evaluateExpression($position['position::allowmove']) == true) {
               log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Calcul de positionnement - Conditions remplies', __FILE__) . ' : ' . $position['position::allowmove'] . ' ' . __('Elévation', __FILE__) . ' = ' . $position['sun::elevation::from'] . '°-' . $position['sun::elevation::to'] . ' ' . __('Azimuth', __FILE__) . ' = ' . $position['sun::azimuth::from'] . '°-' . $position['sun::azimuth::to'] . '° ('  . $position['shutter::position'] . ' %)');
-              //return $position['shutter::position'];
+              if(!$position['position::label']){
+                  $position['position::label'] = '';
+              }
               return array('position' => $position['shutter::position'], 'label' => $position['position::label']);
             }
             log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Calcul de positionnement - Conditions non remplies', __FILE__) . ' : ' . $position['position::allowmove'] . ' ' . __('Elévation', __FILE__) . ' = '  . $position['sun::elevation::from'] . '°-' . $position['sun::elevation::to'] . ' ' . __('Azimuth', __FILE__) . ' = ' . $position['sun::azimuth::from'] . '°-' . $position['sun::azimuth::to'] . '° ('  . $position['shutter::position'] . ' %)');
