@@ -460,6 +460,9 @@ class sunshutter extends eqLogic {
                 $currentPosition = null;
                 $currentPosition = $this->getCurrentPosition();
                 $amplitude = abs($this->getConfiguration('shutter::closePosition', 0) - $this->getConfiguration('shutter::openPosition', 100));
+                if($amplitude == 0){
+                    $amplitude = 100;
+                }
                 $delta = abs($position - $currentPosition);
                 $ecart = round(($delta / $amplitude) * 100, 2);
                 log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Ecart avec la position cible', __FILE__) . ' : ' . $ecart . ' %');
