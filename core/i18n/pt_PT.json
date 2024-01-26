@@ -193,6 +193,7 @@
         "Ecart avec la position cible": "Desvio da posição alvo",
         "Ecart avec la position cible inférieur à 4 % : aucune action": "Desvio da posição alvo inferior a 4%: nenhuma ação",
         "Positionnement à": "Posicionamento em",
+        "[systematicAction] (1) Ecriture de lastPositionOrder : ": "[systematicAction] (1) Escrevendo lastPositionOrder:",
         "Calcul de positionnement - Conditions remplies": "Cálculo de posicionamento - Condições atendidas",
         "Elévation": "Elevação",
         "Azimuth": "Azimute",
@@ -213,6 +214,8 @@
         "Condition remplie mais position vide - Aucune action": "Condição cumprida, mas posição vazia - Nenhuma ação",
         "Position actuelle": "Posição atual",
         "Position cible": "Posição do alvo",
+        "[executeAction] (1) Ecriture de lastPositionOrder : ": "[executeAction] (1) Escrevendo lastPositionOrder:",
+        "[executeAction] (2) Ecriture de lastPositionOrder : ": "[executeAction] (2) Escrevendo lastPositionOrder:",
         "Suspension manuelle de la gestion automatique": "Suspensão manual de gerenciamento automático",
         "Reprise manuelle de la gestion automatique": "Reinício manual da gestão automática",
         "Passage en mode": "Mudando para o modo"
