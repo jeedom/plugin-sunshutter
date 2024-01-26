@@ -647,7 +647,7 @@ class sunshutter extends eqLogic {
         return;
       }
     }
-    if ($position !== null || $_force) {
+    if ($position !== null && $_force) {
       log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Positionnement à', __FILE__) . ' ' . $position . ' %');
       $cmd = cmd::byId(str_replace('#', '', $this->getConfiguration('shutter::position')));
       if (is_object($cmd)) {
@@ -657,6 +657,8 @@ class sunshutter extends eqLogic {
       $this->setCache('lastPositionOrder', $position);
       $this->setCache('lastPositionOrderTime', strtotime('now'));
       $this->checkAndUpdateCmd('lastposition', $position);
+    }
+    if($_force){
       $this->checkAndUpdateCmd('label', $label);
     }
   }
