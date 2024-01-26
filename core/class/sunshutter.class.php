@@ -522,7 +522,7 @@ class sunshutter extends eqLogic {
         log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Calcul de positionnement - Action par défaut : Position personnalisée', __FILE__) . ' ' . __('à', __FILE__) . ' ' . $default . ' %');
         break;
       default:
-        $default = $this->getCurrentPosition();
+        $default = null;
         log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Calcul de positionnement - Action par défaut : Ne rien faire', __FILE__));
         break;
     }
@@ -584,7 +584,6 @@ class sunshutter extends eqLogic {
       }
     }
     $position = null;
-    //$position = $this->calculPosition();
     $positionArray = $this->calculPosition();
     $position = $positionArray['position'];
     $label = $positionArray['label'];
