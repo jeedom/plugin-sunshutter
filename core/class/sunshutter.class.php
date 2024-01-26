@@ -475,6 +475,7 @@ class sunshutter extends eqLogic {
             } else {
               log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Positionnement à', __FILE__) . ' ' . $position . ' %');
               $cmd->execCmd(array('slider' => $position));
+              log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('[systematicAction] (1) Ecriture de lastPositionOrder : ', __FILE__).$position);
               $this->setCache('lastPositionOrder', $position);
               $this->setCache('lastPositionOrderTime', strtotime('now'));
               $this->checkAndUpdateCmd('lastposition', $position);
@@ -640,6 +641,7 @@ class sunshutter extends eqLogic {
       log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Ecart avec la position cible', __FILE__) . ' : ' . $ecart . ' %');
       if ($ecart <= 4) {
         log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Ecart avec la position cible inférieur à 4 % : aucune action', __FILE__));
+        log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('[executeAction] (1) Ecriture de lastPositionOrder : ', __FILE__).$position);
         $this->setCache('lastPositionOrder', $position);
         $this->checkAndUpdateCmd('lastposition', $position);
         $this->checkAndUpdateCmd('label', $label);
@@ -652,6 +654,7 @@ class sunshutter extends eqLogic {
       if (is_object($cmd)) {
         $cmd->execCmd(array('slider' => $position));
       }
+      log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('[executeAction] (2) Ecriture de lastPositionOrder : ', __FILE__).$position);
       $this->setCache('lastPositionOrder', $position);
       $this->setCache('lastPositionOrderTime', strtotime('now'));
       $this->checkAndUpdateCmd('lastposition', $position);
