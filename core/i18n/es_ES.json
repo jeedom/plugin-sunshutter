@@ -1,9 +1,4 @@
 {
-    "plugins\/sunshutter\/mobile\/html\/sunshutter.html": {
-        "Nom": "Nombre",
-        "Gestion": "Gestión",
-        "Manuel": "Manual"
-    },
     "plugins\/sunshutter\/desktop\/modal\/health.php": {
         "Volet": "Persiana",
         "Cron": "Cron",
@@ -26,14 +21,7 @@
         "401 - Accès non autorisé": "401 - Acceso no autorizado",
         "Position Moyenne": "Posición media",
         "Suspendu Manuel": "Manual suspendido",
-        "Suspendu Auto": "Auto Suspendido",
-        "Nom": "Nombre",
-        "Soleil": "Sol",
-        "Mode\/Label": "Etiqueta de moda",
-        "Dernier": "Pasado",
-        "Suspension": "Suspensión",
-        "Gestion": "Gestión",
-        "Manuel": "Manual"
+        "Suspendu Auto": "Auto Suspendido"
     },
     "plugins\/sunshutter\/desktop\/php\/sunshutter.php": {
         "401 - Accès non autorisé": "401 - Acceso no autorizado",
@@ -128,10 +116,12 @@
         "La condition ne sera valide que si le volet est dans le mode spécifié, plusieurs modes peuvent être renseignés séparés par des virgules (facultatif)": "La condición solo será válida si el panel está en el modo especificado, se pueden ingresar varios modos separados por comas (opcional)",
         "Action immédiate": "Acción inmediata",
         "Cocher la case pour que la règle s'exécute immédiatement dès que la condition est valide": "Marque la casilla para que la regla se ejecute inmediatamente tan pronto como la condición sea válida",
+        "Action forcée": "Acción forzada",
+        "Cocher la case pour que l'action immédiate soit exécutée même si la condition générale n'est pas remplie": "Marque la casilla para que se ejecute la acción inmediata aunque no se cumpla la condición general",
         "Suspendre": "Suspender",
         "Cocher la case pour suspendre la gestion automatique tant que la règle est valide": "Marque la casilla para suspender la gestión automática mientras la regla sea válida",
         "Position": "Posición",
-        "Indiquer la position voulue en pourcentage (vide = aucune action)": "Indique la posición deseada en porcentaje (vacío = sin acción)",
+        "Indiquer la position voulue en pourcentage (vide = aucune action , -1= en cas d'action immédiate fera une reprise de gestion)": "Indique la posición deseada en porcentaje (vacío = ninguna acción, -1= en caso de acción inmediata, se reanudará la gestión)",
         "Label": "Etiqueta",
         "Label associé à la validation de la règle d'exception (facultatif)": "Etiqueta asociada a la validación de la regla de excepción (opcional)",
         "Commentaire": "Comentario",
@@ -150,10 +140,8 @@
         "Ajouter un mode": "Agregar un modo",
         "ID": "IDENTIFICACIÓN",
         "Nom": "Nombre",
+        "Etat": "Estado",
         "Action": "Acción"
-    },
-    "plugins\/sunshutter\/desktop\/js\/panel.js": {
-        "Aucun équipement actif ou créé trouvé.": "No se encontraron equipos activos o creados"
     },
     "plugins\/sunshutter\/desktop\/js\/sunshutter.js": {
         "Santé Gestion Volet": "Componente de gestión de salud",
@@ -180,7 +168,6 @@
         "Gestion automatique suspendue, vérification du délai avant reprise": "Gestión automática suspendida, verificación del retraso antes de la reanudación",
         "minutes": "minutos",
         "Délai de reprise atteint : réactivation de la gestion automatique": "Tiempo de recuperación alcanzado: reactivación de la gestión automática",
-        "Ecart avec la dernière position connue": "Desviación de la última posición conocida",
         "Ecart avec la dernière position connue supérieur à 4 % : suspension de la gestion automatique": "Desviación de la última posición conocida superior al 4%: suspensión de la gestión automática",
         "Expression cron non valide pour": "Expresión cron inválida para",
         "Déclenchement de l\\'action immédiate": "Desencadenando una acción inmediata",
@@ -196,12 +183,17 @@
         "Suspendre": "Suspender",
         "Reprendre": "Reanudar",
         "Rafraichir": "Refrescar",
+        "Position actuel du volet ": "Posición actual del obturador",
         "Le mode ne correspond pas": "El modo no coincide",
+        "Condition générale non remplie - Mais action forcée": "Condición general no cumplida - Pero acción forzada",
+        "Condition générale non remplie - Aucune action": "Condición general no cumplida - Sin acción",
         "Condition avec action immédiate": "Condición con acción inmediata",
+        "Action immédiate de reprise": "Acción de recuperación inmediata",
         "Condition avec action immédiate + suspension de la gestion automatique": "Condición con acción inmediata + suspensión de la gestión automática",
         "Ecart avec la position cible": "Desviación de la posición de destino",
         "Ecart avec la position cible inférieur à 4 % : aucune action": "Desviación de la posición objetivo inferior al 4%: sin acción",
         "Positionnement à": "Posicionamiento en",
+        "[systematicAction] (1) Ecriture de lastPositionOrder : ": "[AcciónSistemática] (1) Escribir lastPositionOrder:",
         "Calcul de positionnement - Conditions remplies": "Cálculo de posicionamiento - Condiciones cumplidas",
         "Elévation": "Elevación",
         "Azimuth": "Azimut",
@@ -215,13 +207,15 @@
         "Gestion automatique suspendue, réactivation dans": "Gestión automática suspendida, reactivación en",
         "Gestion automatique suspendue : aucune action": "Gestión automática suspendida: sin acción",
         "Démarrage de la gestion automatique": "Iniciar la gestión automática",
-        "Condition générale non remplie - Aucune action": "Condición general no cumplida - Sin acción",
+        "Ecart avec la dernière position connue": "Desviación de la última posición conocida",
         "Aucune condition définie - Mode valide": "Ninguna condición definida - Modo válido",
         "Condition avec suspension de la gestion automatique": "Condición con suspensión de la gestión automática",
         "Condition remplie": "Condición cumplida",
         "Condition remplie mais position vide - Aucune action": "Condición cumplida pero posición vacía - Sin acción",
         "Position actuelle": "Posición actual",
         "Position cible": "Posición de objetivo",
+        "[executeAction] (1) Ecriture de lastPositionOrder : ": "[executeAction] (1) Escribir lastPositionOrder:",
+        "[executeAction] (2) Ecriture de lastPositionOrder : ": "[executeAction] (2) Escribir lastPositionOrder:",
         "Suspension manuelle de la gestion automatique": "Suspensión manual de la gestión automática",
         "Reprise manuelle de la gestion automatique": "Reanudación manual de la gestión automática",
         "Passage en mode": "Cambiar a modo"

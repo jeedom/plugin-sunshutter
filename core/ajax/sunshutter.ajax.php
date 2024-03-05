@@ -54,14 +54,20 @@ try {
 		ajax::success(utils::o2a($return));
 	}
 
-	if (init('action') == 'getPanel') {
-		if (!isConnect('admin')) {
-			throw new Exception(__('401 - Accès non autorisé', __FILE__));
+	if (init('action') == 'getsunshutter') {
+		$return = array();
+		$return['eqLogics'] = array();
+		foreach (sunshutter::byType('sunshutter') as $sunshutter) {
+			$return['eqLogics'][] = $sunshutter->toHtml(init('version'));
 		}
-		ajax::success(sunshutter::getPanel(init('type')));
+		ajax::success($return);
+	}
+
+	if (init('action') == 'getSummary') {
+		ajax::success(sunshutter::getSummary());
 	}
 
 	throw new Exception(__('Aucune methode correspondante à', __FILE__) . ' : ' . init('action'));
 } catch (Exception $e) {
-	ajax::error(displayExeption($e), $e->getCode());
+	ajax::error(displayException($e), $e->getCode());
 }

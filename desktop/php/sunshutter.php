@@ -9,7 +9,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 
 <div class="row row-overflow">
 	<div class="col-xs-12 eqLogicThumbnailDisplay">
-		<legend><i class="fas fa-cog"></i>  {{Gestion}}</legend>
+		<legend><i class="fas fa-cog"></i> {{Gestion}}</legend>
 		<div class="eqLogicThumbnailContainer">
 			<div class="cursor eqLogicAction logoPrimary" data-action="add">
 				<i class="fas fa-plus-circle"></i>
@@ -31,8 +31,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 		<?php
 		if (count($eqLogics) == 0) {
 			echo '<br><div class="text-center" style="font-size:1.2em;font-weight:bold;">{{Aucun volet n\'est paramétré, cliquer sur "Ajouter" pour commencer}}</div>';
-		}
-		else {
+		} else {
 			echo '<div class="input-group" style="margin:5px;">';
 			echo '<input class="form-control roundedLeft" placeholder="{{Rechercher}}" id="in_searchEqlogic">';
 			echo '<div class="input-group-btn">';
@@ -43,12 +42,12 @@ $eqLogics = eqLogic::byType($plugin->getId());
 			echo '<div class="eqLogicThumbnailContainer">';
 			foreach ($eqLogics as $eqLogic) {
 				$opacity = ($eqLogic->getIsEnable()) ? '' : 'disableCard';
-				echo '<div class="eqLogicDisplayCard cursor '.$opacity.'" data-eqLogic_id="' . $eqLogic->getId() . '">';
+				echo '<div class="eqLogicDisplayCard cursor ' . $opacity . '" data-eqLogic_id="' . $eqLogic->getId() . '">';
 				echo '<img src="' . $plugin->getPathImgIcon() . '">';
 				echo '<br>';
 				echo '<span class="name">' . $eqLogic->getHumanName(true, true) . '</span>';
 				echo '<span class="hiddenAsCard displayTableRight hidden">';
-				$cron = ($eqLogic->getConfiguration('cron::executeAction','') == 'custom') ? $eqLogic->getConfiguration('cron::custom','') : $eqLogic->getConfiguration('cron::executeAction','');
+				$cron = ($eqLogic->getConfiguration('cron::executeAction', '') == 'custom') ? $eqLogic->getConfiguration('cron::custom', '') : $eqLogic->getConfiguration('cron::executeAction', '');
 				echo '<span class="label label-info hidden-xs">' . $cron . '</span>';
 				echo ($eqLogic->getIsVisible() == 1) ? ' <i class="fas fa-eye" title="{{Equipement visible}}"></i>' : ' <i class="fas fa-eye-slash" title="{{Equipement non visible}}"></i>';
 				echo '</span>';
@@ -63,7 +62,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 		<div class="input-group pull-right" style="display:inline-flex">
 			<span class="input-group-btn">
 				<a class="btn btn-sm btn-default eqLogicAction roundedLeft" data-action="configure"><i class="fas fa-cogs"></i><span class="hidden-xs"> {{Configuration avancée}}</span>
-				</a><a class="btn btn-sm btn-default eqLogicAction" data-action="copy"><i class="fas fa-copy"></i><span class="hidden-xs">  {{Dupliquer}}</span>
+				</a><a class="btn btn-sm btn-default eqLogicAction" data-action="copy"><i class="fas fa-copy"></i><span class="hidden-xs"> {{Dupliquer}}</span>
 				</a><a class="btn btn-sm btn-success eqLogicAction" data-action="save"><i class="fas fa-check-circle"></i> {{Sauvegarder}}
 				</a><a class="btn btn-sm btn-danger eqLogicAction roundedRight" data-action="remove"><i class="fas fa-minus-circle"></i> {{Supprimer}}
 				</a>
@@ -72,12 +71,14 @@ $eqLogics = eqLogic::byType($plugin->getId());
 		<ul class="nav nav-tabs" role="tablist">
 			<li role="presentation"><a href="#" class="eqLogicAction" aria-controls="home" role="tab" data-toggle="tab" data-action="returnToThumbnailDisplay"><i class="fas fa-arrow-circle-left"></i></a></li>
 			<li role="presentation" class="active"><a href="#eqlogictab" aria-controls="home" role="tab" data-toggle="tab"><i class="fas fa-tachometer-alt"></i> {{Equipement}}</a></li>
-			<li role="presentation"><a href="#conditiontab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-tasks"></i><span class="hidden-xs">  {{Exceptions}}</span></a></li>
-			<li role="presentation"><a href="#positiontab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-globe"></i><span class="hidden-xs">  {{Positionnement}}</span></a></li>
+			<li role="presentation"><a href="#conditiontab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-tasks"></i><span class="hidden-xs"> {{Exceptions}}</span></a></li>
+			<li role="presentation"><a href="#positiontab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-globe"></i><span class="hidden-xs"> {{Positionnement}}</span></a></li>
 			<?php try {
 				if (is_object(plugin::byId('calendar'))) { ?>
-				<li role="presentation"><a href="#scheduletab" aria-controls="profile" role="tab" data-toggle="tab"><i class="far fa-clock"></i><span class="hidden-xs"> {{Programmation}}</span></a></li>
-			<?php }}catch(Exception $e){} ?>
+					<li role="presentation"><a href="#scheduletab" aria-controls="profile" role="tab" data-toggle="tab"><i class="far fa-clock"></i><span class="hidden-xs"> {{Programmation}}</span></a></li>
+			<?php }
+			} catch (Exception $e) {
+			} ?>
 			<li role="presentation"><a href="#commandtab" aria-controls="profile" role="tab" data-toggle="tab"><i class="fas fa-list-alt"></i> {{Commandes}}</a></li>
 		</ul>
 
@@ -90,12 +91,12 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<div class="form-group">
 								<label class="col-sm-4 control-label">{{Nom du volet}}</label>
 								<div class="col-sm-6">
-									<input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display:none;" >
+									<input type="text" class="eqLogicAttr form-control" data-l1key="id" style="display:none;">
 									<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom du volet}}">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4 control-label" >{{Objet parent}}</label>
+								<label class="col-sm-4 control-label">{{Objet parent}}</label>
 								<div class="col-sm-6">
 									<select id="sel_object" class="eqLogicAttr form-control" data-l1key="object_id">
 										<option value="">{{Aucun}}</option>
@@ -351,11 +352,14 @@ $eqLogics = eqLogic::byType($plugin->getId());
 									<th>{{Action immédiate}}
 										<sup><i class="fas fa-question-circle tooltips" title="{{Cocher la case pour que la règle s'exécute immédiatement dès que la condition est valide}}"></i></sup>
 									</th>
+									<th>{{Action forcée}}
+										<sup><i class="fas fa-question-circle tooltips" title="{{Cocher la case pour que l'action immédiate soit exécutée même si la condition générale n'est pas remplie}}"></i></sup>
+									</th>
 									<th>{{Suspendre}}
 										<sup><i class="fas fa-question-circle tooltips" title="{{Cocher la case pour suspendre la gestion automatique tant que la règle est valide}}"></i></sup>
 									</th>
 									<th style="width:100px;">{{Position}}
-										<sup><i class="fas fa-question-circle tooltips" title="{{Indiquer la position voulue en pourcentage (vide = aucune action)}}"></i></sup>
+										<sup><i class="fas fa-question-circle tooltips" title="{{Indiquer la position voulue en pourcentage (vide = aucune action , -1= en cas d'action immédiate fera une reprise de gestion)}}"></i></sup>
 									</th>
 									<th style="min-width:80px;width:150px">{{Label}}
 										<sup><i class="fas fa-question-circle tooltips" title="{{Label associé à la validation de la règle d'exception (facultatif)}}"></i></sup>
@@ -436,6 +440,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<th style="min-width:150px;width:250px;">{{Nom}}</th>
 							<th></th>
 							<th style="min-width:150px;">{{Options}}</th>
+							<th>{{Etat}}</th>
 							<th style="min-width:100px;width:200px;">{{Action}}</th>
 						</tr>
 					</thead>
@@ -448,5 +453,5 @@ $eqLogics = eqLogic::byType($plugin->getId());
 	</div>
 </div>
 
-<?php include_file('desktop', 'sunshutter', 'js', 'sunshutter');?>
-<?php include_file('core', 'plugin.template', 'js');?>
+<?php include_file('desktop', 'sunshutter', 'js', 'sunshutter'); ?>
+<?php include_file('core', 'plugin.template', 'js'); ?>
