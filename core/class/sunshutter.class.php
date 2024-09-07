@@ -535,8 +535,8 @@ class sunshutter extends eqLogic {
     $stateHandlingCmd = $this->getCmd(null, 'stateHandling');
     if (!$_force && $stateHandlingCmd->execCmd() == false) {
       if ($this->getConfiguration('shutter::nobackhand', 0) == 2) {
-        $delay = $this->getConfiguration('shutter::customDelay', 0);
-        $since = $this->getCache('beginSuspend');
+        $delay = intval($this->getConfiguration('shutter::customDelay', 0));
+        $since = intval($this->getCache('beginSuspend'));
         $deltadelay = abs($since - time()) / 60;
         log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Gestion automatique suspendue, vérification du délai avant reprise', __FILE__) . ' (' . $delay . ' ' . __('minutes', __FILE__) . ') : ' . round($deltadelay) . ' ' . __('minutes', __FILE__));
         if ($this->getCache('manualSuspend')) {
