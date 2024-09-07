@@ -126,7 +126,7 @@ class sunshutter extends eqLogic {
       $cmdHandlingLabel = $sunshutter->getCmd(null, 'stateHandlingLabel');
       $cmd = cmd::byId(str_replace('#', '', $sunshutter->getConfiguration('shutter::state')));
       if (is_object($cmd)) {
-        $sumposition += $cmd->execCmd();
+        $sumposition += intval($cmd->execCmd());
       }
       $handling =  $cmdHandling->execCmd();
       if ($handling == false) {
