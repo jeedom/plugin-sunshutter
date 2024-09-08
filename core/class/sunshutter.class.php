@@ -406,7 +406,7 @@ class sunshutter extends eqLogic {
       $currentPosition = $cmd->execCmd();
     }
     log::add(__CLASS__, 'debug', $this->getHumanName() .' '. __('Position actuel du volet ', __FILE__).$currentPosition);
-    return $currentPosition;
+    return intval($currentPosition);
   }
 
   public function systematicAction($_cmdId) {
@@ -566,7 +566,7 @@ class sunshutter extends eqLogic {
     }
     $currentPosition = $this->getCurrentPosition();
     if (!$_force && $this->getConfiguration('shutter::nobackhand', 0) != 0) {
-      $lastPositionOrder = $this->getCache('lastPositionOrder', null);
+      $lastPositionOrder = intval($this->getCache('lastPositionOrder', 0));
       if ($currentPosition !== null  && $lastPositionOrder !== null) {
         $amplitude = abs($this->getConfiguration('shutter::closePosition', 0) - $this->getConfiguration('shutter::openPosition', 100));
         $delta = abs($currentPosition - $lastPositionOrder);
@@ -634,7 +634,7 @@ class sunshutter extends eqLogic {
     }
     log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Position actuelle', __FILE__) . ' : ' . $currentPosition . ' % → ' . __('Position cible', __FILE__) . ' : ' . $position . ' %');
     if (($position !== null && $currentPosition !== null)) {
-      $amplitude = abs($this->getConfiguration('shutter::closePosition', 0) - $this->getConfiguration('shutter::openPosition', 100));
+      $amplitude = abs(intval($this->getConfiguration('shutter::closePosition', 0)) - intval($this->getConfiguration('shutter::openPosition', 100)));
       $delta = abs($position - $currentPosition);
       $ecart = round(($delta / $amplitude) * 100, 2);
       log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Ecart avec la position cible', __FILE__) . ' : ' . $ecart . ' %');
