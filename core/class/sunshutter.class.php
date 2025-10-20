@@ -658,9 +658,7 @@ class sunshutter extends eqLogic {
       $this->setCache('lastPositionOrderTime', strtotime('now'));
       $this->checkAndUpdateCmd('lastposition', $position);
     }
-    if($_force){
-      $this->checkAndUpdateCmd('label', $label);
-    }
+    $this->checkAndUpdateCmd('label', $label);
   }
 
   public static function templateWidget() {
