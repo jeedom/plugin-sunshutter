@@ -5,6 +5,8 @@
 >Pour rappel, s'il n'y a pas d'information sur la mise à jour, c'est que celle-ci concerne uniquement de la mise à jour de documentation, de traduction ou de texte.
 
 - Support des images d'équipement personnalisées (Jeedom 4.5)
+- Correction d'une race condition pouvant réactiver la gestion automatique juste après une suspension (cron/commande concurrents)
+- Jeedom v4.5 requis
 
 # 22/02/2024
 

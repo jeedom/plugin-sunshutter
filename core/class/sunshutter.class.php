@@ -46,17 +46,21 @@ class sunshutter extends eqLogic {
         if ($stateHandlingCmd->execCmd() == false) {
           if (!$sunshutter->getCache('manualSuspend')) {
             $delay = $sunshutter->getConfiguration('shutter::customDelay', 0);
-            $since = $sunshutter->getCache('beginSuspend');
-            $deltadelay = abs($since - time()) / 60;
-            log::add(__CLASS__, 'debug', $sunshutter->getHumanName() . ' ' . __('Gestion automatique suspendue, vérification du délai avant reprise', __FILE__) . ' (' . $delay . ' ' . __('minutes', __FILE__) . ') : ' . round($deltadelay) . ' ' . __('minutes', __FILE__));
-            if ($deltadelay >= $delay) {
-              log::add(__CLASS__, 'debug', $sunshutter->getHumanName() . ' ' . __('Délai de reprise atteint : réactivation de la gestion automatique', __FILE__));
-              $sunshutter->checkAndUpdateCmd('stateHandling', true);
-              $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
-              $sunshutter->checkAndUpdateCmd('label', 'Reprise Suspension');
-              $sunshutter->setCache('beginSuspend', 0);
-              $sunshutter->executeAction(true);
-              $forcedByDelay = 1;
+            $since = $sunshutter->waitForBeginSuspend();
+            if ($since === 0) {
+              log::add(__CLASS__, 'debug', $sunshutter->getHumanName() . ' ' . __("Suspension en cours d'enregistrement, on attend le prochain cycle", __FILE__));
+            } else {
+              $deltadelay = abs($since - time()) / 60;
+              log::add(__CLASS__, 'debug', $sunshutter->getHumanName() . ' ' . __('Gestion automatique suspendue, vérification du délai avant reprise', __FILE__) . ' (' . $delay . ' ' . __('minutes', __FILE__) . ') : ' . round($deltadelay) . ' ' . __('minutes', __FILE__));
+              if ($deltadelay >= $delay) {
+                log::add(__CLASS__, 'debug', $sunshutter->getHumanName() . ' ' . __('Délai de reprise atteint : réactivation de la gestion automatique', __FILE__));
+                $sunshutter->checkAndUpdateCmd('stateHandling', true);
+                $sunshutter->checkAndUpdateCmd('stateHandlingLabel', 'Aucun');
+                $sunshutter->checkAndUpdateCmd('label', 'Reprise Suspension');
+                $sunshutter->setCache('beginSuspend', 0);
+                $sunshutter->executeAction(true);
+                $forcedByDelay = 1;
+              }
             }
           }
         } else {
@@ -393,6 +397,17 @@ class sunshutter extends eqLogic {
     }
   }
 
+  private function waitForBeginSuspend(int $_maxRetries = 5, int $_delayUs = 200000): int {
+    $since = $this->getCache('beginSuspend');
+    $retries = 0;
+    while (!$since && $retries < $_maxRetries) {
+      usleep($_delayUs);
+      $since = $this->getCache('beginSuspend');
+      $retries++;
+    }
+    return intval($since);
+  }
+
   public function getCurrentPosition() {
     if ($this->getConfiguration('shutter::refreshPosition') != '') {
       $cmd = cmd::byId(str_replace('#', '', $this->getConfiguration('shutter::refreshPosition')));
@@ -536,7 +551,11 @@ class sunshutter extends eqLogic {
     if (!$_force && $stateHandlingCmd->execCmd() == false) {
       if ($this->getConfiguration('shutter::nobackhand', 0) == 2) {
         $delay = intval($this->getConfiguration('shutter::customDelay', 0));
-        $since = intval($this->getCache('beginSuspend'));
+        $since = $this->waitForBeginSuspend();
+        if ($since === 0) {
+          log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __("Suspension en cours d'enregistrement, aucune action", __FILE__));
+          return;
+        }
         $deltadelay = abs($since - time()) / 60;
         log::add(__CLASS__, 'debug', $this->getHumanName() . ' ' . __('Gestion automatique suspendue, vérification du délai avant reprise', __FILE__) . ' (' . $delay . ' ' . __('minutes', __FILE__) . ') : ' . round($deltadelay) . ' ' . __('minutes', __FILE__));
         if ($this->getCache('manualSuspend')) {
