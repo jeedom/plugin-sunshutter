@@ -219,8 +219,5 @@
         "Suspension manuelle de la gestion automatique": "Manuelle Aussetzung der automatischen Verwaltung",
         "Reprise manuelle de la gestion automatique": "Manuelle Wiederaufnahme der automatischen Verwaltung",
         "Passage en mode": "Wechsel in den Modus"
-    },
-    "info.json": {
-        "Ce plugin va vous permettre de gérer facilement le positionnement automatique de vos volets en fonction du soleil et\/ou d'autres conditions. IMPORTANT : ce plugin ne fonctionne qu'avec des équipements possédant une commande action\/curseur permettant de positionner le volet à un certain pourcentage d'ouverture\/fermeture.": "Mit diesem Plugin können Sie die automatische Positionierung Ihrer Rollläden entsprechend der Sonne und \/ oder anderen Bedingungen einfach verwalten. WICHTIG: Dieses Plugin funktioniert nur mit Geräten mit einer Aktions-\/Cursorsteuerung, die es ermöglicht, den Rollladen bei einem bestimmten Öffnungs- \/ Schließprozentsatz zu positionieren"
     }
 }

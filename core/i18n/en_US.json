@@ -219,8 +219,5 @@
         "Suspension manuelle de la gestion automatique": "Manual suspension of automatic management",
         "Reprise manuelle de la gestion automatique": "Manual resumption of automatic management",
         "Passage en mode": "Switching to mode"
-    },
-    "info.json": {
-        "Ce plugin va vous permettre de gérer facilement le positionnement automatique de vos volets en fonction du soleil et\/ou d'autres conditions. IMPORTANT : ce plugin ne fonctionne qu'avec des équipements possédant une commande action\/curseur permettant de positionner le volet à un certain pourcentage d'ouverture\/fermeture.": "This plugin will allow you to easily manage the automatic positioning of your shutters according to the sun and \/ or other conditions. IMPORTANT: this plugin only works with equipment having an action \/ cursor control allowing the shutter to be positioned at a certain opening \/ closing percentage"
     }
 }
