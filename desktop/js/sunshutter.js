@@ -15,12 +15,12 @@
 * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 
-$('#bt_healthsunshutter').on('click', function() {
-  $('#md_modal').dialog({title: "{{Santé Gestion Volet}}"})
+$('#bt_healthsunshutter').on('click', function () {
+  $('#md_modal').dialog({ title: "{{Santé Gestion Volet}}" })
   $('#md_modal').load('index.php?v=d&plugin=sunshutter&modal=health').dialog('open')
 })
 
-$('.eqLogicAttr[data-l1key=configuration][data-l2key=useJeedomLocalisation]').off('change').on('change', function() {
+$('.eqLogicAttr[data-l1key=configuration][data-l2key=useJeedomLocalisation]').off('change').on('change', function () {
   if ($(this).value() == 1) {
     $('.customLocalisation').hide()
   }
@@ -29,7 +29,7 @@ $('.eqLogicAttr[data-l1key=configuration][data-l2key=useJeedomLocalisation]').of
   }
 })
 
-$('.eqLogicAttr[data-l1key=configuration][data-l2key="cron::executeAction"]').on('change', function() {
+$('.eqLogicAttr[data-l1key=configuration][data-l2key="cron::executeAction"]').on('change', function () {
   if ($(this).value() == 'custom') {
     $('.customcron').show()
   }
@@ -38,7 +38,7 @@ $('.eqLogicAttr[data-l1key=configuration][data-l2key="cron::executeAction"]').on
   }
 })
 
-$('.eqLogicAttr[data-l1key=configuration][data-l2key="shutter::defaultAction"]').on('change', function() {
+$('.eqLogicAttr[data-l1key=configuration][data-l2key="shutter::defaultAction"]').on('change', function () {
   if ($(this).value() == 'custom') {
     $('.customPosition').show()
   }
@@ -47,7 +47,7 @@ $('.eqLogicAttr[data-l1key=configuration][data-l2key="shutter::defaultAction"]')
   }
 })
 
-$('.eqLogicAttr[data-l1key=configuration][data-l2key="shutter::nobackhand"]').on('change', function() {
+$('.eqLogicAttr[data-l1key=configuration][data-l2key="shutter::nobackhand"]').on('change', function () {
   if ($(this).value() == '2') {
     $('.customDelay').show()
   }
@@ -56,25 +56,25 @@ $('.eqLogicAttr[data-l1key=configuration][data-l2key="shutter::nobackhand"]').on
   }
 })
 
-$('#bt_addPosition').off('click').on('click', function() {
+$('#bt_addPosition').off('click').on('click', function () {
   addPosition({})
 })
 
-$('#bt_addConditions').off('click').on('click', function() {
+$('#bt_addConditions').off('click').on('click', function () {
   addConditions({})
 })
 
-$('#table_sunShutterPosition').off('click','.bt_removePosition').on('click','.bt_removePosition', function() {
+$('#table_sunShutterPosition').off('click', '.bt_removePosition').on('click', '.bt_removePosition', function () {
   $(this).closest('tr').remove()
 })
 
-$('#table_sunShutterConditions').off('click','.bt_removeCondition').on('click','.bt_removeCondition', function() {
+$('#table_sunShutterConditions').off('click', '.bt_removeCondition').on('click', '.bt_removeCondition', function () {
   $(this).closest('tr').remove()
 })
 
-$(".eqLogic").on('click',".listCmdInfo", function() {
+$(".eqLogic").on('click', ".listCmdInfo", function () {
   var el = $(this).closest('.form-group').find('.eqLogicAttr')
-  jeedom.cmd.getSelectModal({cmd: {type: 'info'}}, function(result) {
+  jeedom.cmd.getSelectModal({ cmd: { type: 'info' } }, function (result) {
     if (el.attr('data-concat') == 1) {
       el.atCaret('insert', result.human)
     }
@@ -84,9 +84,9 @@ $(".eqLogic").on('click',".listCmdInfo", function() {
   })
 })
 
-$(".eqLogic").on('click',".listCmdInfoPos",  function () {
+$(".eqLogic").on('click', ".listCmdInfoPos", function () {
   var el = $(this).closest('.input-group').find('.positionAttr')
-  jeedom.cmd.getSelectModal({cmd: {type: 'info'}}, function(result) {
+  jeedom.cmd.getSelectModal({ cmd: { type: 'info' } }, function (result) {
     if (el.attr('data-concat') == 1) {
       el.atCaret('insert', result.human)
     }
@@ -96,9 +96,9 @@ $(".eqLogic").on('click',".listCmdInfoPos",  function () {
   })
 })
 
-$(".eqLogic").on('click',".listCmdInfoConditions",  function () {
+$(".eqLogic").on('click', ".listCmdInfoConditions", function () {
   var el = $(this).closest('.input-group').find('.conditionsAttr')
-  jeedom.cmd.getSelectModal({cmd: {type: 'info'}}, function(result) {
+  jeedom.cmd.getSelectModal({ cmd: { type: 'info' } }, function (result) {
     if (el.attr('data-concat') == 1) {
       el.atCaret('insert', result.human)
     }
@@ -108,9 +108,9 @@ $(".eqLogic").on('click',".listCmdInfoConditions",  function () {
   })
 })
 
-$(".eqLogic").on('click',".listCmdAction", function () {
+$(".eqLogic").on('click', ".listCmdAction", function () {
   var el = $(this).closest('.form-group').find('.eqLogicAttr')
-  jeedom.cmd.getSelectModal({cmd: {type: 'action'}}, function(result) {
+  jeedom.cmd.getSelectModal({ cmd: { type: 'action' } }, function (result) {
     el.value(result.human)
   })
 })
@@ -133,7 +133,7 @@ function addPosition(_position) {
   tr += '<span class="input-group-addon roundedLeft">{{de}}</span>'
   tr += '<input class="form-control positionAttr" data-l1key="sun::azimuth::from">'
   tr += '<span class="input-group-addon">{{à}}</span>'
-  tr+= '<input class="form-control positionAttr roundedRight" data-l1key="sun::azimuth::to">'
+  tr += '<input class="form-control positionAttr roundedRight" data-l1key="sun::azimuth::to">'
   tr += '</div></td>'
   tr += '<td>'
   tr += '<div class="input-group">'
@@ -224,7 +224,7 @@ function printEqLogic(_eqLogic) {
   }
 }
 
-function printScheduling(_eqLogic){
+function printScheduling(_eqLogic) {
   $.ajax({
     type: 'POST',
     url: 'plugins/sunshutter/core/ajax/sunshutter.ajax.php',
@@ -238,7 +238,7 @@ function printScheduling(_eqLogic){
     },
     success: function (data) {
       if (data.state != 'ok') {
-        $('#div_alert').showAlert({message: data.result, level: 'danger'})
+        $('#div_alert').showAlert({ message: data.result, level: 'danger' })
         return
       }
       $('#div_schedule').empty()
@@ -254,7 +254,7 @@ function printScheduling(_eqLogic){
             color = 'transparent'
           }
           html += '<span class="label label-info cursor" style="font-size:1.2em;background-color : ' + color + 'color : ' + init(data.result[i].cmd_param.text_color, 'black') + '">'
-          html += '<a href="index.php?v=d&m=calendar&p=calendar&id='+data.result[i].eqLogic_id+'&event_id='+data.result[i].id+'" style="color : ' + init(data.result[i].cmd_param.text_color, 'black') + '">'
+          html += '<a href="index.php?v=d&m=calendar&p=calendar&id=' + data.result[i].eqLogic_id + '&event_id=' + data.result[i].id + '" style="color : ' + init(data.result[i].cmd_param.text_color, 'black') + '">'
           if (data.result[i].cmd_param.eventName != '') {
             html += data.result[i].cmd_param.icon + ' ' + data.result[i].cmd_param.eventName
           }
@@ -262,7 +262,7 @@ function printScheduling(_eqLogic){
             html += data.result[i].cmd_param.icon + ' ' + data.result[i].cmd_param.name
           }
           html += '</a></span>'
-          html += ' ' + data.result[i].startDate.substr(11,5) + ' {{à}} ' + data.result[i].endDate.substr(11,5)+'<br\><br\>'
+          html += ' ' + data.result[i].startDate.substr(11, 5) + ' {{à}} ' + data.result[i].endDate.substr(11, 5) + '<br\><br\>'
         }
         $('#div_schedule').empty().append(html)
       }
@@ -270,13 +270,13 @@ function printScheduling(_eqLogic){
   })
 }
 
-$("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true})
-$("#table_sunShutterPosition").sortable({axis: "y", cursor: "move", items: ".position", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true})
-$("#table_sunShutterConditions").sortable({axis: "y", cursor: "move", items: ".conditions", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true})
+$("#table_cmd").sortable({ axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true })
+$("#table_sunShutterPosition").sortable({ axis: "y", cursor: "move", items: ".position", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true })
+$("#table_sunShutterConditions").sortable({ axis: "y", cursor: "move", items: ".conditions", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true })
 
 function addCmdToTable(_cmd) {
   if (!isset(_cmd)) {
-    var _cmd = {configuration: {}}
+    var _cmd = { configuration: {} }
   }
   if (!isset(_cmd.configuration)) {
     _cmd.configuration = {}

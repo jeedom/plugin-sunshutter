@@ -42,45 +42,47 @@ $eqLogics = sunshutter::byType($plugin->getId());
 		<?php
 		foreach ($eqLogics as $eqLogic) {
 			echo '<tr><td><a href="' . $eqLogic->getLinkToConfiguration() . '" style="text-decoration: none;">' . $eqLogic->getHumanName(true) . '</a></td>';
-			$cron = $eqLogic->getConfiguration('cron::executeAction','');
+			$cron = $eqLogic->getConfiguration('cron::executeAction', '');
 			if ($cron == 'custom') {
-				$cron = $eqLogic->getConfiguration('cron::custom','');
+				$cron = $eqLogic->getConfiguration('cron::custom', '');
 			}
 			echo '<td><span class="label label-info" style="font-size : 1em;cursor:default;">' . $cron . '</span></td>';
 			$backhand = '<span class="label label-danger" style="font-size : 1em;cursor:default;">{{Oui}}</span>';
-			if($eqLogic->getConfiguration('shutter::nobackhand',0) == 1) {
+			if ($eqLogic->getConfiguration('shutter::nobackhand', 0) == 1) {
 				$backhand = '<span class="label label-success" style="font-size : 1em;cursor:default;">{{Non}}</span>';
-			}else	if($eqLogic->getConfiguration('shutter::nobackhand',0) == 2) {
-				$backhand = '<span class="label label-warning" style="font-size : 1em;cursor:default;">'. $eqLogic->getConfiguration('shutter::customDelay','0') . 'min</span>';
+			} else	if ($eqLogic->getConfiguration('shutter::nobackhand', 0) == 2) {
+				$backhand = '<span class="label label-warning" style="font-size : 1em;cursor:default;">' . $eqLogic->getConfiguration('shutter::customDelay', '0') . 'min</span>';
 			}
 			echo '<td>' . $backhand . '</td>';
-			echo '<td><span class="label label-info" style="font-size : 1em;cursor:default;">' . $eqLogic->getConfiguration('shutter::openPosition','') . '</span></td>';
-			echo '<td><span class="label label-info" style="font-size : 1em;cursor:default;">' . $eqLogic->getConfiguration('shutter::closePosition','') . '</span></td>';
-			$defaultAction = $eqLogic->getConfiguration('shutter::defaultAction','open');
+			echo '<td><span class="label label-info" style="font-size : 1em;cursor:default;">' . $eqLogic->getConfiguration('shutter::openPosition', '') . '</span></td>';
+			echo '<td><span class="label label-info" style="font-size : 1em;cursor:default;">' . $eqLogic->getConfiguration('shutter::closePosition', '') . '</span></td>';
+			$defaultAction = $eqLogic->getConfiguration('shutter::defaultAction', 'open');
 			$action = '<span class="label label-primary" style="font-size : 1em;cursor:default;">{{Ouvrir}}</span>';
 			if ($defaultAction == 'none') {
 				$action = '<span class="label label-primary" style="font-size : 1em;cursor:default;">{{Rien}}</span>';
-			}if ($defaultAction == 'close') {
+			}
+			if ($defaultAction == 'close') {
 				$action = '<span class="label label-primary" style="font-size : 1em;cursor:default;">{{Fermer}}</span>';
-			}if ($defaultAction == 'custom') {
-				$action = '<span class="label label-primary" style="font-size : 1em;cursor:default;">'. $eqLogic->getConfiguration('shutter::customPosition','0') .'%</span>';
+			}
+			if ($defaultAction == 'custom') {
+				$action = '<span class="label label-primary" style="font-size : 1em;cursor:default;">' . $eqLogic->getConfiguration('shutter::customPosition', '0') . '%</span>';
 			}
 			echo '<td>' . $action . '</td>';
 			$condition = '<span class="label label-success" style="font-size : 1em;cursor:default;">{{Oui}}</span>';
-			if ($eqLogic->getConfiguration('condition::allowmove','') == '') {
+			if ($eqLogic->getConfiguration('condition::allowmove', '') == '') {
 				$condition = '<span class="label label-danger" style="font-size : 1em;cursor:default;">{{Non}}</span>';
 			}
 			echo '<td>' . $condition . '</td>';
 			$systematic = '<span class="label label-success" style="font-size : 1em;cursor:default;">{{Oui}}</span>';
-			if ($eqLogic->getConfiguration('condition::systematic',0) == 0) {
+			if ($eqLogic->getConfiguration('condition::systematic', 0) == 0) {
 				$systematic = '<span class="label label-danger" style="font-size : 1em;cursor:default;">{{Non}}</span>';
 			}
 			echo '<td>' . $systematic . '</td>';
-			$conditions = $eqLogic->getConfiguration('conditions','');
+			$conditions = $eqLogic->getConfiguration('conditions', '');
 			$numberconditionImmediates = 0;
 			$numbercondition = 0;
 			$numberconditionSuspend = 0;
-			if($conditions != '' ){
+			if ($conditions != '') {
 				foreach ($conditions as $condition) {
 					if (!$condition['conditions::immediate']) {
 						$numbercondition += 1;
@@ -92,9 +94,9 @@ $eqLogics = sunshutter::byType($plugin->getId());
 					}
 				}
 			}
-			echo  '<td><span class="label label-primary" style="font-size : 1em;cursor:default;">' . $numbercondition .'</span></td>';
-			echo  '<td><span class="label label-primary" style="font-size : 1em;cursor:default;">' . $numberconditionImmediates .'</span></td>';
-			echo  '<td><span class="label label-primary" style="font-size : 1em;cursor:default;">' . $numberconditionSuspend .'</span></td>';
+			echo  '<td><span class="label label-primary" style="font-size : 1em;cursor:default;">' . $numbercondition . '</span></td>';
+			echo  '<td><span class="label label-primary" style="font-size : 1em;cursor:default;">' . $numberconditionImmediates . '</span></td>';
+			echo  '<td><span class="label label-primary" style="font-size : 1em;cursor:default;">' . $numberconditionSuspend . '</span></td>';
 			echo '</tr>';
 		}
 		?>

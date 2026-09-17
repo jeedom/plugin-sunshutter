@@ -14,9 +14,9 @@
 * along with Plugin openzwave for jeedom. If not, see <http://www.gnu.org/licenses/>.
 */
 jeedomUtils.positionEqLogic();
-$('.div_displayEquipement').packery({isLayoutInstant: true});
+$('.div_displayEquipement').packery({ isLayoutInstant: true });
 
-function getSunshutterState(){
+function getSunshutterState() {
 	$.ajax({
 		type: "POST",
 		url: "plugins/sunshutter/core/ajax/sunshutter.ajax.php",
@@ -25,16 +25,16 @@ function getSunshutterState(){
 			type: "dashboard",
 		},
 		dataType: 'json',
-		global : false,
+		global: false,
 		error: function (request, status, error) {
 			handleAjaxError(request, status, error);
 		},
 		success: function (data) {
 			if (data.state != 'ok') {
-				$('#div_inclusionAlert').showAlert({message: data.result, level: 'danger'});
+				$('#div_inclusionAlert').showAlert({ message: data.result, level: 'danger' });
 				return;
 			}
-			$(".posMoy").value(data.result['moyPos']+'%');
+			$(".posMoy").value(data.result['moyPos'] + '%');
 			$(".manualSuspend").value(data.result['manual']);
 			$(".autoSuspend").value(data.result['auto']);
 		}

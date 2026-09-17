@@ -19,7 +19,6 @@
 require_once dirname(__FILE__) . '/../../../core/php/core.inc.php';
 
 function sunshutter_install() {
-  
 }
 
 function sunshutter_update() {
@@ -30,7 +29,4 @@ function sunshutter_update() {
 
 
 function sunshutter_remove() {
-  
 }
-
-?>
